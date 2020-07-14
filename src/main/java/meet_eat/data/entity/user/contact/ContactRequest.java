@@ -6,15 +6,14 @@ import meet_eat.data.entity.user.User;
 
 public class ContactRequest {
     
-    private static final String ERROR_MESSAGE_TEMPLATE = "The %s must not be null.";
-    private static final String ERROR_MESSAGE_NULL_REQUESTER = String.format(ERROR_MESSAGE_TEMPLATE, "requester");
-    private static final String ERROR_MESSAGE_NULL_REQUESTED_USER = String.format(ERROR_MESSAGE_TEMPLATE, "requestedUser");
+    private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
+    private static final String ERROR_MESSAGE_NULL_REQUESTER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "requester");
+    private static final String ERROR_MESSAGE_NULL_REQUESTED_USER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "requestedUser");
 
     private final User requester;
     private final User requestedUser;
 
     public ContactRequest(User requester, User requestedUser) {
-
         Objects.requireNonNull(requester, ERROR_MESSAGE_NULL_REQUESTER);
         Objects.requireNonNull(requestedUser, ERROR_MESSAGE_NULL_REQUESTED_USER);
 
@@ -23,12 +22,10 @@ public class ContactRequest {
     }
 
     public User getRequester() {
-
         return requester;
     }
 
     public User getRequestedUser() {
-
         return requestedUser;
     }
 }
