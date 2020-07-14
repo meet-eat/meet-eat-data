@@ -2,6 +2,8 @@ package meet_eat.data.entity.user.contact;
 
 import java.util.Objects;
 
+import meet_eat.data.entity.user.User;
+
 public class ContactRequest {
     
     private static final String ERROR_MESSAGE_TEMPLATE = "The %s must not be null.";
