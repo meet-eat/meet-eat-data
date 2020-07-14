@@ -2,6 +2,8 @@ package meet_eat.data;
 
 import java.util.Objects;
 
+import meet_eat.data.entity.user.User;
+
 public class Report {
     
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
