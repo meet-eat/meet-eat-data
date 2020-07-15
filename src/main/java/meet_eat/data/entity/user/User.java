@@ -19,7 +19,6 @@ public class User {
     
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_BIRTHDAY = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "birthDay");
-    private static final String ERROR_MESSAGE_NULL_IMAGE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "image");
     private static final String ERROR_MESSAGE_NULL_ROLE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "role");
     private static final int MIN_AMOUNT_RATINGS = 5;
     private static final int ROUNDING_FACTOR = 10;
