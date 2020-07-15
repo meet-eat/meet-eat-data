@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -14,6 +13,7 @@ import java.util.stream.Collectors;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.user.rating.Rating;
 import meet_eat.data.entity.user.rating.RatingBasis;
+import meet_eat.data.entity.user.setting.Setting;
 
 public class User {
     
