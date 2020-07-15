@@ -167,7 +167,7 @@ public class User {
     }
 
     public void removeRatingsByReviewer(User reviewer) {
-        ratings.remove(reviewer);
+        ratings.removeIf(x -> x.getReviewer().equals(reviewer));
     }
 
     public void removeSubscriptions(User subscription) {
