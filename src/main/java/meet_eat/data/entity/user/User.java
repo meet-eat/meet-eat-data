@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.user.rating.Rating;
 import meet_eat.data.entity.user.rating.RatingBasis;
 
@@ -79,7 +80,7 @@ public class User {
     }
 
     public Collection<Offer> getBookmarks() {
-        return Collection.unmodifiableCollection(bookmarks);
+        return Collections.unmodifiableCollection(bookmarks);
     }
 
     public LocalDate getBirthDay() {
