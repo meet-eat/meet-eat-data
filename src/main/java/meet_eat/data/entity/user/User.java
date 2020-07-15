@@ -31,7 +31,6 @@ public class User {
     private final Set<Offer> bookmarks;
 
     private LocalDate birthDay;
-    private Image image;
     private Role role;
     private String email;
     private String password;
@@ -40,7 +39,7 @@ public class User {
     private String phoneNumber;
     private boolean isVerified;
 
-    public User(LocalDate birthDay, Image image, Role role, String email, String password,
+    public User(LocalDate birthDay, Role role, String email, String password,
             String name, String description, String phoneNumber, boolean isVerified) {
 
         ratings = new LinkedList<>();
@@ -53,7 +52,6 @@ public class User {
         Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
 
         this.birthDay = birthDay;
-        this.image = image;
         this.role = role;
         this.email = email;
         this.password = password;
@@ -85,10 +83,6 @@ public class User {
 
     public LocalDate getBirthDay() {
         return birthDay;
-    }
-
-    public Image getImage() {
-        return image;
     }
 
     public Role getRole() {
@@ -142,11 +136,6 @@ public class User {
     public void setBirthDay(LocalDate birthDay) {
         Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
         this.birthDay = birthDay;
-    }
-
-    public void setImage(Image image) {
-        Objects.requireNonNull(image, ERROR_MESSAGE_NULL_IMAGE);
-        this.image = image;
     }
 
     public void setRole(Role role) {

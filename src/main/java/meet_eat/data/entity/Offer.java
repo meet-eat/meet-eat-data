@@ -18,7 +18,6 @@ public class Offer extends ReportableEntity {
     private String description;
     private double price;
     private int maxParticipants;
-    private Image image;
     private LocalDateTime dateTime;
     private Localizable location;
 
@@ -81,10 +80,6 @@ public class Offer extends ReportableEntity {
         return maxParticipants;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
     public LocalDateTime getDateTime() {
         return dateTime;
     }
@@ -107,10 +102,6 @@ public class Offer extends ReportableEntity {
 
     public void setMaxParticipants(int maxParticipants) {
         this.maxParticipants = maxParticipants;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
     }
 
     public void setDateTime(LocalDateTime dateTime) {
