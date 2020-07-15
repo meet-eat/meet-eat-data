@@ -11,11 +11,12 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import meet_eat.data.entity.Offer;
+import meet_eat.data.entity.ReportableEntity;
 import meet_eat.data.entity.user.rating.Rating;
 import meet_eat.data.entity.user.rating.RatingBasis;
 import meet_eat.data.entity.user.setting.Setting;
 
-public class User {
+public class User extends ReportableEntity {
     
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_BIRTHDAY = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "birthDay");
