@@ -23,8 +23,8 @@ public class PageCommonTest {
     @Test(expected = IllegalArgumentException.class)
     public void testIndexOutOfBounds() {
         // Test data
-        int index = Page.LOWER_BOUND_INDEX - 1;
-        int size = Page.LOWER_BOUND_SIZE;
+        int index = Page.INDEX_LOWER_BOUND - 1;
+        int size = Page.SIZE_LOWER_BOUND;
         
         // Execution
         Page page = new Page(index, size);
@@ -33,8 +33,8 @@ public class PageCommonTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSizeOutOfBounds() {
         // Test data
-        int index = Page.LOWER_BOUND_INDEX;
-        int size = Page.LOWER_BOUND_SIZE - 1;
+        int index = Page.INDEX_LOWER_BOUND;
+        int size = Page.SIZE_LOWER_BOUND - 1;
         
         // Execution
         Page page = new Page(index, size);
