@@ -21,7 +21,7 @@ public class LoginCredentialPasswordTest {
                 {"IchBinEinGlücklichesPasswort1!", true},
                 {" ", false},
                 {"", false},
-                {"Test Test !234", false},
+                {"Test Test !234", true},
                 {"12345678!", false},
                 {"Einvalides!Passwort234", true},
                 {"A!156aB", false},
@@ -33,7 +33,7 @@ public class LoginCredentialPasswordTest {
                 {"123?lowerUpperNumber1Special!", true},
                 {"123?lowerUpperNumber1Special!456", true},
                 {"_123?lowerUpperN1Special!456", true},
-                {"_1AbCdEfG", false},
+                {"_1AbCdEfG", true},
                 {"_1AbCdEf!", true}
         });
     }
