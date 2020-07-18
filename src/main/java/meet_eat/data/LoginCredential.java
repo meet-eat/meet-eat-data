@@ -10,7 +10,20 @@ public class LoginCredential {
     private static final String ERROR_MESSAGE_ILLEGAL_EMAIL = "The email address must comply with RFC 5322.";
     private static final String ERROR_MESSAGE_ILLEGAL_PASSWORD = "The password must comply with the password gui.";
     private static final String REGEX_EMAIL = "";
-    private static final String REGEX_PASSWORD = "";
+    /**
+     * Password properties:
+     * <p><ul>
+     * <li> At least one lower-/uppercase letter
+     * <li> At least one digit
+     * <li> At least one special character
+     * <li> Minimum|Maximum length of 8|32 characters
+     * </ul><p>
+     */
+    private static final String REGEX_PASSWORD = "^(?=.*[a-z])"
+        + "(?=.*[A-Z])"
+        + "(?=.*\\d)"
+        + "(?=.*[!#$%&*+,-./:;'<=>?@^|~(){}])"
+        + "([a-zA-Z\\d!#$%&*+,-./:;'<=>?@^|~(){}]){8,32}$";
 
     private final String email;
     private final String password;
