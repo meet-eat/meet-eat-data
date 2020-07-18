@@ -1,5 +1,6 @@
 package meet_eat.data;
 
+import meet_eat.data.entity.user.Password;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -10,7 +11,7 @@ import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class LoginCredentialPasswordTest {
+public class PasswordLegalityTest {
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
@@ -41,7 +42,7 @@ public class LoginCredentialPasswordTest {
     private final String password;
     private final boolean isValid;
 
-    public LoginCredentialPasswordTest(String password, boolean isValid) {
+    public PasswordLegalityTest(String password, boolean isValid) {
         this.password = password;
         this.isValid = isValid;
     }
@@ -49,6 +50,6 @@ public class LoginCredentialPasswordTest {
     @Test
     public void testIsLegalPassword() {
         // Assertions
-        assertEquals(LoginCredential.isLegalPassword(this.password), this.isValid);
+        assertEquals(Password.isLegalPassword(this.password), this.isValid);
     }
 }
