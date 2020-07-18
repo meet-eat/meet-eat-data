@@ -1,28 +1,33 @@
 package meet_eat.data.location;
 
+import meet_eat.data.location.service.Geocoding;
+
+import java.util.Objects;
+
 public class CityLocation implements Localizable {
-    
-    private static final String ERROR_MESSAGE_NOT_IMPLEMENTED = "This function is not implemented yet.";
 
-    private final String city;
+    private static final String UNLOCALIZABLE_CITY = "The given city is not localizable.";
 
-    public CityLocation(String city) {
-        this.city = city;
+    private String cityName;
+
+    public CityLocation(String cityName) {
+        this.cityName = cityName;
     }
 
-    public String getCity() {
-        return city;
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     @Override
-    public double getDistance(Localizable location) {
-        // TODO Implement
-        throw new UnsupportedOperationException(ERROR_MESSAGE_NOT_IMPLEMENTED);
-    }
-
-    @Override
-    public Coordinate getCoordinate() {
-        // TODO Implement
-        throw new UnsupportedOperationException(ERROR_MESSAGE_NOT_IMPLEMENTED);
+    public Coordinate getCoordinate() throws UnlocalizableException {
+        Coordinate coordinate = Geocoding.getCoordinateFromCityName(cityName);
+        if (Objects.isNull(coordinate)) {
+            throw new UnlocalizableException(UNLOCALIZABLE_CITY);
+        }
+        return coordinate;
     }
 }
