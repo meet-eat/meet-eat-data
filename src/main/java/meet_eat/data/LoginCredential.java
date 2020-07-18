@@ -26,8 +26,8 @@ public class LoginCredential {
     private static final String REGEX_PASSWORD = "^(?=.*[a-z])"
             + "(?=.*[A-Z])"
             + "(?=.*\\d)"
-            + "(?=.*[!#$%&*+,-./:;'<=>?@^|~(){}])"
-            + "([a-zA-Z\\d!#$%&*+,-./:;'<=>?@^|~(){}]){8,32}$";
+            + "(?=.*[!#$%&*_+,-./:;'<=>?@^|~(){}])"
+            + ".{8,32}$";
 
     private final String email;
     private final String password;
