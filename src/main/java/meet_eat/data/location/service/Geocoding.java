@@ -2,7 +2,7 @@ package meet_eat.data.location.service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import meet_eat.data.location.Coordinate;
+import meet_eat.data.location.SphericalPosition;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -20,24 +20,24 @@ public final class Geocoding {
     private Geocoding() {
     }
 
-    public static Coordinate getCoordinateFromPostcode(String postcode) {
+    public static SphericalPosition getSphericalPositionFromPostcode(String postcode) {
         String params = String.format(PARAMETER_POSTCODE, postcode);
         String url = String.format(BASE_URL, SEARCH_OPERATION, params);
         HttpMessageConverter<?>[] messageConverters = getMessageConvertersWithEnabledDeserializationFeatures(
                 DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT,
                 DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS);
 
-        return getForObject(url, Coordinate.class, messageConverters);
+        return getForObject(url, SphericalPosition.class, messageConverters);
     }
 
-    public static Coordinate getCoordinateFromCityName(String cityName) {
+    public static SphericalPosition getSphericalPositionFromCityName(String cityName) {
         String params = String.format(PARAMETER_CITY, cityName);
         String url = String.format(BASE_URL, SEARCH_OPERATION, params);
         HttpMessageConverter<?>[] messageConverters = getMessageConvertersWithEnabledDeserializationFeatures(
                 DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT,
                 DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS);
 
-        return getForObject(url, Coordinate.class, messageConverters);
+        return getForObject(url, SphericalPosition.class, messageConverters);
     }
 
     private static <T> T getForObject(String url, Class<T> responseType) {

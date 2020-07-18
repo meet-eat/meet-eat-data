@@ -23,11 +23,11 @@ public class PostcodeLocation implements Localizable {
     }
 
     @Override
-    public Coordinate getCoordinate() throws UnlocalizableException {
-        Coordinate coordinate = Geocoding.getCoordinateFromPostcode(postcode);
-        if (Objects.isNull(coordinate)) {
+    public SphericalPosition getSphericalPosition() throws UnlocalizableException {
+        SphericalPosition sphericalPosition = Geocoding.getSphericalPositionFromPostcode(postcode);
+        if (Objects.isNull(sphericalPosition)) {
             throw new UnlocalizableException(UNLOCALIZABLE_POSTCODE);
         }
-        return coordinate;
+        return sphericalPosition;
     }
 }

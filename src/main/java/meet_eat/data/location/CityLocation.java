@@ -23,11 +23,11 @@ public class CityLocation implements Localizable {
     }
 
     @Override
-    public Coordinate getCoordinate() throws UnlocalizableException {
-        Coordinate coordinate = Geocoding.getCoordinateFromCityName(cityName);
-        if (Objects.isNull(coordinate)) {
+    public SphericalPosition getSphericalPosition() throws UnlocalizableException {
+        SphericalPosition sphericalPosition = Geocoding.getSphericalPositionFromCityName(cityName);
+        if (Objects.isNull(sphericalPosition)) {
             throw new UnlocalizableException(UNLOCALIZABLE_CITY);
         }
-        return coordinate;
+        return sphericalPosition;
     }
 }

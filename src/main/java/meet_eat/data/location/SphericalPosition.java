@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Coordinate {
+public class SphericalPosition {
 
     private double latitude;
     private double longitude;
 
     @JsonCreator
-    public Coordinate(
+    public SphericalPosition(
             @JsonProperty("lat") double latitude,
             @JsonProperty("lon") double longitude) {
         this.latitude = latitude;

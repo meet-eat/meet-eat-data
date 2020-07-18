@@ -1,6 +1,6 @@
 package meet_eat.data.location.geometry;
 
-import meet_eat.data.location.Coordinate;
+import meet_eat.data.location.SphericalPosition;
 
 import java.util.function.Function;
 
@@ -22,7 +22,7 @@ public final class Haversine {
         return HAVERSINE_FUNCTION.apply(value);
     }
 
-    public static Double applyHaversineFormula(Coordinate origin, Coordinate destination) {
+    public static Double applyHaversineFormula(SphericalPosition origin, SphericalPosition destination) {
         double havLat = HAVERSINE_FUNCTION.apply(destination.getLatitudeAsRadians() - origin.getLatitudeAsRadians());
         double havLon = HAVERSINE_FUNCTION.apply(destination.getLongitudeAsRadians() - origin.getLongitudeAsRadians());
 
