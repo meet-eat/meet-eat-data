@@ -107,3 +107,6 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+
+# Avoids IntelliJ files on source level completely
+.idea/
