@@ -9,12 +9,15 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     `java-library`
+
+    idea
 }
 
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -23,6 +26,12 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation("com.google.guava:guava:29.0-jre")
+
+    // Spring framework
+    implementation("org.springframework:org.springframework.web:3.2.2.RELEASE")
+
+    // Fasterxml jackson
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.11.1")
 
     // Use JUnit test framework
     testImplementation("junit:junit:4.13")
