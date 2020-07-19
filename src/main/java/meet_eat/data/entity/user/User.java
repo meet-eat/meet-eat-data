@@ -32,14 +32,14 @@ public class User extends ReportableEntity {
 
     private LocalDate birthDay;
     private Role role;
-    private String email;
+    private Email email;
     private Password password;
     private String name;
     private String description;
     private String phoneNumber;
     private boolean isVerified;
 
-    public User(LocalDate birthDay, Role role, String email, Password password,
+    public User(LocalDate birthDay, Role role, Email email, Password password,
             String name, String description, String phoneNumber, boolean isVerified) {
 
         ratings = new LinkedList<>();
@@ -89,7 +89,7 @@ public class User extends ReportableEntity {
         return role;
     }
 
-    public String getEmail() {
+    public Email getEmail() {
         return email;
     }
 
@@ -143,7 +143,7 @@ public class User extends ReportableEntity {
         this.role = role;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(Email email) {
         this.email = email;
     }
 
