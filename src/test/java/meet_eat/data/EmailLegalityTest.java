@@ -1,5 +1,6 @@
 package meet_eat.data;
 
+import meet_eat.data.entity.user.Email;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -10,7 +11,7 @@ import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class LoginCredentialEmailTest {
+public class EmailLegalityTest {
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
@@ -43,7 +44,7 @@ public class LoginCredentialEmailTest {
     private final String emailAddress;
     private final boolean isValid;
 
-    public LoginCredentialEmailTest(String emailAddress, boolean isValid) {
+    public EmailLegalityTest(String emailAddress, boolean isValid) {
         this.emailAddress = emailAddress;
         this.isValid = isValid;
     }
@@ -51,6 +52,6 @@ public class LoginCredentialEmailTest {
     @Test
     public void testIsLegalEmailAddress() {
         // Assertions
-        assertEquals(LoginCredential.isLegalEmailAddress(this.emailAddress), this.isValid);
+        assertEquals(Email.isLegalEmailAddress(this.emailAddress), this.isValid);
     }
 }
