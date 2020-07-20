@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import meet_eat.data.Report;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.ReportableEntity;
 import meet_eat.data.entity.user.rating.Rating;
@@ -21,6 +22,7 @@ public class User extends ReportableEntity {
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_BIRTHDAY = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "birthDay");
     private static final String ERROR_MESSAGE_NULL_ROLE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "role");
+    private static final String ERROR_MESSAGE_NULL_EMAIL = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "email");
     private static final int MIN_AMOUNT_RATINGS = 5;
     private static final int ROUNDING_FACTOR = 10;
 
@@ -40,7 +42,7 @@ public class User extends ReportableEntity {
     private boolean isVerified;
 
     public User(LocalDate birthDay, Role role, Email email, Password password,
-            String name, String description, String phoneNumber, boolean isVerified) {
+                String name, String description, String phoneNumber, boolean isVerified) {
 
         ratings = new LinkedList<>();
         subscriptions = new HashSet<>();
@@ -50,6 +52,33 @@ public class User extends ReportableEntity {
 
         Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
         Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
+        Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
+
+        this.birthDay = birthDay;
+        this.role = role;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.description = description;
+        this.phoneNumber = phoneNumber;
+        this.isVerified = isVerified;
+    }
+
+    public User(String identifier, Collection<Report> reports, Collection<Rating> ratings, Set<User> subscriptions,
+                Set<Setting> settings, Set<Predicate<Offer>> offerPredicates, Set<Offer> bookmarks, LocalDate birthDay,
+                Role role, Email email, Password password, String name, String description, String phoneNumber,
+                boolean isVerified) {
+
+        super(identifier, reports);
+        this.ratings = ratings;
+        this.subscriptions = subscriptions;
+        this.settings = settings;
+        this.offerPredicates = offerPredicates;
+        this.bookmarks = bookmarks;
+
+        Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
+        Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
+        Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
 
         this.birthDay = birthDay;
         this.role = role;
@@ -144,6 +173,7 @@ public class User extends ReportableEntity {
     }
 
     public void setEmail(Email email) {
+        Objects.requireNonNull(role, ERROR_MESSAGE_NULL_EMAIL);
         this.email = email;
     }
 
