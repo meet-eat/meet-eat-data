@@ -36,7 +36,7 @@ public class Offer extends ReportableEntity {
         this.location = location;
     }
 
-    private Offer(String identifier, Collection<Report> reports, User creator, Collection<User> participants,
+    public Offer(String identifier, Collection<Report> reports, User creator, Collection<User> participants,
             Collection<Tag> tags, String name, String description, double price, int maxParticipants,
             LocalDateTime dateTime, Localizable location) {
         
