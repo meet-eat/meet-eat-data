@@ -94,20 +94,20 @@ public class User extends ReportableEntity {
         return Collections.unmodifiableCollection(ratings);
     }
 
-    public Collection<User> getSubscriptions() {
-        return Collections.unmodifiableCollection(subscriptions);
+    public Set<User> getSubscriptions() {
+        return Collections.unmodifiableSet(subscriptions);
     }
 
-    public Collection<Setting> getSettings() {
-        return Collections.unmodifiableCollection(settings);
+    public Set<Setting> getSettings() {
+        return Collections.unmodifiableSet(settings);
     }
 
-    public Collection<Predicate<Offer>> getPredicates() {
-        return Collections.unmodifiableCollection(offerPredicates);
+    public Set<Predicate<Offer>> getPredicates() {
+        return Collections.unmodifiableSet(offerPredicates);
     }
 
-    public Collection<Offer> getBookmarks() {
-        return Collections.unmodifiableCollection(bookmarks);
+    public Set<Offer> getBookmarks() {
+        return Collections.unmodifiableSet(bookmarks);
     }
 
     public LocalDate getBirthDay() {
