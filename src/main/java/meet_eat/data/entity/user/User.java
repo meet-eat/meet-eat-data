@@ -184,11 +184,11 @@ public class User extends ReportableEntity {
     }
 
     public double getHostRating() {
-        return (countRatings(RatingBasis.HOST) >= MIN_AMOUNT_RATINGS) ? calculateAverageHostRating() : 0;
+        return (countRatings(RatingBasis.HOST) >= MIN_AMOUNT_RATINGS) ? calculateAverageHostRating() : 0d;
     }
 
     public double getGuestRating() {
-        return (countRatings(RatingBasis.GUEST) >= MIN_AMOUNT_RATINGS) ? calculateAverageGuestRating() : 0;
+        return (countRatings(RatingBasis.GUEST) >= MIN_AMOUNT_RATINGS) ? calculateAverageGuestRating() : 0d;
     }
 
     private double calculateAverageHostRating() {
