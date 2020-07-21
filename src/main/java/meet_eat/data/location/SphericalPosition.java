@@ -11,9 +11,7 @@ public class SphericalPosition {
     private double longitude;
 
     @JsonCreator
-    public SphericalPosition(
-            @JsonProperty("lat") double latitude,
-            @JsonProperty("lon") double longitude) {
+    public SphericalPosition(@JsonProperty("lat") double latitude, @JsonProperty("lon") double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
