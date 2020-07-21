@@ -68,7 +68,7 @@ public class User extends ReportableEntity {
         Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
         Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
 
-        this.role = DEFAULT_ROLE;
+        role = DEFAULT_ROLE;
         this.email = email;
         this.password = password;
         this.birthDay = birthDay;
