@@ -21,10 +21,16 @@ public class User extends ReportableEntity {
     
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_RATINGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "ratings");
+    private static final String ERROR_MESSAGE_NULL_RATING = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "rating");
     private static final String ERROR_MESSAGE_NULL_SUBSCRIPTIONS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "subscriptions");
+    private static final String ERROR_MESSAGE_NULL_SUBSCRIPTION = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "subscription");
     private static final String ERROR_MESSAGE_NULL_SETTINGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "settings");
+    private static final String ERROR_MESSAGE_NULL_SETTING = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "setting");
     private static final String ERROR_MESSAGE_NULL_OFFER_PREDICATES = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "offerPredicates");
+    private static final String ERROR_MESSAGE_NULL_OFFER_PREDICATE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "offerPredicate");
     private static final String ERROR_MESSAGE_NULL_BOOKMARKS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "bookmarks");
+    private static final String ERROR_MESSAGE_NULL_BOOKMARK = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "bookmark");
+    private static final String ERROR_MESSAGE_NULL_REVIEWER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reviewer");
     private static final String ERROR_MESSAGE_NULL_ROLE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "role");
     private static final String ERROR_MESSAGE_NULL_EMAIL = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "email");
     private static final String ERROR_MESSAGE_NULL_PASSWORD = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "password");
@@ -60,6 +66,7 @@ public class User extends ReportableEntity {
         settings = new HashSet<>();
         offerPredicates = new HashSet<>();
         bookmarks = new HashSet<>();
+        role = DEFAULT_ROLE;
 
         Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
         Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
@@ -68,7 +75,6 @@ public class User extends ReportableEntity {
         Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
         Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
 
-        role = DEFAULT_ROLE;
         this.email = email;
         this.password = password;
         this.birthDay = birthDay;
@@ -165,26 +171,6 @@ public class User extends ReportableEntity {
         return isVerified;
     }
 
-    public void addRating(Rating rating) {
-        ratings.add(rating);
-    }
-
-    public void addSubscription(User subscription) {
-        subscriptions.add(subscription);
-    }
-
-    public void addSetting(Setting setting) {
-        settings.add(setting);
-    }
-
-    public void addPredicate(Predicate<Offer> predicate) {
-        offerPredicates.add(predicate);
-    }
-
-    public void addBookmark(Offer bookmark) {
-        bookmarks.add(bookmark);
-    }
-
     public void setRole(Role role) {
         Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
         this.role = role;
@@ -224,19 +210,48 @@ public class User extends ReportableEntity {
         this.isVerified = isVerified;
     }
 
+    public void addRating(Rating rating) {
+        Objects.requireNonNull(rating, ERROR_MESSAGE_NULL_RATING);
+        ratings.add(rating);
+    }
+
+    public void addSubscription(User subscription) {
+        Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION);
+        subscriptions.add(subscription);
+    }
+
+    public void addSetting(Setting setting) {
+        Objects.requireNonNull(setting, ERROR_MESSAGE_NULL_SETTING);
+        settings.add(setting);
+    }
+
+    public void addPredicate(Predicate<Offer> predicate) {
+        Objects.requireNonNull(predicate, ERROR_MESSAGE_NULL_OFFER_PREDICATE);
+        offerPredicates.add(predicate);
+    }
+
+    public void addBookmark(Offer bookmark) {
+        Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK);
+        bookmarks.add(bookmark);
+    }
+
     public void removeRatingsByReviewer(User reviewer) {
+        Objects.requireNonNull(reviewer, ERROR_MESSAGE_NULL_REVIEWER);
         ratings.removeIf(x -> x.getReviewer().equals(reviewer));
     }
 
     public void removeSubscriptions(User subscription) {
+        Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION);
         subscriptions.remove(subscription);
     }
 
     public void removePredicate(Predicate<Offer> predicate) {
+        Objects.requireNonNull(predicate, ERROR_MESSAGE_NULL_OFFER_PREDICATE);
         offerPredicates.remove(predicate);
     }
 
     public void removeBookmark(Offer bookmark) {
+        Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK);
         bookmarks.remove(bookmark);
     }
 
