@@ -15,6 +15,8 @@ import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.ReportableEntity;
 import meet_eat.data.entity.user.rating.Rating;
 import meet_eat.data.entity.user.rating.RatingBasis;
+import meet_eat.data.entity.user.setting.DisplaySetting;
+import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
 
 public class User extends ReportableEntity {
@@ -75,6 +77,8 @@ public class User extends ReportableEntity {
         this.phoneNumber = Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
         this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
         this.isVerified = isVerified;
+
+        initSettings();
     }
 
     public User(String identifier, Collection<Report> reports, Collection<Rating> ratings, Set<User> subscriptions,
@@ -260,5 +264,10 @@ public class User extends ReportableEntity {
 
     private double roundToFirstDecimal(double rating) {
         return (((double) Math.round(rating * ROUNDING_FACTOR)) / ROUNDING_FACTOR);
+    }
+
+    private void initSettings() {
+        settings.add(new DisplaySetting());
+        settings.add(new NotificationSetting());
     }
 }
