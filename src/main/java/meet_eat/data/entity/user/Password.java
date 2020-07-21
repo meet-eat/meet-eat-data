@@ -1,5 +1,6 @@
 package meet_eat.data.entity.user;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 public class Password {
@@ -42,6 +43,9 @@ public class Password {
     }
 
     public static boolean isLegalPassword(String password) {
+        if (Objects.isNull(password)) {
+            return false;
+        }
         return password.matches(REGEX_PASSWORD);
     }
 }
