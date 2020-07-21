@@ -11,6 +11,7 @@ public abstract class ReportableEntity extends Entity {
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_REPORTS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reports");
+    private static final String ERROR_MESSAGE_NULL_REPORT = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "report");
 
     private final Collection<Report> reports;
 
@@ -30,6 +31,7 @@ public abstract class ReportableEntity extends Entity {
     }
 
     public void addReport(Report report) {
+        Objects.requireNonNull(report, ERROR_MESSAGE_NULL_REPORT);
         reports.add(report);
     }
 }
