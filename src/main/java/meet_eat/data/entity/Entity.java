@@ -14,8 +14,7 @@ public abstract class Entity {
     }
 
     protected Entity(String identifier) {
-        Objects.requireNonNull(identifier, ERROR_MESSAGE_NULL_IDENTIFIER);
-        this.identifier = identifier;
+        this.identifier = Objects.requireNonNull(identifier, ERROR_MESSAGE_NULL_IDENTIFIER);
     }
 
     public String getIdentifier() {

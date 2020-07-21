@@ -22,8 +22,7 @@ public abstract class ReportableEntity extends Entity {
 
     protected ReportableEntity(String identifier, Collection<Report> reports) {
         super(identifier);
-        Objects.requireNonNull(reports, ERROR_MESSAGE_NULL_REPORTS);
-        this.reports = reports;
+        this.reports = Objects.requireNonNull(reports, ERROR_MESSAGE_NULL_REPORTS);
     }
 
     public Collection<Report> getReports() {
@@ -31,7 +30,6 @@ public abstract class ReportableEntity extends Entity {
     }
 
     public void addReport(Report report) {
-        Objects.requireNonNull(report, ERROR_MESSAGE_NULL_REPORT);
-        reports.add(report);
+        reports.add(Objects.requireNonNull(report, ERROR_MESSAGE_NULL_REPORT));
     }
 }

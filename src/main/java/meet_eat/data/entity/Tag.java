@@ -10,14 +10,12 @@ public class Tag extends Entity {
     private String name;
 
     public Tag(String name) {
-        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
-        this.name = name;
+        this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
     }
 
     public Tag(String identifier, String name) {
         super(identifier);
-        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
-        this.name = name;
+        this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
     }
 
     public String getName() {
@@ -25,7 +23,6 @@ public class Tag extends Entity {
     }
 
     public void setName(String name) {
-        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
-        this.name = name;
+        this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
     }
 }

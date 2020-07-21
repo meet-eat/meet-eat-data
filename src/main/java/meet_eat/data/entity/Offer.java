@@ -42,18 +42,11 @@ public class Offer extends ReportableEntity {
     public Offer(User creator, Collection<Tag> tags, String name, String description, double price, int maxParticipants,
             LocalDateTime dateTime, Localizable location) {
 
-        Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
-        Objects.requireNonNull(tags, ERROR_MESSAGE_NULL_TAGS);
-        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
-        Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
-        Objects.requireNonNull(dateTime, ERROR_MESSAGE_NULL_DATE_TIME);
-        Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
-
-        this.creator = creator;
+        this.creator = Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
         this.participants = new HashSet<>();
-        this.tags = tags;
-        this.name = name;
-        this.description = description;
+        this.tags = Objects.requireNonNull(tags, ERROR_MESSAGE_NULL_TAGS);
+        this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
+        this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
         if (price < DEFAULT_MIN_PRICE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_PRICE);
         }
@@ -62,8 +55,8 @@ public class Offer extends ReportableEntity {
             throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_MAX_PARTICIPANTS);
         }
         this.maxParticipants = maxParticipants;
-        this.dateTime = dateTime;
-        this.location = location;
+        this.dateTime = Objects.requireNonNull(dateTime, ERROR_MESSAGE_NULL_DATE_TIME);
+        this.location = Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
     }
 
     public Offer(String identifier, Collection<Report> reports, User creator, Collection<User> participants,
@@ -71,20 +64,11 @@ public class Offer extends ReportableEntity {
             LocalDateTime dateTime, Localizable location) {
         
         super(identifier, reports);
-
-        Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
-        Objects.requireNonNull(participants, ERROR_MESSAGE_NULL_PARTICIPANTS);
-        Objects.requireNonNull(tags, ERROR_MESSAGE_NULL_TAGS);
-        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
-        Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
-        Objects.requireNonNull(dateTime, ERROR_MESSAGE_NULL_DATE_TIME);
-        Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
-
-        this.creator = creator;
-        this.participants = participants;
-        this.tags = tags;
-        this.name = name;
-        this.description = description;
+        this.creator = Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
+        this.participants = new HashSet<>();
+        this.tags = Objects.requireNonNull(tags, ERROR_MESSAGE_NULL_TAGS);
+        this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
+        this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
         if (price < DEFAULT_MIN_PRICE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_PRICE);
         }
@@ -93,8 +77,8 @@ public class Offer extends ReportableEntity {
             throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_MAX_PARTICIPANTS);
         }
         this.maxParticipants = maxParticipants;
-        this.dateTime = dateTime;
-        this.location = location;
+        this.dateTime = Objects.requireNonNull(dateTime, ERROR_MESSAGE_NULL_DATE_TIME);
+        this.location = Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
     }
 
     public User getCreator() {
@@ -152,32 +136,27 @@ public class Offer extends ReportableEntity {
     }
 
     public void setDateTime(LocalDateTime dateTime) {
-        Objects.requireNonNull(dateTime, ERROR_MESSAGE_NULL_DATE_TIME);
-        this.dateTime = dateTime;
+        this.dateTime = Objects.requireNonNull(dateTime, ERROR_MESSAGE_NULL_DATE_TIME);
     }
 
     public void setLocation(Localizable location) {
-        Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
-        this.location = location;
+        this.location = Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
     }
 
     public void addParticipant(User participant) {
-        Objects.requireNonNull(participant, ERROR_MESSAGE_NULL_PARTICIPANT);
-        participants.add(participant);
+        participants.add(Objects.requireNonNull(participant, ERROR_MESSAGE_NULL_PARTICIPANT));
     }
 
     public void addTag(Tag tag) {
-        Objects.requireNonNull(tag, ERROR_MESSAGE_NULL_TAG);
-        tags.add(tag);
+
+        tags.add(Objects.requireNonNull(tag, ERROR_MESSAGE_NULL_TAG));
     }
 
     public void removeParticipant(User participant) {
-        Objects.requireNonNull(participant, ERROR_MESSAGE_NULL_PARTICIPANT);
-        participants.remove(participant);
+        participants.remove(Objects.requireNonNull(participant, ERROR_MESSAGE_NULL_PARTICIPANT));
     }
 
     public void removeTag(Tag tag) {
-        Objects.requireNonNull(tag, ERROR_MESSAGE_NULL_TAG);
-        tags.remove(tag);
+        tags.remove(Objects.requireNonNull(tag, ERROR_MESSAGE_NULL_TAG));
     }
 }

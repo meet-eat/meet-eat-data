@@ -15,11 +15,8 @@ public class Report {
     private boolean processed;
 
     public Report(User reporter, String message) {
-        Objects.requireNonNull(reporter, ERROR_MESSAGE_NULL_REPORTER);
-        Objects.requireNonNull(message, ERROR_MESSAGE_NULL_MESSAGE);
-
-        this.reporter = reporter;
-        this.message = message;
+        this.reporter = Objects.requireNonNull(reporter, ERROR_MESSAGE_NULL_REPORTER);
+        this.message = Objects.requireNonNull(message, ERROR_MESSAGE_NULL_MESSAGE);
     }
 
     public User getReporter() {

@@ -16,8 +16,7 @@ public class DisplaySetting implements Setting {
     }
 
     public DisplaySetting(ColorMode colorMode) {
-        Objects.requireNonNull(colorMode, ERROR_MESSAGE_NULL_COLOR_MODE);
-        this.colorMode = colorMode;
+        this.colorMode = Objects.requireNonNull(colorMode, ERROR_MESSAGE_NULL_COLOR_MODE);;
     }
 
     public ColorMode getColorMode() {
@@ -25,8 +24,7 @@ public class DisplaySetting implements Setting {
     }
 
     public void setColorMode(ColorMode colorMode) {
-        Objects.requireNonNull(colorMode, ERROR_MESSAGE_NULL_COLOR_MODE);
-        this.colorMode = colorMode;
+        this.colorMode = Objects.requireNonNull(colorMode, ERROR_MESSAGE_NULL_COLOR_MODE);;
     }
 
     @Override

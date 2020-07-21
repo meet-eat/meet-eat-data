@@ -15,11 +15,8 @@ public class LoginCredential {
     private final Password password;
 
     public LoginCredential(Email email, Password password) {
-        Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
-        Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
-
-        this.email = email;
-        this.password = password;
+        this.email = Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
+        this.password = Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
     }
 
     public Email getEmail() {

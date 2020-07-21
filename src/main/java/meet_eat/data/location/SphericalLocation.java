@@ -10,8 +10,7 @@ public class SphericalLocation implements Localizable {
     private SphericalPosition sphericalPosition;
 
     public SphericalLocation(SphericalPosition sphericalPosition) {
-        Objects.requireNonNull(sphericalPosition, ERROR_MESSAGE_NULL_SPHERICAL_POSITION);
-        this.sphericalPosition = sphericalPosition;
+        this.sphericalPosition = Objects.requireNonNull(sphericalPosition, ERROR_MESSAGE_NULL_SPHERICAL_POSITION);
     }
 
     @Override
@@ -20,7 +19,6 @@ public class SphericalLocation implements Localizable {
     }
 
     public void setSphericalPosition(SphericalPosition sphericalPosition) {
-        Objects.requireNonNull(sphericalPosition, ERROR_MESSAGE_NULL_SPHERICAL_POSITION);
-        this.sphericalPosition = sphericalPosition;
+        this.sphericalPosition = Objects.requireNonNull(sphericalPosition, ERROR_MESSAGE_NULL_SPHERICAL_POSITION);
     }
 }

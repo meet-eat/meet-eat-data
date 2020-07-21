@@ -16,13 +16,9 @@ public class Rating {
     private final User reviewer;
 
     public Rating(RatingBasis basis, RatingValue value, User reviewer) {
-        Objects.requireNonNull(basis, ERROR_MESSAGE_NULL_BASIS);
-        Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
-        Objects.requireNonNull(reviewer, ERROR_MESSAGE_NULL_REVIEWER);
-
-        this.basis = basis;
-        this.value = value;
-        this.reviewer = reviewer;
+        this.basis = Objects.requireNonNull(basis, ERROR_MESSAGE_NULL_BASIS);
+        this.value = Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
+        this.reviewer = Objects.requireNonNull(reviewer, ERROR_MESSAGE_NULL_REVIEWER);
     }
 
     public RatingBasis getBasis() {

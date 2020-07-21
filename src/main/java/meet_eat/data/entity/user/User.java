@@ -68,19 +68,12 @@ public class User extends ReportableEntity {
         bookmarks = new HashSet<>();
         role = DEFAULT_ROLE;
 
-        Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
-        Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
-        Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
-        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
-        Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
-        Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
-
-        this.email = email;
-        this.password = password;
-        this.birthDay = birthDay;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.description = description;
+        this.email = Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
+        this.password = Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
+        this.birthDay = Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
+        this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
+        this.phoneNumber = Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
+        this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
         this.isVerified = isVerified;
     }
 
@@ -90,32 +83,18 @@ public class User extends ReportableEntity {
                 boolean isVerified) {
 
         super(identifier, reports);
-
-        Objects.requireNonNull(ratings, ERROR_MESSAGE_NULL_RATINGS);
-        Objects.requireNonNull(subscriptions, ERROR_MESSAGE_NULL_SUBSCRIPTIONS);
-        Objects.requireNonNull(settings, ERROR_MESSAGE_NULL_SETTINGS);
-        Objects.requireNonNull(offerPredicates, ERROR_MESSAGE_NULL_OFFER_PREDICATES);
-        Objects.requireNonNull(bookmarks, ERROR_MESSAGE_NULL_BOOKMARKS);
-        Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
-        Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
-        Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
-        Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
-        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
-        Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
-        Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
-
-        this.ratings = ratings;
-        this.subscriptions = subscriptions;
-        this.settings = settings;
-        this.offerPredicates = offerPredicates;
-        this.bookmarks = bookmarks;
-        this.role = role;
-        this.email = email;
-        this.password = password;
-        this.birthDay = birthDay;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.description = description;
+        this.ratings = Objects.requireNonNull(ratings, ERROR_MESSAGE_NULL_RATINGS);
+        this.subscriptions = Objects.requireNonNull(subscriptions, ERROR_MESSAGE_NULL_SUBSCRIPTIONS);
+        this.settings = Objects.requireNonNull(settings, ERROR_MESSAGE_NULL_SETTINGS);
+        this.offerPredicates = Objects.requireNonNull(offerPredicates, ERROR_MESSAGE_NULL_OFFER_PREDICATES);
+        this.bookmarks = Objects.requireNonNull(bookmarks, ERROR_MESSAGE_NULL_BOOKMARKS);
+        this.role = Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
+        this.email = Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
+        this.password = Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
+        this.birthDay = Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
+        this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
+        this.phoneNumber = Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
+        this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
         this.isVerified = isVerified;
     }
 
@@ -172,38 +151,31 @@ public class User extends ReportableEntity {
     }
 
     public void setRole(Role role) {
-        Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
-        this.role = role;
+        this.role = Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
     }
 
     public void setEmail(Email email) {
-        Objects.requireNonNull(role, ERROR_MESSAGE_NULL_EMAIL);
-        this.email = email;
+        this.email = Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
     }
 
     public void setPassword(Password password) {
-        Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
-        this.password = password;
+        this.password = Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
     }
 
     public void setBirthDay(LocalDate birthDay) {
-        Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
-        this.birthDay = birthDay;
+        this.birthDay = Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
     }
 
     public void setName(String name) {
-        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
-        this.name = name;
+        this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
     }
 
     public void setDescription(String description) {
-        Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
-        this.description = description;
+        this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
     }
 
     public void setVerified(boolean isVerified) {
@@ -211,23 +183,19 @@ public class User extends ReportableEntity {
     }
 
     public void addRating(Rating rating) {
-        Objects.requireNonNull(rating, ERROR_MESSAGE_NULL_RATING);
-        ratings.add(rating);
+        ratings.add(Objects.requireNonNull(rating, ERROR_MESSAGE_NULL_RATING));
     }
 
     public void addSubscription(User subscription) {
-        Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION);
-        subscriptions.add(subscription);
+        subscriptions.add(Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION));
     }
 
     public void addSetting(Setting setting) {
-        Objects.requireNonNull(setting, ERROR_MESSAGE_NULL_SETTING);
-        settings.add(setting);
+        settings.add(Objects.requireNonNull(setting, ERROR_MESSAGE_NULL_SETTING));
     }
 
     public void addPredicate(Predicate<Offer> predicate) {
-        Objects.requireNonNull(predicate, ERROR_MESSAGE_NULL_OFFER_PREDICATE);
-        offerPredicates.add(predicate);
+        offerPredicates.add(Objects.requireNonNull(predicate, ERROR_MESSAGE_NULL_OFFER_PREDICATE));
     }
 
     public void addBookmark(Offer bookmark) {
@@ -241,18 +209,15 @@ public class User extends ReportableEntity {
     }
 
     public void removeSubscriptions(User subscription) {
-        Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION);
-        subscriptions.remove(subscription);
+        subscriptions.remove(Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION));
     }
 
     public void removePredicate(Predicate<Offer> predicate) {
-        Objects.requireNonNull(predicate, ERROR_MESSAGE_NULL_OFFER_PREDICATE);
-        offerPredicates.remove(predicate);
+        offerPredicates.remove(Objects.requireNonNull(predicate, ERROR_MESSAGE_NULL_OFFER_PREDICATE));
     }
 
     public void removeBookmark(Offer bookmark) {
-        Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK);
-        bookmarks.remove(bookmark);
+        bookmarks.remove(Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK));
     }
 
     public double getHostRating() {

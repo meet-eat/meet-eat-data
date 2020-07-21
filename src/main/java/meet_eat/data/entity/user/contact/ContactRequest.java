@@ -14,11 +14,8 @@ public class ContactRequest {
     private final User requestedUser;
 
     public ContactRequest(User requester, User requestedUser) {
-        Objects.requireNonNull(requester, ERROR_MESSAGE_NULL_REQUESTER);
-        Objects.requireNonNull(requestedUser, ERROR_MESSAGE_NULL_REQUESTED_USER);
-
-        this.requester = requester;
-        this.requestedUser = requestedUser;
+        this.requester = Objects.requireNonNull(requester, ERROR_MESSAGE_NULL_REQUESTER);;
+        this.requestedUser = Objects.requireNonNull(requestedUser, ERROR_MESSAGE_NULL_REQUESTED_USER);;
     }
 
     public User getRequester() {

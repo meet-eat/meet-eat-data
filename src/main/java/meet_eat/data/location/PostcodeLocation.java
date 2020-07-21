@@ -13,8 +13,7 @@ public class PostcodeLocation implements Localizable {
     private String postcode;
 
     public PostcodeLocation(String postcode) {
-        Objects.requireNonNull(postcode, ERROR_MESSAGE_NULL_POSTCODE);
-        this.postcode = postcode;
+        this.postcode = Objects.requireNonNull(postcode, ERROR_MESSAGE_NULL_POSTCODE);
     }
 
     public String getPostcode() {
@@ -22,8 +21,7 @@ public class PostcodeLocation implements Localizable {
     }
 
     public void setPostcode(String postcode) {
-        Objects.requireNonNull(postcode, ERROR_MESSAGE_NULL_POSTCODE);
-        this.postcode = postcode;
+        this.postcode = Objects.requireNonNull(postcode, ERROR_MESSAGE_NULL_POSTCODE);
     }
 
     @Override

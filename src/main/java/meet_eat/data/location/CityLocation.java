@@ -13,8 +13,7 @@ public class CityLocation implements Localizable {
     private String cityName;
 
     public CityLocation(String cityName) {
-        Objects.requireNonNull(cityName, ERROR_MESSAGE_NULL_CITY_NAME);
-        this.cityName = cityName;
+        this.cityName = Objects.requireNonNull(cityName, ERROR_MESSAGE_NULL_CITY_NAME);
     }
 
     public String getCityName() {
@@ -22,8 +21,7 @@ public class CityLocation implements Localizable {
     }
 
     public void setCityName(String cityName) {
-        Objects.requireNonNull(cityName, ERROR_MESSAGE_NULL_CITY_NAME);
-        this.cityName = cityName;
+        this.cityName = Objects.requireNonNull(cityName, ERROR_MESSAGE_NULL_CITY_NAME);
     }
 
     @Override

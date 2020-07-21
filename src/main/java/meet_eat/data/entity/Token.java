@@ -14,21 +14,14 @@ public class Token extends Entity {
     private final String value;
 
     public Token(User user, String value) {
-        Objects.requireNonNull(user, ERROR_MESSAGE_NULL_USER);
-        Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
-
-        this.user = user;
-        this.value = value;
+        this.user = Objects.requireNonNull(user, ERROR_MESSAGE_NULL_USER);
+        this.value = Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
     }
 
     public Token(String identifier, User user, String value) {
         super(identifier);
-
-        Objects.requireNonNull(user, ERROR_MESSAGE_NULL_USER);
-        Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
-
-        this.user = user;
-        this.value = value;
+        this.user = Objects.requireNonNull(user, ERROR_MESSAGE_NULL_USER);
+        this.value = Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
     }
 
     public User getUser() {

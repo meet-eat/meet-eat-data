@@ -16,9 +16,8 @@ public class ContactData {
     private final ContactRequest request;
 
     public ContactData(ContactRequest request) {
-        Objects.requireNonNull(request, ERROR_MESSAGE_NULL_REQUEST);
         contacts = new EnumMap<>(ContactType.class);
-        this.request = request;
+        this.request = Objects.requireNonNull(request, ERROR_MESSAGE_NULL_REQUEST);;
     }
 
     public Map<ContactType, String> getContacts() {
