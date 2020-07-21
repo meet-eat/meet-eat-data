@@ -22,6 +22,11 @@ public class Offer extends ReportableEntity {
     private static final String ERROR_MESSAGE_NULL_DESCRIPTION = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "description");
     private static final String ERROR_MESSAGE_NULL_DATE_TIME = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "dateTime");
     private static final String ERROR_MESSAGE_NULL_LOCATION = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "location");
+    private static final String ERROR_MESSAGE_ILLEGAL_PRICE = "The price must be greater or equals than 0.";
+    private static final String ERROR_MESSAGE_ILLEGAL_MAX_PARTICIPANTS = "At least one individual has to participate.";
+
+    private static final double DEFAULT_MIN_PRICE = 0d;
+    private static final int DEFAULT_MIN_PARTICIPANTS = 1;
 
     private final User creator;
     private final Collection<User> participants;
@@ -49,7 +54,13 @@ public class Offer extends ReportableEntity {
         this.tags = tags;
         this.name = name;
         this.description = description;
+        if (price < DEFAULT_MIN_PRICE) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_PRICE);
+        }
         this.price = price;
+        if (maxParticipants < DEFAULT_MIN_PARTICIPANTS) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_MAX_PARTICIPANTS);
+        }
         this.maxParticipants = maxParticipants;
         this.dateTime = dateTime;
         this.location = location;
@@ -74,7 +85,13 @@ public class Offer extends ReportableEntity {
         this.tags = tags;
         this.name = name;
         this.description = description;
+        if (price < DEFAULT_MIN_PRICE) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_PRICE);
+        }
         this.price = price;
+        if (maxParticipants < DEFAULT_MIN_PARTICIPANTS) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_MAX_PARTICIPANTS);
+        }
         this.maxParticipants = maxParticipants;
         this.dateTime = dateTime;
         this.location = location;
