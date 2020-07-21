@@ -20,9 +20,20 @@ import meet_eat.data.entity.user.setting.Setting;
 public class User extends ReportableEntity {
     
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
-    private static final String ERROR_MESSAGE_NULL_BIRTHDAY = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "birthDay");
+    private static final String ERROR_MESSAGE_NULL_RATINGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "ratings");
+    private static final String ERROR_MESSAGE_NULL_SUBSCRIPTIONS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "subscriptions");
+    private static final String ERROR_MESSAGE_NULL_SETTINGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "settings");
+    private static final String ERROR_MESSAGE_NULL_OFFER_PREDICATES = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "offerPredicates");
+    private static final String ERROR_MESSAGE_NULL_BOOKMARKS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "bookmarks");
     private static final String ERROR_MESSAGE_NULL_ROLE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "role");
     private static final String ERROR_MESSAGE_NULL_EMAIL = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "email");
+    private static final String ERROR_MESSAGE_NULL_PASSWORD = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "password");
+    private static final String ERROR_MESSAGE_NULL_BIRTHDAY = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "birthDay");
+    private static final String ERROR_MESSAGE_NULL_NAME = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "name");
+    private static final String ERROR_MESSAGE_NULL_PHONE_NUMBER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "phoneNumber");
+    private static final String ERROR_MESSAGE_NULL_DESCRIPTION = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "description");
+
+    private static final Role DEFAULT_ROLE = Role.USER;
     private static final int MIN_AMOUNT_RATINGS = 5;
     private static final int ROUNDING_FACTOR = 10;
 
@@ -32,17 +43,17 @@ public class User extends ReportableEntity {
     private final Set<Predicate<Offer>> offerPredicates;
     private final Set<Offer> bookmarks;
 
-    private LocalDate birthDay;
     private Role role;
     private Email email;
     private Password password;
+    private LocalDate birthDay;
     private String name;
-    private String description;
     private String phoneNumber;
+    private String description;
     private boolean isVerified;
 
-    public User(LocalDate birthDay, Role role, Email email, Password password,
-                String name, String description, String phoneNumber, boolean isVerified) {
+    public User(Email email, Password password, LocalDate birthDay, String name, String phoneNumber,
+                String description, boolean isVerified) {
 
         ratings = new LinkedList<>();
         subscriptions = new HashSet<>();
@@ -50,43 +61,55 @@ public class User extends ReportableEntity {
         offerPredicates = new HashSet<>();
         bookmarks = new HashSet<>();
 
-        Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
-        Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
         Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
+        Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
+        Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
+        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
+        Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
+        Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
 
-        this.birthDay = birthDay;
-        this.role = role;
+        this.role = DEFAULT_ROLE;
         this.email = email;
         this.password = password;
+        this.birthDay = birthDay;
         this.name = name;
-        this.description = description;
         this.phoneNumber = phoneNumber;
+        this.description = description;
         this.isVerified = isVerified;
     }
 
     public User(String identifier, Collection<Report> reports, Collection<Rating> ratings, Set<User> subscriptions,
-                Set<Setting> settings, Set<Predicate<Offer>> offerPredicates, Set<Offer> bookmarks, LocalDate birthDay,
-                Role role, Email email, Password password, String name, String description, String phoneNumber,
+                Set<Setting> settings, Set<Predicate<Offer>> offerPredicates, Set<Offer> bookmarks, Role role,
+                Email email, Password password, LocalDate birthDay, String name, String phoneNumber, String description,
                 boolean isVerified) {
 
         super(identifier, reports);
+
+        Objects.requireNonNull(ratings, ERROR_MESSAGE_NULL_RATINGS);
+        Objects.requireNonNull(subscriptions, ERROR_MESSAGE_NULL_SUBSCRIPTIONS);
+        Objects.requireNonNull(settings, ERROR_MESSAGE_NULL_SETTINGS);
+        Objects.requireNonNull(offerPredicates, ERROR_MESSAGE_NULL_OFFER_PREDICATES);
+        Objects.requireNonNull(bookmarks, ERROR_MESSAGE_NULL_BOOKMARKS);
+        Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
+        Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
+        Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
+        Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
+        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
+        Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
+        Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
+
         this.ratings = ratings;
         this.subscriptions = subscriptions;
         this.settings = settings;
         this.offerPredicates = offerPredicates;
         this.bookmarks = bookmarks;
-
-        Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
-        Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
-        Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
-
-        this.birthDay = birthDay;
         this.role = role;
         this.email = email;
         this.password = password;
+        this.birthDay = birthDay;
         this.name = name;
-        this.description = description;
         this.phoneNumber = phoneNumber;
+        this.description = description;
         this.isVerified = isVerified;
     }
 
@@ -110,10 +133,6 @@ public class User extends ReportableEntity {
         return Collections.unmodifiableSet(bookmarks);
     }
 
-    public LocalDate getBirthDay() {
-        return birthDay;
-    }
-
     public Role getRole() {
         return role;
     }
@@ -126,16 +145,20 @@ public class User extends ReportableEntity {
         return password;
     }
 
+    public LocalDate getBirthDay() {
+        return birthDay;
+    }
+
     public String getName() {
         return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public boolean isVerified() {
@@ -162,11 +185,6 @@ public class User extends ReportableEntity {
         bookmarks.add(bookmark);
     }
 
-    public void setBirthDay(LocalDate birthDay) {
-        Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
-        this.birthDay = birthDay;
-    }
-
     public void setRole(Role role) {
         Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
         this.role = role;
@@ -178,19 +196,28 @@ public class User extends ReportableEntity {
     }
 
     public void setPassword(Password password) {
+        Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
         this.password = password;
     }
 
+    public void setBirthDay(LocalDate birthDay) {
+        Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
+        this.birthDay = birthDay;
+    }
+
     public void setName(String name) {
+        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
         this.name = name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPhoneNumber(String phoneNumber) {
+        Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setDescription(String description) {
+        Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
+        this.description = description;
     }
 
     public void setVerified(boolean isVerified) {
