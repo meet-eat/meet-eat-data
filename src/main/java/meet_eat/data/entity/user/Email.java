@@ -1,5 +1,7 @@
 package meet_eat.data.entity.user;
 
+import java.util.Objects;
+
 public class Email {
 
     private static final String ERROR_MESSAGE_ILLEGAL_EMAIL = "The email address must comply with RFC 5322.";
@@ -19,6 +21,9 @@ public class Email {
     }
 
     public static boolean isLegalEmailAddress(String address) {
+        if (Objects.isNull(address)) {
+            return false;
+        }
         return address.matches(REGEX_EMAIL_ADDRESS);
     }
 
