@@ -1,11 +1,12 @@
 package meet_eat.data;
 
 public class Page {
-    
-    public static final int INDEX_LOWER_BOUND = 0;
-    public static final int SIZE_LOWER_BOUND = 1;
+
     private static final String ERROR_MESSAGE_ILLEGAL_INDEX = "Page index must not be less than zero.";
     private static final String ERROR_MESSAGE_ILLEGAL_SIZE = "Page size must not be less than one.";
+
+    public static final int INDEX_LOWER_BOUND = 0;
+    public static final int SIZE_LOWER_BOUND = 1;
 
     private final int index;
     private final int size;
@@ -28,5 +29,4 @@ public class Page {
     public int getSize() {
         return size;
     }
-
 }
