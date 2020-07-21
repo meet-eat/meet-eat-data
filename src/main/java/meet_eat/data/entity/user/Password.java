@@ -21,7 +21,7 @@ public class Password {
             + "(?=.*[!#$%&*_+,-./:;'<=>?@^|~(){}])"
             + ".{8,32}$";
     private static final String ERROR_MESSAGE_ILLEGAL_PASSWORD = "The password must comply with password guidelines.";
-    private static final Function<String, String> HASH_FUNCTION = new Function<>() {
+    private static final Function<String, String> HASH_FUNCTION = new Function<String, String>() {
         @Override
         public String apply(String s) {
             throw new UnsupportedOperationException("Method not implemented.");

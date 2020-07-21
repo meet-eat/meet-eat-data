@@ -11,7 +11,7 @@ public final class Haversine {
     private Haversine() {
     }
 
-    private static Function<Double, Double> HAVERSINE_FUNCTION = new Function<>() {
+    private static Function<Double, Double> HAVERSINE_FUNCTION = new Function<Double, Double>() {
         @Override
         public Double apply(Double t) {
             return Math.pow(Math.sin(t / 2.0), 2.0);
