@@ -1,28 +1,12 @@
 package meet_eat.data;
 
-import java.util.Objects;
+public final class RequestHeaderField {
 
-public enum RequestHeaderField {
-
-    TOKEN,
-
-    PAGE,
-
-    PREDICATES,
-
-    COMPARATORS;
-
-    private final String identifier;
+    private static final String TOKEN = "token";
+    private static final String PAGE = "page";
+    private static final String PREDICATES = "predicates";
+    private static final String COMPARATORS = "comparators";
 
     private RequestHeaderField() {
-        this.identifier = this.name().toLowerCase();
-    }
-
-    private RequestHeaderField(String identifier) {
-        this.identifier = identifier;
-    }
-
-    public String getIdentifier() {
-        return this.name().toLowerCase();
     }
 }
