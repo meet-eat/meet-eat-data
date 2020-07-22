@@ -33,7 +33,7 @@ dependencies {
     implementation("com.google.guava:guava:29.0-jre")
 
     // Spring framework
-    implementation("org.springframework:org.springframework.web:3.2.2.RELEASE")
+    implementation("org.springframework:spring-web:5.2.8.RELEASE")
 
     // Fasterxml jackson
     implementation("com.fasterxml.jackson.core:jackson-databind:2.11.1")
