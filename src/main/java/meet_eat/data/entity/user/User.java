@@ -19,7 +19,7 @@ import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
 
-public class User extends ReportableEntity {
+public class User extends ReportableEntity<String> {
     
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_RATINGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "ratings");

@@ -10,7 +10,7 @@ import meet_eat.data.Report;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.location.Localizable;
 
-public class Offer extends ReportableEntity {
+public class Offer extends ReportableEntity<String> {
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_CREATOR = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "creator");

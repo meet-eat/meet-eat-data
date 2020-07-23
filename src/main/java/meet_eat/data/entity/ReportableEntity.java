@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import meet_eat.data.Report;
 
-public abstract class ReportableEntity extends Entity {
+public abstract class ReportableEntity<U> extends Entity<U> {
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_REPORTS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reports");
@@ -20,7 +20,7 @@ public abstract class ReportableEntity extends Entity {
         this.reports = new LinkedList<>();
     }
 
-    protected ReportableEntity(String identifier, Collection<Report> reports) {
+    protected ReportableEntity(U identifier, Collection<Report> reports) {
         super(identifier);
         this.reports = Objects.requireNonNull(reports, ERROR_MESSAGE_NULL_REPORTS);
     }

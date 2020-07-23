@@ -4,7 +4,7 @@ import meet_eat.data.entity.user.User;
 
 import java.util.Objects;
 
-public class Token extends Entity {
+public class Token extends Entity<String> {
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_USER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "user");

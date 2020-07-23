@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class EntityCommonTest {
 
-    private class ConcreteEntity extends Entity {
+    private class ConcreteEntity extends Entity<String> {
 
         public ConcreteEntity() {
             super();
