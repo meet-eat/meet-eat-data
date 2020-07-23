@@ -43,6 +43,7 @@ public class User extends ReportableEntity<String> {
 
     private static final Role DEFAULT_ROLE = Role.USER;
     private static final int MIN_AMOUNT_RATINGS = 5;
+    private static final int DEFAULT_NOT_ENOUGH_RATINGS = 0;
     private static final int ROUNDING_FACTOR = 10;
 
     private final Collection<Rating> ratings;
@@ -225,11 +226,15 @@ public class User extends ReportableEntity<String> {
     }
 
     public double getHostRating() {
-        return (countRatings(RatingBasis.HOST) >= MIN_AMOUNT_RATINGS) ? calculateAverageHostRating() : 0d;
+        return (countRatings(RatingBasis.HOST) >= MIN_AMOUNT_RATINGS)
+                ? calculateAverageHostRating()
+                : DEFAULT_NOT_ENOUGH_RATINGS;
     }
 
     public double getGuestRating() {
-        return (countRatings(RatingBasis.GUEST) >= MIN_AMOUNT_RATINGS) ? calculateAverageGuestRating() : 0d;
+        return (countRatings(RatingBasis.GUEST) >= MIN_AMOUNT_RATINGS)
+                ? calculateAverageGuestRating()
+                : DEFAULT_NOT_ENOUGH_RATINGS;
     }
 
     private double calculateAverageHostRating() {
