@@ -37,7 +37,7 @@ public class ReportableEntityCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorNullIdentifier() {
         // Execution
-        ConcreteReportableEntity entity = new ConcreteReportableEntity(null, null)
+        ConcreteReportableEntity entity = new ConcreteReportableEntity(null, null);
     }
 
     @Test(expected = NullPointerException.class)
