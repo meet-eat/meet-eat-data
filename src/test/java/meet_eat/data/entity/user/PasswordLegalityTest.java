@@ -1,6 +1,5 @@
-package meet_eat.data;
+package meet_eat.data.entity.user;
 
-import meet_eat.data.entity.user.Password;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
