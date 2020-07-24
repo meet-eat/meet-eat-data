@@ -2,12 +2,14 @@ package meet_eat.data;
 
 import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class LoginCredentialCommonTest {
 
+    @Ignore
     @Test
     public void testConstructor() {
         // Test data
@@ -24,6 +26,7 @@ public class LoginCredentialCommonTest {
         assertEquals(password, loginCredential.getPassword());
     }
 
+    @Ignore
     @Test(expected = NullPointerException.class)
     public void testConstructorNullEmail() {
         // Test data
