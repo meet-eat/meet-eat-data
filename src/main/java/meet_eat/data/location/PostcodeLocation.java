@@ -38,4 +38,17 @@ public class PostcodeLocation implements Localizable {
         }
         return sphericalPosition;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PostcodeLocation that = (PostcodeLocation) o;
+        return Objects.equals(postcode, that.postcode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(postcode);
+    }
 }
