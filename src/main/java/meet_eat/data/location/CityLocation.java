@@ -38,4 +38,17 @@ public class CityLocation implements Localizable {
         }
         return sphericalPosition;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CityLocation that = (CityLocation) o;
+        return Objects.equals(cityName, that.cityName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cityName);
+    }
 }
