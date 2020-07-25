@@ -1,8 +1,10 @@
 package meet_eat.data;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.DefaultBaseTypeLimitingValidator;
 
 import java.util.Objects;
 
@@ -15,6 +17,11 @@ public class ObjectJsonParser {
 
     public ObjectJsonParser() {
         objectMapper = new ObjectMapper();
+
+        // Activate type/class meta-properties of elements generically typed within collections for example.
+        objectMapper.activateDefaultTypingAsProperty(new DefaultBaseTypeLimitingValidator(),
+                ObjectMapper.DefaultTyping.JAVA_LANG_OBJECT,
+                JsonTypeInfo.Id.CLASS.getDefaultPropertyName());
     }
 
     public ObjectJsonParser(ObjectMapper objectMapper) {
@@ -22,7 +29,14 @@ public class ObjectJsonParser {
     }
 
     public <T> T parseJsonStringToObject(String jsonString, Class<T> type) {
-        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(jsonString, type);
+        } catch (JsonProcessingException exception) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_STRING_NOT_PARSABLE, exception);
+        }
+    }
+
+    public <T> T parseJsonStringToObject(String jsonString, JavaType type) {
         try {
             return objectMapper.readValue(jsonString, type);
         } catch (JsonProcessingException exception) {
@@ -31,7 +45,6 @@ public class ObjectJsonParser {
     }
 
     public String parseObjectToJsonString(Object object) {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException exception) {
