@@ -1,5 +1,8 @@
 package meet_eat.data.location;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.location.service.Geocoding;
 
 import java.util.Objects;
@@ -10,9 +13,11 @@ public class PostcodeLocation implements Localizable {
     private static final String ERROR_MESSAGE_NULL_POSTCODE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "postcode");
     private static final String UNLOCALIZABLE_POSTCODE = "The given postcode is not localizable.";
 
+    @JsonProperty
     private String postcode;
 
-    public PostcodeLocation(String postcode) {
+    @JsonCreator
+    public PostcodeLocation(@JsonProperty("postcode") String postcode) {
         this.postcode = Objects.requireNonNull(postcode, ERROR_MESSAGE_NULL_POSTCODE);
     }
 
@@ -25,6 +30,7 @@ public class PostcodeLocation implements Localizable {
     }
 
     @Override
+    @JsonIgnore
     public SphericalPosition getSphericalPosition() throws UnlocalizableException {
         SphericalPosition sphericalPosition = Geocoding.getSphericalPositionFromPostcode(postcode);
         if (Objects.isNull(sphericalPosition)) {

@@ -1,13 +1,16 @@
 package meet_eat.data.location;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SphericalPosition {
 
+    @JsonProperty("lat")
     private double latitude;
+    @JsonProperty("lon")
     private double longitude;
 
     @JsonCreator
@@ -20,6 +23,7 @@ public class SphericalPosition {
         return latitude;
     }
 
+    @JsonIgnore
     public double getLatitudeAsRadians() {
         return Math.toRadians(latitude);
     }
@@ -28,6 +32,7 @@ public class SphericalPosition {
         return longitude;
     }
 
+    @JsonIgnore
     public double getLongitudeAsRadians() {
         return Math.toRadians(latitude);
     }
