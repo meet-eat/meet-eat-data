@@ -26,4 +26,17 @@ public class SphericalLocation implements Localizable {
     public void setSphericalPosition(SphericalPosition sphericalPosition) {
         this.sphericalPosition = Objects.requireNonNull(sphericalPosition, ERROR_MESSAGE_NULL_SPHERICAL_POSITION);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SphericalLocation that = (SphericalLocation) o;
+        return Objects.equals(sphericalPosition, that.sphericalPosition);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sphericalPosition);
+    }
 }
