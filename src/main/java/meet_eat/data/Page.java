@@ -3,6 +3,8 @@ package meet_eat.data;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 public class Page {
 
     private static final String ERROR_MESSAGE_ILLEGAL_INDEX = "Page index must not be less than zero.";
@@ -34,5 +36,19 @@ public class Page {
 
     public int getSize() {
         return size;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Page page = (Page) o;
+        return index == page.index &&
+                size == page.size;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, size);
     }
 }
