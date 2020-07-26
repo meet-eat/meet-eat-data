@@ -34,6 +34,7 @@ dependencies {
 
     // Spring framework
     implementation("org.springframework:spring-web:5.2.8.RELEASE")
+    implementation("org.springframework.security:spring-security-crypto:5.3.3.RELEASE")
 
     // Fasterxml jackson
     implementation("com.fasterxml.jackson.core:jackson-databind:2.11.1")

@@ -2,6 +2,7 @@ package meet_eat.data.entity.user;
 
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -31,6 +32,7 @@ public class Password {
             return Hashing.sha512().hashString(s, Charsets.UTF_16).toString();
         }
     };
+    private static final int DERIVATION_WIDTH = 512;
 
     private final String hash;
 
@@ -58,6 +60,14 @@ public class Password {
     }
 
     public Password derive(String salt, int iterations) {
-        throw new UnsupportedOperationException();
+        Pbkdf2PasswordEncoder encoder = new Pbkdf2PasswordEncoder(salt, iterations, DERIVATION_WIDTH);
+        encoder.setAlgorithm(Pbkdf2PasswordEncoder.SecretKeyFactoryAlgorithm.PBKDF2WithHmacSHA512);
+        return new Password(encoder.encode(hash));
+    }
+
+    public boolean matches(Password derivedPassword, String salt, int iterations) {
+        Pbkdf2PasswordEncoder encoder = new Pbkdf2PasswordEncoder(salt, iterations, DERIVATION_WIDTH);
+        encoder.setAlgorithm(Pbkdf2PasswordEncoder.SecretKeyFactoryAlgorithm.PBKDF2WithHmacSHA512);
+        return encoder.matches(hash, derivedPassword.getHash());
     }
 }
