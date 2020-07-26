@@ -83,7 +83,7 @@ public class ObjectJsonParserCommonTest {
     @Ignore // TODO Has to be fixed
     public void testParseReport() {
         // Test data
-        User user = new User(new Email("noreply.meet.eat@gmail.com"), new Password("AbcdefghijkL1!"),
+        User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
                 LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false);
         Report report = new Report(user, "Max does not use power saving mode.");
 

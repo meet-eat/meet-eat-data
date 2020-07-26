@@ -16,7 +16,7 @@ public class LoginCredentialCommonTest {
         String testEmail = "test@meet-eat.com";
         Email email = new Email(testEmail);
         String testPassword = "MySpecial*Password1";
-        Password password = new Password(testPassword);
+        Password password = Password.createHashedPassword(testPassword);
 
         // Execution
         LoginCredential loginCredential = new LoginCredential(email, password);
@@ -31,7 +31,7 @@ public class LoginCredentialCommonTest {
     public void testConstructorNullEmail() {
         // Test data
         String testPassword = "MySpecial*Password1";
-        Password password = new Password(testPassword);
+        Password password = Password.createHashedPassword(testPassword);
 
         // Execution
         LoginCredential loginCredential = new LoginCredential(null, password);

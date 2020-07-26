@@ -1,5 +1,8 @@
 package meet_eat.data.entity.user;
 
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
+
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -25,17 +28,14 @@ public class Password {
     private static final Function<String, String> HASH_FUNCTION = new Function<String, String>() {
         @Override
         public String apply(String s) {
-            throw new UnsupportedOperationException("Method not implemented.");
+            return Hashing.sha512().hashString(s, Charsets.UTF_16).toString();
         }
     };
 
     private final String hash;
 
-    public Password(String password) {
-        if (!isLegalPassword(password)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_PASSWORD);
-        }
-        hash = HASH_FUNCTION.apply(password);
+    protected Password(String hash) {
+        this.hash = hash;
     }
 
     public String getHash() {
@@ -47,5 +47,17 @@ public class Password {
             return false;
         }
         return password.matches(REGEX_PASSWORD);
+    }
+
+    public static Password createHashedPassword(String passwordValue) {
+        if (!isLegalPassword(passwordValue)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_PASSWORD);
+        }
+        String hash = HASH_FUNCTION.apply(passwordValue);
+        return new Password(hash);
+    }
+
+    public Password derive(String salt, int iterations) {
+        throw new UnsupportedOperationException();
     }
 }
