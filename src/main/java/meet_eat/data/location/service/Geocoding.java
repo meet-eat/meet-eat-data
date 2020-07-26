@@ -23,21 +23,21 @@ public final class Geocoding {
     public static SphericalPosition getSphericalPositionFromPostcode(String postcode) {
         String params = String.format(PARAMETER_POSTCODE, postcode);
         String url = String.format(BASE_URL, SEARCH_OPERATION, params);
-        HttpMessageConverter<?>[] messageConverters = getMessageConvertersWithEnabledDeserializationFeatures(
+        HttpMessageConverter<?> messageConverter = getMessageConverterWithEnabledDeserializationFeatures(
                 DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT,
                 DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS);
 
-        return getForObject(url, SphericalPosition.class, messageConverters);
+        return getForObject(url, SphericalPosition.class, messageConverter);
     }
 
     public static SphericalPosition getSphericalPositionFromCityName(String cityName) {
         String params = String.format(PARAMETER_CITY, cityName);
         String url = String.format(BASE_URL, SEARCH_OPERATION, params);
-        HttpMessageConverter<?>[] messageConverters = getMessageConvertersWithEnabledDeserializationFeatures(
+        HttpMessageConverter<?> messageConverter = getMessageConverterWithEnabledDeserializationFeatures(
                 DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT,
                 DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS);
 
-        return getForObject(url, SphericalPosition.class, messageConverters);
+        return getForObject(url, SphericalPosition.class, messageConverter);
     }
 
     private static <T> T getForObject(String url, Class<T> responseType) {
@@ -51,19 +51,15 @@ public final class Geocoding {
         return restTemplate.getForObject(url, responseType);
     }
 
-    private static MappingJackson2HttpMessageConverter[] getMessageConvertersWithEnabledDeserializationFeatures(
+    private static MappingJackson2HttpMessageConverter getMessageConverterWithEnabledDeserializationFeatures(
             DeserializationFeature... features) {
 
-        MappingJackson2HttpMessageConverter[] converters = new MappingJackson2HttpMessageConverter[features.length];
-        for (int i = 0; i < features.length; i++) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.enable(features[i]);
-
-            MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
-            messageConverter.setObjectMapper(objectMapper);
-
-            converters[i] = messageConverter;
+        ObjectMapper objectMapper = new ObjectMapper();
+        MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
+        messageConverter.setObjectMapper(objectMapper);
+        for (DeserializationFeature feature : features) {
+            objectMapper.enable(feature);
         }
-        return converters;
+        return messageConverter;
     }
 }
