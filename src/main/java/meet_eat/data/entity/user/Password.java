@@ -1,5 +1,8 @@
 package meet_eat.data.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
@@ -34,12 +37,15 @@ public class Password {
     };
     private static final int DERIVATION_WIDTH = 512;
 
+    @JsonProperty
     private final String hash;
 
-    protected Password(String hash) {
+    @JsonCreator
+    protected Password(@JsonProperty("hash") String hash) {
         this.hash = hash;
     }
 
+    @JsonGetter("hash")
     public String getHash() {
         return hash;
     }
@@ -69,5 +75,18 @@ public class Password {
         Pbkdf2PasswordEncoder encoder = new Pbkdf2PasswordEncoder(salt, iterations, DERIVATION_WIDTH);
         encoder.setAlgorithm(Pbkdf2PasswordEncoder.SecretKeyFactoryAlgorithm.PBKDF2WithHmacSHA512);
         return encoder.matches(hash, derivedPassword.getHash());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Password password = (Password) o;
+        return Objects.equals(hash, password.hash);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hash);
     }
 }
