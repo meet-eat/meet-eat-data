@@ -33,6 +33,7 @@ public class ContactData {
         this.request = Objects.requireNonNull(request, ERROR_MESSAGE_NULL_REQUEST);
     }
 
+    @JsonGetter
     public Map<ContactType, String> getContacts() {
         return Collections.unmodifiableMap(contacts);
     }
