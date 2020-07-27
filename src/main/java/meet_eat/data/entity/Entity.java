@@ -5,9 +5,6 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import meet_eat.data.location.CityLocation;
-import meet_eat.data.location.PostcodeLocation;
-import meet_eat.data.location.SphericalLocation;
 
 import java.util.Objects;
 
