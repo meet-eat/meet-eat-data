@@ -39,8 +39,8 @@ public class Offer extends ReportableEntity<String> {
     private LocalDateTime dateTime;
     private Localizable location;
 
-    public Offer(User creator, Collection<Tag> tags, String name, String description, double price, int maxParticipants,
-            LocalDateTime dateTime, Localizable location) {
+    public Offer(User creator, Collection<Tag> tags, String name, String description, double price,
+                 int maxParticipants, LocalDateTime dateTime, Localizable location) {
 
         this.creator = Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
         this.participants = new HashSet<>();
@@ -59,9 +59,8 @@ public class Offer extends ReportableEntity<String> {
         this.location = Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
     }
 
-    public Offer(String identifier, Collection<Report> reports, User creator, Collection<User> participants,
-            Collection<Tag> tags, String name, String description, double price, int maxParticipants,
-            LocalDateTime dateTime, Localizable location) {
+    public Offer(String identifier, Collection<Report> reports, User creator, Collection<Tag> tags, String name,
+                 String description, double price, int maxParticipants, LocalDateTime dateTime, Localizable location) {
         
         super(identifier, reports);
         this.creator = Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
