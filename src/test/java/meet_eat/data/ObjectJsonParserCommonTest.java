@@ -33,7 +33,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class ObjectJsonParserCommonTest {
 
@@ -131,7 +133,7 @@ public class ObjectJsonParserCommonTest {
         // Test data
         User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
                 LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false);
-        Collection<Tag> tags = new LinkedList<>();
+        Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("1", "TestTag1"));
         tags.add(new Tag("2", "TestTag2"));
         Offer offer = new Offer(user, tags, "Spaghetti", "Leckere Spaghetti. Mhmmmmmmm.",
