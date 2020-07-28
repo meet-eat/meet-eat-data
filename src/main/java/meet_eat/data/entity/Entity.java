@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 
@@ -20,6 +21,7 @@ public abstract class Entity<U> {
     private static final String ERROR_MESSAGE_NULL_IDENTIFIER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "identifier");
 
     @JsonProperty
+    @Id
     private final U identifier;
 
     protected Entity() {
