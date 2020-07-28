@@ -6,6 +6,8 @@ public class TagFactory extends ObjectFactory<Tag> {
 
     @Override
     protected Tag createObject() {
-        return new Tag("TestTag" + Integer.toString(objectCounter));
+        String identifier = Integer.toString(objectCounter);
+        String name = "TestTag" + Integer.toString(objectCounter);
+        return new Tag(identifier, name);
     }
 }
