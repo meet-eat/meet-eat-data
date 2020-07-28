@@ -3,9 +3,11 @@ package meet_eat.data.entity;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import meet_eat.data.Report;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.location.Localizable;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 public class Offer extends ReportableEntity<String> {
 
@@ -56,6 +58,8 @@ public class Offer extends ReportableEntity<String> {
         this.location = Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
     }
 
+    @JsonCreator
+    @PersistenceConstructor
     public Offer(String identifier, Collection<Report> reports, User creator, Set<User> participants,
                  Set<Tag> tags, String name, String description, double price, int maxParticipants,
                  LocalDateTime dateTime, Localizable location) {

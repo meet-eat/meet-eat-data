@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import meet_eat.data.Report;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.ReportableEntity;
@@ -18,6 +19,7 @@ import meet_eat.data.entity.user.rating.RatingBasis;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 public class User extends ReportableEntity<String> {
     
@@ -78,6 +80,8 @@ public class User extends ReportableEntity<String> {
         initSettings();
     }
 
+    @JsonCreator
+    @PersistenceConstructor
     public User(String identifier, Collection<Report> reports, Collection<Rating> ratings, Set<User> subscriptions,
                 Set<Setting> settings, Set<Offer> bookmarks, Role role,
                 Email email, Password password, LocalDate birthDay, String name, String phoneNumber, String description,

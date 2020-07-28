@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.entity.user.User;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import java.util.Objects;
 
@@ -24,6 +25,7 @@ public class Token extends Entity<String> {
     }
 
     @JsonCreator
+    @PersistenceConstructor
     public Token(@JsonProperty("identifier") String identifier,
                  @JsonProperty("user") User user,
                  @JsonProperty("value") String value) {
