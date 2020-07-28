@@ -28,8 +28,6 @@ public class User extends ReportableEntity<String> {
     private static final String ERROR_MESSAGE_NULL_SUBSCRIPTION = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "subscription");
     private static final String ERROR_MESSAGE_NULL_SETTINGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "settings");
     private static final String ERROR_MESSAGE_NULL_SETTING = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "setting");
-    private static final String ERROR_MESSAGE_NULL_OFFER_PREDICATES = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "offerPredicates");
-    private static final String ERROR_MESSAGE_NULL_OFFER_PREDICATE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "offerPredicate");
     private static final String ERROR_MESSAGE_NULL_BOOKMARKS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "bookmarks");
     private static final String ERROR_MESSAGE_NULL_BOOKMARK = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "bookmark");
     private static final String ERROR_MESSAGE_NULL_REVIEWER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reviewer");
@@ -49,7 +47,6 @@ public class User extends ReportableEntity<String> {
     private final Collection<Rating> ratings;
     private final Set<User> subscriptions;
     private final Set<Setting> settings;
-    private final Set<Predicate<Offer>> offerPredicates;
     private final Set<Offer> bookmarks;
 
     private Role role;
@@ -67,7 +64,6 @@ public class User extends ReportableEntity<String> {
         ratings = new LinkedList<>();
         subscriptions = new HashSet<>();
         settings = new HashSet<>();
-        offerPredicates = new HashSet<>();
         bookmarks = new HashSet<>();
         role = DEFAULT_ROLE;
 
@@ -83,7 +79,7 @@ public class User extends ReportableEntity<String> {
     }
 
     public User(String identifier, Collection<Report> reports, Collection<Rating> ratings, Set<User> subscriptions,
-                Set<Setting> settings, Set<Predicate<Offer>> offerPredicates, Set<Offer> bookmarks, Role role,
+                Set<Setting> settings, Set<Offer> bookmarks, Role role,
                 Email email, Password password, LocalDate birthDay, String name, String phoneNumber, String description,
                 boolean isVerified) {
 
@@ -91,7 +87,6 @@ public class User extends ReportableEntity<String> {
         this.ratings = Objects.requireNonNull(ratings, ERROR_MESSAGE_NULL_RATINGS);
         this.subscriptions = Objects.requireNonNull(subscriptions, ERROR_MESSAGE_NULL_SUBSCRIPTIONS);
         this.settings = Objects.requireNonNull(settings, ERROR_MESSAGE_NULL_SETTINGS);
-        this.offerPredicates = Objects.requireNonNull(offerPredicates, ERROR_MESSAGE_NULL_OFFER_PREDICATES);
         this.bookmarks = Objects.requireNonNull(bookmarks, ERROR_MESSAGE_NULL_BOOKMARKS);
         this.role = Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
         this.email = Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
@@ -113,10 +108,6 @@ public class User extends ReportableEntity<String> {
 
     public Set<Setting> getSettings() {
         return Collections.unmodifiableSet(settings);
-    }
-
-    public Set<Predicate<Offer>> getPredicates() {
-        return Collections.unmodifiableSet(offerPredicates);
     }
 
     public Set<Offer> getBookmarks() {
@@ -199,10 +190,6 @@ public class User extends ReportableEntity<String> {
         settings.add(Objects.requireNonNull(setting, ERROR_MESSAGE_NULL_SETTING));
     }
 
-    public void addPredicate(Predicate<Offer> predicate) {
-        offerPredicates.add(Objects.requireNonNull(predicate, ERROR_MESSAGE_NULL_OFFER_PREDICATE));
-    }
-
     public void addBookmark(Offer bookmark) {
         Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK);
         bookmarks.add(bookmark);
@@ -215,10 +202,6 @@ public class User extends ReportableEntity<String> {
 
     public void removeSubscriptions(User subscription) {
         subscriptions.remove(Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION));
-    }
-
-    public void removePredicate(Predicate<Offer> predicate) {
-        offerPredicates.remove(Objects.requireNonNull(predicate, ERROR_MESSAGE_NULL_OFFER_PREDICATE));
     }
 
     public void removeBookmark(Offer bookmark) {
