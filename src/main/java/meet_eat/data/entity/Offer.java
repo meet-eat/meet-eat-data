@@ -1,10 +1,7 @@
 package meet_eat.data.entity;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.*;
 
 import meet_eat.data.Report;
 import meet_eat.data.entity.user.User;
@@ -29,8 +26,8 @@ public class Offer extends ReportableEntity<String> {
     private static final int DEFAULT_MIN_PARTICIPANTS = 1;
 
     private final User creator;
-    private final Collection<User> participants;
-    private final Collection<Tag> tags;
+    private final Set<User> participants;
+    private final Set<Tag> tags;
 
     private String name;
     private String description;
@@ -39,7 +36,7 @@ public class Offer extends ReportableEntity<String> {
     private LocalDateTime dateTime;
     private Localizable location;
 
-    public Offer(User creator, Collection<Tag> tags, String name, String description, double price,
+    public Offer(User creator, Set<Tag> tags, String name, String description, double price,
                  int maxParticipants, LocalDateTime dateTime, Localizable location) {
 
         this.creator = Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
@@ -59,12 +56,13 @@ public class Offer extends ReportableEntity<String> {
         this.location = Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
     }
 
-    public Offer(String identifier, Collection<Report> reports, User creator, Collection<Tag> tags, String name,
-                 String description, double price, int maxParticipants, LocalDateTime dateTime, Localizable location) {
+    public Offer(String identifier, Collection<Report> reports, User creator, Set<User> participants,
+                 Set<Tag> tags, String name, String description, double price, int maxParticipants,
+                 LocalDateTime dateTime, Localizable location) {
         
         super(identifier, reports);
         this.creator = Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
-        this.participants = new HashSet<>();
+        this.participants = Objects.requireNonNull(participants, ERROR_MESSAGE_NULL_PARTICIPANTS);
         this.tags = Objects.requireNonNull(tags, ERROR_MESSAGE_NULL_TAGS);
         this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
         this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
