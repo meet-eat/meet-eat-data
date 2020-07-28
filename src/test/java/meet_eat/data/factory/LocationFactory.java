@@ -4,7 +4,7 @@ import meet_eat.data.location.Localizable;
 import meet_eat.data.location.SphericalLocation;
 import meet_eat.data.location.SphericalPosition;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class LocationFactory extends ObjectFactory<Localizable> {
 
@@ -21,8 +21,8 @@ public class LocationFactory extends ObjectFactory<Localizable> {
     }
 
     private SphericalPosition getRandomPosition() {
-        double randomLat = new Random().nextDouble();
-        double randomLon = new Random().nextDouble();
+        double randomLat = ThreadLocalRandom.current().nextDouble();
+        double randomLon = ThreadLocalRandom.current().nextDouble();
 
         // Create random latitude and longitude values
         double latitude = LAT_START + (randomLat * (LAT_END - LAT_START));
