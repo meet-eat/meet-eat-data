@@ -2,7 +2,6 @@ package meet_eat.data.entity.user;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
 public class PasswordCommonTest {
 
@@ -36,9 +35,10 @@ public class PasswordCommonTest {
         assertNotNull(password.getHash());
         assertNotNull(derivedPassword);
         assertNotNull(derivedPassword.getHash());
+        assertNotNull(derivedPassword.getSalt());
+        assertNotNull(derivedPassword.getIterations());
         assertNotEquals(0, derivedPassword.getHash().length());
-        assertTrue(password.matches(derivedPassword, salt, iterations));
-        assertFalse(password.matches(password, salt, iterations));
+        assertTrue(password.matches(derivedPassword));
     }
 
     @Test
@@ -55,7 +55,26 @@ public class PasswordCommonTest {
 
         // Assertions
         assertNotEquals(derivedPasswordFst, derivedPasswordSnd);
-        assertTrue(password.matches(derivedPasswordFst, salt, iterations));
-        assertTrue(password.matches(derivedPasswordSnd, salt, iterations));
+        assertTrue(password.matches(derivedPasswordFst));
+        assertTrue(password.matches(derivedPasswordSnd));
+    }
+
+    @Test
+    public void testGenerateSaltRandomness() {
+        // Execution
+        String salt = Password.generateSalt();
+
+        // Assertions
+        assertNotEquals(Password.generateSalt(), salt);
+    }
+
+    @Test
+    public void testGenerateSaltNotNull() {
+        // Execution
+        String salt = Password.generateSalt();
+
+        // Assertions
+        assertNotNull(salt);
+        assertNotEquals(0, salt.length());
     }
 }

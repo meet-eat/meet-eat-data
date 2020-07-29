@@ -32,6 +32,9 @@ dependencies {
     // Fasterxml jackson
     implementation("com.fasterxml.jackson.core:jackson-databind:2.11.1")
 
+    // Apache Commons Codec
+    implementation("commons-codec:commons-codec:1.14")
+
     // Use JUnit test framework
     testImplementation("junit:junit:4.13")
 }
