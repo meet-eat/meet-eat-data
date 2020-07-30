@@ -37,24 +37,19 @@ public class OfferFactory extends ObjectFactory<Offer> {
     @Override
     protected Offer createObject() {
         String identifier = Integer.toString(objectCounter);
-
         Collection<Report> reports = new LinkedList<>();
         for (int i = 0; i < AMOUNT_REPORTS; i++) {
             reports.add(reportFactory.getValidObject());
         }
-
         User creator = userFactory.getValidObject();
-
         Set<User> participants = new HashSet<>();
         for (int i = 0; i < AMOUNT_PARTICIPANTS; i++) {
             participants.add(userFactory.getValidObject());
         }
-
         Set<Tag> tags = new HashSet<>();
         for (int i = 0; i < AMOUNT_TAGS; i++) {
             tags.add(tagFactory.getValidObject());
         }
-
         String name = "TestOffer" + objectCounter;
         String description = "This is test offer number " + objectCounter;
         double price = TEST_PRICE;
