@@ -11,6 +11,10 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import meet_eat.data.Report;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.ReportableEntity;
@@ -20,6 +24,8 @@ import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
 import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class User extends ReportableEntity<String> {
     
@@ -46,18 +52,32 @@ public class User extends ReportableEntity<String> {
     private static final int DEFAULT_NOT_ENOUGH_RATINGS = 0;
     private static final int ROUNDING_FACTOR = 10;
 
+    @JsonProperty
     private final Collection<Rating> ratings;
+    @DBRef
+    @JsonProperty
     private final Set<User> subscriptions;
+    @JsonProperty
     private final Set<Setting> settings;
+    @DBRef
+    @JsonProperty
     private final Set<Offer> bookmarks;
 
+    @JsonProperty
     private Role role;
+    @JsonProperty
     private Email email;
+    @JsonProperty
     private Password password;
+    @JsonProperty
     private LocalDate birthDay;
+    @JsonProperty
     private String name;
+    @JsonProperty
     private String phoneNumber;
+    @JsonProperty
     private String description;
+    @JsonProperty
     private boolean isVerified;
 
     public User(Email email, Password password, LocalDate birthDay, String name, String phoneNumber,
@@ -82,10 +102,20 @@ public class User extends ReportableEntity<String> {
 
     @JsonCreator
     @PersistenceConstructor
-    public User(String identifier, Collection<Report> reports, Collection<Rating> ratings, Set<User> subscriptions,
-                Set<Setting> settings, Set<Offer> bookmarks, Role role,
-                Email email, Password password, LocalDate birthDay, String name, String phoneNumber, String description,
-                boolean isVerified) {
+    public User(@JsonProperty("identifier") String identifier,
+                @JsonProperty("reports") Collection<Report> reports,
+                @JsonProperty("ratings") Collection<Rating> ratings,
+                @JsonProperty("subscriptions") Set<User> subscriptions,
+                @JsonProperty("settings") Set<Setting> settings,
+                @JsonProperty("bookmarks") Set<Offer> bookmarks,
+                @JsonProperty("role") Role role,
+                @JsonProperty("email") Email email,
+                @JsonProperty("password") Password password,
+                @JsonProperty("birthDay") LocalDate birthDay,
+                @JsonProperty("name") String name,
+                @JsonProperty("phoneNumber") String phoneNumber,
+                @JsonProperty("description") String description,
+                @JsonProperty("isVerified") boolean isVerified) {
 
         super(identifier, reports);
         this.ratings = Objects.requireNonNull(ratings, ERROR_MESSAGE_NULL_RATINGS);
@@ -102,50 +132,62 @@ public class User extends ReportableEntity<String> {
         this.isVerified = isVerified;
     }
 
+    @JsonGetter
     public Collection<Rating> getRatings() {
         return Collections.unmodifiableCollection(ratings);
     }
 
+    @JsonGetter
     public Set<User> getSubscriptions() {
         return Collections.unmodifiableSet(subscriptions);
     }
 
+    @JsonGetter
     public Set<Setting> getSettings() {
         return Collections.unmodifiableSet(settings);
     }
 
+    @JsonGetter
     public Set<Offer> getBookmarks() {
         return Collections.unmodifiableSet(bookmarks);
     }
 
+    @JsonGetter
     public Role getRole() {
         return role;
     }
 
+    @JsonGetter
     public Email getEmail() {
         return email;
     }
 
+    @JsonGetter
     public Password getPassword() {
         return password;
     }
 
+    @JsonGetter
     public LocalDate getBirthDay() {
         return birthDay;
     }
 
+    @JsonGetter
     public String getName() {
         return name;
     }
 
+    @JsonGetter
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    @JsonGetter
     public String getDescription() {
         return description;
     }
 
+    @JsonGetter
     public boolean isVerified() {
         return isVerified;
     }
@@ -212,12 +254,14 @@ public class User extends ReportableEntity<String> {
         bookmarks.remove(Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK));
     }
 
+    @JsonIgnore
     public double getHostRating() {
         return (countRatings(RatingBasis.HOST) >= MIN_AMOUNT_RATINGS)
                 ? calculateAverageHostRating()
                 : DEFAULT_NOT_ENOUGH_RATINGS;
     }
 
+    @JsonIgnore
     public double getGuestRating() {
         return (countRatings(RatingBasis.GUEST) >= MIN_AMOUNT_RATINGS)
                 ? calculateAverageGuestRating()
@@ -261,5 +305,30 @@ public class User extends ReportableEntity<String> {
     private void initSettings() {
         settings.add(new DisplaySetting());
         settings.add(new NotificationSetting());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        User user = (User) o;
+        return isVerified == user.isVerified &&
+                Objects.equals(ratings, user.ratings) &&
+                Objects.equals(subscriptions, user.subscriptions) &&
+                Objects.equals(settings, user.settings) &&
+                Objects.equals(bookmarks, user.bookmarks) &&
+                role == user.role &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(birthDay, user.birthDay) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(phoneNumber, user.phoneNumber) &&
+                Objects.equals(description, user.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), ratings, subscriptions, settings, bookmarks, role, email, password, birthDay, name, phoneNumber, description, isVerified);
     }
 }
