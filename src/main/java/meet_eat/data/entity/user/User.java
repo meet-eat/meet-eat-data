@@ -326,6 +326,7 @@ public class User extends ReportableEntity<String> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), ratings, subscriptions, settings, bookmarks, role, email, password, birthDay, name, phoneNumber, description, isVerified);
+        return Objects.hash(super.hashCode(), ratings, subscriptions, settings, bookmarks, role, email, password,
+                birthDay, name, phoneNumber, description, isVerified);
     }
 }
