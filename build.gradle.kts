@@ -32,6 +32,8 @@ dependencies {
 
     // Fasterxml jackson
     implementation("com.fasterxml.jackson.core:jackson-databind:2.11.1")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.11.1")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.1")
 
     // Apache Commons Codec
     implementation("commons-codec:commons-codec:1.14")

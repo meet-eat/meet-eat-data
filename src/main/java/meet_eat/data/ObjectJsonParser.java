@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.DefaultBaseTypeLimitingValidator;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.util.Objects;
 
@@ -16,7 +18,9 @@ public class ObjectJsonParser {
     private ObjectMapper objectMapper;
 
     public ObjectJsonParser() {
-        objectMapper = new ObjectMapper();
+        objectMapper = new ObjectMapper()
+                .registerModule(new Jdk8Module())
+                .registerModule(new JavaTimeModule());
 
         // Activate type/class meta-properties of elements generically typed within collections for example.
         objectMapper.activateDefaultTypingAsProperty(new DefaultBaseTypeLimitingValidator(),
