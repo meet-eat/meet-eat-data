@@ -26,7 +26,6 @@ import meet_eat.data.location.Localizable;
 import meet_eat.data.location.PostcodeLocation;
 import meet_eat.data.location.SphericalLocation;
 import meet_eat.data.location.SphericalPosition;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -110,7 +109,6 @@ public class ObjectJsonParserCommonTest {
     }
 
     @Test
-    @Ignore
     public void testParseUser() {
         // Test data
         User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
@@ -128,7 +126,6 @@ public class ObjectJsonParserCommonTest {
     }
 
     @Test
-    @Ignore
     public void testParseOffer() {
         // Test data
         User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
@@ -151,7 +148,6 @@ public class ObjectJsonParserCommonTest {
     }
 
     @Test
-    @Ignore
     public void testParseToken() {
         // Test data
         User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
@@ -170,7 +166,6 @@ public class ObjectJsonParserCommonTest {
     }
 
     @Test
-    @Ignore
     public void testParseReport() {
         // Test data
         User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
@@ -371,7 +366,6 @@ public class ObjectJsonParserCommonTest {
     }
 
     @Test
-    @Ignore
     public void testParseRating() {
         // Test data
         User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
@@ -406,7 +400,6 @@ public class ObjectJsonParserCommonTest {
     }
 
     @Test
-    @Ignore
     public void testParseContactRequest() {
         // Test data
         User userFst = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
@@ -427,7 +420,6 @@ public class ObjectJsonParserCommonTest {
     }
 
     @Test
-    @Ignore
     public void testParseContactData() {
         // Test data
         User userFst = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
