@@ -17,9 +17,6 @@ import java.util.Objects;
 })
 public abstract class Entity<U> {
 
-    private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
-    private static final String ERROR_MESSAGE_NULL_IDENTIFIER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "identifier");
-
     @JsonProperty
     @Id
     private final U identifier;
@@ -30,7 +27,7 @@ public abstract class Entity<U> {
 
     @JsonCreator
     protected Entity(@JsonProperty("identifier") U identifier) {
-        this.identifier = Objects.requireNonNull(identifier, ERROR_MESSAGE_NULL_IDENTIFIER);
+        this.identifier = identifier;
     }
 
     @JsonGetter
