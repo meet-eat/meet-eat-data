@@ -81,7 +81,6 @@ public class FactoryTest {
         assertFalse(tag1.equals(tag2));
     }
 
-    @Ignore
     @Test
     public void testUserFactory() {
         // Execution
