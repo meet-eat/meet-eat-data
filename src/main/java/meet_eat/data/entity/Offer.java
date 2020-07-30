@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.Report;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.location.Localizable;
 import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 public class Offer extends ReportableEntity<String> {
 
@@ -27,15 +30,27 @@ public class Offer extends ReportableEntity<String> {
     private static final double DEFAULT_MIN_PRICE = 0d;
     private static final int DEFAULT_MIN_PARTICIPANTS = 1;
 
+    @DBRef
+    @JsonProperty
     private final User creator;
+    @DBRef
+    @JsonProperty
     private final Set<User> participants;
+    @DBRef
+    @JsonProperty
     private final Set<Tag> tags;
 
+    @JsonProperty
     private String name;
+    @JsonProperty
     private String description;
+    @JsonProperty
     private double price;
+    @JsonProperty
     private int maxParticipants;
+    @JsonProperty
     private LocalDateTime dateTime;
+    @JsonProperty
     private Localizable location;
 
     public Offer(User creator, Set<Tag> tags, String name, String description, double price,
@@ -60,9 +75,17 @@ public class Offer extends ReportableEntity<String> {
 
     @JsonCreator
     @PersistenceConstructor
-    public Offer(String identifier, Collection<Report> reports, User creator, Set<User> participants,
-                 Set<Tag> tags, String name, String description, double price, int maxParticipants,
-                 LocalDateTime dateTime, Localizable location) {
+    public Offer(@JsonProperty("identifier") String identifier,
+                 @JsonProperty("reports") Collection<Report> reports,
+                 @JsonProperty("creator") User creator,
+                 @JsonProperty("participants") Set<User> participants,
+                 @JsonProperty("tags") Set<Tag> tags,
+                 @JsonProperty("name") String name,
+                 @JsonProperty("description") String description,
+                 @JsonProperty("price") double price,
+                 @JsonProperty("maxParticipants") int maxParticipants,
+                 @JsonProperty("dateTime") LocalDateTime dateTime,
+                 @JsonProperty("location") Localizable location) {
         
         super(identifier, reports);
         this.creator = Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
@@ -82,38 +105,47 @@ public class Offer extends ReportableEntity<String> {
         this.location = Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
     }
 
+    @JsonGetter
     public User getCreator() {
         return creator;
     }
 
+    @JsonGetter
     public Collection<User> getParticipants() {
         return Collections.unmodifiableCollection(participants);
     }
 
+    @JsonGetter
     public Collection<Tag> getTags() {
         return Collections.unmodifiableCollection(tags);
     }
 
+    @JsonGetter
     public String getName() {
         return name;
     }
 
+    @JsonGetter
     public String getDescription() {
         return description;
     }
 
+    @JsonGetter
     public double getPrice() {
         return price;
     }
 
+    @JsonGetter
     public int getMaxParticipants() {
         return maxParticipants;
     }
 
+    @JsonGetter
     public LocalDateTime getDateTime() {
         return dateTime;
     }
 
+    @JsonGetter
     public Localizable getLocation() {
         return location;
     }
@@ -159,5 +191,27 @@ public class Offer extends ReportableEntity<String> {
 
     public void removeTag(Tag tag) {
         tags.remove(Objects.requireNonNull(tag, ERROR_MESSAGE_NULL_TAG));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Offer offer = (Offer) o;
+        return Double.compare(offer.price, price) == 0 &&
+                maxParticipants == offer.maxParticipants &&
+                Objects.equals(creator, offer.creator) &&
+                Objects.equals(participants, offer.participants) &&
+                Objects.equals(tags, offer.tags) &&
+                Objects.equals(name, offer.name) &&
+                Objects.equals(description, offer.description) &&
+                Objects.equals(dateTime, offer.dateTime) &&
+                Objects.equals(location, offer.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), creator, participants, tags, name, description, price, maxParticipants, dateTime, location);
     }
 }
