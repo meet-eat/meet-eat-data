@@ -27,6 +27,7 @@ dependencies {
     // Spring framework
     implementation("org.springframework:spring-web:5.2.8.RELEASE")
     implementation("org.springframework.data:spring-data-commons:2.3.2.RELEASE")
+    implementation("org.springframework.data:spring-data-mongodb:3.0.2.RELEASE")
     implementation("org.springframework.security:spring-security-crypto:5.3.3.RELEASE")
 
     // Fasterxml jackson
