@@ -23,11 +23,10 @@ public class LocationFactory extends ObjectFactory<Localizable> {
     private SphericalPosition getRandomPosition() {
         double randomLat = ThreadLocalRandom.current().nextDouble();
         double randomLon = ThreadLocalRandom.current().nextDouble();
-
-        // Create random latitude and longitude values
+        // Create random latitude between [-90,90)
         double latitude = LAT_START + (randomLat * (LAT_END - LAT_START));
+        // Create random longitude between [-180, 180)
         double longitude = LON_START + (randomLon * (LON_END - LON_START));
-
         return new SphericalPosition(latitude, longitude);
     }
 }
