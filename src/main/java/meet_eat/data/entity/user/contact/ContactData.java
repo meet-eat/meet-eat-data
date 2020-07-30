@@ -28,7 +28,7 @@ public class ContactData {
     }
 
     @JsonCreator
-    public ContactData(ContactRequest request, Map<ContactType, String> contacts) {
+    public ContactData(@JsonProperty("request") ContactRequest request, @JsonProperty("contacts") Map<ContactType, String> contacts) {
         this.contacts = Objects.requireNonNull(contacts);
         this.request = Objects.requireNonNull(request, ERROR_MESSAGE_NULL_REQUEST);
     }
