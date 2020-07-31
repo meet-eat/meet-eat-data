@@ -1,5 +1,6 @@
 package meet_eat.data.entity;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -18,7 +19,7 @@ import meet_eat.data.entity.user.User;
         @JsonSubTypes.Type(value = User.class),
         @JsonSubTypes.Type(value = Offer.class),
 })
-public abstract class ReportableEntity<U> extends Entity<U> {
+public abstract class ReportableEntity<U extends Serializable> extends Entity<U> {
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_REPORTS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reports");

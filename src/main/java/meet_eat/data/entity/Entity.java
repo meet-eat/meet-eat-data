@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.data.annotation.Id;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
@@ -15,7 +16,7 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = Token.class),
         @JsonSubTypes.Type(value = ReportableEntity.class)
 })
-public abstract class Entity<U> {
+public abstract class Entity<U extends Serializable> implements Serializable {
 
     @JsonProperty
     @Id
