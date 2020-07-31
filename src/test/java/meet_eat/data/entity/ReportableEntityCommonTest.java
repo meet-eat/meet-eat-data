@@ -47,10 +47,21 @@ public class ReportableEntityCommonTest {
         assertTrue(entity.getReports().contains(report));
     }
 
-    @Test(expected = NullPointerException.class)
+
+    @Test
     public void testConstructorNullIdentifier() {
+        // Test data
+        Collection<Report> reports = new LinkedList<>();
+        ReportFactory reportFactory = new ReportFactory();
+        Report report = reportFactory.getValidObject();
+        reports.add(report);
+
         // Execution
-        ConcreteReportableEntity entity = new ConcreteReportableEntity(null, null);
+        ConcreteReportableEntity entity = new ConcreteReportableEntity(null, reports);
+
+        // Assertions
+        assertNotNull(entity);
+        assertNull(entity.getIdentifier());
     }
 
     @Test(expected = NullPointerException.class)
