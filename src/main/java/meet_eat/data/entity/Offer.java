@@ -14,6 +14,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 public class Offer extends ReportableEntity<String> {
 
+    private static final long serialVersionUID = -5026750026998176586L;
+
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_CREATOR = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "creator");
     private static final String ERROR_MESSAGE_NULL_PARTICIPANTS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "participants");
