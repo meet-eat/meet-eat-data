@@ -9,7 +9,6 @@ import static org.junit.Assert.assertEquals;
 
 public class LoginCredentialCommonTest {
 
-    @Ignore
     @Test
     public void testConstructor() {
         // Test data
@@ -26,7 +25,6 @@ public class LoginCredentialCommonTest {
         assertEquals(password, loginCredential.getPassword());
     }
 
-    @Ignore
     @Test(expected = NullPointerException.class)
     public void testConstructorNullEmail() {
         // Test data
