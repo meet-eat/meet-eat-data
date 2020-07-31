@@ -1,4 +1,4 @@
-package meet_eat.data;
+package meet_eat.data.location.service;
 
 import static org.junit.Assert.*;
 
