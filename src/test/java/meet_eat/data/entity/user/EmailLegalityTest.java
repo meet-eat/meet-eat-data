@@ -36,7 +36,8 @@ public class EmailLegalityTest {
                 {"1@example.com", true},
                 {"123@example.com", true},
                 {"123@123.example.com", true},
-                {"bjoern@tolle-implementierungsphase.example.com", true}
+                {"bjoern@tolle-implementierungsphase.example.com", true},
+                {null, false}
         });
     }
 

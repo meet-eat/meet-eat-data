@@ -34,7 +34,8 @@ public class PasswordLegalityTest {
                 {"123?lowerUpperNumber1Special!456", true},
                 {"_123?lowerUpperN1Special!456", true},
                 {"_1AbCdEfG", true},
-                {"_1AbCdEf!", true}
+                {"_1AbCdEf!", true},
+                {null, false}
         });
     }
 
