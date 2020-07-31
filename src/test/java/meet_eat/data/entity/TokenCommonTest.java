@@ -6,8 +6,7 @@ import meet_eat.data.factory.UserFactory;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class TokenCommonTest {
 
@@ -34,8 +33,7 @@ public class TokenCommonTest {
         assertNotNull(token);
     }
 
-    @Ignore
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testConstructorNullIdentifier() {
         // Test data
         UserFactory userFactory = new UserFactory();
@@ -44,6 +42,10 @@ public class TokenCommonTest {
 
         // Execution
         Token token = new Token(null, user, value);
+
+        // Assertion
+        assertNotNull(token);
+        assertNull(token.getIdentifier());
     }
 
     @Test(expected = NullPointerException.class)
