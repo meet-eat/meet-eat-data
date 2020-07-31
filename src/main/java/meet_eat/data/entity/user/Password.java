@@ -8,11 +8,14 @@ import com.google.common.hash.Hashing;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
+import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class Password {
+public class Password implements Serializable {
+
+    private static final long serialVersionUID = -4013709321180976803L;
 
     /**
      * Password properties:
