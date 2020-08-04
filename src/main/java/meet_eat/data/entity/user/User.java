@@ -79,7 +79,7 @@ public class User extends ReportableEntity<String> {
     @JsonProperty
     private boolean isVerified;
     @JsonProperty
-    private Collection<OfferPredicate> offerPredicates;
+    private final Collection<OfferPredicate> offerPredicates;
 
     public User(Email email, Password password, LocalDate birthDay, String name, String phoneNumber,
                 String description, boolean isVerified) {
