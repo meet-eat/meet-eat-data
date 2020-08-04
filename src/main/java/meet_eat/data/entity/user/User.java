@@ -21,6 +21,7 @@ import meet_eat.data.entity.user.rating.RatingBasis;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
+import meet_eat.data.predicate.OfferPredicate;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
@@ -77,6 +78,8 @@ public class User extends ReportableEntity<String> {
     private String description;
     @JsonProperty
     private boolean isVerified;
+    @JsonProperty
+    private Collection<OfferPredicate> offerPredicates;
 
     public User(Email email, Password password, LocalDate birthDay, String name, String phoneNumber,
                 String description, boolean isVerified) {
@@ -85,6 +88,7 @@ public class User extends ReportableEntity<String> {
         subscriptions = new HashSet<>();
         settings = new HashSet<>();
         bookmarks = new HashSet<>();
+        offerPredicates = new LinkedList<>();
         role = DEFAULT_ROLE;
 
         this.email = Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
@@ -113,7 +117,8 @@ public class User extends ReportableEntity<String> {
                 @JsonProperty("name") String name,
                 @JsonProperty("phoneNumber") String phoneNumber,
                 @JsonProperty("description") String description,
-                @JsonProperty("isVerified") boolean isVerified) {
+                @JsonProperty("isVerified") boolean isVerified,
+                @JsonProperty("offerPredicates") Collection<OfferPredicate> offerPredicates) {
 
         super(identifier, reports);
         this.ratings = Objects.requireNonNull(ratings, ERROR_MESSAGE_NULL_RATINGS);
@@ -128,6 +133,7 @@ public class User extends ReportableEntity<String> {
         this.phoneNumber = Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
         this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
         this.isVerified = isVerified;
+        this.offerPredicates = Objects.requireNonNull(offerPredicates);
     }
 
     @JsonGetter
@@ -190,6 +196,11 @@ public class User extends ReportableEntity<String> {
         return isVerified;
     }
 
+    @JsonGetter
+    public Collection<OfferPredicate> getOfferPredicates() {
+        return Collections.unmodifiableCollection(offerPredicates);
+    }
+
     public void setRole(Role role) {
         this.role = Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
     }
@@ -239,6 +250,11 @@ public class User extends ReportableEntity<String> {
         bookmarks.add(bookmark);
     }
 
+    public void addOfferPredicate(OfferPredicate predicate) {
+        Objects.requireNonNull(predicate);
+        offerPredicates.add(predicate);
+    }
+
     public void removeRatingsByReviewer(User reviewer) {
         Objects.requireNonNull(reviewer, ERROR_MESSAGE_NULL_REVIEWER);
         ratings.removeIf(x -> x.getReviewer().equals(reviewer));
@@ -250,6 +266,10 @@ public class User extends ReportableEntity<String> {
 
     public void removeBookmark(Offer bookmark) {
         bookmarks.remove(Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK));
+    }
+
+    public void removeOfferPredicate(OfferPredicate predicate) {
+        offerPredicates.remove(Objects.requireNonNull(predicate));
     }
 
     @JsonIgnore

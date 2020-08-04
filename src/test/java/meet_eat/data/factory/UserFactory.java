@@ -11,6 +11,9 @@ import meet_eat.data.entity.user.setting.ColorMode;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
+import meet_eat.data.predicate.OfferPredicate;
+import meet_eat.data.predicate.numeric.DoubleOperation;
+import meet_eat.data.predicate.numeric.PricePredicate;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -46,8 +49,10 @@ public class UserFactory extends ObjectFactory<User> {
         String name = "TestUser" + objectCounter;
         String phoneNumber = Integer.toString(objectCounter);
         String description = "I am " + name + " and this is my description.";
+        Collection<OfferPredicate> offerPredicates = new LinkedList<OfferPredicate>();
+        offerPredicates.add(new PricePredicate(DoubleOperation.LESS, 20d));
         return new User(identifier, reports, ratings, subscriptions, settings, bookmarks, role, email, password,
-                birthDay, name, phoneNumber, description, DEFAULT_VERIFIED);
+                birthDay, name, phoneNumber, description, DEFAULT_VERIFIED, offerPredicates);
     }
 
     private <T extends Enum<T>> T getRandomEnumValue(Class<T> clazz) {
