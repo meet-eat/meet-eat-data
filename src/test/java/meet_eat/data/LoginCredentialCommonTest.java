@@ -12,7 +12,7 @@ public class LoginCredentialCommonTest {
     @Test
     public void testConstructor() {
         // Test data
-        String testEmail = "test@meet-eat.com";
+        String testEmail = "test@example.com";
         Email email = new Email(testEmail);
         String testPassword = "MySpecial*Password1";
         Password password = Password.createHashedPassword(testPassword);
@@ -38,7 +38,7 @@ public class LoginCredentialCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorNullPassword() {
         // Test data
-        String testEmail = "test@meet.eat.com";
+        String testEmail = "test@example.com";
         Email email = new Email(testEmail);
 
         // Execution
