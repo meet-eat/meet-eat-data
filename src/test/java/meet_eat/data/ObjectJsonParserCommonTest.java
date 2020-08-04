@@ -38,6 +38,8 @@ import java.util.Set;
 
 public class ObjectJsonParserCommonTest {
 
+    private static final Localizable VALID_LOCALIZABLE = new SphericalLocation(new SphericalPosition(0, 0));
+
     @Test
     public void testConstructorEmpty() {
         // Execution
@@ -112,7 +114,7 @@ public class ObjectJsonParserCommonTest {
     public void testParseUser() {
         // Test data
         User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
-                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false);
+                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
 
         // Execution
         ObjectJsonParser objectJsonParser = new ObjectJsonParser();
@@ -129,7 +131,7 @@ public class ObjectJsonParserCommonTest {
     public void testParseOffer() {
         // Test data
         User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
-                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false);
+                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("1", "TestTag1"));
         tags.add(new Tag("2", "TestTag2"));
@@ -151,7 +153,7 @@ public class ObjectJsonParserCommonTest {
     public void testParseToken() {
         // Test data
         User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
-                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false);
+                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
         Token token = new Token("ID1234", user, "12345678");
 
         // Execution
@@ -169,7 +171,7 @@ public class ObjectJsonParserCommonTest {
     public void testParseReport() {
         // Test data
         User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
-                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false);
+                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
         Report report = new Report(user, "Max does not use power saving mode.");
 
         // Execution
@@ -369,7 +371,7 @@ public class ObjectJsonParserCommonTest {
     public void testParseRating() {
         // Test data
         User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
-                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false);
+                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
         Rating rating = new Rating(RatingBasis.HOST, RatingValue.POINTS_4, user);
 
         // Execution
@@ -403,9 +405,9 @@ public class ObjectJsonParserCommonTest {
     public void testParseContactRequest() {
         // Test data
         User userFst = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
-                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false);
+                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
         User userSnd = new User(new Email("noreply2.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
-                LocalDate.now(), "Max Mustermann 2", "+49 12345678", "Empty Description", false);
+                LocalDate.now(), "Max Mustermann 2", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
         ContactRequest contactRequest = new ContactRequest(userFst, userSnd);
 
         // Execution
@@ -423,9 +425,9 @@ public class ObjectJsonParserCommonTest {
     public void testParseContactData() {
         // Test data
         User userFst = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
-                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false);
+                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
         User userSnd = new User(new Email("noreply2.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
-                LocalDate.now(), "Max Mustermann 2", "+49 12345678", "Empty Description", false);
+                LocalDate.now(), "Max Mustermann 2", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
         ContactRequest contactRequest = new ContactRequest(userFst, userSnd);
         ContactData contactData = new ContactData(contactRequest);
 

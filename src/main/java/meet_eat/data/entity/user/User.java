@@ -21,7 +21,9 @@ import meet_eat.data.entity.user.rating.RatingBasis;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
+import meet_eat.data.location.Localizable;
 import meet_eat.data.predicate.OfferPredicate;
+import meet_eat.data.predicate.localizable.LocalizablePredicate;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
@@ -80,9 +82,11 @@ public class User extends ReportableEntity<String> {
     private boolean isVerified;
     @JsonProperty
     private final Collection<OfferPredicate> offerPredicates;
+    @JsonProperty
+    private Localizable localizable;
 
     public User(Email email, Password password, LocalDate birthDay, String name, String phoneNumber,
-                String description, boolean isVerified) {
+                String description, boolean isVerified, Localizable localizable) {
 
         ratings = new LinkedList<>();
         subscriptions = new HashSet<>();
@@ -98,6 +102,7 @@ public class User extends ReportableEntity<String> {
         this.phoneNumber = Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
         this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
         this.isVerified = isVerified;
+        this.localizable = Objects.requireNonNull(localizable);
 
         initSettings();
     }
@@ -118,7 +123,8 @@ public class User extends ReportableEntity<String> {
                 @JsonProperty("phoneNumber") String phoneNumber,
                 @JsonProperty("description") String description,
                 @JsonProperty("isVerified") boolean isVerified,
-                @JsonProperty("offerPredicates") Collection<OfferPredicate> offerPredicates) {
+                @JsonProperty("offerPredicates") Collection<OfferPredicate> offerPredicates,
+                @JsonProperty("localizable") Localizable localizable) {
 
         super(identifier, reports);
         this.ratings = Objects.requireNonNull(ratings, ERROR_MESSAGE_NULL_RATINGS);
@@ -134,6 +140,7 @@ public class User extends ReportableEntity<String> {
         this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
         this.isVerified = isVerified;
         this.offerPredicates = Objects.requireNonNull(offerPredicates);
+        this.localizable = Objects.requireNonNull(localizable);
     }
 
     @JsonGetter
@@ -201,6 +208,11 @@ public class User extends ReportableEntity<String> {
         return Collections.unmodifiableCollection(offerPredicates);
     }
 
+    @JsonGetter
+    public Localizable getLocalizable() {
+        return localizable;
+    }
+
     public void setRole(Role role) {
         this.role = Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
     }
@@ -231,6 +243,10 @@ public class User extends ReportableEntity<String> {
 
     public void setVerified(boolean isVerified) {
         this.isVerified = isVerified;
+    }
+
+    public void setLocalizable(Localizable localizable) {
+        this.localizable = Objects.requireNonNull(localizable);
     }
 
     public void addRating(Rating rating) {

@@ -11,6 +11,10 @@ import meet_eat.data.entity.user.setting.ColorMode;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
+import meet_eat.data.location.CityLocation;
+import meet_eat.data.location.Localizable;
+import meet_eat.data.location.SphericalLocation;
+import meet_eat.data.location.SphericalPosition;
 import meet_eat.data.predicate.OfferPredicate;
 import meet_eat.data.predicate.numeric.DoubleOperation;
 import meet_eat.data.predicate.numeric.PricePredicate;
@@ -51,8 +55,9 @@ public class UserFactory extends ObjectFactory<User> {
         String description = "I am " + name + " and this is my description.";
         Collection<OfferPredicate> offerPredicates = new LinkedList<OfferPredicate>();
         offerPredicates.add(new PricePredicate(DoubleOperation.LESS, 20d));
+        Localizable localizable = new SphericalLocation(new SphericalPosition(0, 0));
         return new User(identifier, reports, ratings, subscriptions, settings, bookmarks, role, email, password,
-                birthDay, name, phoneNumber, description, DEFAULT_VERIFIED, offerPredicates);
+                birthDay, name, phoneNumber, description, DEFAULT_VERIFIED, offerPredicates, localizable);
     }
 
     private <T extends Enum<T>> T getRandomEnumValue(Class<T> clazz) {
