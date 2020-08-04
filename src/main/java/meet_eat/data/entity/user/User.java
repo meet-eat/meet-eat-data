@@ -255,6 +255,11 @@ public class User extends ReportableEntity<String> {
         offerPredicates.add(predicate);
     }
 
+    public void addManyOfferPredicates(Collection<OfferPredicate> predicates) {
+        Objects.requireNonNull(predicates);
+        offerPredicates.addAll(predicates);
+    }
+
     public void removeRatingsByReviewer(User reviewer) {
         Objects.requireNonNull(reviewer, ERROR_MESSAGE_NULL_REVIEWER);
         ratings.removeIf(x -> x.getReviewer().equals(reviewer));
@@ -270,6 +275,10 @@ public class User extends ReportableEntity<String> {
 
     public void removeOfferPredicate(OfferPredicate predicate) {
         offerPredicates.remove(Objects.requireNonNull(predicate));
+    }
+
+    public void clearOfferPredicates() {
+        offerPredicates.clear();
     }
 
     @JsonIgnore
