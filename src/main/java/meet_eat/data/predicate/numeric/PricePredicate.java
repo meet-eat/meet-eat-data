@@ -10,8 +10,8 @@ public class PricePredicate extends DoubleOperator implements OfferPredicate {
     private static final long serialVersionUID = -9147038172467909868L;
 
     @JsonCreator
-    protected PricePredicate(@JsonProperty("operation") DoubleOperation operation,
-                             @JsonProperty("referenceValue") double priceBound) {
+    public PricePredicate(@JsonProperty("operation") DoubleOperation operation,
+                          @JsonProperty("referenceValue") double priceBound) {
         super(operation, priceBound);
     }
 
