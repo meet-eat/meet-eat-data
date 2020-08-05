@@ -26,7 +26,7 @@ public class LoginCredential {
     /**
      * Creates the login credential.
      *
-     * @param email the email address
+     * @param email    the email address
      * @param password the password
      */
     @JsonCreator

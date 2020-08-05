@@ -25,7 +25,7 @@ public class Page {
      * Creates a page.
      *
      * @param index the index representing the page number
-     * @param size the size of a {@link Page}
+     * @param size  the size of a {@link Page}
      */
     @JsonCreator
     public Page(@JsonProperty("index") int index, @JsonProperty("size") int size) {
@@ -34,7 +34,7 @@ public class Page {
         } else if (size < SIZE_LOWER_BOUND) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_SIZE);
         }
-        
+
         this.index = index;
         this.size = size;
     }

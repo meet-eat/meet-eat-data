@@ -13,7 +13,7 @@ import meet_eat.data.entity.user.User;
  * Represents a report of a {@link ReportableEntity} with a given {@link User}.
  */
 public class Report {
-    
+
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_REPORTER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reporter");
     private static final String ERROR_MESSAGE_NULL_MESSAGE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "message");
@@ -29,7 +29,7 @@ public class Report {
      * Creates a report.
      *
      * @param reporter the reporter
-     * @param message the message
+     * @param message  the message
      */
     @JsonCreator
     public Report(@JsonProperty("reporter") User reporter, @JsonProperty("message") String message) {
