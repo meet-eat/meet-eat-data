@@ -57,9 +57,9 @@ public class ObjectJsonParser {
         this.objectMapper = Objects.requireNonNull(objectMapper);
     }
 
-    public ObjectMapper getDefaultObjectMapper() {
+    public static ObjectMapper getDefaultObjectMapper() {
         // Add JDK8 and java.time.* specific functionality to mapper using module registration.
-        objectMapper = new ObjectMapper()
+        ObjectMapper objectMapper = new ObjectMapper()
                 .registerModule(new Jdk8Module())
                 .registerModule(new JavaTimeModule());
 
