@@ -36,7 +36,7 @@ public class SphericalPosition {
 
     @JsonIgnore
     public double getLongitudeAsRadians() {
-        return Math.toRadians(latitude);
+        return Math.toRadians(longitude);
     }
 
     public void setLatitude(double latitude) {
