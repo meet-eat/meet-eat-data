@@ -11,10 +11,10 @@ import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class HaversineFunctionTest {
+public class HaversineFormulaTest {
 
     // Allow deviation of 1/1000 of a meter
-    private static final double DELTA = 0.001d;
+    private static final double DELTA = 0.001;
     // Rounding factor for third decimal
     private static final int ROUNDING_FACTOR = 1000;
 
@@ -52,14 +52,14 @@ public class HaversineFunctionTest {
     private final SphericalPosition destination;
     private double expected;
 
-    public HaversineFunctionTest(SphericalPosition origin, SphericalPosition destination, double expected) {
+    public HaversineFormulaTest(SphericalPosition origin, SphericalPosition destination, double expected) {
         this.origin = origin;
         this.destination = destination;
         this.expected = expected;
     }
 
     @Test
-    public void testApplyHaversineFunction() {
+    public void testApplyHaversineFormula() {
         double result = roundToThirdDecimal(Haversine.applyHaversineFormula(origin, destination));
         assertEquals(expected, result, DELTA);
     }
