@@ -10,6 +10,11 @@ import org.springframework.data.annotation.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Represents an identifiable entity.
+ *
+ * @param <U> the type of the identifier
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Tag.class),
@@ -22,15 +27,28 @@ public abstract class Entity<U extends Serializable> implements Serializable {
     @Id
     private final U identifier;
 
+    /**
+     * Creates an entity with a {@code null} identifier.
+     */
     protected Entity() {
         this.identifier = null;
     }
 
+    /**
+     * Creates an entity.
+     *
+     * @param identifier the entity identifier
+     */
     @JsonCreator
     protected Entity(@JsonProperty("identifier") U identifier) {
         this.identifier = identifier;
     }
 
+    /**
+     * Gets the identifier.
+     *
+     * @return the identifier
+     */
     @JsonGetter
     public U getIdentifier() {
         return identifier;

@@ -7,6 +7,9 @@ import org.springframework.data.annotation.PersistenceConstructor;
 
 import java.util.Objects;
 
+/**
+ * Represents tags that can be assigned to {@link Offer}.
+ */
 public class Tag extends Entity<String> {
 
     private static final long serialVersionUID = -8429053043596898672L;
@@ -17,10 +20,21 @@ public class Tag extends Entity<String> {
     @JsonProperty
     private String name;
 
+    /**
+     * Creates a tag.
+     *
+     * @param name the tag name
+     */
     public Tag(String name) {
         this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
     }
 
+    /**
+     * Creates a tag.
+     *
+     * @param identifier the identifier
+     * @param name       the tag name
+     */
     @JsonCreator
     @PersistenceConstructor
     public Tag(@JsonProperty("identifier") String identifier, @JsonProperty("name") String name) {
@@ -28,11 +42,21 @@ public class Tag extends Entity<String> {
         this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
     }
 
+    /**
+     * Gets the name.
+     *
+     * @return the tag name
+     */
     @JsonGetter
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name.
+     *
+     * @param name the tag name
+     */
     public void setName(String name) {
         this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
     }

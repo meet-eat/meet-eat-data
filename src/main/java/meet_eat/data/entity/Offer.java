@@ -12,6 +12,10 @@ import meet_eat.data.location.Localizable;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
+/**
+ * Represents a {@link ReportableEntity} of a {@link User}, which can be used to
+ * arrange a meet to eating together.
+ */
 public class Offer extends ReportableEntity<String> {
 
     private static final long serialVersionUID = -5026750026998176586L;
@@ -55,6 +59,18 @@ public class Offer extends ReportableEntity<String> {
     @JsonProperty
     private Localizable location;
 
+    /**
+     * Creates an offer.
+     *
+     * @param creator         the creator
+     * @param tags            the offer tags
+     * @param name            the name
+     * @param description     the description
+     * @param price           the price to be paid for participation
+     * @param maxParticipants the maximum number of participating users
+     * @param dateTime        the date and time at which the offer takes place
+     * @param location        the location at which the offer takes place
+     */
     public Offer(User creator, Set<Tag> tags, String name, String description, double price,
                  int maxParticipants, LocalDateTime dateTime, Localizable location) {
 
@@ -75,6 +91,21 @@ public class Offer extends ReportableEntity<String> {
         this.location = Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
     }
 
+    /**
+     * Creates an offer.
+     *
+     * @param identifier      the identifier
+     * @param reports         the reports
+     * @param creator         the creator
+     * @param participants    the participating users
+     * @param tags            the offer tags
+     * @param name            the name
+     * @param description     the description
+     * @param price           the price to be paid for participation
+     * @param maxParticipants the maximum number of participating users
+     * @param dateTime        the date and time at which the offer takes place
+     * @param location        the location at which the offer takes place
+     */
     @JsonCreator
     @PersistenceConstructor
     public Offer(@JsonProperty("identifier") String identifier,
@@ -88,7 +119,7 @@ public class Offer extends ReportableEntity<String> {
                  @JsonProperty("maxParticipants") int maxParticipants,
                  @JsonProperty("dateTime") LocalDateTime dateTime,
                  @JsonProperty("location") Localizable location) {
-        
+
         super(identifier, reports);
         this.creator = Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
         this.participants = Objects.requireNonNull(participants, ERROR_MESSAGE_NULL_PARTICIPANTS);
@@ -107,59 +138,119 @@ public class Offer extends ReportableEntity<String> {
         this.location = Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
     }
 
+    /**
+     * Gets the creator.
+     *
+     * @return the creator
+     */
     @JsonGetter
     public User getCreator() {
         return creator;
     }
 
+    /**
+     * Gets the participating users.
+     *
+     * @return the participating users
+     */
     @JsonGetter
     public Set<User> getParticipants() {
         return Collections.unmodifiableSet(participants);
     }
 
+    /**
+     * Gets the tags.
+     *
+     * @return the tags
+     */
     @JsonGetter
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     @JsonGetter
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the description.
+     *
+     * @return the description
+     */
     @JsonGetter
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Gets the price.
+     *
+     * @return the price
+     */
     @JsonGetter
     public double getPrice() {
         return price;
     }
 
+    /**
+     * Gets the maximum amount of participating users.
+     *
+     * @return the maximum amount of participating users
+     */
     @JsonGetter
     public int getMaxParticipants() {
         return maxParticipants;
     }
 
+    /**
+     * Gets the date and time at which the offer takes place.
+     *
+     * @return the date and time
+     */
     @JsonGetter
     public LocalDateTime getDateTime() {
         return dateTime;
     }
 
+    /**
+     * Gets the location at which the offer takes place.
+     *
+     * @return the location
+     */
     @JsonGetter
     public Localizable getLocation() {
         return location;
     }
 
+    /**
+     * Sets the name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
     }
 
+    /**
+     * Sets the description.
+     *
+     * @param description the description
+     */
     public void setDescription(String description) {
         this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
     }
 
+    /**
+     * Sets the price.
+     *
+     * @param price the price
+     */
     public void setPrice(double price) {
         if (price < DEFAULT_MIN_PRICE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_PRICE);
@@ -167,6 +258,11 @@ public class Offer extends ReportableEntity<String> {
         this.price = price;
     }
 
+    /**
+     * Sets the maximum amount of participating users.
+     *
+     * @param maxParticipants the maximum amount of participating users
+     */
     public void setMaxParticipants(int maxParticipants) {
         if (maxParticipants < DEFAULT_MIN_PARTICIPANTS) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_MAX_PARTICIPANTS);
@@ -174,26 +270,56 @@ public class Offer extends ReportableEntity<String> {
         this.maxParticipants = maxParticipants;
     }
 
+    /**
+     * Sets the date and time.
+     *
+     * @param dateTime the date and time
+     */
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = Objects.requireNonNull(dateTime, ERROR_MESSAGE_NULL_DATE_TIME);
     }
 
+    /**
+     * Sets the location.
+     *
+     * @param location the location
+     */
     public void setLocation(Localizable location) {
         this.location = Objects.requireNonNull(location, ERROR_MESSAGE_NULL_LOCATION);
     }
 
+    /**
+     * Adds a {@link User} as participant.
+     *
+     * @param participant the participant
+     */
     public void addParticipant(User participant) {
         participants.add(Objects.requireNonNull(participant, ERROR_MESSAGE_NULL_PARTICIPANT));
     }
 
+    /**
+     * Adds a {@link Tag}.
+     *
+     * @param tag the tag
+     */
     public void addTag(Tag tag) {
         tags.add(Objects.requireNonNull(tag, ERROR_MESSAGE_NULL_TAG));
     }
 
+    /**
+     * Removes a {@link User} from the participant list.
+     *
+     * @param participant the previously participating user
+     */
     public void removeParticipant(User participant) {
         participants.remove(Objects.requireNonNull(participant, ERROR_MESSAGE_NULL_PARTICIPANT));
     }
 
+    /**
+     * Removes a {@link Tag}.
+     *
+     * @param tag the tag
+     */
     public void removeTag(Tag tag) {
         tags.remove(Objects.requireNonNull(tag, ERROR_MESSAGE_NULL_TAG));
     }

@@ -3,9 +3,13 @@ package meet_eat.data.entity.user.setting;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import meet_eat.data.entity.user.User;
 
 import java.util.Objects;
 
+/**
+ * Represents the display settings that can be changed by the {@link User}.
+ */
 public class DisplaySetting implements Setting {
 
     private static final String ERROR_MESSAGE_NOT_IMPLEMENTED = "This function is not implemented yet.";
@@ -16,22 +20,41 @@ public class DisplaySetting implements Setting {
     @JsonProperty
     private ColorMode colorMode;
 
+    /**
+     * Creates a default display setting.
+     */
     public DisplaySetting() {
         this.colorMode = COLOR_MODE_DEFAULT;
     }
 
+    /**
+     * Creates a display setting with a given {@link ColorMode}.
+     *
+     * @param colorMode the color mode
+     */
     @JsonCreator
     public DisplaySetting(@JsonProperty("colorMode") ColorMode colorMode) {
-        this.colorMode = Objects.requireNonNull(colorMode, ERROR_MESSAGE_NULL_COLOR_MODE);;
+        this.colorMode = Objects.requireNonNull(colorMode, ERROR_MESSAGE_NULL_COLOR_MODE);
     }
 
+    /**
+     * Gets the color mode.
+     *
+     * @return the color mode
+     */
     @JsonGetter
     public ColorMode getColorMode() {
         return colorMode;
     }
 
+    /**
+     * Sets the color mode.
+     *
+     * @param colorMode the color mode
+     */
     public void setColorMode(ColorMode colorMode) {
-        this.colorMode = Objects.requireNonNull(colorMode, ERROR_MESSAGE_NULL_COLOR_MODE);;
+        this.colorMode = Objects.requireNonNull(colorMode, ERROR_MESSAGE_NULL_COLOR_MODE);
+        ;
     }
 
     @Override
