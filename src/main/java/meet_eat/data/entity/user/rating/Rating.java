@@ -7,6 +7,10 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.entity.user.User;
 
+/**
+ * Represents the rating of a {@link User}, which he/she has received from other users. On the one hand as a guest,
+ * on the other as a host.
+ */
 public class Rating {
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
@@ -21,6 +25,13 @@ public class Rating {
     @JsonProperty
     private final User reviewer;
 
+    /**
+     * Creates a rating.
+     *
+     * @param basis    the rating basis
+     * @param value    the rating value
+     * @param reviewer the reviewer of a rating
+     */
     @JsonCreator
     public Rating(@JsonProperty("basis") RatingBasis basis,
                   @JsonProperty("value") RatingValue value,
@@ -30,16 +41,31 @@ public class Rating {
         this.reviewer = Objects.requireNonNull(reviewer, ERROR_MESSAGE_NULL_REVIEWER);
     }
 
+    /**
+     * Gets the rating basis.
+     *
+     * @return the rating basis
+     */
     @JsonGetter
     public RatingBasis getBasis() {
         return basis;
     }
 
+    /**
+     * Gets the rating value.
+     *
+     * @return the rating value
+     */
     @JsonGetter
     public RatingValue getValue() {
         return value;
     }
 
+    /**
+     * Gets the reviewer.
+     *
+     * @return the reviewer
+     */
     @JsonGetter
     public User getReviewer() {
         return reviewer;
