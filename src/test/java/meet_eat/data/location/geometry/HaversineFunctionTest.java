@@ -64,7 +64,7 @@ public class HaversineFunctionTest {
         assertEquals(expected, result, DELTA);
     }
 
-    private double roundToThirdDecimal(double rating) {
-        return (((double) Math.round(rating * ROUNDING_FACTOR)) / ROUNDING_FACTOR);
+    private double roundToThirdDecimal(double distance) {
+        return (((double) Math.round(distance * ROUNDING_FACTOR)) / ROUNDING_FACTOR);
     }
 }
