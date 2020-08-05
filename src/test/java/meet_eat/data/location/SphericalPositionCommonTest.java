@@ -40,7 +40,6 @@ public class SphericalPositionCommonTest {
         assertFalse(lat == sphericalPosition.getLatitude());
     }
 
-    @Ignore
     @Test(expected = IllegalArgumentException.class)
     public void testSetLatitudeOutOfBoundsMin() {
         // Test data
@@ -51,7 +50,6 @@ public class SphericalPositionCommonTest {
         SphericalPosition sphericalPosition = new SphericalPosition(lat, lon);
     }
 
-    @Ignore
     @Test(expected = IllegalArgumentException.class)
     public void testSetLatitudeOutOfBoundsMax() {
         // Test data
@@ -78,7 +76,6 @@ public class SphericalPositionCommonTest {
         assertFalse(lon == sphericalPosition.getLongitude());
     }
 
-    @Ignore
     @Test(expected = IllegalArgumentException.class)
     public void testSetLongitudeOutOfBoundsMin() {
         // Test data
@@ -89,7 +86,6 @@ public class SphericalPositionCommonTest {
         SphericalPosition sphericalPosition = new SphericalPosition(lat, lon);
     }
 
-    @Ignore
     @Test(expected = IllegalArgumentException.class)
     public void testSetLongitudeOutOfBoundsMax() {
         // Test data
