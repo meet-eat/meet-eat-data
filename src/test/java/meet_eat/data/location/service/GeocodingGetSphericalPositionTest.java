@@ -12,7 +12,7 @@ public class GeocodingGetSphericalPositionTest {
 
     // One arcminute equals to 1/60 (arc) degrees and approximately 1852 meters on earth's great circle.
     private static double ARC_MINUTE = 1d/60d;
-    // One arcsecond equals to 1/3600 (arc) degrees and approximately 1852 meters on earth's great circle.
+    // One arcsecond equals to 1/3600 (arc) degrees and approximately 30 meters on earth's great circle.
     private static double ARC_SECOND = 1d/3600d;
 
     @Test
