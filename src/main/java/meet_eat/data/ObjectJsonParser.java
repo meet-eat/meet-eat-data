@@ -18,14 +18,7 @@ public class ObjectJsonParser {
     private ObjectMapper objectMapper;
 
     public ObjectJsonParser() {
-        objectMapper = new ObjectMapper()
-                .registerModule(new Jdk8Module())
-                .registerModule(new JavaTimeModule());
-
-        // Activate type/class meta-properties of elements generically typed within collections for example.
-        objectMapper.activateDefaultTypingAsProperty(new DefaultBaseTypeLimitingValidator(),
-                ObjectMapper.DefaultTyping.JAVA_LANG_OBJECT,
-                JsonTypeInfo.Id.CLASS.getDefaultPropertyName());
+        this.objectMapper = getDefaultObjectMapper();
     }
 
     public ObjectJsonParser(ObjectMapper objectMapper) {
@@ -62,5 +55,19 @@ public class ObjectJsonParser {
 
     public void setObjectMapper(ObjectMapper objectMapper) {
         this.objectMapper = Objects.requireNonNull(objectMapper);
+    }
+
+    public ObjectMapper getDefaultObjectMapper() {
+        // Add JDK8 and java.time.* specific functionality to mapper using module registration.
+        objectMapper = new ObjectMapper()
+                .registerModule(new Jdk8Module())
+                .registerModule(new JavaTimeModule());
+
+        // Activate type/class meta-properties of elements generically typed within collections for example.
+        objectMapper.activateDefaultTypingAsProperty(new DefaultBaseTypeLimitingValidator(),
+                ObjectMapper.DefaultTyping.JAVA_LANG_OBJECT,
+                JsonTypeInfo.Id.CLASS.getDefaultPropertyName());
+
+        return objectMapper;
     }
 }
