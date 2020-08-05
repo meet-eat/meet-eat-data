@@ -34,6 +34,6 @@ public abstract class BooleanOperator<T extends BiFunction<S, S, Boolean>, S> im
     }
 
     public Boolean operate(S value) {
-        return operation.apply(referenceValue, value);
+        return operation.apply(referenceValue, Objects.requireNonNull(value));
     }
 }
