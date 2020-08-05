@@ -5,6 +5,7 @@ import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.Tag;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.location.Localizable;
+import org.junit.Ignore;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class OfferFactory extends ObjectFactory<Offer> {
 
@@ -28,6 +30,7 @@ public class OfferFactory extends ObjectFactory<Offer> {
     private LocationFactory locationFactory;
 
     public OfferFactory() {
+        super();
         reportFactory = new ReportFactory();
         userFactory = new UserFactory();
         tagFactory = new TagFactory();

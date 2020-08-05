@@ -8,6 +8,7 @@ public class TokenFactory extends ObjectFactory<Token> {
     private UserFactory userFactory;
 
     public TokenFactory() {
+        super();
         userFactory = new UserFactory();
     }
 

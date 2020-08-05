@@ -11,7 +11,6 @@ import meet_eat.data.entity.user.setting.ColorMode;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
-import meet_eat.data.location.CityLocation;
 import meet_eat.data.location.Localizable;
 import meet_eat.data.location.SphericalLocation;
 import meet_eat.data.location.SphericalPosition;
@@ -32,6 +31,7 @@ public class UserFactory extends ObjectFactory<User> {
     private PasswordFactory passwordFactory;
 
     public UserFactory() {
+        super();
         emailFactory = new EmailFactory();
         passwordFactory = new PasswordFactory();
     }

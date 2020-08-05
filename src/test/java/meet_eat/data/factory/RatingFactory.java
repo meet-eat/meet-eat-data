@@ -14,6 +14,7 @@ public class RatingFactory extends ObjectFactory<Rating> {
     private UserFactory userFactory;
 
     public RatingFactory() {
+        super();
         userFactory = new UserFactory();
     }
 

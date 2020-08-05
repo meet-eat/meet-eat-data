@@ -8,6 +8,7 @@ public class ReportFactory extends ObjectFactory<Report> {
     private UserFactory userFactory;
 
     public ReportFactory() {
+        super();
         userFactory = new UserFactory();
     }
 
