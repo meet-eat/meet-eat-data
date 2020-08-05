@@ -10,6 +10,12 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SphericalPosition {
 
+    private static final String ERROR_MESSAGE_ILLEGAL_COORDINATES = "Coordinate values out of bounds.";
+    private static final int LAT_START = -90;
+    private static final int LAT_END = 90;
+    private static final int LON_START = -180;
+    private static final int LON_END = 180;
+
     @JsonProperty("lat")
     private double latitude;
     @JsonProperty("lon")
@@ -17,6 +23,9 @@ public class SphericalPosition {
 
     @JsonCreator
     public SphericalPosition(@JsonProperty("lat") double latitude, @JsonProperty("lon") double longitude) {
+        if (latitude < LAT_START || latitude > LAT_END || longitude < LON_START || longitude > LON_END) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_COORDINATES);
+        }
         this.latitude = latitude;
         this.longitude = longitude;
     }
