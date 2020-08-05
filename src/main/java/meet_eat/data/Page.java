@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
+/**
+ * Represents an indexed page object with a fixed number of elements.
+ */
 public class Page {
 
     private static final String ERROR_MESSAGE_ILLEGAL_INDEX = "Page index must not be less than zero.";
@@ -18,6 +21,12 @@ public class Page {
     @JsonProperty
     private final int size;
 
+    /**
+     * Creates a page.
+     *
+     * @param index the index representing the page number
+     * @param size the size of a {@link Page}
+     */
     @JsonCreator
     public Page(@JsonProperty("index") int index, @JsonProperty("size") int size) {
         if (index < INDEX_LOWER_BOUND) {
@@ -30,10 +39,20 @@ public class Page {
         this.size = size;
     }
 
+    /**
+     * Gets the page index.
+     *
+     * @return the index
+     */
     public int getIndex() {
         return index;
     }
 
+    /**
+     * Gets the page size.
+     *
+     * @return the page size
+     */
     public int getSize() {
         return size;
     }

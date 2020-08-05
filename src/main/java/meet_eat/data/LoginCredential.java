@@ -5,9 +5,13 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
+import meet_eat.data.entity.user.User;
 
 import java.util.Objects;
 
+/**
+ * Represents the login credential of a {@link User}.
+ */
 public class LoginCredential {
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
@@ -19,17 +23,33 @@ public class LoginCredential {
     @JsonProperty
     private final Password password;
 
+    /**
+     * Creates the login credential.
+     *
+     * @param email the email address
+     * @param password the password
+     */
     @JsonCreator
     public LoginCredential(@JsonProperty("email") Email email, @JsonProperty("password") Password password) {
         this.email = Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
         this.password = Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
     }
 
+    /**
+     * Get the email address.
+     *
+     * @return the email address
+     */
     @JsonGetter
     public Email getEmail() {
         return email;
     }
 
+    /**
+     * Get the password.
+     *
+     * @return the password
+     */
     @JsonGetter
     public Password getPassword() {
         return password;
