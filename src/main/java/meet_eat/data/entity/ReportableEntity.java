@@ -54,7 +54,7 @@ public abstract class ReportableEntity<U extends Serializable> extends Entity<U>
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         ReportableEntity<?> that = (ReportableEntity<?>) o;
-        return Objects.equals(reports, that.reports);
+        return reports.containsAll(that.reports);
     }
 
     @Override
