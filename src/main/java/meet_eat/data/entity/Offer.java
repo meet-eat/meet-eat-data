@@ -113,13 +113,13 @@ public class Offer extends ReportableEntity<String> {
     }
 
     @JsonGetter
-    public Collection<User> getParticipants() {
-        return Collections.unmodifiableCollection(participants);
+    public Set<User> getParticipants() {
+        return Collections.unmodifiableSet(participants);
     }
 
     @JsonGetter
-    public Collection<Tag> getTags() {
-        return Collections.unmodifiableCollection(tags);
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     @JsonGetter
@@ -153,20 +153,24 @@ public class Offer extends ReportableEntity<String> {
     }
 
     public void setName(String name) {
-        Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
-        this.name = name;
+        this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
     }
 
     public void setDescription(String description) {
-        Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
-        this.description = description;
+        this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
     }
 
     public void setPrice(double price) {
+        if (price < DEFAULT_MIN_PRICE) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_PRICE);
+        }
         this.price = price;
     }
 
     public void setMaxParticipants(int maxParticipants) {
+        if (maxParticipants < DEFAULT_MIN_PARTICIPANTS) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_MAX_PARTICIPANTS);
+        }
         this.maxParticipants = maxParticipants;
     }
 
@@ -183,7 +187,6 @@ public class Offer extends ReportableEntity<String> {
     }
 
     public void addTag(Tag tag) {
-
         tags.add(Objects.requireNonNull(tag, ERROR_MESSAGE_NULL_TAG));
     }
 
