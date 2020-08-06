@@ -1,6 +1,5 @@
 package meet_eat.data.predicate.collection;
 
-import meet_eat.data.predicate.numeric.DoubleOperatorCommonTest;
 import org.junit.Test;
 
 import java.util.Collection;

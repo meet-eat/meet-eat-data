@@ -6,8 +6,6 @@ import meet_eat.data.entity.user.rating.RatingBasis;
 import meet_eat.data.entity.user.rating.RatingValue;
 import meet_eat.data.factory.OfferFactory;
 import meet_eat.data.factory.UserFactory;
-import meet_eat.data.predicate.string.DescriptionPredicate;
-import meet_eat.data.predicate.string.StringOperation;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

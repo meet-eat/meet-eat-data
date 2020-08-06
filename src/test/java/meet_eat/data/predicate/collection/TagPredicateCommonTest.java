@@ -4,8 +4,6 @@ import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.Tag;
 import meet_eat.data.factory.OfferFactory;
 import meet_eat.data.factory.TagFactory;
-import meet_eat.data.predicate.numeric.DoubleOperation;
-import meet_eat.data.predicate.numeric.PricePredicate;
 import org.junit.Test;
 
 import java.util.HashSet;
