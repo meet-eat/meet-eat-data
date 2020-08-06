@@ -15,6 +15,9 @@ import meet_eat.data.predicate.string.NamePredicate;
 import java.io.Serializable;
 import java.util.function.Predicate;
 
+/**
+ * Represents a {@link Predicate} for an {@link Offer} object.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = LocalizablePredicate.class),
