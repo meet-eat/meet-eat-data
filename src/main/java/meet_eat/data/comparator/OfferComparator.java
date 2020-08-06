@@ -12,6 +12,9 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Objects;
 
+/**
+ * Implements the {@link Comparator} functionality for {@link Offer} objects.
+ */
 public class OfferComparator implements Serializable, Comparator<Offer> {
 
     private static final long serialVersionUID = 3846969499567330524L;
@@ -21,6 +24,12 @@ public class OfferComparator implements Serializable, Comparator<Offer> {
     @JsonProperty
     private final Localizable location;
 
+    /**
+     * Creates a {@link Comparator} for {@link Offer} object comparison.
+     *
+     * @param field    the field to be compared
+     * @param location the location needed for distance calculations
+     */
     @JsonCreator
     public OfferComparator(@JsonProperty("field") OfferComparableField field,
                            @JsonProperty("location") Localizable location) {
@@ -28,11 +37,21 @@ public class OfferComparator implements Serializable, Comparator<Offer> {
         this.location = Objects.requireNonNull(location);
     }
 
+    /**
+     * Gets the field.
+     *
+     * @return the field
+     */
     @JsonGetter
     public OfferComparableField getField() {
         return field;
     }
 
+    /**
+     * Gets the location.
+     *
+     * @return the location
+     */
     @JsonGetter
     public Localizable getLocation() {
         return location;
@@ -58,11 +77,17 @@ public class OfferComparator implements Serializable, Comparator<Offer> {
         }
     }
 
+    /**
+     * Calculates the distance between the given {@link OfferComparator#location} and a {@link Localizable} location of an {@link Offer}.
+     *
+     * @param localizable the offer location
+     * @return the distance between the given {@link OfferComparator#location} and the {@link Offer}
+     */
     @JsonIgnore
     private double getDistance(Localizable localizable) {
         double distance;
         try {
-            distance = localizable.getDistance(location);
+            distance = location.getDistance(localizable);
         } catch (UnlocalizableException exception) {
             distance = Double.MAX_VALUE;
         }
