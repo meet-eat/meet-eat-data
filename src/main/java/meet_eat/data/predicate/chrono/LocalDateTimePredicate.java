@@ -7,20 +7,23 @@ import meet_eat.data.predicate.OfferPredicate;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents an {@link OfferPredicate} for the date and time of an {@link Offer}.
+ */
 public class LocalDateTimePredicate extends ChronoLocalDateTimeOperator implements OfferPredicate {
 
     private static final long serialVersionUID = 7062600211366077108L;
 
     /**
-     * Constructs a new instance of {@link LocalDateTimePredicate}.
+     * Creates a local date time predicate.
      *
-     * @param operation the operation used for testing a certain object
-     * @param dateTime  the dateTime object used as reference value within the operation
+     * @param operation      the operation
+     * @param referenceValue the reference value
      */
     @JsonCreator
     public LocalDateTimePredicate(@JsonProperty("operation") ChronoLocalDateTimeOperation operation,
-                                  @JsonProperty("referenceValue") LocalDateTime dateTime) {
-        super(operation, dateTime);
+                                  @JsonProperty("referenceValue") LocalDateTime referenceValue) {
+        super(operation, referenceValue);
     }
 
     @Override

@@ -5,6 +5,11 @@ import java.util.function.BiFunction;
 
 public enum ChronoLocalDateTimeOperation implements BiFunction<ChronoLocalDateTime<?>, ChronoLocalDateTime<?>, Boolean> {
 
+    /**
+     * The before operation.
+     *
+     * @see ChronoLocalDateTime#isBefore(ChronoLocalDateTime)
+     */
     BEFORE {
         @Override
         public Boolean apply(ChronoLocalDateTime<?> chronoLocalDateTimeArgument, ChronoLocalDateTime<?> chronoLocalDateTimeBase) {
@@ -12,6 +17,11 @@ public enum ChronoLocalDateTimeOperation implements BiFunction<ChronoLocalDateTi
         }
     },
 
+    /**
+     * The equal operation.
+     *
+     * @see ChronoLocalDateTime#equals(Object)
+     */
     EQUAL {
         @Override
         public Boolean apply(ChronoLocalDateTime<?> chronoLocalDateTimeArgument, ChronoLocalDateTime<?> chronoLocalDateTimeBase) {
@@ -19,6 +29,11 @@ public enum ChronoLocalDateTimeOperation implements BiFunction<ChronoLocalDateTi
         }
     },
 
+    /**
+     * The after operation.
+     *
+     * @see ChronoLocalDateTime#isAfter(ChronoLocalDateTime)
+     */
     AFTER {
         @Override
         public Boolean apply(ChronoLocalDateTime<?> chronoLocalDateTimeArgument, ChronoLocalDateTime<?> chronoLocalDateTimeBase) {
