@@ -6,22 +6,22 @@ public enum DoubleOperation implements BiFunction<Double, Double, Boolean> {
 
     GREATER {
         @Override
-        public Boolean apply(Double aDoubleFst, Double aDoubleSnd) {
-            return Double.compare(aDoubleFst, aDoubleSnd) > 0;
+        public Boolean apply(Double doubleArgument, Double doubleBase) {
+            return Double.compare(doubleBase, doubleArgument) > 0;
         }
     },
 
     EQUAL {
         @Override
-        public Boolean apply(Double aDoubleFst, Double aDoubleSnd) {
-            return Double.compare(aDoubleFst, aDoubleSnd) == 0;
+        public Boolean apply(Double doubleArgument, Double doubleBase) {
+            return Double.compare(doubleBase, doubleArgument) == 0;
         }
     },
 
     LESS {
         @Override
-        public Boolean apply(Double aDoubleFst, Double aDoubleSnd) {
-            return Double.compare(aDoubleFst, aDoubleSnd) < 0;
+        public Boolean apply(Double doubleArgument, Double doubleBase) {
+            return Double.compare(doubleBase, doubleArgument) < 0;
         }
     };
 }
