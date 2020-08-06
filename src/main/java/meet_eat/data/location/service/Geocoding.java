@@ -9,6 +9,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
+/**
+ * This class consists exclusively of static methods implementing geocoding functionality.
+ */
 public final class Geocoding {
 
     private static final String BASE_URL = "https://nominatim.openstreetmap.org/%s?format=json&limit=1%s";
@@ -20,6 +23,12 @@ public final class Geocoding {
     private Geocoding() {
     }
 
+    /**
+     * Gets a {@link SphericalPosition} from a postcode.
+     *
+     * @param postcode the postcode
+     * @return the spherical position
+     */
     public static SphericalPosition getSphericalPositionFromPostcode(String postcode) {
         String params = String.format(PARAMETER_POSTCODE, postcode);
         String url = String.format(BASE_URL, SEARCH_OPERATION, params);
@@ -30,6 +39,12 @@ public final class Geocoding {
         return getForObject(url, SphericalPosition.class, messageConverter);
     }
 
+    /**
+     * Gets a {@link SphericalPosition} from a city name.
+     *
+     * @param cityName the city name
+     * @return the spherical position
+     */
     public static SphericalPosition getSphericalPositionFromCityName(String cityName) {
         String params = String.format(PARAMETER_CITY, cityName);
         String url = String.format(BASE_URL, SEARCH_OPERATION, params);

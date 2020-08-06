@@ -7,6 +7,9 @@ import meet_eat.data.location.service.Geocoding;
 
 import java.util.Objects;
 
+/**
+ * Represents a {@link Localizable} location by a city.
+ */
 public class CityLocation implements Localizable {
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
@@ -16,15 +19,30 @@ public class CityLocation implements Localizable {
     @JsonProperty
     private String cityName;
 
+    /**
+     * Creates a city location.
+     *
+     * @param cityName the city name
+     */
     @JsonCreator
     public CityLocation(@JsonProperty("cityName") String cityName) {
         this.cityName = Objects.requireNonNull(cityName, ERROR_MESSAGE_NULL_CITY_NAME);
     }
 
+    /**
+     * Gets the city name
+     *
+     * @return the city name
+     */
     public String getCityName() {
         return cityName;
     }
 
+    /**
+     * Sets the city name
+     *
+     * @param cityName the city name
+     */
     public void setCityName(String cityName) {
         this.cityName = Objects.requireNonNull(cityName, ERROR_MESSAGE_NULL_CITY_NAME);
     }

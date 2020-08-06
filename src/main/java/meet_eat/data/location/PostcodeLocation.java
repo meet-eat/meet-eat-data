@@ -7,6 +7,9 @@ import meet_eat.data.location.service.Geocoding;
 
 import java.util.Objects;
 
+/**
+ * Represents a {@link Localizable} location by a postcode.
+ */
 public class PostcodeLocation implements Localizable {
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
@@ -16,15 +19,30 @@ public class PostcodeLocation implements Localizable {
     @JsonProperty
     private String postcode;
 
+    /**
+     * Creates a postcode location.
+     *
+     * @param postcode the postcode
+     */
     @JsonCreator
     public PostcodeLocation(@JsonProperty("postcode") String postcode) {
         this.postcode = Objects.requireNonNull(postcode, ERROR_MESSAGE_NULL_POSTCODE);
     }
 
+    /**
+     * Gets the postcode.
+     *
+     * @return the postcode
+     */
     public String getPostcode() {
         return postcode;
     }
 
+    /**
+     * Sets the postcode.
+     *
+     * @param postcode the postcode
+     */
     public void setPostcode(String postcode) {
         this.postcode = Objects.requireNonNull(postcode, ERROR_MESSAGE_NULL_POSTCODE);
     }
