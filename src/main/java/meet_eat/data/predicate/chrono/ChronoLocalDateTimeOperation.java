@@ -7,20 +7,22 @@ public enum ChronoLocalDateTimeOperation implements BiFunction<ChronoLocalDateTi
 
     BEFORE {
         @Override
-        public Boolean apply(ChronoLocalDateTime<?> chronoLocalDateTimeFst, ChronoLocalDateTime<?> chronoLocalDateTimeSnd) {
-            return chronoLocalDateTimeFst.isBefore(chronoLocalDateTimeSnd);
+        public Boolean apply(ChronoLocalDateTime<?> chronoLocalDateTimeArgument, ChronoLocalDateTime<?> chronoLocalDateTimeBase) {
+            return chronoLocalDateTimeBase.isBefore(chronoLocalDateTimeArgument);
         }
     },
+
     EQUAL {
         @Override
-        public Boolean apply(ChronoLocalDateTime<?> chronoLocalDateTimeFst, ChronoLocalDateTime<?> chronoLocalDateTimeSnd) {
-            return chronoLocalDateTimeFst.isEqual(chronoLocalDateTimeSnd);
+        public Boolean apply(ChronoLocalDateTime<?> chronoLocalDateTimeArgument, ChronoLocalDateTime<?> chronoLocalDateTimeBase) {
+            return chronoLocalDateTimeBase.isEqual(chronoLocalDateTimeArgument);
         }
     },
+
     AFTER {
         @Override
-        public Boolean apply(ChronoLocalDateTime<?> chronoLocalDateTimeFst, ChronoLocalDateTime<?> chronoLocalDateTimeSnd) {
-            return chronoLocalDateTimeFst.isAfter(chronoLocalDateTimeSnd);
+        public Boolean apply(ChronoLocalDateTime<?> chronoLocalDateTimeArgument, ChronoLocalDateTime<?> chronoLocalDateTimeBase) {
+            return chronoLocalDateTimeBase.isAfter(chronoLocalDateTimeArgument);
         }
     };
 }
