@@ -15,6 +15,9 @@ import org.springframework.data.annotation.PersistenceConstructor;
 
 import java.util.Objects;
 
+/**
+ * Represents an {@link OfferPredicate} for the {@link Localizable} location of an {@link Offer}.
+ */
 public class LocalizablePredicate extends DoubleOperator implements OfferPredicate {
 
     private static final long serialVersionUID = -2939257528922805161L;
@@ -27,7 +30,7 @@ public class LocalizablePredicate extends DoubleOperator implements OfferPredica
      *
      * @param operation   the operation used for testing a certain object
      * @param distance    the distance used as reference value within the operation
-     * @param localizable the localizable calculate the actual distance
+     * @param localizable the localizable from which the actual distance is going to be calculated from
      * @throws UnlocalizableException if the given localizable is not localizable
      */
     @JsonCreator
