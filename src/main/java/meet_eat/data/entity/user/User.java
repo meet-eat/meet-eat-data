@@ -314,31 +314,31 @@ public class User extends ReportableEntity<String> {
     private double calculateAverageHostRating() {
         RatingBasis basis = RatingBasis.HOST;
         double hostRating = (double) sumRatings(basis) / countRatings(basis);
-        hostRating = roundToFirstDecimal(hostRating / ratings.size());
+        hostRating = roundToFirstDecimal(hostRating);
         return hostRating;
     }
 
     private double calculateAverageGuestRating() {
         RatingBasis basis = RatingBasis.GUEST;
         double guestRating = (double) sumRatings(basis) / countRatings(basis);
-        guestRating = roundToFirstDecimal(guestRating / ratings.size());
+        guestRating = roundToFirstDecimal(guestRating);
         return guestRating;
     }
 
     private int countRatings(RatingBasis basis) {
         return ratings
-            .stream()
-            .filter(x -> x.getBasis().equals(basis))
-            .collect(Collectors.toList())
-            .size();
+                .stream()
+                .filter(x -> x.getBasis().equals(basis))
+                .collect(Collectors.toList())
+                .size();
     }
 
     private int sumRatings(RatingBasis basis) {
         return ratings
-            .stream()
-            .filter(x -> x.getBasis().equals(basis))
-            .mapToInt(x -> x.getValue().getIntegerValue())
-            .sum();
+                .stream()
+                .filter(x -> x.getBasis().equals(basis))
+                .mapToInt(x -> x.getValue().getIntegerValue())
+                .sum();
     }
 
     private double roundToFirstDecimal(double rating) {
