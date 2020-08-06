@@ -14,6 +14,8 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.Report;
+import meet_eat.data.comparator.OfferComparableField;
+import meet_eat.data.comparator.OfferComparator;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.ReportableEntity;
 import meet_eat.data.entity.user.rating.Rating;
@@ -23,7 +25,6 @@ import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
 import meet_eat.data.location.Localizable;
 import meet_eat.data.predicate.OfferPredicate;
-import meet_eat.data.predicate.localizable.LocalizablePredicate;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
@@ -83,6 +84,8 @@ public class User extends ReportableEntity<String> {
     @JsonProperty
     private final Collection<OfferPredicate> offerPredicates;
     @JsonProperty
+    private OfferComparator offerComparator;
+    @JsonProperty
     private Localizable localizable;
 
     public User(Email email, Password password, LocalDate birthDay, String name, String phoneNumber,
@@ -94,6 +97,7 @@ public class User extends ReportableEntity<String> {
         bookmarks = new HashSet<>();
         offerPredicates = new LinkedList<>();
         role = DEFAULT_ROLE;
+        offerComparator = new OfferComparator(OfferComparableField.TIME, localizable);
 
         this.email = Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
         this.password = Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
@@ -124,6 +128,7 @@ public class User extends ReportableEntity<String> {
                 @JsonProperty("description") String description,
                 @JsonProperty("isVerified") boolean isVerified,
                 @JsonProperty("offerPredicates") Collection<OfferPredicate> offerPredicates,
+                @JsonProperty("offerComparator") OfferComparator offerComparator,
                 @JsonProperty("localizable") Localizable localizable) {
 
         super(identifier, reports);
@@ -140,6 +145,7 @@ public class User extends ReportableEntity<String> {
         this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
         this.isVerified = isVerified;
         this.offerPredicates = Objects.requireNonNull(offerPredicates);
+        this.offerComparator = Objects.requireNonNull(offerComparator);
         this.localizable = Objects.requireNonNull(localizable);
     }
 
@@ -209,6 +215,11 @@ public class User extends ReportableEntity<String> {
     }
 
     @JsonGetter
+    public OfferComparator getOfferComparator() {
+        return offerComparator;
+    }
+
+    @JsonGetter
     public Localizable getLocalizable() {
         return localizable;
     }
@@ -243,6 +254,10 @@ public class User extends ReportableEntity<String> {
 
     public void setVerified(boolean isVerified) {
         this.isVerified = isVerified;
+    }
+
+    public void setOfferComparator(OfferComparator offerComparator) {
+        this.offerComparator = Objects.requireNonNull(offerComparator);
     }
 
     public void setLocalizable(Localizable localizable) {
@@ -367,12 +382,14 @@ public class User extends ReportableEntity<String> {
                 Objects.equals(birthDay, user.birthDay) &&
                 Objects.equals(name, user.name) &&
                 Objects.equals(phoneNumber, user.phoneNumber) &&
-                Objects.equals(description, user.description);
+                Objects.equals(description, user.description) &&
+                Objects.equals(offerPredicates, user.offerPredicates) &&
+                Objects.equals(offerComparator, user.offerComparator) &&
+                Objects.equals(localizable, user.localizable);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), ratings, subscriptions, settings, bookmarks, role, email, password,
-                birthDay, name, phoneNumber, description, isVerified);
+        return Objects.hash(super.hashCode(), ratings, subscriptions, settings, bookmarks, role, email, password, birthDay, name, phoneNumber, description, isVerified, offerPredicates, offerComparator, localizable);
     }
 }

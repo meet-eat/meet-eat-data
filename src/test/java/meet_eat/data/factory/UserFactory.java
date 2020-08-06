@@ -1,6 +1,8 @@
 package meet_eat.data.factory;
 
 import meet_eat.data.Report;
+import meet_eat.data.comparator.OfferComparableField;
+import meet_eat.data.comparator.OfferComparator;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
@@ -56,8 +58,9 @@ public class UserFactory extends ObjectFactory<User> {
         Collection<OfferPredicate> offerPredicates = new LinkedList<OfferPredicate>();
         offerPredicates.add(new PricePredicate(DoubleOperation.LESS, 20d));
         Localizable localizable = new SphericalLocation(new SphericalPosition(0, 0));
+        OfferComparator offerComparator = new OfferComparator(OfferComparableField.TIME, localizable);
         return new User(identifier, reports, ratings, subscriptions, settings, bookmarks, role, email, password,
-                birthDay, name, phoneNumber, description, DEFAULT_VERIFIED, offerPredicates, localizable);
+                birthDay, name, phoneNumber, description, DEFAULT_VERIFIED, offerPredicates, offerComparator, localizable);
     }
 
     private <T extends Enum<T>> T getRandomEnumValue(Class<T> clazz) {
