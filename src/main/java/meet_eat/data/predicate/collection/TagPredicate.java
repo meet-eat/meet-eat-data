@@ -8,10 +8,19 @@ import meet_eat.data.predicate.OfferPredicate;
 
 import java.util.Collection;
 
+/**
+ * Represents an {@link OfferPredicate} for the {@link Tag}s of an {@link Offer}.
+ */
 public class TagPredicate extends CollectionOperator implements OfferPredicate {
 
     private static final long serialVersionUID = 5677783409137877370L;
 
+    /**
+     * Creates a tag predicate.
+     *
+     * @param operation the operation
+     * @param tags      the tags
+     */
     @JsonCreator
     public TagPredicate(@JsonProperty("operation") CollectionOperation operation,
                         @JsonProperty("referenceValue") Collection<Tag> tags) {
