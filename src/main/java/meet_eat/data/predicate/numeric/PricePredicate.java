@@ -11,8 +11,8 @@ public class PricePredicate extends DoubleOperator implements OfferPredicate {
 
     @JsonCreator
     public PricePredicate(@JsonProperty("operation") DoubleOperation operation,
-                          @JsonProperty("referenceValue") double priceBound) {
-        super(operation, priceBound);
+                          @JsonProperty("referenceValue") Double referenceValue) {
+        super(operation, referenceValue);
     }
 
     @Override
