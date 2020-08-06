@@ -18,16 +18,16 @@ public class StringOperatorCommonTest {
     public void testContain() {
         // Test data
         StringOperation contain = StringOperation.CONTAIN;
-        String reference = "This is my reference.";
+        String reference = "reference.";
         String valueOne = "reference";
-        String valueTwo = "my reference";
+        String valueTwo = "my reference.";
         String valueThree = "Hello";
 
         // Execution
         StringOperatorMock operator = new StringOperatorMock(contain, reference);
 
         // Assertions
-        assertTrue(operator.operate(valueOne));
+        assertFalse(operator.operate(valueOne));
         assertTrue(operator.operate(valueTwo));
         assertFalse(operator.operate(valueThree));
     }
@@ -36,10 +36,10 @@ public class StringOperatorCommonTest {
     public void testNotContain() {
         // Test data
         StringOperation notContain = StringOperation.NOT_CONTAIN;
-        String reference = "This is my reference.";
+        String reference = "reference.";
         String valueOne = "XYZ";
         String valueTwo = "TEST";
-        String valueThree = "This";
+        String valueThree = "This is my reference.";
 
         // Execution
         StringOperatorMock operator = new StringOperatorMock(notContain, reference);
@@ -71,8 +71,8 @@ public class StringOperatorCommonTest {
     public void testStartsWith() {
         // Test data
         StringOperation startsWith = StringOperation.STARTS_WITH;
-        String reference = "This is my reference.";
-        String valueOne = "Thi";
+        String reference = "reference";
+        String valueOne = "reference to this";
         String valueTwo = "That shouldn't work.";
 
         // Execution
@@ -88,8 +88,8 @@ public class StringOperatorCommonTest {
     public void testEndsWith() {
         // Test data
         StringOperation endsWith = StringOperation.ENDS_WITH;
-        String reference = "This is my reference.";
-        String valueOne = "e.";
+        String reference = "reference.";
+        String valueOne = "This is my reference.";
         String valueTwo = "That shouldn't work.";
 
         // Execution

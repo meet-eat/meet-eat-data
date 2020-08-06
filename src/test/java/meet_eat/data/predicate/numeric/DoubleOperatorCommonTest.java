@@ -28,9 +28,9 @@ public class DoubleOperatorCommonTest {
 
         // Assertions
         assertFalse(operator.operate(reference));
-        assertTrue(operator.operate(valueOne));
-        assertFalse(operator.operate(valueTwo));
-        assertTrue(operator.operate(valueThree));
+        assertFalse(operator.operate(valueOne));
+        assertTrue(operator.operate(valueTwo));
+        assertFalse(operator.operate(valueThree));
     }
 
     @Test
@@ -66,8 +66,8 @@ public class DoubleOperatorCommonTest {
 
         // Assertions
         assertFalse(operator.operate(reference));
-        assertFalse(operator.operate(valueOne));
-        assertTrue(operator.operate(valueTwo));
-        assertFalse(operator.operate(valueThree));
+        assertTrue(operator.operate(valueOne));
+        assertFalse(operator.operate(valueTwo));
+        assertTrue(operator.operate(valueThree));
     }
 }
