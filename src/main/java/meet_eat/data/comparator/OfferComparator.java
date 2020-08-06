@@ -1,9 +1,12 @@
 package meet_eat.data.comparator;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.location.Localizable;
 import meet_eat.data.location.UnlocalizableException;
-import org.springframework.cglib.core.Local;
 
 import java.io.Serializable;
 import java.util.Comparator;
@@ -13,18 +16,24 @@ public class OfferComparator implements Serializable, Comparator<Offer> {
 
     private static final long serialVersionUID = 3846969499567330524L;
 
+    @JsonProperty
     private final OfferComparableField field;
+    @JsonProperty
     private final Localizable location;
 
-    public OfferComparator(OfferComparableField field, Localizable location) {
+    @JsonCreator
+    public OfferComparator(@JsonProperty("field") OfferComparableField field,
+                           @JsonProperty("location") Localizable location) {
         this.field = Objects.requireNonNull(field);
         this.location = Objects.requireNonNull(location);
     }
 
+    @JsonGetter
     public OfferComparableField getField() {
         return field;
     }
 
+    @JsonGetter
     public Localizable getLocation() {
         return location;
     }
@@ -49,6 +58,7 @@ public class OfferComparator implements Serializable, Comparator<Offer> {
         }
     }
 
+    @JsonIgnore
     private double getDistance(Localizable localizable) {
         double distance;
         try {
@@ -57,5 +67,19 @@ public class OfferComparator implements Serializable, Comparator<Offer> {
             distance = Double.MAX_VALUE;
         }
         return distance;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OfferComparator that = (OfferComparator) o;
+        return field == that.field &&
+                Objects.equals(location, that.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(field, location);
     }
 }
