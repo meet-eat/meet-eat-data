@@ -8,23 +8,31 @@ public enum CollectionOperation implements BiFunction<Collection<?>, Collection<
 
     CONTAIN_ALL {
         @Override
-        public Boolean apply(Collection<?> collectionFst, Collection<?> collectionSnd) {
-            return collectionSnd.containsAll(collectionFst);
+        public Boolean apply(Collection<?> collectionArgument, Collection<?> collectionBase) {
+            if (collectionArgument.isEmpty()) {
+                return true;
+            }
+            return collectionBase.containsAll(collectionArgument);
         }
     },
 
     CONTAIN_ANY {
         @Override
-        public Boolean apply(Collection<?> collectionFst, Collection<?> collectionSnd) {
-            collectionSnd.removeAll(collectionFst);
-            return !collectionSnd.isEmpty();
+        public Boolean apply(Collection<?> collectionArgument, Collection<?> collectionBase) {
+            if (collectionArgument.isEmpty()) {
+                return true;
+            }
+            int sizeBeforeRemoval = collectionBase.size();
+            collectionBase.removeAll(collectionArgument);
+            int sizeAfterRemoval = collectionBase.size();
+            return sizeBeforeRemoval != sizeAfterRemoval;
         }
     },
 
     CONTAIN_NONE {
         @Override
-        public Boolean apply(Collection<?> collectionFst, Collection<?> collectionSnd) {
-            return Collections.disjoint(collectionFst, collectionSnd);
+        public Boolean apply(Collection<?> collectionArgument, Collection<?> collectionBase) {
+            return Collections.disjoint(collectionArgument, collectionBase);
         }
     };
 }
