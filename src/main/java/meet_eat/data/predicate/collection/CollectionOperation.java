@@ -12,6 +12,7 @@ public enum CollectionOperation implements BiFunction<Collection<?>, Collection<
             return collectionSnd.containsAll(collectionFst);
         }
     },
+
     CONTAIN_ANY {
         @Override
         public Boolean apply(Collection<?> collectionFst, Collection<?> collectionSnd) {
@@ -19,6 +20,7 @@ public enum CollectionOperation implements BiFunction<Collection<?>, Collection<
             return !collectionSnd.isEmpty();
         }
     },
+
     CONTAIN_NONE {
         @Override
         public Boolean apply(Collection<?> collectionFst, Collection<?> collectionSnd) {
