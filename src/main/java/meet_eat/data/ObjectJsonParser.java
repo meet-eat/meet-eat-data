@@ -11,7 +11,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.util.Objects;
 
 /**
- * Represents a class to serialize objects to its json representation and to deserialize JSON representations of objects
+ * Represents a class to serialize objects to its JSON representation and to deserialize JSON representations of objects
  * to objects.
  */
 public class ObjectJsonParser {
