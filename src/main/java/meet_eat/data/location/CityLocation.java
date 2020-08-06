@@ -26,7 +26,8 @@ public class CityLocation implements Localizable {
      */
     @JsonCreator
     public CityLocation(@JsonProperty("cityName") String cityName) {
-        this.cityName = Objects.requireNonNull(cityName, ERROR_MESSAGE_NULL_CITY_NAME);
+        Objects.requireNonNull(cityName, ERROR_MESSAGE_NULL_CITY_NAME);
+        this.cityName = convertCityName(cityName);
     }
 
     /**
@@ -44,7 +45,8 @@ public class CityLocation implements Localizable {
      * @param cityName the city name
      */
     public void setCityName(String cityName) {
-        this.cityName = Objects.requireNonNull(cityName, ERROR_MESSAGE_NULL_CITY_NAME);
+        Objects.requireNonNull(cityName, ERROR_MESSAGE_NULL_CITY_NAME);
+        this.cityName = convertCityName(cityName);
     }
 
     @Override
@@ -68,5 +70,16 @@ public class CityLocation implements Localizable {
     @Override
     public int hashCode() {
         return Objects.hash(cityName);
+    }
+
+    private String convertCityName(String cityName) {
+        return cityName
+                .replaceAll("ü", "ue")
+                .replaceAll("ö", "oe")
+                .replaceAll("ä", "ae")
+                .replaceAll("Ü", "Ue")
+                .replaceAll("Ö", "Oe")
+                .replaceAll("Ä", "Ae")
+                .replaceAll("ß", "ss");
     }
 }
