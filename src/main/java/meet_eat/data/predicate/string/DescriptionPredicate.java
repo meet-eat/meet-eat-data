@@ -5,10 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.predicate.OfferPredicate;
 
+/**
+ * Represents an {@link OfferPredicate} for the description of an {@link Offer}.
+ */
 public class DescriptionPredicate extends StringOperator implements OfferPredicate {
 
     private static final long serialVersionUID = 1761548413420048622L;
 
+    /**
+     * Creates a description predicate.
+     *
+     * @param operation      the operation
+     * @param referenceValue the reference value
+     */
     @JsonCreator
     public DescriptionPredicate(@JsonProperty("operation") StringOperation operation,
                                 @JsonProperty("referenceValue") String referenceValue) {
