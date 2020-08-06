@@ -13,9 +13,15 @@ import java.security.SecureRandom;
 import java.util.Objects;
 import java.util.function.Function;
 
+/**
+ * Represents a password belonging to a {@link User}.
+ */
 public class Password implements Serializable {
 
     private static final long serialVersionUID = -4013709321180976803L;
+
+    private static final String ERROR_MESSAGE_ILLEGAL_PASSWORD = "The password must comply with password guidelines.";
+    private static final String ERROR_MESSAGE_MATCH_NON_DERIVED = "Password to be matched must be derived.";
 
     /**
      * Password properties:
@@ -33,14 +39,12 @@ public class Password implements Serializable {
             + "(?=.*\\d)"
             + "(?=.*[!#$%&*_+,-./:;'<=>?@^|~(){}])"
             + ".{8,32}$";
-    private static final String ERROR_MESSAGE_ILLEGAL_PASSWORD = "The password must comply with password guidelines.";
-    private static final String ERROR_MESSAGE_MATCH_NON_DERIVED = "Password to be matched must be derived.";
-    private static final Function<String, String> HASH_FUNCTION = new Function<String, String>() {
-        @Override
-        public String apply(String s) {
-            return Hashing.sha512().hashString(s, Charsets.UTF_16).toString();
-        }
-    };
+
+    /**
+     * Encodes a string with SHA-512 algorithm and given charset.
+     */
+    private static final Function<String, String> HASH_FUNCTION = s -> Hashing.sha512().hashString(s, Charsets.UTF_16).toString();
+
     private static final int DERIVATION_WIDTH = 512;
     private static final int SALT_BYTE_LENGTH = 64;
 
@@ -51,6 +55,13 @@ public class Password implements Serializable {
     @JsonProperty
     private final Integer iterations;
 
+    /**
+     * Creates a password with given hash, salt and iterations.
+     *
+     * @param hash       the hash
+     * @param salt       the salt
+     * @param iterations the amount of iterations
+     */
     @JsonCreator
     protected Password(@JsonProperty("hash") String hash, @JsonProperty("salt") String salt, @JsonProperty("iterations") Integer iterations) {
         this.hash = hash;
@@ -58,21 +69,42 @@ public class Password implements Serializable {
         this.iterations = iterations;
     }
 
+    /**
+     * Gets the hash.
+     *
+     * @return the hash
+     */
     @JsonGetter
     public String getHash() {
         return hash;
     }
 
+    /**
+     * Gets the salt.
+     *
+     * @return the salt
+     */
     @JsonGetter
     public String getSalt() {
         return salt;
     }
 
+    /**
+     * Gets the amount of iterations used for password encoding.
+     *
+     * @return the amount of iterations
+     */
     @JsonGetter
     public Integer getIterations() {
         return iterations;
     }
 
+    /**
+     * Checks the password for correctness.
+     *
+     * @param password the password
+     * @return {@code true} if the password is legal, {@code false} otherwise
+     */
     public static boolean isLegalPassword(String password) {
         if (Objects.isNull(password)) {
             return false;
@@ -80,6 +112,12 @@ public class Password implements Serializable {
         return password.matches(REGEX_PASSWORD);
     }
 
+    /**
+     * Creates a hashed password by applying {@link Password#HASH_FUNCTION}.
+     *
+     * @param passwordValue the password string value
+     * @return the hashed password if, and only if, the password is legal
+     */
     public static Password createHashedPassword(String passwordValue) {
         if (!isLegalPassword(passwordValue)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_PASSWORD);
@@ -88,12 +126,25 @@ public class Password implements Serializable {
         return new Password(hash, null, null);
     }
 
+    /**
+     * Derives an encoded password with given salt and iterations.
+     *
+     * @param salt       the salt
+     * @param iterations the amount of iterations
+     * @return the derived password
+     */
     public Password derive(String salt, int iterations) {
         Pbkdf2PasswordEncoder encoder = new Pbkdf2PasswordEncoder(salt, iterations, DERIVATION_WIDTH);
         encoder.setAlgorithm(Pbkdf2PasswordEncoder.SecretKeyFactoryAlgorithm.PBKDF2WithHmacSHA512);
         return new Password(encoder.encode(hash), salt, iterations);
     }
 
+    /**
+     * Checks if two hashes which represent {@link Password}s, are matching.
+     *
+     * @param derivedPassword the derived password
+     * @return {@code true} if both hashes are representing the same {@link Password}, {@code false} if not
+     */
     public boolean matches(Password derivedPassword) {
         if (Objects.isNull(derivedPassword.getSalt()) || Objects.isNull(derivedPassword.getIterations())) {
             throw new IllegalStateException(ERROR_MESSAGE_MATCH_NON_DERIVED);
@@ -103,6 +154,11 @@ public class Password implements Serializable {
         return encoder.matches(hash, derivedPassword.getHash());
     }
 
+    /**
+     * Generates a random salt used for password encoding.
+     *
+     * @return the generated salt
+     */
     public static String generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[SALT_BYTE_LENGTH];
