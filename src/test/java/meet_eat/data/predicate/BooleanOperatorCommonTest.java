@@ -40,9 +40,8 @@ public class BooleanOperatorCommonTest {
     @Test
     public void testConstructor() {
         // Test data
-        Object object = new Object();
         ObjectOperation objectOperation = new ObjectOperation();
-        Object operationObject = new Object();
+        Object object = new Object();
 
         // Execution
         BooleanOperatorMock objectOperator = new BooleanOperatorMock(objectOperation, object);
@@ -58,8 +57,8 @@ public class BooleanOperatorCommonTest {
     @Test
     public void testOperate() {
         // Test data
-        Object object = new Object();
         ObjectOperation objectOperation = new ObjectOperation();
+        Object object = new Object();
         Object operationObject = new Object();
 
         // Execution
@@ -72,8 +71,8 @@ public class BooleanOperatorCommonTest {
     @Test(expected = NullPointerException.class)
     public void testOperateNull() {
         // Test data
-        Object object = new Object();
         ObjectOperation objectOperation = new ObjectOperation();
+        Object object = new Object();
 
         // Execution
         BooleanOperatorMock objectOperator = new BooleanOperatorMock(objectOperation, object);
