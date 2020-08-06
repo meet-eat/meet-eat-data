@@ -1,7 +1,5 @@
-package meet_eat.data.predicate;
+package meet_eat.data.predicate.string;
 
-import meet_eat.data.predicate.string.StringOperation;
-import meet_eat.data.predicate.string.StringOperator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
