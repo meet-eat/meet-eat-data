@@ -425,6 +425,7 @@ public class OfferCommonTest {
         Offer offer = new OfferFactory().getValidObject();
         offer.setMaxParticipants(3);
         offer.addParticipant(userOne);
+        offer.addParticipant(userTwo);
     }
 
     @Test
