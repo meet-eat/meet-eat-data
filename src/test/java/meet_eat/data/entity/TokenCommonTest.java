@@ -79,4 +79,18 @@ public class TokenCommonTest {
         // Assertion
         assertFalse(token1.equals(token2));
     }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        Token token = new TokenFactory().getValidObject();
+        Token tokenCopy = new Token(token.getIdentifier(), token.getUser(), token.getValue());
+
+        // Assertions
+        assertTrue(token.equals(token));
+        assertFalse(token.equals(null));
+        assertFalse(token.equals(new Object()));
+        assertTrue(token.equals(tokenCopy));
+        assertEquals(token.hashCode(), tokenCopy.hashCode());
+    }
 }

@@ -99,4 +99,19 @@ public class ReportableEntityCommonTest {
         ConcreteReportableEntity entity = new ConcreteReportableEntity();
         entity.addReport(null);
     }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        Collection<Report> reports = new LinkedList<>();
+        ConcreteReportableEntity entity = new ConcreteReportableEntity("Identifier", reports);
+        ConcreteReportableEntity entityCopy = new ConcreteReportableEntity(entity.getIdentifier(), entity.getReports());
+
+        // Assertions
+        assertTrue(entity.equals(entity));
+        assertFalse(entity.equals(null));
+        assertFalse(entity.equals(new Object()));
+        assertTrue(entity.equals(entityCopy));
+        assertEquals(entity.hashCode(), entityCopy.hashCode());
+    }
 }

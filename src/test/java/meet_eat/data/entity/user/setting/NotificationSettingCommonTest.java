@@ -2,7 +2,7 @@ package meet_eat.data.entity.user.setting;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class NotificationSettingCommonTest {
 
@@ -57,5 +57,18 @@ public class NotificationSettingCommonTest {
 
         // Assertions
         assertEquals(minutesUntilOffer, notificationSetting.getMinutesUntilOffer());
+    }
+
+    @Test
+    public void testEquals() {
+        NotificationSetting notificatonSetting = new NotificationSetting(false, 60);
+        NotificationSetting notificationSettingCopy = new NotificationSetting(notificatonSetting.isEnabled(), notificatonSetting.getMinutesUntilOffer());
+
+        // Assertions
+        assertTrue(notificatonSetting.equals(notificatonSetting));
+        assertFalse(notificatonSetting.equals(null));
+        assertFalse(notificatonSetting.equals(new Object()));
+        assertTrue(notificatonSetting.equals(notificationSettingCopy));
+        assertEquals(notificatonSetting.hashCode(), notificationSettingCopy.hashCode());
     }
 }

@@ -2,7 +2,7 @@ package meet_eat.data.entity.user.setting;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class DisplaySettingCommonTest {
 
@@ -55,5 +55,18 @@ public class DisplaySettingCommonTest {
 
         // Execution
         displaySetting.setColorMode(null);
+    }
+
+    @Test
+    public void testEquals() {
+        DisplaySetting displaySetting = new DisplaySetting(ColorMode.DARK);
+        DisplaySetting displaySettingCopy = new DisplaySetting(displaySetting.getColorMode());
+
+        // Assertions
+        assertTrue(displaySetting.equals(displaySetting));
+        assertFalse(displaySetting.equals(null));
+        assertFalse(displaySetting.equals(new Object()));
+        assertTrue(displaySetting.equals(displaySettingCopy));
+        assertEquals(displaySetting.hashCode(), displaySettingCopy.hashCode());
     }
 }

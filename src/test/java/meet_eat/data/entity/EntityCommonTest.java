@@ -1,9 +1,8 @@
 package meet_eat.data.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class EntityCommonTest {
 
@@ -37,5 +36,19 @@ public class EntityCommonTest {
 
         // Assertions
         assertEquals(identifier, entity.getIdentifier());
+    }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        ConcreteEntity entity = new ConcreteEntity("Identifier");
+        ConcreteEntity entityCopy = new ConcreteEntity(entity.getIdentifier());
+
+        // Assertions
+        assertTrue(entity.equals(entity));
+        assertFalse(entity.equals(null));
+        assertFalse(entity.equals(new Object()));
+        assertTrue(entity.equals(entityCopy));
+        assertEquals(entity.hashCode(), entityCopy.hashCode());
     }
 }
