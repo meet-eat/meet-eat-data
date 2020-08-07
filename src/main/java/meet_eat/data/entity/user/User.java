@@ -92,7 +92,7 @@ public class User extends ReportableEntity<String> {
     private Localizable localizable;
 
     /**
-     * Creates a new user
+     * Creates a new user.
      *
      * @param email       the email address
      * @param password    the password
@@ -127,7 +127,7 @@ public class User extends ReportableEntity<String> {
     }
 
     /**
-     * Creates a new user
+     * Creates a new user.
      *
      * @param identifier      the identifier
      * @param reports         the reports received by other users
@@ -494,7 +494,7 @@ public class User extends ReportableEntity<String> {
      *
      * @param subscription the user subscription
      */
-    public void removeSubscriptions(User subscription) {
+    public void removeSubscription(User subscription) {
         subscriptions.remove(Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION));
     }
 
