@@ -232,6 +232,42 @@ public class OfferComparatorCommonTest {
     }
 
     @Test
+    public void testDistanceUnlocalizable() {
+        // Test data
+        OfferComparableField distance = OfferComparableField.DISTANCE;
+        Localizable location = new CityLocation("Karlsruhe");
+        OfferFactory offerFactory = new OfferFactory();
+        Offer offerOne = offerFactory.getValidObject();
+        Offer offerTwo = offerFactory.getValidObject();
+        Offer offerThree = offerFactory.getValidObject();
+        Offer offerFour = offerFactory.getValidObject();
+        Offer offerFive = offerFactory.getValidObject();
+        offerOne.setLocation(new CityLocation("Stuttgart"));
+        offerTwo.setLocation(new CityLocation("abc123"));
+        offerThree.setLocation(new CityLocation("Berlin"));
+        offerFour.setLocation(new CityLocation("Hamburg"));
+        offerFive.setLocation(new CityLocation("Bad Herrenalb"));
+
+        List<Offer> list = new ArrayList<>();
+        list.add(offerOne);
+        list.add(offerTwo);
+        list.add(offerThree);
+        list.add(offerFour);
+        list.add(offerFive);
+
+        // Execution
+        OfferComparatorMock comparator = new OfferComparatorMock(distance, location);
+        Collections.sort(list, comparator);
+
+        // Assertions
+        assertEquals(offerFive, list.get(0));
+        assertEquals(offerOne, list.get(1));
+        assertEquals(offerFour, list.get(2));
+        assertEquals(offerThree, list.get(3));
+        assertEquals(offerTwo, list.get(4));
+    }
+
+    @Test
     public void testParticipants() {
         // Test data
         OfferComparableField participants = OfferComparableField.PARTICIPANTS;
