@@ -37,13 +37,13 @@ public class Offer extends ReportableEntity<String> {
     private static final double DEFAULT_MIN_PRICE = 0d;
     private static final int DEFAULT_MIN_PARTICIPANTS = 1;
 
-    @DBRef(lazy = true)
+    @DBRef
     @JsonProperty
     private final User creator;
-    @DBRef(lazy = true)
+    @DBRef
     @JsonProperty
     private final Set<User> participants;
-    @DBRef(lazy = true)
+    @DBRef
     @JsonProperty
     private final Set<Tag> tags;
 

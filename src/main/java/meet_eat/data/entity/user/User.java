@@ -60,12 +60,12 @@ public class User extends ReportableEntity<String> {
 
     @JsonProperty
     private final Collection<Rating> ratings;
-    @DBRef(lazy = true)
+    @DBRef
     @JsonProperty
     private final Set<User> subscriptions;
     @JsonProperty
     private final Set<Setting> settings;
-    @DBRef(lazy = true)
+    @DBRef
     @JsonProperty
     private final Set<Offer> bookmarks;
     @JsonProperty
