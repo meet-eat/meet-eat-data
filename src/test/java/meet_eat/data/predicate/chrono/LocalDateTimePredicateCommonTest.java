@@ -14,7 +14,7 @@ public class LocalDateTimePredicateCommonTest {
     @Test
     public void testConstructor() {
         // Test data
-        ChronoLocalDateTimeOperation operation = ChronoLocalDateTimeOperation.BEFORE;
+        LocalDateTimeOperation operation = LocalDateTimeOperation.BEFORE;
         LocalDateTime reference = LocalDateTime.of(2020, Month.AUGUST, 6, 22, 05);
 
         // Execution
@@ -38,7 +38,7 @@ public class LocalDateTimePredicateCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorWithNullReferenceValue() {
         // Test data
-        ChronoLocalDateTimeOperation operation = ChronoLocalDateTimeOperation.BEFORE;
+        LocalDateTimeOperation operation = LocalDateTimeOperation.BEFORE;
 
         // Execution
         LocalDateTimePredicate localDateTimePredicate = new LocalDateTimePredicate(operation, null);
@@ -47,7 +47,7 @@ public class LocalDateTimePredicateCommonTest {
     @Test
     public void testOperate() {
         // Test data
-        ChronoLocalDateTimeOperation operation = ChronoLocalDateTimeOperation.BEFORE;
+        LocalDateTimeOperation operation = LocalDateTimeOperation.BEFORE;
         LocalDateTime reference = LocalDateTime.of(2020, Month.AUGUST, 6, 22, 05);
         OfferFactory offerFactory = new OfferFactory();
         Offer offerOne = offerFactory.getValidObject();

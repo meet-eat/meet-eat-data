@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 /**
  * Represents an {@link OfferPredicate} for the date and time of an {@link Offer}.
  */
-public class LocalDateTimePredicate extends ChronoLocalDateTimeOperator implements OfferPredicate {
+public class LocalDateTimePredicate extends LocalDateTimeOperator implements OfferPredicate {
 
     private static final long serialVersionUID = 7062600211366077108L;
 
@@ -21,7 +21,7 @@ public class LocalDateTimePredicate extends ChronoLocalDateTimeOperator implemen
      * @param referenceValue the reference value
      */
     @JsonCreator
-    public LocalDateTimePredicate(@JsonProperty("operation") ChronoLocalDateTimeOperation operation,
+    public LocalDateTimePredicate(@JsonProperty("operation") LocalDateTimeOperation operation,
                                   @JsonProperty("referenceValue") LocalDateTime referenceValue) {
         super(operation, referenceValue);
     }

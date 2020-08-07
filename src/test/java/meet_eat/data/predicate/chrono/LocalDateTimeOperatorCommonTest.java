@@ -9,11 +9,11 @@ import java.time.chrono.ChronoLocalDateTime;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class ChronoLocalDateTimeOperatorCommonTest {
+public class LocalDateTimeOperatorCommonTest {
 
-    private class ChronoLocalDateTimeOperatorMock extends ChronoLocalDateTimeOperator {
+    private class LocalDateTimeOperatorMock extends LocalDateTimeOperator {
 
-        public ChronoLocalDateTimeOperatorMock(ChronoLocalDateTimeOperation operation, ChronoLocalDateTime<?> referenceValue) {
+        public LocalDateTimeOperatorMock(LocalDateTimeOperation operation, LocalDateTime referenceValue) {
             super(operation, referenceValue);
         }
     }
@@ -21,14 +21,14 @@ public class ChronoLocalDateTimeOperatorCommonTest {
     @Test
     public void testBefore() {
         // Test data
-        ChronoLocalDateTimeOperation before = ChronoLocalDateTimeOperation.BEFORE;
+        LocalDateTimeOperation before = LocalDateTimeOperation.BEFORE;
         LocalDateTime reference = LocalDateTime.of(2020, Month.AUGUST, 6, 15, 30);
         LocalDateTime dateTimeOne = LocalDateTime.of(2020, Month.JANUARY, 1, 12, 0);
         LocalDateTime dateTimeTwo = LocalDateTime.of(2020, Month.AUGUST, 6, 15, 30);
         LocalDateTime dateTimeThree = LocalDateTime.of(2100, Month.OCTOBER, 16, 12, 0);
 
         // Execution
-        ChronoLocalDateTimeOperatorMock operator = new ChronoLocalDateTimeOperatorMock(before, reference);
+        LocalDateTimeOperatorMock operator = new LocalDateTimeOperatorMock(before, reference);
 
         // Assertions
         assertTrue(operator.operate(dateTimeOne));
@@ -39,14 +39,14 @@ public class ChronoLocalDateTimeOperatorCommonTest {
     @Test
     public void testEqual() {
         // Test data
-        ChronoLocalDateTimeOperation equal = ChronoLocalDateTimeOperation.EQUAL;
+        LocalDateTimeOperation equal = LocalDateTimeOperation.EQUAL;
         LocalDateTime reference = LocalDateTime.of(2020, Month.AUGUST, 6, 15, 30);
         LocalDateTime dateTimeOne = LocalDateTime.of(2020, Month.JANUARY, 1, 12, 0);
         LocalDateTime dateTimeTwo = LocalDateTime.of(2020, Month.AUGUST, 6, 15, 30);
         LocalDateTime dateTimeThree = LocalDateTime.of(2100, Month.OCTOBER, 16, 12, 0);
 
         // Execution
-        ChronoLocalDateTimeOperatorMock operator = new ChronoLocalDateTimeOperatorMock(equal, reference);
+        LocalDateTimeOperatorMock operator = new LocalDateTimeOperatorMock(equal, reference);
 
         // Assertions
         assertFalse(operator.operate(dateTimeOne));
@@ -57,14 +57,14 @@ public class ChronoLocalDateTimeOperatorCommonTest {
     @Test
     public void testAfter() {
         // Test data
-        ChronoLocalDateTimeOperation after = ChronoLocalDateTimeOperation.AFTER;
+        LocalDateTimeOperation after = LocalDateTimeOperation.AFTER;
         LocalDateTime reference = LocalDateTime.of(2020, Month.AUGUST, 6, 15, 30);
         LocalDateTime dateTimeOne = LocalDateTime.of(2020, Month.JANUARY, 1, 12, 0);
         LocalDateTime dateTimeTwo = LocalDateTime.of(2020, Month.AUGUST, 6, 15, 30);
         LocalDateTime dateTimeThree = LocalDateTime.of(2100, Month.OCTOBER, 16, 12, 0);
 
         // Execution
-        ChronoLocalDateTimeOperatorMock operator = new ChronoLocalDateTimeOperatorMock(after, reference);
+        LocalDateTimeOperatorMock operator = new LocalDateTimeOperatorMock(after, reference);
 
         // Assertions
         assertFalse(operator.operate(dateTimeOne));
