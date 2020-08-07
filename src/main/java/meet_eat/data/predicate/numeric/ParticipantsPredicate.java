@@ -21,8 +21,8 @@ public class ParticipantsPredicate extends DoubleOperator implements OfferPredic
      */
     @JsonCreator
     public ParticipantsPredicate(@JsonProperty("operation") DoubleOperation operation,
-                                 @JsonProperty("referenceValue") int referenceValue) {
-        super(operation, (double) referenceValue);
+                                 @JsonProperty("referenceValue") Double referenceValue) {
+        super(operation, referenceValue);
     }
 
     @Override
