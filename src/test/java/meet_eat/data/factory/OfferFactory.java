@@ -22,7 +22,7 @@ public class OfferFactory extends ObjectFactory<Offer> {
     private static final int AMOUNT_PARTICIPANTS = 2;
     private static final int AMOUNT_TAGS = 2;
     private static final double TEST_PRICE = 5d;
-    private static final int TEST_AMOUNT_PARTICIPANTS = 5;
+    private static final int TEST_MAX_AMOUNT_PARTICIPANTS = 10;
 
     private ReportFactory reportFactory;
     private UserFactory userFactory;
@@ -56,7 +56,7 @@ public class OfferFactory extends ObjectFactory<Offer> {
         String name = "TestOffer" + objectCounter;
         String description = "This is test offer number " + objectCounter;
         double price = TEST_PRICE;
-        int maxParticipants = TEST_AMOUNT_PARTICIPANTS;
+        int maxParticipants = TEST_MAX_AMOUNT_PARTICIPANTS;
         LocalDateTime dateTime = LocalDateTime.of(LocalDate.EPOCH, LocalTime.NOON);
         Localizable location = locationFactory.getValidObject();
         return new Offer(identifier, reports, creator, participants, tags, name, description, price, maxParticipants,
