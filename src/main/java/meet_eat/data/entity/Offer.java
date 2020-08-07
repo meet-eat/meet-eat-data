@@ -297,8 +297,9 @@ public class Offer extends ReportableEntity<String> {
     public void addParticipant(User participant) {
         if (getParticipants().size() < maxParticipants) {
             participants.add(Objects.requireNonNull(participant, ERROR_MESSAGE_NULL_PARTICIPANT));
+        } else {
+            throw new IllegalStateException(ERROR_MESSAGE_MAX_PARTICIPANTS_REACHED);
         }
-        throw new IllegalStateException(ERROR_MESSAGE_MAX_PARTICIPANTS_REACHED);
     }
 
     /**
