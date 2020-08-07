@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 @RunWith(Parameterized.class)
 public class EmailLegalityTest {
@@ -53,5 +54,19 @@ public class EmailLegalityTest {
     public void testIsLegalEmailAddress() {
         // Assertions
         assertEquals(Email.isLegalEmailAddress(this.emailAddress), this.isValid);
+    }
+
+    @Test
+    public void testIllegalEmailAddress() {
+        if (!isValid) {
+            assertThrows(IllegalArgumentException.class, () -> new Email(emailAddress));
+        }
+    }
+
+    @Test
+    public void testToString() {
+        if (isValid) {
+            assertEquals(emailAddress, new Email(emailAddress).toString());
+        }
     }
 }
