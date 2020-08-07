@@ -32,6 +32,7 @@ public class Offer extends ReportableEntity<String> {
     private static final String ERROR_MESSAGE_NULL_LOCATION = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "location");
     private static final String ERROR_MESSAGE_ILLEGAL_PRICE = "The price must be greater or equals than 0.";
     private static final String ERROR_MESSAGE_ILLEGAL_MAX_PARTICIPANTS = "At least one individual has to participate.";
+    private static final String ERROR_MESSAGE_MAX_PARTICIPANTS_REACHED = "Maximum participants reached, no participation possible.";
 
     private static final double DEFAULT_MIN_PRICE = 0d;
     private static final int DEFAULT_MIN_PARTICIPANTS = 1;
@@ -294,7 +295,10 @@ public class Offer extends ReportableEntity<String> {
      * @param participant the participant
      */
     public void addParticipant(User participant) {
-        participants.add(Objects.requireNonNull(participant, ERROR_MESSAGE_NULL_PARTICIPANT));
+        if (getParticipants().size() < maxParticipants) {
+            participants.add(Objects.requireNonNull(participant, ERROR_MESSAGE_NULL_PARTICIPANT));
+        }
+        throw new IllegalStateException(ERROR_MESSAGE_MAX_PARTICIPANTS_REACHED);
     }
 
     /**
