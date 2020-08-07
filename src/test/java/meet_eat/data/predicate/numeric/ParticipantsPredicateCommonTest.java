@@ -13,7 +13,7 @@ public class ParticipantsPredicateCommonTest {
     public void testConstructor() {
         // Test data
         DoubleOperation operation = DoubleOperation.EQUAL;
-        int reference = 1;
+        double reference = 1d;
 
         // Execution
         ParticipantsPredicate participantsPredicate = new ParticipantsPredicate(operation, reference);
@@ -27,7 +27,7 @@ public class ParticipantsPredicateCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorWithNullOperation() {
         // Test data
-        int reference = 1;
+        double reference = 1d;
 
         // Execution
         ParticipantsPredicate participantsPredicate = new ParticipantsPredicate(null, reference);
@@ -37,7 +37,7 @@ public class ParticipantsPredicateCommonTest {
     public void testOperate() {
         // Test data
         DoubleOperation operation = DoubleOperation.EQUAL;
-        int reference = 2;
+        double reference = 2d;
         OfferFactory offerFactory = new OfferFactory();
         Offer offerOne = offerFactory.getValidObject();
         Offer offerTwo = offerFactory.getValidObject();

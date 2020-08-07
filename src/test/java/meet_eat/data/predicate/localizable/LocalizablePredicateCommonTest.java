@@ -16,7 +16,7 @@ public class LocalizablePredicateCommonTest {
     public void testConstructor() throws UnlocalizableException {
         // Test data
         DoubleOperation operation = DoubleOperation.LESS;
-        int reference = 30;
+        double reference = 30d;
         Localizable localizable = new CityLocation("Karlsruhe");
 
         // Execution
@@ -26,12 +26,13 @@ public class LocalizablePredicateCommonTest {
         assertNotNull(localizablePredicate);
         assertNotNull(localizablePredicate.getOperation());
         assertNotNull(localizablePredicate.getReferenceValue());
+        assertNotNull(localizablePredicate.getLocalizable());
     }
 
     @Test(expected = NullPointerException.class)
     public void testConstructorWithNullOperation() throws UnlocalizableException {
         // Test data
-        int reference = 30;
+        double reference = 30d;
         Localizable localizable = new CityLocation("Karlsruhe");
 
         // Execution
@@ -42,7 +43,7 @@ public class LocalizablePredicateCommonTest {
     public void testOperate() throws UnlocalizableException {
         // Test data
         DoubleOperation operation = DoubleOperation.LESS;
-        int reference = 30000;
+        double reference = 30000d;
         Localizable localizable = new CityLocation("Karlsruhe");
         OfferFactory offerFactory = new OfferFactory();
         Offer offerOne = offerFactory.getValidObject();
@@ -62,7 +63,7 @@ public class LocalizablePredicateCommonTest {
     public void testOperateUnlocalizable() throws UnlocalizableException {
         // Test data
         DoubleOperation operation = DoubleOperation.LESS;
-        int reference = 30;
+        double reference = 30d;
         Localizable localizable = new CityLocation("abc123456");
         OfferFactory offerFactory = new OfferFactory();
         Offer offerOne = offerFactory.getValidObject();
@@ -72,5 +73,24 @@ public class LocalizablePredicateCommonTest {
 
         // Execution
         LocalizablePredicate localizablePredicate = new LocalizablePredicate(operation, reference, localizable);
+    }
+
+    @Test
+    public void testGetDistanceUnlocalizable() throws UnlocalizableException {
+        // Test data
+        DoubleOperation operation = DoubleOperation.LESS;
+        double reference = 30d;
+        Localizable localizable = new CityLocation("Karlsruhe");
+        OfferFactory offerFactory = new OfferFactory();
+        Offer offerOne = offerFactory.getValidObject();
+        offerOne.setLocation(new CityLocation("abc123"));
+        Offer offerTwo = offerFactory.getValidObject();
+        offerTwo.setLocation(new CityLocation("Mannheim"));
+
+        // Execution
+        LocalizablePredicate localizablePredicate = new LocalizablePredicate(operation, reference, localizable);
+
+        // Assertions
+        assertFalse(localizablePredicate.test(offerOne));
     }
 }
