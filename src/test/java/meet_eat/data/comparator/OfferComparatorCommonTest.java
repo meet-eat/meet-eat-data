@@ -105,7 +105,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerFive, list.get(4));
 
         // Reverse list order from big to small
-        Collections.reverse(list);
+        Collections.sort(list, comparator.reversed());
 
         assertEquals(offerFive, list.get(0));
         assertEquals(offerFour, list.get(1));
@@ -157,7 +157,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerFour, list.get(4));
 
         // Reverse list order from late to early
-        Collections.reverse(list);
+        Collections.sort(list, comparator.reversed());
 
         assertEquals(offerFour, list.get(0));
         assertEquals(offerOne, list.get(1));
@@ -222,7 +222,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerThree, list.get(4));
 
         // Reverse list order from far to close
-        Collections.reverse(list);
+        Collections.sort(list, comparator.reversed());
 
         assertEquals(offerThree, list.get(0));
         assertEquals(offerFour, list.get(1));
@@ -328,7 +328,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerOne, list.get(4));
 
         // Reverse list order from high to low participation
-        Collections.reverse(list);
+        Collections.sort(list, comparator.reversed());
 
         assertEquals(offerOne, list.get(0));
         assertEquals(offerTwo, list.get(1));
@@ -408,6 +408,12 @@ public class OfferComparatorCommonTest {
         assertEquals(offerOne, list.get(4));
 
         // Sort list from high to low participation
-        Collections.reverse(list);
+        Collections.sort(list, comparator.reversed());
+
+        assertEquals(offerOne, list.get(0));
+        assertEquals(offerTwo, list.get(1));
+        assertEquals(offerFour, list.get(2));
+        assertEquals(offerThree, list.get(3));
+        assertEquals(offerFive, list.get(4));
     }
 }
