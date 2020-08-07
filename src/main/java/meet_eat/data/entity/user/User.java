@@ -458,8 +458,7 @@ public class User extends ReportableEntity<String> {
      * @param bookmark the offer bookmark
      */
     public void addBookmark(Offer bookmark) {
-        Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK);
-        bookmarks.add(bookmark);
+        bookmarks.add(Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK));
     }
 
     /**
@@ -468,8 +467,7 @@ public class User extends ReportableEntity<String> {
      * @param predicate the offer predicate
      */
     public void addOfferPredicate(OfferPredicate predicate) {
-        Objects.requireNonNull(predicate);
-        offerPredicates.add(predicate);
+        offerPredicates.add(Objects.requireNonNull(predicate));
     }
 
     /**
@@ -478,8 +476,7 @@ public class User extends ReportableEntity<String> {
      * @param predicates the offer predicates
      */
     public void addManyOfferPredicates(Collection<OfferPredicate> predicates) {
-        Objects.requireNonNull(predicates);
-        offerPredicates.addAll(predicates);
+        offerPredicates.addAll(Objects.requireNonNull(predicates));
     }
 
     /**
