@@ -27,7 +27,7 @@ public abstract class BooleanOperator<T extends BiFunction<S, S, Boolean>, S> im
      * Creates a specific operator.
      *
      * @param operation      the specific {@link BiFunction} operation used for testing a certain object
-     * @param referenceValue the specific object used as reference value with the operation
+     * @param referenceValue the specific object used as reference value within the operation
      */
     @JsonCreator
     protected BooleanOperator(@JsonProperty("operation") T operation, @JsonProperty("referenceValue") S referenceValue) {
