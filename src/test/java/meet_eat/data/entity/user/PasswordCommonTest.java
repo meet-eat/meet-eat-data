@@ -77,4 +77,26 @@ public class PasswordCommonTest {
         assertNotNull(salt);
         assertNotEquals(0, salt.length());
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void testNullSalt() {
+        // Test data
+        String passwordValue = "MyTest1Password!";
+        Password password = Password.createHashedPassword(passwordValue);
+        Password wrongPassword = new Password(null, null, 100);
+
+        // Execution
+        password.matches(wrongPassword);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testNullIterations() {
+        // Test data
+        String passwordValue = "MyTest1Password!";
+        Password password = Password.createHashedPassword(passwordValue);
+        Password wrongPassword = new Password(null, "salt", null);
+
+        // Execution
+        password.matches(wrongPassword);
+    }
 }
