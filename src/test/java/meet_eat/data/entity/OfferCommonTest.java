@@ -414,6 +414,19 @@ public class OfferCommonTest {
         offer.addParticipant(null);
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void testAddParticipantToFullParticipants() {
+        // Test data
+        UserFactory userFactory = new UserFactory();
+        User userOne = userFactory.getValidObject();
+        User userTwo = userFactory.getValidObject();
+
+        // Execution
+        Offer offer = new OfferFactory().getValidObject();
+        offer.setMaxParticipants(3);
+        offer.addParticipant(userOne);
+    }
+
     @Test
     public void testAddTags() {
         // Test data
