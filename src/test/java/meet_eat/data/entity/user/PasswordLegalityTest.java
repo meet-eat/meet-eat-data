@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 @RunWith(Parameterized.class)
 public class PasswordLegalityTest {
@@ -50,6 +51,13 @@ public class PasswordLegalityTest {
     @Test
     public void testIsLegalPassword() {
         // Assertions
-        assertEquals(Password.isLegalPassword(this.password), this.isValid);
+        assertEquals(Password.isLegalPassword(password), isValid);
+    }
+
+    @Test
+    public void testCreateHashedIllegalPassword() {
+        if (!isValid) {
+            assertThrows(IllegalArgumentException.class, () -> Password.createHashedPassword(password));
+        }
     }
 }
