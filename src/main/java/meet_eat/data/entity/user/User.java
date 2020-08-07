@@ -28,6 +28,9 @@ import meet_eat.data.predicate.OfferPredicate;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
+/**
+ * Represents a {@link ReportableEntity}.
+ */
 public class User extends ReportableEntity<String> {
 
     private static final long serialVersionUID = -7918410988503545424L;
@@ -88,6 +91,18 @@ public class User extends ReportableEntity<String> {
     @JsonProperty
     private Localizable localizable;
 
+    /**
+     * Creates a new user
+     *
+     * @param email       the email address
+     * @param password    the password
+     * @param birthDay    the birthday
+     * @param name        the display name
+     * @param phoneNumber the phone number
+     * @param description the user description
+     * @param isVerified  the indicator if the user is verified or not
+     * @param localizable the user location
+     */
     public User(Email email, Password password, LocalDate birthDay, String name, String phoneNumber,
                 String description, boolean isVerified, Localizable localizable) {
 
@@ -111,6 +126,27 @@ public class User extends ReportableEntity<String> {
         initSettings();
     }
 
+    /**
+     * Creates a new user
+     *
+     * @param identifier      the identifier
+     * @param reports         the reports received by other users
+     * @param ratings         the ratings received by other users
+     * @param subscriptions   the users subscribed by the user
+     * @param settings        the user settings
+     * @param bookmarks       the offers bookmarked by the user
+     * @param role            the user role
+     * @param email           the email address
+     * @param password        the password
+     * @param birthDay        the birthday
+     * @param name            the display name
+     * @param phoneNumber     the phone number
+     * @param description     the user description
+     * @param isVerified      indicator if the user is verified or not
+     * @param offerPredicates the predicates used to filter offers
+     * @param offerComparator the comparator used to sort offers
+     * @param localizable     the user location
+     */
     @JsonCreator
     @PersistenceConstructor
     public User(@JsonProperty("identifier") String identifier,
@@ -149,169 +185,352 @@ public class User extends ReportableEntity<String> {
         this.localizable = Objects.requireNonNull(localizable);
     }
 
+    /**
+     * Gets the ratings.
+     *
+     * @return the ratings
+     */
     @JsonGetter
     public Collection<Rating> getRatings() {
         return Collections.unmodifiableCollection(ratings);
     }
 
+    /**
+     * Gets the subscriptions.
+     *
+     * @return the subscriptions
+     */
     @JsonGetter
     public Set<User> getSubscriptions() {
         return Collections.unmodifiableSet(subscriptions);
     }
 
+    /**
+     * Gets the settings.
+     *
+     * @return the settings
+     */
     @JsonGetter
     public Set<Setting> getSettings() {
         return Collections.unmodifiableSet(settings);
     }
 
+    /**
+     * Gets the bookmarks.
+     *
+     * @return the bookmarks
+     */
     @JsonGetter
     public Set<Offer> getBookmarks() {
         return Collections.unmodifiableSet(bookmarks);
     }
 
+    /**
+     * Gets the role.
+     *
+     * @return the role
+     */
     @JsonGetter
     public Role getRole() {
         return role;
     }
 
+    /**
+     * Gets the email address.
+     *
+     * @return the email address
+     */
     @JsonGetter
     public Email getEmail() {
         return email;
     }
 
+    /**
+     * Gets the password
+     *
+     * @return the password
+     */
     @JsonGetter
     public Password getPassword() {
         return password;
     }
 
+    /**
+     * Gets the birthday.
+     *
+     * @return the birthday
+     */
     @JsonGetter
     public LocalDate getBirthDay() {
         return birthDay;
     }
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     @JsonGetter
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the phone number
+     *
+     * @return the phone number
+     */
     @JsonGetter
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    /**
+     * Gets the description.
+     *
+     * @return the description
+     */
     @JsonGetter
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Gets the verified status of an user.
+     *
+     * @return {@code true} if the user is verified, {@code false} otherwise
+     */
     @JsonGetter
     public boolean isVerified() {
         return isVerified;
     }
 
+    /**
+     * Gets the offer predicates.
+     *
+     * @return the offer predicates
+     */
     @JsonGetter
     public Collection<OfferPredicate> getOfferPredicates() {
         return Collections.unmodifiableCollection(offerPredicates);
     }
 
+    /**
+     * Gets the offer comparator.
+     *
+     * @return the offer comparator
+     */
     @JsonGetter
     public OfferComparator getOfferComparator() {
         return offerComparator;
     }
 
+    /**
+     * Gets the location.
+     *
+     * @return the location
+     */
     @JsonGetter
     public Localizable getLocalizable() {
         return localizable;
     }
 
+    /**
+     * Sets the role.
+     *
+     * @param role the role
+     */
     public void setRole(Role role) {
         this.role = Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
     }
 
+    /**
+     * Sets the email address.
+     *
+     * @param email the email address
+     */
     public void setEmail(Email email) {
         this.email = Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
     }
 
+    /**
+     * Sets the password.
+     *
+     * @param password the password
+     */
     public void setPassword(Password password) {
         this.password = Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
     }
 
+    /**
+     * Sets the birthday.
+     *
+     * @param birthDay the birthday
+     */
     public void setBirthDay(LocalDate birthDay) {
         this.birthDay = Objects.requireNonNull(birthDay, ERROR_MESSAGE_NULL_BIRTHDAY);
     }
 
+    /**
+     * Sets the name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
     }
 
+    /**
+     * Sets the phone number.
+     *
+     * @param phoneNumber the phone number
+     */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = Objects.requireNonNull(phoneNumber, ERROR_MESSAGE_NULL_PHONE_NUMBER);
     }
 
+    /**
+     * Sets the description.
+     *
+     * @param description the description
+     */
     public void setDescription(String description) {
         this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
     }
 
+    /**
+     * Sets the verified status of the user.
+     *
+     * @param isVerified the verified status
+     */
     public void setVerified(boolean isVerified) {
         this.isVerified = isVerified;
     }
 
+    /**
+     * Sets the offer comparator.
+     *
+     * @param offerComparator the offer comparator
+     */
     public void setOfferComparator(OfferComparator offerComparator) {
         this.offerComparator = Objects.requireNonNull(offerComparator);
     }
 
+    /**
+     * Sets the location.
+     *
+     * @param localizable the location
+     */
     public void setLocalizable(Localizable localizable) {
         this.localizable = Objects.requireNonNull(localizable);
     }
 
+    /**
+     * Adds a user rating.
+     *
+     * @param rating the user rating
+     */
     public void addRating(Rating rating) {
         ratings.add(Objects.requireNonNull(rating, ERROR_MESSAGE_NULL_RATING));
     }
 
+    /**
+     * Adds a user subscription.
+     *
+     * @param subscription the user subscription
+     */
     public void addSubscription(User subscription) {
         subscriptions.add(Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION));
     }
 
+    /**
+     * Adds a setting.
+     *
+     * @param setting the setting
+     */
     public void addSetting(Setting setting) {
         settings.add(Objects.requireNonNull(setting, ERROR_MESSAGE_NULL_SETTING));
     }
 
+    /**
+     * Adds an offer bookmark.
+     *
+     * @param bookmark the offer bookmark
+     */
     public void addBookmark(Offer bookmark) {
         Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK);
         bookmarks.add(bookmark);
     }
 
+    /**
+     * Adds an offer predicate.
+     *
+     * @param predicate the offer predicate
+     */
     public void addOfferPredicate(OfferPredicate predicate) {
         Objects.requireNonNull(predicate);
         offerPredicates.add(predicate);
     }
 
+    /**
+     * Adds multiple offer predicates.
+     *
+     * @param predicates the offer predicates
+     */
     public void addManyOfferPredicates(Collection<OfferPredicate> predicates) {
         Objects.requireNonNull(predicates);
         offerPredicates.addAll(predicates);
     }
 
+    /**
+     * Removes a rating based on the reviewer.
+     *
+     * @param reviewer the reviewer
+     */
     public void removeRatingsByReviewer(User reviewer) {
         Objects.requireNonNull(reviewer, ERROR_MESSAGE_NULL_REVIEWER);
         ratings.removeIf(x -> x.getReviewer().equals(reviewer));
     }
 
+    /**
+     * Removes a user subscription.
+     *
+     * @param subscription the user subscription
+     */
     public void removeSubscriptions(User subscription) {
         subscriptions.remove(Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION));
     }
 
+    /**
+     * Removes an offer bookmark.
+     *
+     * @param bookmark the offer bookmark
+     */
     public void removeBookmark(Offer bookmark) {
         bookmarks.remove(Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK));
     }
 
+    /**
+     * Removes an offer predicate.
+     *
+     * @param predicate the offer predicate
+     */
     public void removeOfferPredicate(OfferPredicate predicate) {
         offerPredicates.remove(Objects.requireNonNull(predicate));
     }
 
+    /**
+     * Removes all offer predicates.
+     */
     public void clearOfferPredicates() {
         offerPredicates.clear();
     }
 
+    /**
+     * Gets the user host rating.
+     *
+     * @return the host rating if the user has at least {@link User#MIN_AMOUNT_RATINGS}, {@link User#DEFAULT_NOT_ENOUGH_RATINGS} otherwise
+     */
     @JsonIgnore
     public double getHostRating() {
         return (countRatings(RatingBasis.HOST) >= MIN_AMOUNT_RATINGS)
@@ -319,6 +538,11 @@ public class User extends ReportableEntity<String> {
                 : DEFAULT_NOT_ENOUGH_RATINGS;
     }
 
+    /**
+     * Gets the user guest rating.
+     *
+     * @return the guest rating if the user has at least {@link User#MIN_AMOUNT_RATINGS}, {@link User#DEFAULT_NOT_ENOUGH_RATINGS} otherwise
+     */
     @JsonIgnore
     public double getGuestRating() {
         return (countRatings(RatingBasis.GUEST) >= MIN_AMOUNT_RATINGS)
@@ -326,6 +550,11 @@ public class User extends ReportableEntity<String> {
                 : DEFAULT_NOT_ENOUGH_RATINGS;
     }
 
+    /**
+     * Calculates the average host rating rounded to first decimal.
+     *
+     * @return the average host rating
+     */
     private double calculateAverageHostRating() {
         RatingBasis basis = RatingBasis.HOST;
         double hostRating = (double) sumRatings(basis) / countRatings(basis);
@@ -333,6 +562,11 @@ public class User extends ReportableEntity<String> {
         return hostRating;
     }
 
+    /**
+     * Calculates the average guest rating rounded to first decimal.
+     *
+     * @return the average guest rating
+     */
     private double calculateAverageGuestRating() {
         RatingBasis basis = RatingBasis.GUEST;
         double guestRating = (double) sumRatings(basis) / countRatings(basis);
@@ -340,6 +574,12 @@ public class User extends ReportableEntity<String> {
         return guestRating;
     }
 
+    /**
+     * Counts the amount of ratings based on {@link RatingBasis}.
+     *
+     * @param basis the rating basis
+     * @return the amount of the specific ratings
+     */
     private int countRatings(RatingBasis basis) {
         return ratings
                 .stream()
@@ -348,6 +588,12 @@ public class User extends ReportableEntity<String> {
                 .size();
     }
 
+    /**
+     * Sums up the integer values of the ratings based on {@link RatingBasis}.
+     *
+     * @param basis the rating basis
+     * @return the sum of the specific ratings
+     */
     private int sumRatings(RatingBasis basis) {
         return ratings
                 .stream()
@@ -356,10 +602,19 @@ public class User extends ReportableEntity<String> {
                 .sum();
     }
 
+    /**
+     * Rounds a rating to its first decimal.
+     *
+     * @param rating the rating value
+     * @return the rating value rounded to first decimal
+     */
     private double roundToFirstDecimal(double rating) {
         return (((double) Math.round(rating * ROUNDING_FACTOR)) / ROUNDING_FACTOR);
     }
 
+    /**
+     * Initializes default settings for the {@link User}.
+     */
     private void initSettings() {
         settings.add(new DisplaySetting());
         settings.add(new NotificationSetting());
