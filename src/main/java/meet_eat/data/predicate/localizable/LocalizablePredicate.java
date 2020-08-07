@@ -28,17 +28,17 @@ public class LocalizablePredicate extends DoubleOperator implements OfferPredica
     /**
      * Constructs a new instance of {@link LocalizablePredicate}.
      *
-     * @param operation   the operation used for testing a certain object
-     * @param distance    the distance used as reference value within the operation
-     * @param localizable the localizable from which the actual distance is going to be calculated from
+     * @param operation      the operation used for testing a certain object
+     * @param referenceValue the distance used as reference value within the operation
+     * @param localizable    the localizable from which the actual distance is going to be calculated from
      * @throws UnlocalizableException if the given localizable is not localizable
      */
     @JsonCreator
     @PersistenceConstructor
     public LocalizablePredicate(@JsonProperty("operation") DoubleOperation operation,
-                                @JsonProperty("referenceValue") int distance,
+                                @JsonProperty("referenceValue") int referenceValue,
                                 @JsonProperty("localizable") Localizable localizable) throws UnlocalizableException {
-        super(operation, (double) distance);
+        super(operation, (double) referenceValue);
 
         // "Casting" the localizable to a spherical location decreases the number of needed geocoding operations.
         SphericalPosition sphericalPosition = Objects.requireNonNull(localizable).getSphericalPosition();

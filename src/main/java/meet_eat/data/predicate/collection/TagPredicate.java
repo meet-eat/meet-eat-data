@@ -18,13 +18,13 @@ public class TagPredicate extends CollectionOperator implements OfferPredicate {
     /**
      * Creates a tag predicate.
      *
-     * @param operation the operation
-     * @param tags      the tags
+     * @param operation      the operation
+     * @param referenceValue the tags
      */
     @JsonCreator
     public TagPredicate(@JsonProperty("operation") CollectionOperation operation,
-                        @JsonProperty("referenceValue") Collection<Tag> tags) {
-        super(operation, tags);
+                        @JsonProperty("referenceValue") Collection<Tag> referenceValue) {
+        super(operation, referenceValue);
     }
 
     @Override
