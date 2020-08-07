@@ -616,32 +616,4 @@ public class User extends ReportableEntity<String> {
         settings.add(new DisplaySetting());
         settings.add(new NotificationSetting());
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        User user = (User) o;
-        return isVerified == user.isVerified &&
-                Objects.equals(ratings, user.ratings) &&
-                Objects.equals(subscriptions, user.subscriptions) &&
-                Objects.equals(settings, user.settings) &&
-                Objects.equals(bookmarks, user.bookmarks) &&
-                role == user.role &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(birthDay, user.birthDay) &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(phoneNumber, user.phoneNumber) &&
-                Objects.equals(description, user.description) &&
-                Objects.equals(offerPredicates, user.offerPredicates) &&
-                Objects.equals(offerComparator, user.offerComparator) &&
-                Objects.equals(localizable, user.localizable);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), ratings, subscriptions, settings, bookmarks, role, email, password, birthDay, name, phoneNumber, description, isVerified, offerPredicates, offerComparator, localizable);
-    }
 }

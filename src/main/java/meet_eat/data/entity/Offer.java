@@ -328,26 +328,4 @@ public class Offer extends ReportableEntity<String> {
     public void removeTag(Tag tag) {
         tags.remove(Objects.requireNonNull(tag, ERROR_MESSAGE_NULL_TAG));
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Offer offer = (Offer) o;
-        return Double.compare(offer.price, price) == 0 &&
-                maxParticipants == offer.maxParticipants &&
-                Objects.equals(creator, offer.creator) &&
-                Objects.equals(participants, offer.participants) &&
-                Objects.equals(tags, offer.tags) &&
-                Objects.equals(name, offer.name) &&
-                Objects.equals(description, offer.description) &&
-                Objects.equals(dateTime, offer.dateTime) &&
-                Objects.equals(location, offer.location);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), creator, participants, tags, name, description, price, maxParticipants, dateTime, location);
-    }
 }
