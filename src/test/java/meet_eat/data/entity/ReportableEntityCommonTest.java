@@ -1,5 +1,6 @@
 package meet_eat.data.entity;
 
+import com.google.common.collect.Lists;
 import meet_eat.data.Report;
 import meet_eat.data.factory.ReportFactory;
 import org.junit.Test;
@@ -104,8 +105,9 @@ public class ReportableEntityCommonTest {
     public void testEquals() {
         // Execution
         Collection<Report> reports = new LinkedList<>();
+        LinkedList<Report> reportsCopy = Lists.newLinkedList(reports);
         ConcreteReportableEntity entity = new ConcreteReportableEntity("Identifier", reports);
-        ConcreteReportableEntity entityCopy = new ConcreteReportableEntity(entity.getIdentifier(), entity.getReports());
+        ConcreteReportableEntity entityCopy = new ConcreteReportableEntity(entity.getIdentifier(), reportsCopy);
 
         // Assertions
         assertTrue(entity.equals(entity));
