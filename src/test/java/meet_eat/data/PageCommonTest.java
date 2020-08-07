@@ -1,8 +1,8 @@
 package meet_eat.data;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class PageCommonTest {
 
@@ -40,4 +40,17 @@ public class PageCommonTest {
         Page page = new Page(index, size);
     }
 
+    @Test
+    public void testEquals() {
+        // Execution
+        Page page = new Page(0, 50);
+        Page pageCopy = new Page(page.getIndex(), page.getSize());
+
+        // Assertions
+        assertTrue(page.equals(page));
+        assertFalse(page.equals(null));
+        assertFalse(page.equals(new Object()));
+        assertTrue(page.equals(pageCopy));
+        assertEquals(page.hashCode(), pageCopy.hashCode());
+    }
 }

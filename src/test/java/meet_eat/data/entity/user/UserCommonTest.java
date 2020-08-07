@@ -1,5 +1,7 @@
 package meet_eat.data.entity.user;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import meet_eat.data.Report;
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
@@ -25,10 +27,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -713,5 +712,28 @@ public class UserCommonTest {
 
         // Assertions
         assertEquals(0, user.getHostRating(), DELTA);
+    }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        User user = new UserFactory().getValidObject();
+        LinkedList<Report> reports = Lists.newLinkedList(user.getReports());
+        LinkedList<Rating> ratings = Lists.newLinkedList(user.getRatings());
+        LinkedList<OfferPredicate> offerPredicates = Lists.newLinkedList(user.getOfferPredicates());
+        HashSet<User> subscriptions = Sets.newHashSet(user.getSubscriptions());
+        HashSet<Setting> settings = Sets.newHashSet(user.getSettings());
+        HashSet<Offer> bookmarks = Sets.newHashSet(user.getBookmarks());
+        User userCopy = new User(user.getIdentifier(), reports, ratings, subscriptions,
+                settings, bookmarks, user.getRole(), user.getEmail(), user.getPassword(),
+                user.getBirthDay() , user.getName(), user.getPhoneNumber(), user.getDescription(), user.isVerified(),
+                offerPredicates, user.getOfferComparator(), user.getLocalizable());
+
+        // Assertions
+        assertTrue(user.equals(user));
+        assertFalse(user.equals(null));
+        assertFalse(user.equals(new Object()));
+        assertTrue(user.equals(userCopy));
+        assertEquals(user.hashCode(), userCopy.hashCode());
     }
 }

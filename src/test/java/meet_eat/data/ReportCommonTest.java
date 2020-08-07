@@ -5,8 +5,7 @@ import meet_eat.data.factory.ReportFactory;
 import meet_eat.data.factory.UserFactory;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class ReportCommonTest {
 
@@ -58,5 +57,19 @@ public class ReportCommonTest {
         // Assertions
         assertNotNull(report);
         assertEquals(processed, report.isProcessed());
+    }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        Report report = new ReportFactory().getValidObject();
+        Report reportCopy = new Report(report.getReporter(), report.getMessage());
+
+        // Assertions
+        assertTrue(report.equals(report));
+        assertFalse(report.equals(null));
+        assertFalse(report.equals(new Object()));
+        assertTrue(report.equals(reportCopy));
+        assertEquals(report.hashCode(), reportCopy.hashCode());
     }
 }

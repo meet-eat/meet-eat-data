@@ -4,8 +4,7 @@ import meet_eat.data.entity.user.User;
 import meet_eat.data.factory.UserFactory;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class ContactRequestCommonTest {
 
@@ -43,5 +42,20 @@ public class ContactRequestCommonTest {
 
         // Execution
         ContactRequest contactRequest = new ContactRequest(requester, null);
+    }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        UserFactory userFactory = new UserFactory();
+        ContactRequest contactRequest = new ContactRequest(userFactory.getValidObject(), userFactory.getValidObject());
+        ContactRequest contactRequestCopy = new ContactRequest(contactRequest.getRequester(), contactRequest.getRequestedUser());
+
+        // Assertions
+        assertTrue(contactRequest.equals(contactRequest));
+        assertFalse(contactRequest.equals(null));
+        assertFalse(contactRequest.equals(new Object()));
+        assertTrue(contactRequest.equals(contactRequestCopy));
+        assertEquals(contactRequest.hashCode(), contactRequestCopy.hashCode());
     }
 }

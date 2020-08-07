@@ -2,10 +2,12 @@ package meet_eat.data;
 
 import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
+import meet_eat.data.factory.EmailFactory;
+import meet_eat.data.factory.PasswordFactory;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class LoginCredentialCommonTest {
 
@@ -43,5 +45,19 @@ public class LoginCredentialCommonTest {
 
         // Execution
         LoginCredential loginCredential = new LoginCredential(email, null);
+    }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        LoginCredential loginCredential = new LoginCredential(new EmailFactory().getValidObject(), new PasswordFactory().getValidObject());
+        LoginCredential loginCredentialCopy = new LoginCredential(loginCredential.getEmail(), loginCredential.getPassword());
+
+        // Assertions
+        assertTrue(loginCredential.equals(loginCredential));
+        assertFalse(loginCredential.equals(null));
+        assertFalse(loginCredential.equals(new Object()));
+        assertTrue(loginCredential.equals(loginCredentialCopy));
+        assertEquals(loginCredential.hashCode(), loginCredentialCopy.hashCode());
     }
 }

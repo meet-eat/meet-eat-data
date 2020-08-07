@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class OfferComparatorCommonTest {
 
@@ -415,5 +414,19 @@ public class OfferComparatorCommonTest {
         assertEquals(offerFour, list.get(2));
         assertEquals(offerThree, list.get(3));
         assertEquals(offerFive, list.get(4));
+    }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        OfferComparator comparator = new OfferComparator(OfferComparableField.DISTANCE, new CityLocation("Karlsruhe"));
+        OfferComparator comparatorCopy = new OfferComparator(comparator.getField(), comparator.getLocation());
+
+        // Assertions
+        assertTrue(comparator.equals(comparator));
+        assertFalse(comparator.equals(null));
+        assertFalse(comparator.equals(new Object()));
+        assertTrue(comparator.equals(comparatorCopy));
+        assertEquals(comparator.hashCode(), comparatorCopy.hashCode());
     }
 }

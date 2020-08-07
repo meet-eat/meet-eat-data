@@ -1,6 +1,8 @@
 package meet_eat.data.entity.user;
 
 import static org.junit.Assert.*;
+
+import meet_eat.data.factory.PasswordFactory;
 import org.junit.Test;
 
 public class PasswordCommonTest {
@@ -98,5 +100,19 @@ public class PasswordCommonTest {
 
         // Execution
         password.matches(wrongPassword);
+    }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        Password password = new PasswordFactory().getValidObject();
+        Password passwordCopy = new Password(password.getHash(), password.getSalt(), password.getIterations());
+
+        // Assertions
+        assertTrue(password.equals(password));
+        assertFalse(password.equals(null));
+        assertFalse(password.equals(new Object()));
+        assertTrue(password.equals(passwordCopy));
+        assertEquals(password.hashCode(), passwordCopy.hashCode());
     }
 }

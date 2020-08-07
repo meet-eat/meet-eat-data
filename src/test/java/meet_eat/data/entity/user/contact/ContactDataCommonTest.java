@@ -163,4 +163,22 @@ public class ContactDataCommonTest {
         ContactData contactData = new ContactData(contactRequest, contacts);
         contactData.putContact(ContactType.EMAIL, null);
     }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        UserFactory userFactory = new UserFactory();
+        User requester = userFactory.getValidObject();
+        User requestedUser = userFactory.getValidObject();
+        Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+        ContactData contactData = new ContactData(new ContactRequest(requester, requestedUser), contacts);
+        ContactData contactDataCopy = new ContactData(contactData.getRequest(), contactData.getContacts());
+
+        // Assertions
+        assertTrue(contactData.equals(contactData));
+        assertFalse(contactData.equals(null));
+        assertFalse(contactData.equals(new Object()));
+        assertTrue(contactData.equals(contactDataCopy));
+        assertEquals(contactData.hashCode(), contactDataCopy.hashCode());
+    }
 }

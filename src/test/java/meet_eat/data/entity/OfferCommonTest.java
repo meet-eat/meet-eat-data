@@ -1,5 +1,7 @@
 package meet_eat.data.entity;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import meet_eat.data.Report;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.factory.OfferFactory;
@@ -523,5 +525,24 @@ public class OfferCommonTest {
         assertNotNull(offerCopy);
         assertEquals(offer, offer);
         assertEquals(offer, offerCopy);
+    }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        Offer offer = new OfferFactory().getValidObject();
+        LinkedList<Report> reports = Lists.newLinkedList(offer.getReports());
+        HashSet<User> participants = Sets.newHashSet(offer.getParticipants());
+        HashSet<Tag> tags = Sets.newHashSet(offer.getTags());
+        Offer offerCopy = new Offer(offer.getIdentifier(), reports, offer.getCreator(), participants, tags,
+                offer.getName(), offer.getDescription(), offer.getPrice(), offer.getMaxParticipants(),
+                offer.getDateTime(), offer.getLocation());
+
+        // Assertions
+        assertTrue(offer.equals(offer));
+        assertFalse(offer.equals(null));
+        assertFalse(offer.equals(new Object()));
+        assertTrue(offer.equals(offerCopy));
+        assertEquals(offer.hashCode(), offerCopy.hashCode());
     }
 }
