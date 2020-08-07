@@ -711,7 +711,7 @@ public class UserCommonTest {
         user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_2, userFactory.getValidObject()));
 
         // Assertions
-        assertEquals(0, user.getHostRating(), DELTA);
+        assertEquals(0, user.getGuestRating(), DELTA);
     }
 
     @Test
