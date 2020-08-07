@@ -62,11 +62,4 @@ public class EmailLegalityTest {
             assertThrows(IllegalArgumentException.class, () -> new Email(emailAddress));
         }
     }
-
-    @Test
-    public void testToString() {
-        if (isValid) {
-            assertEquals(emailAddress, new Email(emailAddress).toString());
-        }
-    }
 }
