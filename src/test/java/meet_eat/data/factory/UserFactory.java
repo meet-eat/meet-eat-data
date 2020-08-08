@@ -59,7 +59,7 @@ public class UserFactory extends ObjectFactory<User> {
         offerPredicates.add(new PricePredicate(DoubleOperation.LESS, 20d));
         Localizable localizable = new SphericalLocation(new SphericalPosition(0, 0));
         OfferComparator offerComparator = new OfferComparator(OfferComparableField.TIME, localizable);
-        return new User(identifier, reports, ratings, subscriptions, settings, bookmarks, role, email, password,
+        return new User(identifier, reports, ratings, settings, bookmarks, role, email, password,
                 birthDay, name, phoneNumber, description, DEFAULT_VERIFIED, offerPredicates, offerComparator, localizable);
     }
 

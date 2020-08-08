@@ -60,9 +60,6 @@ public class User extends ReportableEntity<String> {
 
     @JsonProperty
     private final Collection<Rating> ratings;
-    @DBRef
-    @JsonProperty
-    private final Set<User> subscriptions;
     @JsonProperty
     private final Set<Setting> settings;
     @DBRef
@@ -107,7 +104,6 @@ public class User extends ReportableEntity<String> {
                 String description, boolean isVerified, Localizable localizable) {
 
         ratings = new LinkedList<>();
-        subscriptions = new HashSet<>();
         settings = new HashSet<>();
         bookmarks = new HashSet<>();
         offerPredicates = new LinkedList<>();
@@ -152,7 +148,6 @@ public class User extends ReportableEntity<String> {
     public User(@JsonProperty("identifier") String identifier,
                 @JsonProperty("reports") Collection<Report> reports,
                 @JsonProperty("ratings") Collection<Rating> ratings,
-                @JsonProperty("subscriptions") Set<User> subscriptions,
                 @JsonProperty("settings") Set<Setting> settings,
                 @JsonProperty("bookmarks") Set<Offer> bookmarks,
                 @JsonProperty("role") Role role,
@@ -169,7 +164,6 @@ public class User extends ReportableEntity<String> {
 
         super(identifier, reports);
         this.ratings = Objects.requireNonNull(ratings, ERROR_MESSAGE_NULL_RATINGS);
-        this.subscriptions = Objects.requireNonNull(subscriptions, ERROR_MESSAGE_NULL_SUBSCRIPTIONS);
         this.settings = Objects.requireNonNull(settings, ERROR_MESSAGE_NULL_SETTINGS);
         this.bookmarks = Objects.requireNonNull(bookmarks, ERROR_MESSAGE_NULL_BOOKMARKS);
         this.role = Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
@@ -193,16 +187,6 @@ public class User extends ReportableEntity<String> {
     @JsonGetter
     public Collection<Rating> getRatings() {
         return Collections.unmodifiableCollection(ratings);
-    }
-
-    /**
-     * Gets the subscriptions.
-     *
-     * @return the subscriptions
-     */
-    @JsonGetter
-    public Set<User> getSubscriptions() {
-        return Collections.unmodifiableSet(subscriptions);
     }
 
     /**
@@ -435,15 +419,6 @@ public class User extends ReportableEntity<String> {
     }
 
     /**
-     * Adds a user subscription.
-     *
-     * @param subscription the user subscription
-     */
-    public void addSubscription(User subscription) {
-        subscriptions.add(Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION));
-    }
-
-    /**
      * Adds a setting.
      *
      * @param setting the setting
@@ -487,15 +462,6 @@ public class User extends ReportableEntity<String> {
     public void removeRatingsByReviewer(User reviewer) {
         Objects.requireNonNull(reviewer, ERROR_MESSAGE_NULL_REVIEWER);
         ratings.removeIf(x -> x.getReviewer().equals(reviewer));
-    }
-
-    /**
-     * Removes a user subscription.
-     *
-     * @param subscription the user subscription
-     */
-    public void removeSubscription(User subscription) {
-        subscriptions.remove(Objects.requireNonNull(subscription, ERROR_MESSAGE_NULL_SUBSCRIPTION));
     }
 
     /**

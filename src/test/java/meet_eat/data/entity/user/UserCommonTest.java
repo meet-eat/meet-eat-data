@@ -119,7 +119,6 @@ public class UserCommonTest {
         assertNotNull(user);
         assertNotNull(user.getReports());
         assertNotNull(user.getRatings());
-        assertNotNull(user.getSubscriptions());
         assertNotNull(user.getSettings());
         assertNotNull(user.getBookmarks());
         assertNotNull(user.getOfferPredicates());
@@ -180,7 +179,7 @@ public class UserCommonTest {
     @Test
     public void testJsonConstructor() {
         // Execution
-        User user = new User(identifier, reports, ratings, subscriptions, settings, bookmarks, role, email, password,
+        User user = new User(identifier, reports, ratings, settings, bookmarks, role, email, password,
                 birthDay, name, phoneNumber, description, isVerified, offerPredicates, offerComparator, localizable);
 
         // Assertions
@@ -188,7 +187,6 @@ public class UserCommonTest {
         assertEquals(identifier, user.getIdentifier());
         assertTrue(reports.containsAll(user.getReports()));
         assertTrue(ratings.containsAll(user.getRatings()));
-        assertEquals(subscriptions, user.getSubscriptions());
         assertEquals(settings, user.getSettings());
         assertEquals(bookmarks, user.getBookmarks());
         assertTrue(offerPredicates.containsAll(user.getOfferPredicates()));
@@ -419,27 +417,6 @@ public class UserCommonTest {
     }
 
     @Test
-    public void testAddSubscription() {
-        // Test data
-        UserFactory userFactory = new UserFactory();
-        User subscription = userFactory.getValidObject();
-
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.addSubscription(subscription);
-
-        // Assertions
-        assertTrue(user.getSubscriptions().contains(subscription));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testAddNullSubscription() {
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.addSubscription(null);
-    }
-
-    @Test
     public void testAddSetting() {
         // Test data
         Setting notificationSetting = new NotificationSetting();
@@ -551,30 +528,6 @@ public class UserCommonTest {
         // Execution
         User user = new UserFactory().getValidObject();
         user.removeRatingsByReviewer(null);
-    }
-
-    @Test
-    public void testRemoveSubscription() {
-        // Test data
-        User subscription = new UserFactory().getValidObject();
-
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.addSubscription(subscription);
-
-        // Assertions
-        assertTrue(user.getSubscriptions().contains(subscription));
-
-        user.removeSubscription(subscription);
-
-        assertFalse(user.getSubscriptions().contains(subscription));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testRemoveNullSubscription() {
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.removeSubscription(null);
     }
 
     @Test
@@ -721,10 +674,9 @@ public class UserCommonTest {
         LinkedList<Report> reports = Lists.newLinkedList(user.getReports());
         LinkedList<Rating> ratings = Lists.newLinkedList(user.getRatings());
         LinkedList<OfferPredicate> offerPredicates = Lists.newLinkedList(user.getOfferPredicates());
-        HashSet<User> subscriptions = Sets.newHashSet(user.getSubscriptions());
         HashSet<Setting> settings = Sets.newHashSet(user.getSettings());
         HashSet<Offer> bookmarks = Sets.newHashSet(user.getBookmarks());
-        User userCopy = new User(user.getIdentifier(), reports, ratings, subscriptions,
+        User userCopy = new User(user.getIdentifier(), reports, ratings,
                 settings, bookmarks, user.getRole(), user.getEmail(), user.getPassword(),
                 user.getBirthDay() , user.getName(), user.getPhoneNumber(), user.getDescription(), user.isVerified(),
                 offerPredicates, user.getOfferComparator(), user.getLocalizable());
