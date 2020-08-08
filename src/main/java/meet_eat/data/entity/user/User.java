@@ -38,8 +38,6 @@ public class User extends ReportableEntity<String> {
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_RATINGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "ratings");
     private static final String ERROR_MESSAGE_NULL_RATING = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "rating");
-    private static final String ERROR_MESSAGE_NULL_SUBSCRIPTIONS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "subscriptions");
-    private static final String ERROR_MESSAGE_NULL_SUBSCRIPTION = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "subscription");
     private static final String ERROR_MESSAGE_NULL_SETTINGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "settings");
     private static final String ERROR_MESSAGE_NULL_SETTING = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "setting");
     private static final String ERROR_MESSAGE_NULL_BOOKMARKS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "bookmarks");
@@ -128,7 +126,6 @@ public class User extends ReportableEntity<String> {
      * @param identifier      the identifier
      * @param reports         the reports received by other users
      * @param ratings         the ratings received by other users
-     * @param subscriptions   the users subscribed by the user
      * @param settings        the user settings
      * @param bookmarks       the offers bookmarked by the user
      * @param role            the user role
