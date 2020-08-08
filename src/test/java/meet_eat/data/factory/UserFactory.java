@@ -43,7 +43,6 @@ public class UserFactory extends ObjectFactory<User> {
         String identifier = Integer.toString(objectCounter);
         Collection<Report> reports = new LinkedList<>();
         Collection<Rating> ratings = new LinkedList<>();
-        Set<User> subscriptions = new HashSet<>();
         Set<Setting> settings = new HashSet<>();
         settings.add(new NotificationSetting(DEFAULT_NOTIFICATION, objectCounter));
         settings.add(new DisplaySetting(getRandomEnumValue(ColorMode.class)));
