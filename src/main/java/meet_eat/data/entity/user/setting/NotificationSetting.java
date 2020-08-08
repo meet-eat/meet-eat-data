@@ -13,6 +13,7 @@ import java.util.Objects;
 public class NotificationSetting implements Setting {
 
     private static final String ERROR_MESSAGE_NOT_IMPLEMENTED = "This function is not implemented yet.";
+    private static final String ERROR_MESSAGE_NEGATIVE_MINUTES = "Negative values are not allowed.";
     private static final boolean NOTIFICATION_DEFAULT = true;
     private static final int MINUTES_UNTIL_OFFER_DEFAULT = 60;
 
@@ -39,6 +40,9 @@ public class NotificationSetting implements Setting {
     @JsonCreator
     public NotificationSetting(@JsonProperty("enabled") boolean enabled, @JsonProperty("minutesUntilOffer") int minutesUntilOffer) {
         this.enabled = enabled;
+        if (minutesUntilOffer < 0) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_NEGATIVE_MINUTES);
+        }
         this.minutesUntilOffer = minutesUntilOffer;
     }
 
@@ -77,6 +81,9 @@ public class NotificationSetting implements Setting {
      * @param minutesUntilOffer the number of minutes
      */
     public void setMinutesUntilOffer(int minutesUntilOffer) {
+        if (minutesUntilOffer < 0) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_NEGATIVE_MINUTES);
+        }
         this.minutesUntilOffer = minutesUntilOffer;
     }
 
