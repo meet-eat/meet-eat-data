@@ -34,6 +34,16 @@ public final class EndpointPath {
      */
     public static final String USERS = "/users";
 
+    /**
+     * The URI endpoint path for: {@link meet_eat.data.entity.Subscription Subscriptions}
+     */
+    public static final String SUBSCRIPTIONS = "/subscriptions";
+
+    /**
+     * The URI endpoint path for: {@link User Participants}
+     */
+    public static final String PARTICIPANTS = "/participants";
+
     private EndpointPath() {
     }
 }
