@@ -638,10 +638,9 @@ public class UserCommonTest {
                 offerPredicates, user.getOfferComparator(), user.getLocalizable());
 
         // Assertions
-        assertTrue(user.equals(user));
-        assertFalse(user.equals(null));
-        assertFalse(user.equals(new Object()));
-        assertTrue(user.equals(userCopy));
+        assertNotEquals(null, user);
+        assertNotEquals(new Object(), user);
+        assertEquals(user, userCopy);
         assertEquals(user.hashCode(), userCopy.hashCode());
     }
 }
