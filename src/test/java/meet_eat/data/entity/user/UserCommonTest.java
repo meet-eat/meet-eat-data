@@ -120,7 +120,6 @@ public class UserCommonTest {
         assertNotNull(user.getReports());
         assertNotNull(user.getRatings());
         assertNotNull(user.getSettings());
-        assertNotNull(user.getBookmarks());
         assertNotNull(user.getOfferPredicates());
         assertNotNull(user.getOfferComparator());
         assertEquals(Role.USER, user.getRole());
@@ -179,7 +178,7 @@ public class UserCommonTest {
     @Test
     public void testJsonConstructor() {
         // Execution
-        User user = new User(identifier, reports, ratings, settings, bookmarks, role, email, password,
+        User user = new User(identifier, reports, ratings, settings, role, email, password,
                 birthDay, name, phoneNumber, description, isVerified, offerPredicates, offerComparator, localizable);
 
         // Assertions
@@ -188,7 +187,6 @@ public class UserCommonTest {
         assertTrue(reports.containsAll(user.getReports()));
         assertTrue(ratings.containsAll(user.getRatings()));
         assertEquals(settings, user.getSettings());
-        assertEquals(bookmarks, user.getBookmarks());
         assertTrue(offerPredicates.containsAll(user.getOfferPredicates()));
         assertEquals(offerComparator, user.getOfferComparator());
         assertEquals(Role.USER, user.getRole());
@@ -437,23 +435,6 @@ public class UserCommonTest {
     }
 
     @Test
-    public void testAddBookmark() {
-        // Test data
-        Offer offer = new OfferFactory().getValidObject();
-
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.addBookmark(offer);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testAddNullBookmark() {
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.addBookmark(null);
-    }
-
-    @Test
     public void testAddOfferPredicate() {
         // Test data
         OfferPredicate offerPredicate = new NamePredicate(StringOperation.EQUAL, "test");
@@ -528,30 +509,6 @@ public class UserCommonTest {
         // Execution
         User user = new UserFactory().getValidObject();
         user.removeRatingsByReviewer(null);
-    }
-
-    @Test
-    public void testRemoveBookmark() {
-        // Test data
-        Offer bookmark = new OfferFactory().getValidObject();
-
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.addBookmark(bookmark);
-
-        // Assertions
-        assertTrue(user.getBookmarks().contains(bookmark));
-
-        user.removeBookmark(bookmark);
-
-        assertFalse(user.getBookmarks().contains(bookmark));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testRemoveNullBookmark() {
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.removeBookmark(null);
     }
 
     @Test
@@ -675,9 +632,8 @@ public class UserCommonTest {
         LinkedList<Rating> ratings = Lists.newLinkedList(user.getRatings());
         LinkedList<OfferPredicate> offerPredicates = Lists.newLinkedList(user.getOfferPredicates());
         HashSet<Setting> settings = Sets.newHashSet(user.getSettings());
-        HashSet<Offer> bookmarks = Sets.newHashSet(user.getBookmarks());
         User userCopy = new User(user.getIdentifier(), reports, ratings,
-                settings, bookmarks, user.getRole(), user.getEmail(), user.getPassword(),
+                settings, user.getRole(), user.getEmail(), user.getPassword(),
                 user.getBirthDay() , user.getName(), user.getPhoneNumber(), user.getDescription(), user.isVerified(),
                 offerPredicates, user.getOfferComparator(), user.getLocalizable());
 

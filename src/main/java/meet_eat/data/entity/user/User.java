@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.Report;
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
-import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.ReportableEntity;
 import meet_eat.data.entity.user.rating.Rating;
 import meet_eat.data.entity.user.rating.RatingBasis;
@@ -26,7 +25,6 @@ import meet_eat.data.entity.user.setting.Setting;
 import meet_eat.data.location.Localizable;
 import meet_eat.data.predicate.OfferPredicate;
 import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 
 /**
  * Represents a {@link ReportableEntity}.
@@ -40,8 +38,6 @@ public class User extends ReportableEntity<String> {
     private static final String ERROR_MESSAGE_NULL_RATING = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "rating");
     private static final String ERROR_MESSAGE_NULL_SETTINGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "settings");
     private static final String ERROR_MESSAGE_NULL_SETTING = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "setting");
-    private static final String ERROR_MESSAGE_NULL_BOOKMARKS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "bookmarks");
-    private static final String ERROR_MESSAGE_NULL_BOOKMARK = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "bookmark");
     private static final String ERROR_MESSAGE_NULL_REVIEWER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reviewer");
     private static final String ERROR_MESSAGE_NULL_ROLE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "role");
     private static final String ERROR_MESSAGE_NULL_EMAIL = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "email");
@@ -60,9 +56,6 @@ public class User extends ReportableEntity<String> {
     private final Collection<Rating> ratings;
     @JsonProperty
     private final Set<Setting> settings;
-    @DBRef
-    @JsonProperty
-    private final Set<Offer> bookmarks;
     @JsonProperty
     private Role role;
     @JsonProperty
@@ -103,7 +96,6 @@ public class User extends ReportableEntity<String> {
 
         ratings = new LinkedList<>();
         settings = new HashSet<>();
-        bookmarks = new HashSet<>();
         offerPredicates = new LinkedList<>();
         role = DEFAULT_ROLE;
         offerComparator = new OfferComparator(OfferComparableField.TIME, localizable);
@@ -127,7 +119,6 @@ public class User extends ReportableEntity<String> {
      * @param reports         the reports received by other users
      * @param ratings         the ratings received by other users
      * @param settings        the user settings
-     * @param bookmarks       the offers bookmarked by the user
      * @param role            the user role
      * @param email           the email address
      * @param password        the password
@@ -146,7 +137,6 @@ public class User extends ReportableEntity<String> {
                 @JsonProperty("reports") Collection<Report> reports,
                 @JsonProperty("ratings") Collection<Rating> ratings,
                 @JsonProperty("settings") Set<Setting> settings,
-                @JsonProperty("bookmarks") Set<Offer> bookmarks,
                 @JsonProperty("role") Role role,
                 @JsonProperty("email") Email email,
                 @JsonProperty("password") Password password,
@@ -162,7 +152,6 @@ public class User extends ReportableEntity<String> {
         super(identifier, reports);
         this.ratings = Objects.requireNonNull(ratings, ERROR_MESSAGE_NULL_RATINGS);
         this.settings = Objects.requireNonNull(settings, ERROR_MESSAGE_NULL_SETTINGS);
-        this.bookmarks = Objects.requireNonNull(bookmarks, ERROR_MESSAGE_NULL_BOOKMARKS);
         this.role = Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
         this.email = Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
         this.password = Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
@@ -194,16 +183,6 @@ public class User extends ReportableEntity<String> {
     @JsonGetter
     public Set<Setting> getSettings() {
         return Collections.unmodifiableSet(settings);
-    }
-
-    /**
-     * Gets the bookmarks.
-     *
-     * @return the bookmarks
-     */
-    @JsonGetter
-    public Set<Offer> getBookmarks() {
-        return Collections.unmodifiableSet(bookmarks);
     }
 
     /**
@@ -425,15 +404,6 @@ public class User extends ReportableEntity<String> {
     }
 
     /**
-     * Adds an offer bookmark.
-     *
-     * @param bookmark the offer bookmark
-     */
-    public void addBookmark(Offer bookmark) {
-        bookmarks.add(Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK));
-    }
-
-    /**
      * Adds an offer predicate.
      *
      * @param predicate the offer predicate
@@ -459,15 +429,6 @@ public class User extends ReportableEntity<String> {
     public void removeRatingsByReviewer(User reviewer) {
         Objects.requireNonNull(reviewer, ERROR_MESSAGE_NULL_REVIEWER);
         ratings.removeIf(x -> x.getReviewer().equals(reviewer));
-    }
-
-    /**
-     * Removes an offer bookmark.
-     *
-     * @param bookmark the offer bookmark
-     */
-    public void removeBookmark(Offer bookmark) {
-        bookmarks.remove(Objects.requireNonNull(bookmark, ERROR_MESSAGE_NULL_BOOKMARK));
     }
 
     /**
