@@ -136,43 +136,43 @@ public class UserCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorNullEmail() {
         // Execution
-        User user = new User(null, password, birthDay, name, phoneNumber, description, isVerified, localizable);
+        new User(null, password, birthDay, name, phoneNumber, description, isVerified, localizable);
     }
 
     @Test(expected = NullPointerException.class)
     public void testConstructorNullPassword() {
         // Execution
-        User user = new User(email, null, birthDay, name, phoneNumber, description, isVerified, localizable);
+        new User(email, null, birthDay, name, phoneNumber, description, isVerified, localizable);
     }
 
     @Test(expected = NullPointerException.class)
     public void testConstructorNullBirthDay() {
         // Execution
-        User user = new User(email, password, null, name, phoneNumber, description, isVerified, localizable);
+        new User(email, password, null, name, phoneNumber, description, isVerified, localizable);
     }
 
     @Test(expected = NullPointerException.class)
     public void testConstructorNullName() {
         // Execution
-        User user = new User(email, password, birthDay, null, phoneNumber, description, isVerified, localizable);
+        new User(email, password, birthDay, null, phoneNumber, description, isVerified, localizable);
     }
 
     @Test(expected = NullPointerException.class)
     public void testConstructorNullPhoneNumber() {
         // Execution
-        User user = new User(email, password, birthDay, name, null, description, isVerified, localizable);
+        new User(email, password, birthDay, name, null, description, isVerified, localizable);
     }
 
     @Test(expected = NullPointerException.class)
     public void testConstructorNullDescription() {
         // Execution
-        User user = new User(email, password, birthDay, name, phoneNumber, null, isVerified, localizable);
+        new User(email, password, birthDay, name, phoneNumber, null, isVerified, localizable);
     }
 
     @Test(expected = NullPointerException.class)
     public void testConstructorNullLocalizable() {
         // Execution
-        User user = new User(email, password, birthDay, name, phoneNumber, description, isVerified, null);
+        new User(email, password, birthDay, name, phoneNumber, description, isVerified, null);
     }
 
     @Test
@@ -397,7 +397,6 @@ public class UserCommonTest {
     public void testAddRating() {
         // Test data
         Rating rating = new RatingFactory().getValidObject();
-        User reviewer = rating.getReviewer();
 
         // Execution
         User user = new UserFactory().getValidObject();
