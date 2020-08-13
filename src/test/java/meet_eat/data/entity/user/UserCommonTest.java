@@ -499,7 +499,7 @@ public class UserCommonTest {
 
         user.removeRatingsByReviewer(reviewer);
 
-        assertTrue(!user.getRatings().isEmpty());
+        assertFalse(user.getRatings().isEmpty());
         assertFalse(user.getRatings().contains(ratingOne));
         assertFalse(user.getRatings().contains(ratingTwo));
     }
