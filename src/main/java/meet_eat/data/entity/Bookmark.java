@@ -1,6 +1,7 @@
 package meet_eat.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.entity.user.User;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -56,6 +57,7 @@ public class Bookmark extends Entity<String> {
      *
      * @return the user
      */
+    @JsonGetter
     public User getUser() {
         return user;
     }
@@ -65,6 +67,7 @@ public class Bookmark extends Entity<String> {
      *
      * @return the offer
      */
+    @JsonGetter
     public Offer getOffer() {
         return offer;
     }
