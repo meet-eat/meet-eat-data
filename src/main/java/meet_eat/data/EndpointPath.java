@@ -1,6 +1,8 @@
 package meet_eat.data;
 
+import meet_eat.data.entity.Bookmark;
 import meet_eat.data.entity.Offer;
+import meet_eat.data.entity.Subscription;
 import meet_eat.data.entity.Tag;
 import meet_eat.data.entity.user.User;
 
@@ -35,9 +37,14 @@ public final class EndpointPath {
     public static final String USERS = "/users";
 
     /**
-     * The URI endpoint path for: {@link meet_eat.data.entity.Subscription Subscriptions}
+     * The URI endpoint path for: {@link Subscription Subscriptions}
      */
     public static final String SUBSCRIPTIONS = "/subscriptions";
+
+    /**
+     * The URI endpoint path for: {@link Bookmark Bookmarks}
+     */
+    public static final String BOOKMARKS = "/bookmarks";
 
     /**
      * The URI endpoint path for: {@link User Participants}
