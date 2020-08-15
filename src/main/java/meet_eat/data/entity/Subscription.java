@@ -9,6 +9,9 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.Objects;
 
+/**
+ * Represents a relation between a {@link User subscriber} and a {@link User subscribed user}.
+ */
 public class Subscription extends Entity<String> {
 
     private static final long serialVersionUID = 862640034570532907L;
@@ -20,11 +23,24 @@ public class Subscription extends Entity<String> {
     @JsonProperty
     private final User targetUser;
 
+    /**
+     * Constructs a new instance of {@link Subscription}.
+     *
+     * @param sourceUser the {@link User subscriber}
+     * @param targetUser the {@link User subscribed user}
+     */
     public Subscription(User sourceUser, User targetUser) {
         this.sourceUser = Objects.requireNonNull(sourceUser);
         this.targetUser = Objects.requireNonNull(targetUser);
     }
 
+    /**
+     * Constructs a new instance of {@link Subscription}.
+     *
+     * @param identifier the identifier of the {@link Subscription} relation
+     * @param sourceUser the {@link User subscriber}
+     * @param targetUser the {@link User subscribed user}
+     */
     @JsonCreator
     @PersistenceConstructor
     protected Subscription(@JsonProperty("identifier") String identifier,
@@ -35,11 +51,21 @@ public class Subscription extends Entity<String> {
         this.targetUser = targetUser;
     }
 
+    /**
+     * Gets the {@link User subsriber} of this {@link Subscription} instance.
+     *
+     * @return the subscriber
+     */
     @JsonGetter
     public User getSourceUser() {
         return sourceUser;
     }
 
+    /**
+     * Gets the {@link User subscribed user} of this {@link Subscription} instance.
+     *
+     * @return the subscribed user
+     */
     @JsonGetter
     public User getTargetUser() {
         return targetUser;
