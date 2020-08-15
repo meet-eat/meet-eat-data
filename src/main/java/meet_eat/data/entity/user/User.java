@@ -1,16 +1,9 @@
 package meet_eat.data.entity.user;
 
-import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.ClassToInstanceMap;
-import com.google.common.collect.MutableClassToInstanceMap;
-import com.sun.nio.sctp.Notification;
 import meet_eat.data.Report;
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
@@ -23,6 +16,10 @@ import meet_eat.data.entity.user.setting.Setting;
 import meet_eat.data.location.Localizable;
 import meet_eat.data.predicate.OfferPredicate;
 import org.springframework.data.annotation.PersistenceConstructor;
+
+import java.time.LocalDate;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Represents a {@link ReportableEntity}.

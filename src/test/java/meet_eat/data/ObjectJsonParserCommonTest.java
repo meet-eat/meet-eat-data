@@ -1,10 +1,7 @@
 package meet_eat.data;
 
-import static org.junit.Assert.*;
-
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.SimpleType;
 import com.google.common.collect.Maps;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.Tag;
@@ -23,17 +20,15 @@ import meet_eat.data.entity.user.setting.ColorMode;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
-import meet_eat.data.location.CityLocation;
-import meet_eat.data.location.Localizable;
-import meet_eat.data.location.PostcodeLocation;
-import meet_eat.data.location.SphericalLocation;
-import meet_eat.data.location.SphericalPosition;
+import meet_eat.data.location.*;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.*;
+
+import static org.junit.Assert.*;
 
 public class ObjectJsonParserCommonTest {
 
