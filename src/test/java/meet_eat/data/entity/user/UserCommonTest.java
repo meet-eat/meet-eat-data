@@ -1,6 +1,7 @@
 package meet_eat.data.entity.user;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import meet_eat.data.Report;
 import meet_eat.data.comparator.OfferComparableField;
@@ -39,7 +40,7 @@ public class UserCommonTest {
     private Collection<Report> reports;
     private Collection<Rating> ratings;
     private Set<User> subscriptions;
-    private Set<Setting> settings;
+    private Map<Class<? extends Setting>, Setting> settings;
     private Set<Offer> bookmarks;
     private Role role;
     private Email email;
@@ -68,9 +69,9 @@ public class UserCommonTest {
         subscriptions = new HashSet<>();
         subscriptions.add(userFactory.getValidObject());
         subscriptions.add(userFactory.getValidObject());
-        settings = new HashSet<>();
-        settings.add(new NotificationSetting(false, 60));
-        settings.add(new DisplaySetting(ColorMode.DARK));
+        settings = new HashMap<>();
+        settings.put(NotificationSetting.class, new NotificationSetting(false, 60));
+        settings.put(DisplaySetting.class, new DisplaySetting(ColorMode.DARK));
         OfferFactory offerFactory = new OfferFactory();
         bookmarks = new HashSet<>();
         bookmarks.add(offerFactory.getValidObject());
@@ -423,7 +424,26 @@ public class UserCommonTest {
         user.addSetting(notificationSetting);
 
         // Assertions
-        assertTrue(user.getSettings().contains(notificationSetting));
+        assertTrue(user.getSettings().containsKey(NotificationSetting.class));
+        assertEquals(notificationSetting, user.getSettings().get(NotificationSetting.class));
+    }
+
+    @Test
+    public void testAddSettingOverwrite() {
+        // Test data
+        Setting notificationSettingToBeOverwritten = new NotificationSetting(true, 30);
+        Setting notificationSetting = new NotificationSetting();
+
+        // Execution
+        User user = new UserFactory().getValidObject();
+        user.addSetting(notificationSettingToBeOverwritten);
+
+        // Assertions
+        assertEquals(notificationSettingToBeOverwritten, user.getSettings().get(NotificationSetting.class));
+
+        // Overwrite
+        user.addSetting(notificationSetting);
+        assertEquals(notificationSetting, user.getSettings().get(NotificationSetting.class));
     }
 
     @Test(expected = NullPointerException.class)
@@ -630,7 +650,7 @@ public class UserCommonTest {
         LinkedList<Report> reports = Lists.newLinkedList(user.getReports());
         LinkedList<Rating> ratings = Lists.newLinkedList(user.getRatings());
         LinkedList<OfferPredicate> offerPredicates = Lists.newLinkedList(user.getOfferPredicates());
-        HashSet<Setting> settings = Sets.newHashSet(user.getSettings());
+        HashMap<Class<? extends Setting>, Setting> settings = Maps.newHashMap(user.getSettings());
         User userCopy = new User(user.getIdentifier(), reports, ratings,
                 settings, user.getRole(), user.getEmail(), user.getPassword(),
                 user.getBirthDay() , user.getName(), user.getPhoneNumber(), user.getDescription(), user.isVerified(),

@@ -43,9 +43,9 @@ public class UserFactory extends ObjectFactory<User> {
         String identifier = Integer.toString(objectCounter);
         Collection<Report> reports = new LinkedList<>();
         Collection<Rating> ratings = new LinkedList<>();
-        Set<Setting> settings = new HashSet<>();
-        settings.add(new NotificationSetting(DEFAULT_NOTIFICATION, objectCounter));
-        settings.add(new DisplaySetting(getRandomEnumValue(ColorMode.class)));
+        Map<Class<? extends Setting>, Setting> settings = new HashMap<>();
+        settings.put(NotificationSetting.class, new NotificationSetting(DEFAULT_NOTIFICATION, objectCounter));
+        settings.put(DisplaySetting.class, new DisplaySetting(getRandomEnumValue(ColorMode.class)));
         Role role = DEFAULT_ROLE;
         Email email = emailFactory.getValidObject();
         Password password = passwordFactory.getValidObject();

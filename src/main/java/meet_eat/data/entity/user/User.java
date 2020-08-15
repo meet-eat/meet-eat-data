@@ -1,18 +1,16 @@
 package meet_eat.data.entity.user;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.ClassToInstanceMap;
+import com.google.common.collect.MutableClassToInstanceMap;
+import com.sun.nio.sctp.Notification;
 import meet_eat.data.Report;
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
@@ -38,6 +36,7 @@ public class User extends ReportableEntity<String> {
     private static final String ERROR_MESSAGE_NULL_RATING = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "rating");
     private static final String ERROR_MESSAGE_NULL_SETTINGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "settings");
     private static final String ERROR_MESSAGE_NULL_SETTING = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "setting");
+    private static final String ERROR_MESSAGE_NULL_CLASS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "class");
     private static final String ERROR_MESSAGE_NULL_REVIEWER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reviewer");
     private static final String ERROR_MESSAGE_NULL_ROLE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "role");
     private static final String ERROR_MESSAGE_NULL_EMAIL = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "email");
@@ -55,7 +54,7 @@ public class User extends ReportableEntity<String> {
     @JsonProperty
     private final Collection<Rating> ratings;
     @JsonProperty
-    private final Set<Setting> settings;
+    private final Map<Class<? extends Setting>, Setting> settings;
     @JsonProperty
     private Role role;
     @JsonProperty
@@ -95,7 +94,7 @@ public class User extends ReportableEntity<String> {
                 String description, boolean isVerified, Localizable localizable) {
 
         ratings = new LinkedList<>();
-        settings = new HashSet<>();
+        settings = new HashMap<>();
         offerPredicates = new LinkedList<>();
         role = DEFAULT_ROLE;
         offerComparator = new OfferComparator(OfferComparableField.TIME, localizable);
@@ -109,7 +108,7 @@ public class User extends ReportableEntity<String> {
         this.isVerified = isVerified;
         this.localizable = Objects.requireNonNull(localizable);
 
-        initSettings();
+        initializeSettings();
     }
 
     /**
@@ -136,7 +135,7 @@ public class User extends ReportableEntity<String> {
     public User(@JsonProperty("identifier") String identifier,
                 @JsonProperty("reports") Collection<Report> reports,
                 @JsonProperty("ratings") Collection<Rating> ratings,
-                @JsonProperty("settings") Set<Setting> settings,
+                @JsonProperty("settings") Map<Class<? extends Setting>, Setting> settings,
                 @JsonProperty("role") Role role,
                 @JsonProperty("email") Email email,
                 @JsonProperty("password") Password password,
@@ -181,8 +180,8 @@ public class User extends ReportableEntity<String> {
      * @return the settings
      */
     @JsonGetter
-    public Set<Setting> getSettings() {
-        return Collections.unmodifiableSet(settings);
+    public Map<Class<? extends Setting>, Setting> getSettings() {
+        return Collections.unmodifiableMap(settings);
     }
 
     /**
@@ -395,12 +394,14 @@ public class User extends ReportableEntity<String> {
     }
 
     /**
-     * Adds a setting.
+     * Adds a new setting.
      *
      * @param setting the setting
+     * @param <T> the type of setting
      */
-    public void addSetting(Setting setting) {
-        settings.add(Objects.requireNonNull(setting, ERROR_MESSAGE_NULL_SETTING));
+    public <T extends Setting> void addSetting(T setting) {
+        Objects.requireNonNull(setting, ERROR_MESSAGE_NULL_SETTING);
+        settings.put(setting.getClass(), setting);
     }
 
     /**
@@ -536,8 +537,8 @@ public class User extends ReportableEntity<String> {
     /**
      * Initializes default settings for the {@link User}.
      */
-    private void initSettings() {
-        settings.add(new DisplaySetting());
-        settings.add(new NotificationSetting());
+    private void initializeSettings() {
+        addSetting(new DisplaySetting());
+        addSetting(new NotificationSetting());
     }
 }
