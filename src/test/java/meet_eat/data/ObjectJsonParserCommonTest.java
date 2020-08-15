@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.SimpleType;
+import com.google.common.collect.Maps;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.Tag;
 import meet_eat.data.entity.Token;
@@ -31,10 +33,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 public class ObjectJsonParserCommonTest {
 
@@ -125,6 +124,7 @@ public class ObjectJsonParserCommonTest {
         assertNotNull(jsonString);
         assertNotNull(parsedObject);
         assertEquals(user, parsedObject);
+        assertTrue(Maps.difference(user.getSettings(), parsedObject.getSettings()).areEqual());
     }
 
     @Test
@@ -558,6 +558,34 @@ public class ObjectJsonParserCommonTest {
         assertNotNull(parsedObject);
         assertEquals(PostcodeLocation.class, parsedObject.getClass());
         assertEquals(localizable, parsedObject);
+    }
+
+    @Test
+    public void testParseSettingMap() {
+        // Test data
+        Map<Class<? extends Setting>, Setting> settings = new HashMap<>();
+        Setting notificationSetting = new NotificationSetting();
+        Setting displaySetting = new DisplaySetting();
+        settings.put(NotificationSetting.class, notificationSetting);
+        settings.put(DisplaySetting.class, displaySetting);
+
+        // Execution
+        ObjectJsonParser objectJsonParser = new ObjectJsonParser();
+        String jsonString = objectJsonParser.parseObjectToJsonString(settings);
+        JavaType keyType = objectJsonParser.getObjectMapper().getTypeFactory()
+                .constructParametricType(Class.class, Setting.class);
+        JavaType valueType = objectJsonParser.getObjectMapper().getTypeFactory()
+                .constructType(Setting.class);
+        JavaType type = objectJsonParser.getObjectMapper().getTypeFactory()
+                .constructMapType(HashMap.class, keyType, valueType);
+        Map<Class<? extends Setting>, Setting> parsedObject = objectJsonParser.parseJsonStringToObject(jsonString, type);
+
+        // Assertions
+        assertNotNull(jsonString);
+        assertNotNull(parsedObject);
+        assertEquals(notificationSetting, parsedObject.get(NotificationSetting.class));
+        assertEquals(displaySetting, parsedObject.get(DisplaySetting.class));
+        assertEquals(settings, parsedObject);
     }
 
     @Test
