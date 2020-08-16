@@ -18,7 +18,12 @@ import meet_eat.data.predicate.OfferPredicate;
 import org.springframework.data.annotation.PersistenceConstructor;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -33,7 +38,6 @@ public class User extends ReportableEntity<String> {
     private static final String ERROR_MESSAGE_NULL_RATING = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "rating");
     private static final String ERROR_MESSAGE_NULL_SETTINGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "settings");
     private static final String ERROR_MESSAGE_NULL_SETTING = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "setting");
-    private static final String ERROR_MESSAGE_NULL_CLASS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "class");
     private static final String ERROR_MESSAGE_NULL_REVIEWER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reviewer");
     private static final String ERROR_MESSAGE_NULL_ROLE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "role");
     private static final String ERROR_MESSAGE_NULL_EMAIL = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "email");
@@ -394,7 +398,7 @@ public class User extends ReportableEntity<String> {
      * Adds a new setting.
      *
      * @param setting the setting
-     * @param <T> the type of setting
+     * @param <T>     the type of setting
      */
     public <T extends Setting> void addSetting(T setting) {
         Objects.requireNonNull(setting, ERROR_MESSAGE_NULL_SETTING);

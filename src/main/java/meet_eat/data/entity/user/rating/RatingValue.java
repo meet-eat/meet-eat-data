@@ -1,6 +1,7 @@
 package meet_eat.data.entity.user.rating;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * Represents the amount of a given rating.

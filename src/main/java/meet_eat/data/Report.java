@@ -1,13 +1,13 @@
 package meet_eat.data;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import meet_eat.data.entity.ReportableEntity;
 import meet_eat.data.entity.user.User;
+
+import java.util.Objects;
 
 /**
  * Represents a report of a {@link ReportableEntity} with a given {@link User}.
@@ -32,7 +32,8 @@ public class Report {
      * @param message  the message
      */
     @JsonCreator
-    public Report(@JsonProperty("reporter") User reporter, @JsonProperty("message") String message) {
+    public Report(@JsonProperty("reporter") User reporter,
+                  @JsonProperty("message") String message) {
         this.reporter = Objects.requireNonNull(reporter, ERROR_MESSAGE_NULL_REPORTER);
         this.message = Objects.requireNonNull(message, ERROR_MESSAGE_NULL_MESSAGE);
     }

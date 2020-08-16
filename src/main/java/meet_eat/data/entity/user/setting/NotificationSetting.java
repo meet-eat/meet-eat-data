@@ -38,7 +38,8 @@ public class NotificationSetting implements Setting {
      *                          in which the user has registered to participate
      */
     @JsonCreator
-    public NotificationSetting(@JsonProperty("enabled") boolean enabled, @JsonProperty("minutesUntilOffer") int minutesUntilOffer) {
+    public NotificationSetting(@JsonProperty("enabled") boolean enabled,
+                               @JsonProperty("minutesUntilOffer") int minutesUntilOffer) {
         this.enabled = enabled;
         if (minutesUntilOffer < 0) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NEGATIVE_MINUTES);

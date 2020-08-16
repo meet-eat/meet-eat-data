@@ -31,7 +31,8 @@ public class SphericalPosition {
      * @param longitude the longitude
      */
     @JsonCreator
-    public SphericalPosition(@JsonProperty("lat") double latitude, @JsonProperty("lon") double longitude) {
+    public SphericalPosition(@JsonProperty("lat") double latitude,
+                             @JsonProperty("lon") double longitude) {
         if (latitude < LAT_START || latitude > LAT_END || longitude < LON_START || longitude > LON_END) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ILLEGAL_COORDINATES);
         }

@@ -30,7 +30,8 @@ public class LoginCredential {
      * @param password the password
      */
     @JsonCreator
-    public LoginCredential(@JsonProperty("email") Email email, @JsonProperty("password") Password password) {
+    public LoginCredential(@JsonProperty("email") Email email,
+                           @JsonProperty("password") Password password) {
         this.email = Objects.requireNonNull(email, ERROR_MESSAGE_NULL_EMAIL);
         this.password = Objects.requireNonNull(password, ERROR_MESSAGE_NULL_PASSWORD);
     }

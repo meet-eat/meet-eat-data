@@ -28,7 +28,8 @@ public class ContactRequest {
      * @param requestedUser the requested user
      */
     @JsonCreator
-    public ContactRequest(@JsonProperty("requester") User requester, @JsonProperty("requestedUser") User requestedUser) {
+    public ContactRequest(@JsonProperty("requester") User requester,
+                          @JsonProperty("requestedUser") User requestedUser) {
         this.requester = Objects.requireNonNull(requester, ERROR_MESSAGE_NULL_REQUESTER);
         this.requestedUser = Objects.requireNonNull(requestedUser, ERROR_MESSAGE_NULL_REQUESTED_USER);
     }

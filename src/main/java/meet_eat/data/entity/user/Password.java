@@ -63,7 +63,9 @@ public class Password implements Serializable {
      * @param iterations the amount of iterations
      */
     @JsonCreator
-    protected Password(@JsonProperty("hash") String hash, @JsonProperty("salt") String salt, @JsonProperty("iterations") Integer iterations) {
+    protected Password(@JsonProperty("hash") String hash,
+                       @JsonProperty("salt") String salt,
+                       @JsonProperty("iterations") Integer iterations) {
         this.hash = hash;
         this.salt = salt;
         this.iterations = iterations;

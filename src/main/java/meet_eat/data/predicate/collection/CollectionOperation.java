@@ -11,8 +11,8 @@ public enum CollectionOperation implements BiFunction<Collection<?>, Collection<
 
     /**
      * The contain all operation.
-     * 
-     * @see Collection#containsAll(Collection) 
+     *
+     * @see Collection#containsAll(Collection)
      */
     CONTAIN_ALL {
         @Override
@@ -42,8 +42,8 @@ public enum CollectionOperation implements BiFunction<Collection<?>, Collection<
 
     /**
      * The contain none operation comparing if two {@link Collection}s have no element in common.
-     * 
-     * @see Collections#disjoint(Collection, Collection) 
+     *
+     * @see Collections#disjoint(Collection, Collection)
      */
     CONTAIN_NONE {
         @Override

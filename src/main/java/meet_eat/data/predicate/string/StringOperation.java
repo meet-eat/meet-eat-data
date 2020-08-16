@@ -9,7 +9,7 @@ public enum StringOperation implements BiFunction<String, String, Boolean> {
 
     /**
      * The contain operation.
-     * 
+     *
      * @see String#contains(CharSequence)
      */
     CONTAIN {
@@ -21,8 +21,8 @@ public enum StringOperation implements BiFunction<String, String, Boolean> {
 
     /**
      * Opposite of the contain operation.
-     * 
-     * @see String#contains(CharSequence) 
+     *
+     * @see String#contains(CharSequence)
      */
     NOT_CONTAIN {
         @Override
@@ -33,8 +33,8 @@ public enum StringOperation implements BiFunction<String, String, Boolean> {
 
     /**
      * The equal operation.
-     * 
-     * @see String#equals(Object) 
+     *
+     * @see String#equals(Object)
      */
     EQUAL {
         @Override
@@ -45,8 +45,8 @@ public enum StringOperation implements BiFunction<String, String, Boolean> {
 
     /**
      * The starts with operation.
-     * 
-     * @see String#startsWith(String) 
+     *
+     * @see String#startsWith(String)
      */
     STARTS_WITH {
         @Override
@@ -57,8 +57,8 @@ public enum StringOperation implements BiFunction<String, String, Boolean> {
 
     /**
      * The ends with operation.
-     * 
-     * @see String#endsWith(String) 
+     *
+     * @see String#endsWith(String)
      */
     ENDS_WITH {
         @Override

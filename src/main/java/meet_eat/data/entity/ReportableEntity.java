@@ -1,11 +1,5 @@
 package meet_eat.data.entity;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,6 +7,12 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import meet_eat.data.Report;
 import meet_eat.data.entity.user.User;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Objects;
 
 /**
  * Represents a reportable and identifiable entity.
@@ -48,7 +48,8 @@ public abstract class ReportableEntity<U extends Serializable> extends Entity<U>
      * @param reports    the reports
      */
     @JsonCreator
-    protected ReportableEntity(@JsonProperty("identifier") U identifier, @JsonProperty("reports") Collection<Report> reports) {
+    protected ReportableEntity(@JsonProperty("identifier") U identifier,
+                               @JsonProperty("reports") Collection<Report> reports) {
         super(identifier);
         this.reports = Objects.requireNonNull(reports, ERROR_MESSAGE_NULL_REPORTS);
     }

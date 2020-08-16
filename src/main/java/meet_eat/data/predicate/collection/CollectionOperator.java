@@ -3,7 +3,6 @@ package meet_eat.data.predicate.collection;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.predicate.BooleanOperator;
-import meet_eat.data.predicate.string.StringOperation;
 
 import java.util.Collection;
 

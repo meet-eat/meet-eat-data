@@ -30,7 +30,8 @@ public abstract class BooleanOperator<T extends BiFunction<S, S, Boolean>, S> im
      * @param referenceValue the specific object used as reference value within the operation
      */
     @JsonCreator
-    protected BooleanOperator(@JsonProperty("operation") T operation, @JsonProperty("referenceValue") S referenceValue) {
+    protected BooleanOperator(@JsonProperty("operation") T operation,
+                              @JsonProperty("referenceValue") S referenceValue) {
         this.operation = Objects.requireNonNull(operation);
         this.referenceValue = Objects.requireNonNull(referenceValue);
     }
