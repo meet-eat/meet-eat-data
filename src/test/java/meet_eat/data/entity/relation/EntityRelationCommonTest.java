@@ -10,7 +10,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class EntityRelationCommonTest {
 
-    private class ConcreteSerializable implements Serializable {
+    private static final class ConcreteSerializable implements Serializable {
 
         private static final long serialVersionUID = -9140807055984889146L;
 
@@ -19,20 +19,16 @@ public class EntityRelationCommonTest {
         }
     }
 
-    private class ConcreteEntity extends Entity<ConcreteSerializable> {
+    private static final class ConcreteEntity extends Entity<ConcreteSerializable> {
 
         private static final long serialVersionUID = 3971456058385893862L;
-
-        public ConcreteEntity() {
-            super();
-        }
 
         public ConcreteEntity(ConcreteSerializable identifier) {
             super(identifier);
         }
     }
 
-    private class ConcreteEntityRelation extends EntityRelation<ConcreteEntity, ConcreteEntity, ConcreteSerializable> {
+    private static final class ConcreteEntityRelation extends EntityRelation<ConcreteEntity, ConcreteEntity, ConcreteSerializable> {
 
         private static final long serialVersionUID = -8583181573254223233L;
 
@@ -85,7 +81,7 @@ public class EntityRelationCommonTest {
         ConcreteEntity target = new ConcreteEntity(new ConcreteSerializable());
 
         // Execution
-        ConcreteEntityRelation entityRelation = new ConcreteEntityRelation(null, target);
+        new ConcreteEntityRelation(null, target);
     }
 
     @Test(expected = NullPointerException.class)
@@ -94,7 +90,7 @@ public class EntityRelationCommonTest {
         ConcreteEntity source = new ConcreteEntity(new ConcreteSerializable());
 
         // Execution
-        ConcreteEntityRelation entityRelation = new ConcreteEntityRelation(source, null);
+        new ConcreteEntityRelation(source, null);
     }
 
     @Test
