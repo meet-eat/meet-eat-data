@@ -2,7 +2,6 @@ package meet_eat.data.entity.relation;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import meet_eat.data.ObjectJsonParser;
 import meet_eat.data.entity.Entity;
 
 import java.io.Serializable;
