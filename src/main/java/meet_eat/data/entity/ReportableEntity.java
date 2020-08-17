@@ -24,6 +24,7 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = User.class),
         @JsonSubTypes.Type(value = Offer.class),
 })
+@Deprecated
 public abstract class ReportableEntity<U extends Serializable> extends Entity<U> {
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
