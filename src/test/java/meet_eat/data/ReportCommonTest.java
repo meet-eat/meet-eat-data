@@ -1,5 +1,6 @@
 package meet_eat.data;
 
+import meet_eat.data.entity.relation.Report;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.factory.ReportFactory;
 import meet_eat.data.factory.UserFactory;

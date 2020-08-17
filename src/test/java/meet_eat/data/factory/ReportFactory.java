@@ -1,6 +1,6 @@
 package meet_eat.data.factory;
 
-import meet_eat.data.Report;
+import meet_eat.data.entity.relation.Report;
 import meet_eat.data.entity.user.User;
 
 public class ReportFactory extends ObjectFactory<Report> {

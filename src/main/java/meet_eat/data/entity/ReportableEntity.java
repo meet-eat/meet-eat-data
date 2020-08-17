@@ -3,10 +3,7 @@ package meet_eat.data.entity;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import meet_eat.data.Report;
-import meet_eat.data.entity.user.User;
+import meet_eat.data.entity.relation.Report;
 
 import java.io.Serializable;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package meet_eat.data;
+package meet_eat.data.entity.relation;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;

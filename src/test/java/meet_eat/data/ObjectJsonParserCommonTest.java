@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.Tag;
 import meet_eat.data.entity.Token;
+import meet_eat.data.entity.relation.Report;
 import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
 import meet_eat.data.entity.user.Role;

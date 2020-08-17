@@ -1,7 +1,7 @@
 package meet_eat.data.entity;
 
 import com.google.common.collect.Lists;
-import meet_eat.data.Report;
+import meet_eat.data.entity.relation.Report;
 import meet_eat.data.factory.ReportFactory;
 import org.junit.Test;
 
