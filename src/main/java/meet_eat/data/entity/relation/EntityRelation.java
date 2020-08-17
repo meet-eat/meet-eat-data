@@ -2,6 +2,7 @@ package meet_eat.data.entity.relation;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import meet_eat.data.ObjectJsonParser;
 import meet_eat.data.entity.Entity;
 
 import java.io.Serializable;
@@ -25,9 +26,9 @@ public abstract class EntityRelation<T extends Entity<?>, S extends Entity<?>, U
      * @param source the source {@link Entity}
      * @param target the target {@link Entity}
      */
-    protected EntityRelation(T source, S target) {
-        this.source = source;
-        this.target = target;
+    public EntityRelation(T source, S target) {
+        this.source = Objects.requireNonNull(source);
+        this.target = Objects.requireNonNull(target);
     }
 
     /**
