@@ -64,24 +64,4 @@ public class ParticipationCommonTest {
         assertEquals(participant, participation.getParticipant());
         assertEquals(offer, participation.getOffer());
     }
-
-    @Test(expected = NullPointerException.class)
-    public void testJsonConstructorNullParticipant() {
-        // Test data
-        String identifier = "gj029jsa";
-        Offer offer = new OfferFactory().getValidObject();
-
-        // Execution
-        Participation participation = new Participation(identifier, null, offer);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testJsonConstructorNullOffer() {
-        // Test data
-        String identifier = "gj029jsa";
-        User participant = new UserFactory().getValidObject();
-
-        // Execution
-        Participation participation = new Participation(identifier, participant, null);
-    }
 }

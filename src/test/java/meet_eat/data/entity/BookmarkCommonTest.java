@@ -64,24 +64,4 @@ public class BookmarkCommonTest {
         assertEquals(user, bookmark.getUser());
         assertEquals(offer, bookmark.getOffer());
     }
-
-    @Test(expected = NullPointerException.class)
-    public void testJsonConstructorNullUser() {
-        // Test data
-        String identifier = "9834zncf498";
-        Offer offer = new OfferFactory().getValidObject();
-
-        // Execution
-        Bookmark bookmark = new Bookmark(identifier, null, offer);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testJsonConstructorNullOffer() {
-        // Test data
-        String identifier = "9834zncf498";
-        User user = new UserFactory().getValidObject();
-
-        // Execution
-        Bookmark bookmark = new Bookmark(identifier, user, null);
-    }
 }

@@ -67,26 +67,4 @@ public class SubscriptionCommonTest {
         assertEquals(source, subscription.getSourceUser());
         assertEquals(target, subscription.getTargetUser());
     }
-
-    @Test(expected = NullPointerException.class)
-    public void testJsonConstructorNullSourceUser() {
-        // Test data
-        String identifier = "vns23h0ds";
-        UserFactory userFactory = new UserFactory();
-        User target = userFactory.getValidObject();
-
-        // Execution
-        Subscription subscription = new Subscription(identifier, null, target);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testJsonConstructorNullTargetUser() {
-        // Test data
-        String identifier = "vns23h0ds";
-        UserFactory userFactory = new UserFactory();
-        User source = userFactory.getValidObject();
-
-        // Execution
-        Subscription subscription = new Subscription(identifier, source, null);
-    }
 }
