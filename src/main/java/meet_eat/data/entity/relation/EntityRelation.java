@@ -71,7 +71,7 @@ public abstract class EntityRelation<T extends Entity<?>, S extends Entity<?>, U
     }
 
     /**
-     * Gets the target {@link Entity}
+     * Gets the target {@link Entity}.
      *
      * @return the target entity
      */
