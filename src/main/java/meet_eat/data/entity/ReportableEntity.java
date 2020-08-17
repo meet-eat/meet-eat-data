@@ -19,11 +19,6 @@ import java.util.Objects;
  *
  * @param <U> the type of the identifier
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = User.class),
-        @JsonSubTypes.Type(value = Offer.class),
-})
 @Deprecated
 public abstract class ReportableEntity<U extends Serializable> extends Entity<U> {
 
