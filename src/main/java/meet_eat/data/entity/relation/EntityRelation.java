@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Defines abstract <b>directed</b> associations between {@link Entity} instances.
+ * Defines an abstract <b>directed</b> association between {@link Entity} instances.
  *
  * @param <T> the type of the source {@link Entity}
  * @param <S> the type of the target {@link Entity}
