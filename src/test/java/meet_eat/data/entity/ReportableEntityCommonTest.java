@@ -77,12 +77,9 @@ public class ReportableEntityCommonTest {
     @Test
     public void testAddReport() {
         // Test data
-        Collection<Report> reports = new LinkedList<>();
         ReportFactory reportFactory = new ReportFactory();
         Report report1 = reportFactory.getValidObject();
         Report report2 = reportFactory.getValidObject();
-        reports.add(report1);
-        reports.add(report2);
 
         // Execution
         ConcreteReportableEntity entity = new ConcreteReportableEntity();
@@ -90,8 +87,8 @@ public class ReportableEntityCommonTest {
         entity.addReport(report2);
 
         // Assertions
-        assertFalse(report1.equals(report2));
-        assertTrue(entity.getReports().containsAll(reports));
+        assertTrue(entity.getReports().stream().anyMatch(x -> x.getMessage().equals(report1.getMessage())));
+        assertTrue(entity.getReports().stream().anyMatch(x -> x.getMessage().equals(report2.getMessage())));
     }
 
     @Test(expected = NullPointerException.class)

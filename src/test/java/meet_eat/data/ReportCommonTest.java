@@ -14,35 +14,51 @@ public class ReportCommonTest {
     public void testConstructor() {
         // Test data
         UserFactory userFactory = new UserFactory();
-        User user = userFactory.getValidObject();
+        User reporter = userFactory.getValidObject();
+        User reported = userFactory.getValidObject();
         String message = "MyReportMessage";
 
         // Execution
-        Report report = new Report(user, message);
+        Report report = new Report(reporter, reported, message);
 
         // Assertions
         assertNotNull(report);
-        assertEquals(user, report.getReporter());
+        assertEquals(reporter, report.getSource());
+        assertEquals(reported, report.getTarget());
         assertEquals(message, report.getMessage());
     }
 
     @Test(expected = NullPointerException.class)
-    public void testConstructorWithNullReporterAndMessage() {
+    public void testConstructorWithNullSource() {
         // Test data
+        UserFactory userFactory = new UserFactory();
         String message = "MyReportMessage";
+        User reported = userFactory.getValidObject();
 
         // Execution
-        Report report = new Report(null, message);
+        Report report = new Report(null, reported, message);
     }
 
     @Test(expected = NullPointerException.class)
-    public void testConstructorWithReporterAndNullMessage() {
+    public void testConstructorWithNullTarget() {
         // Test data
         UserFactory userFactory = new UserFactory();
-        User user = userFactory.getValidObject();
+        User reporter = userFactory.getValidObject();
+        String message = "MyReportMessage";
 
         // Execution
-        Report report = new Report(user, null);
+        Report report = new Report(reporter, null, message);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testConstructorWithNullMessage() {
+        // Test data
+        UserFactory userFactory = new UserFactory();
+        User reporter = userFactory.getValidObject();
+        User reported = userFactory.getValidObject();
+
+        // Execution
+        Report report = new Report(reporter, reported, null);
     }
 
     @Test
@@ -58,19 +74,5 @@ public class ReportCommonTest {
         // Assertions
         assertNotNull(report);
         assertEquals(processed, report.isProcessed());
-    }
-
-    @Test
-    public void testEquals() {
-        // Execution
-        Report report = new ReportFactory().getValidObject();
-        Report reportCopy = new Report(report.getReporter(), report.getMessage());
-
-        // Assertions
-        assertTrue(report.equals(report));
-        assertFalse(report.equals(null));
-        assertFalse(report.equals(new Object()));
-        assertTrue(report.equals(reportCopy));
-        assertEquals(report.hashCode(), reportCopy.hashCode());
     }
 }

@@ -12,6 +12,7 @@ import meet_eat.data.location.UnlocalizableException;
 import org.junit.*;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 
 public class FactoryTest {
 
@@ -67,7 +68,9 @@ public class FactoryTest {
         Report report2 = reportFactory.getValidObject();
 
         // Assertions
-        assertFalse(report1.equals(report2));
+        assertNotEquals(report1.getSource(), report2.getSource());
+        assertNotEquals(report1.getTarget(), report2.getTarget());
+        assertNotEquals(report1.getMessage(), report2.getMessage());
     }
 
     @Test

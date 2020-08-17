@@ -166,9 +166,12 @@ public class ObjectJsonParserCommonTest {
     @Test
     public void testParseReport() {
         // Test data
-        User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
+        String identifier = "1234ABCDEFG";
+        User reporter = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
                 LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
-        Report report = new Report(user, "Max does not use power saving mode.");
+        User reported = new User(new Email("noreply2.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
+                LocalDate.now(), "Max Mustermann 2", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
+        Report report = new Report(reporter, reported, "Max does not use power saving mode.");
 
         // Execution
         ObjectJsonParser objectJsonParser = new ObjectJsonParser();

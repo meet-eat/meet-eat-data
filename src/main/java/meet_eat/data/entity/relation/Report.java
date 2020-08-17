@@ -3,55 +3,65 @@ package meet_eat.data.entity.relation;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import meet_eat.data.entity.ReportableEntity;
+import meet_eat.data.entity.Entity;
+import meet_eat.data.entity.Reportable;
 import meet_eat.data.entity.user.User;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import java.util.Objects;
 
 /**
- * Represents a report of a {@link ReportableEntity} with a given {@link User}.
+ * Represents a report of a {@link Reportable} {@link Entity}.
+ * Consists of a {@link User reporter} and an {@link Entity} that should be reported.
  */
-public class Report {
+public class Report extends EntityRelation<User, Entity<?>, String> {
 
-    private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
-    private static final String ERROR_MESSAGE_NULL_REPORTER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reporter");
-    private static final String ERROR_MESSAGE_NULL_MESSAGE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "message");
+    private static final long serialVersionUID = -3131866887183153010L;
 
-    @JsonProperty
-    private final User reporter;
     @JsonProperty
     private final String message;
     @JsonProperty
     private boolean processed;
 
     /**
-     * Creates a report.
+     * Constructs a new instance of {@link Report}.
      *
-     * @param reporter the reporter
-     * @param message  the message
+     * @param source the {@link User reporter} of this report
+     * @param target the {@link Entity} to be reported
+     * @param message the message describing the report's circumstances
+     * @param <T> the type of the target entity
+     */
+    public <T extends Entity<?> & Reportable> Report(User source, T target, String message) {
+        super(source, target);
+        this.message = Objects.requireNonNull(message);
+    }
+
+    /**
+     * Constructs a new instance of {@link Report}.
+     *
+     * @param identifier the identifier of this report
+     * @param source the {@link User reporter} of this report
+     * @param target the {@link Entity} to be reported
+     * @param message the message describing the report's circumstances
+     * @param processed the processing state of this report
+     * @param <T> the type of the target entity
      */
     @JsonCreator
-    public Report(@JsonProperty("reporter") User reporter,
-                  @JsonProperty("message") String message) {
-        this.reporter = Objects.requireNonNull(reporter, ERROR_MESSAGE_NULL_REPORTER);
-        this.message = Objects.requireNonNull(message, ERROR_MESSAGE_NULL_MESSAGE);
+    @PersistenceConstructor
+    protected <T extends Entity<?> & Reportable> Report(@JsonProperty("identifier") String identifier,
+                                                        @JsonProperty("source") User source,
+                                                        @JsonProperty("target") T target,
+                                                        @JsonProperty("message") String message,
+                                                        @JsonProperty("processed") boolean processed) {
+        super(identifier, source, target);
+        this.message = message;
+        this.processed = processed;
     }
 
     /**
-     * Gets the current reporter.
+     * Gets the message of this report.
      *
-     * @return the reporter
-     */
-    @JsonGetter
-    public User getReporter() {
-        return reporter;
-    }
-
-    /**
-     * Gets the current message given by a {@link User}.
-     *
-     * @return the report message
+     * @return the message of this report
      */
     @JsonGetter
     public String getMessage() {
@@ -73,23 +83,7 @@ public class Report {
      *
      * @param processed indicator, if a {@link Report} has been processed or not
      */
-    @JsonSetter("processed")
-    public void setProcessed(@JsonProperty("processed") boolean processed) {
+    public void setProcessed(boolean processed) {
         this.processed = processed;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Report report = (Report) o;
-        return processed == report.processed &&
-                Objects.equals(reporter, report.reporter) &&
-                Objects.equals(message, report.message);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(reporter, message, processed);
     }
 }
