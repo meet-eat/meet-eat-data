@@ -2,8 +2,6 @@ package meet_eat.data.entity.user;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import meet_eat.data.Report;
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
 import meet_eat.data.entity.Offer;
@@ -14,7 +12,11 @@ import meet_eat.data.entity.user.setting.ColorMode;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
-import meet_eat.data.factory.*;
+import meet_eat.data.factory.EmailFactory;
+import meet_eat.data.factory.OfferFactory;
+import meet_eat.data.factory.PasswordFactory;
+import meet_eat.data.factory.RatingFactory;
+import meet_eat.data.factory.UserFactory;
 import meet_eat.data.location.CityLocation;
 import meet_eat.data.location.Localizable;
 import meet_eat.data.predicate.OfferPredicate;
@@ -28,16 +30,24 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class UserCommonTest {
 
     private static final double DELTA = 0.01;
 
     private String identifier;
-    private Collection<Report> reports;
     private Collection<Rating> ratings;
     private Set<User> subscriptions;
     private Map<Class<? extends Setting>, Setting> settings;
@@ -57,10 +67,6 @@ public class UserCommonTest {
     @Before
     public void setUp() {
         identifier = "This is my identifier";
-        ReportFactory reportFactory = new ReportFactory();
-        reports = new LinkedList<>();
-        reports.add(reportFactory.getValidObject());
-        reports.add(reportFactory.getValidObject());
         RatingFactory ratingFactory = new RatingFactory();
         ratings = new LinkedList<>();
         ratings.add(ratingFactory.getValidObject());
@@ -93,7 +99,6 @@ public class UserCommonTest {
     @After
     public void tearDown() {
         identifier = null;
-        reports = null;
         ratings = null;
         subscriptions = null;
         settings = null;
@@ -118,7 +123,6 @@ public class UserCommonTest {
 
         // Assertions
         assertNotNull(user);
-        assertNotNull(user.getReports());
         assertNotNull(user.getRatings());
         assertNotNull(user.getSettings());
         assertNotNull(user.getOfferPredicates());
@@ -179,13 +183,12 @@ public class UserCommonTest {
     @Test
     public void testJsonConstructor() {
         // Execution
-        User user = new User(identifier, reports, ratings, settings, role, email, password,
+        User user = new User(identifier, ratings, settings, role, email, password,
                 birthDay, name, phoneNumber, description, isVerified, offerPredicates, offerComparator, localizable);
 
         // Assertions
         assertNotNull(user);
         assertEquals(identifier, user.getIdentifier());
-        assertTrue(reports.containsAll(user.getReports()));
         assertTrue(ratings.containsAll(user.getRatings()));
         assertEquals(settings, user.getSettings());
         assertTrue(offerPredicates.containsAll(user.getOfferPredicates()));
@@ -647,11 +650,10 @@ public class UserCommonTest {
     public void testEquals() {
         // Execution
         User user = new UserFactory().getValidObject();
-        LinkedList<Report> reports = Lists.newLinkedList(user.getReports());
         LinkedList<Rating> ratings = Lists.newLinkedList(user.getRatings());
         LinkedList<OfferPredicate> offerPredicates = Lists.newLinkedList(user.getOfferPredicates());
         HashMap<Class<? extends Setting>, Setting> settings = Maps.newHashMap(user.getSettings());
-        User userCopy = new User(user.getIdentifier(), reports, ratings,
+        User userCopy = new User(user.getIdentifier(), ratings,
                 settings, user.getRole(), user.getEmail(), user.getPassword(),
                 user.getBirthDay() , user.getName(), user.getPhoneNumber(), user.getDescription(), user.isVerified(),
                 offerPredicates, user.getOfferComparator(), user.getLocalizable());

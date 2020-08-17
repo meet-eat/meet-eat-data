@@ -1,9 +1,7 @@
 package meet_eat.data.factory;
 
-import meet_eat.data.Report;
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
-import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
 import meet_eat.data.entity.user.Role;
@@ -21,7 +19,14 @@ import meet_eat.data.predicate.numeric.DoubleOperation;
 import meet_eat.data.predicate.numeric.PricePredicate;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class UserFactory extends ObjectFactory<User> {
 
@@ -29,8 +34,8 @@ public class UserFactory extends ObjectFactory<User> {
     private static final boolean DEFAULT_NOTIFICATION = false;
     private static final boolean DEFAULT_VERIFIED = false;
 
-    private EmailFactory emailFactory;
-    private PasswordFactory passwordFactory;
+    private final EmailFactory emailFactory;
+    private final PasswordFactory passwordFactory;
 
     public UserFactory() {
         super();
@@ -41,29 +46,32 @@ public class UserFactory extends ObjectFactory<User> {
     @Override
     protected User createObject() {
         String identifier = Integer.toString(objectCounter);
-        Collection<Report> reports = new LinkedList<>();
         Collection<Rating> ratings = new LinkedList<>();
         Map<Class<? extends Setting>, Setting> settings = new HashMap<>();
         settings.put(NotificationSetting.class, new NotificationSetting(DEFAULT_NOTIFICATION, objectCounter));
         settings.put(DisplaySetting.class, new DisplaySetting(getRandomEnumValue(ColorMode.class)));
-        Role role = DEFAULT_ROLE;
         Email email = emailFactory.getValidObject();
         Password password = passwordFactory.getValidObject();
         LocalDate birthDay = LocalDate.EPOCH;
         String name = "TestUser" + objectCounter;
         String phoneNumber = Integer.toString(objectCounter);
         String description = "I am " + name + " and this is my description.";
-        Collection<OfferPredicate> offerPredicates = new LinkedList<OfferPredicate>();
+        Collection<OfferPredicate> offerPredicates = new LinkedList<>();
         offerPredicates.add(new PricePredicate(DoubleOperation.LESS, 20d));
         Localizable localizable = new SphericalLocation(new SphericalPosition(0, 0));
         OfferComparator offerComparator = new OfferComparator(OfferComparableField.TIME, localizable);
-        return new User(identifier, reports, ratings, settings, role, email, password,
+        return new User(identifier, ratings, settings, DEFAULT_ROLE, email, password,
                 birthDay, name, phoneNumber, description, DEFAULT_VERIFIED, offerPredicates, offerComparator, localizable);
     }
 
-    private <T extends Enum<T>> T getRandomEnumValue(Class<T> clazz) {
-        List<T> values = Arrays.asList(clazz.getEnumConstants());
+    private <T extends Enum<T>> T getRandomEnumValue(Class<T> classType) {
+        List<T> values = Arrays.asList(classType.getEnumConstants());
         Collections.shuffle(values);
-        return values.stream().findFirst().get();
+        Optional<T> value = values.stream().findFirst();
+        if (value.isPresent()) {
+            return values.stream().findFirst().get();
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }

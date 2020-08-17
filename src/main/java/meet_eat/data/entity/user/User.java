@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import meet_eat.data.Report;
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
-import meet_eat.data.entity.ReportableEntity;
+import meet_eat.data.entity.Entity;
+import meet_eat.data.entity.Reportable;
 import meet_eat.data.entity.user.rating.Rating;
 import meet_eat.data.entity.user.rating.RatingBasis;
 import meet_eat.data.entity.user.setting.DisplaySetting;
@@ -27,9 +27,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * Represents a {@link ReportableEntity}.
+ * Represents an {@link Entity} serving as a user within the application.
  */
-public class User extends ReportableEntity<String> {
+public class User extends Entity<String> implements Reportable {
 
     private static final long serialVersionUID = -7918410988503545424L;
 
@@ -116,7 +116,6 @@ public class User extends ReportableEntity<String> {
      * Creates a new user.
      *
      * @param identifier      the identifier
-     * @param reports         the reports received by other users
      * @param ratings         the ratings received by other users
      * @param settings        the user settings
      * @param role            the user role
@@ -134,7 +133,6 @@ public class User extends ReportableEntity<String> {
     @JsonCreator
     @PersistenceConstructor
     public User(@JsonProperty("identifier") String identifier,
-                @JsonProperty("reports") Collection<Report> reports,
                 @JsonProperty("ratings") Collection<Rating> ratings,
                 @JsonProperty("settings") Map<Class<? extends Setting>, Setting> settings,
                 @JsonProperty("role") Role role,
@@ -149,7 +147,7 @@ public class User extends ReportableEntity<String> {
                 @JsonProperty("offerComparator") OfferComparator offerComparator,
                 @JsonProperty("localizable") Localizable localizable) {
 
-        super(identifier, reports);
+        super(identifier);
         this.ratings = Objects.requireNonNull(ratings, ERROR_MESSAGE_NULL_RATINGS);
         this.settings = Objects.requireNonNull(settings, ERROR_MESSAGE_NULL_SETTINGS);
         this.role = Objects.requireNonNull(role, ERROR_MESSAGE_NULL_ROLE);
