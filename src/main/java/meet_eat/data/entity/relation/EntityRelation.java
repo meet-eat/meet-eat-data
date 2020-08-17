@@ -2,7 +2,13 @@ package meet_eat.data.entity.relation;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import meet_eat.data.entity.Bookmark;
 import meet_eat.data.entity.Entity;
+import meet_eat.data.entity.Participation;
+import meet_eat.data.entity.Subscription;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,9 +20,17 @@ import java.util.Objects;
  * @param <S> the type of the target {@link Entity}
  * @param <U> the type of the identifier
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Bookmark.class),
+        @JsonSubTypes.Type(value = Participation.class),
+        @JsonSubTypes.Type(value = Subscription.class)
+})
 public abstract class EntityRelation<T extends Entity<?>, S extends Entity<?>, U extends Serializable> extends Entity<U> {
 
+    @JsonProperty
     private final T source;
+    @JsonProperty
     private final S target;
 
     /**
@@ -38,7 +52,9 @@ public abstract class EntityRelation<T extends Entity<?>, S extends Entity<?>, U
      * @param target     the target {@link Entity}
      */
     @JsonCreator
-    protected EntityRelation(U identifier, T source, S target) {
+    protected EntityRelation(@JsonProperty("identifier") U identifier,
+                             @JsonProperty("source") T source,
+                             @JsonProperty("target") S target) {
         super(identifier);
         this.source = source;
         this.target = target;
