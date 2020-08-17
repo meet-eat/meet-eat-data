@@ -9,6 +9,8 @@ import meet_eat.data.entity.Bookmark;
 import meet_eat.data.entity.Entity;
 import meet_eat.data.entity.Participation;
 import meet_eat.data.entity.Subscription;
+import meet_eat.data.entity.user.rating.Rating;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -24,12 +26,16 @@ import java.util.Objects;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Bookmark.class),
         @JsonSubTypes.Type(value = Participation.class),
-        @JsonSubTypes.Type(value = Subscription.class)
+        @JsonSubTypes.Type(value = Subscription.class),
+        @JsonSubTypes.Type(value = Report.class),
+        @JsonSubTypes.Type(value = Rating.class)
 })
 public abstract class EntityRelation<T extends Entity<?>, S extends Entity<?>, U extends Serializable> extends Entity<U> {
 
+    @DBRef
     @JsonProperty
     private final T source;
+    @DBRef
     @JsonProperty
     private final S target;
 
@@ -78,20 +84,5 @@ public abstract class EntityRelation<T extends Entity<?>, S extends Entity<?>, U
     @JsonGetter
     public S getTarget() {
         return target;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        EntityRelation<?, ?, ?> that = (EntityRelation<?, ?, ?>) o;
-        return Objects.equals(source, that.source) &&
-                Objects.equals(target, that.target);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), source, target);
     }
 }
