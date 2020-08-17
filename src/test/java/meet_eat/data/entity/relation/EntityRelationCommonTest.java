@@ -1,24 +1,46 @@
 package meet_eat.data.entity.relation;
 
-import meet_eat.data.entity.Offer;
-import meet_eat.data.entity.ReportableEntity;
-import meet_eat.data.entity.user.User;
-import meet_eat.data.factory.OfferFactory;
-import meet_eat.data.factory.UserFactory;
+import meet_eat.data.entity.Entity;
 import org.junit.Test;
+
+import java.io.Serializable;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class EntityRelationCommonTest {
 
-    private class ConcreteEntityRelation extends EntityRelation<User, ReportableEntity<String>, String> {
+    private class ConcreteSerializable implements Serializable {
 
-        public ConcreteEntityRelation(User source, ReportableEntity<String> target) {
+        private static final long serialVersionUID = -9140807055984889146L;
+
+        public ConcreteSerializable() {
+            super();
+        }
+    }
+
+    private class ConcreteEntity extends Entity<ConcreteSerializable> {
+
+        private static final long serialVersionUID = 3971456058385893862L;
+
+        public ConcreteEntity() {
+            super();
+        }
+
+        public ConcreteEntity(ConcreteSerializable identifier) {
+            super(identifier);
+        }
+    }
+
+    private class ConcreteEntityRelation extends EntityRelation<ConcreteEntity, ConcreteEntity, ConcreteSerializable> {
+
+        private static final long serialVersionUID = -8583181573254223233L;
+
+        public ConcreteEntityRelation(ConcreteEntity source, ConcreteEntity target) {
             super(source, target);
         }
 
-        protected ConcreteEntityRelation(String identifier, User source, ReportableEntity<String> target) {
+        public ConcreteEntityRelation(ConcreteSerializable identifier, ConcreteEntity source, ConcreteEntity target) {
             super(identifier, source, target);
         }
     }
@@ -26,9 +48,8 @@ public class EntityRelationCommonTest {
     @Test
     public void testConstructorReportableUser() {
         // Test data
-        UserFactory userFactory = new UserFactory();
-        User source = userFactory.getValidObject();
-        User target = userFactory.getValidObject();
+        ConcreteEntity source = new ConcreteEntity(new ConcreteSerializable());
+        ConcreteEntity target = new ConcreteEntity(new ConcreteSerializable());
 
         // Execution
         ConcreteEntityRelation entityRelation = new ConcreteEntityRelation(source, target);
@@ -44,8 +65,8 @@ public class EntityRelationCommonTest {
     @Test
     public void testConstructorReportableOffer() {
         // Test data
-        User source = new UserFactory().getValidObject();
-        Offer target = new OfferFactory().getValidObject();
+        ConcreteEntity source = new ConcreteEntity(new ConcreteSerializable());
+        ConcreteEntity target = new ConcreteEntity(new ConcreteSerializable());
 
         // Execution
         ConcreteEntityRelation entityRelation = new ConcreteEntityRelation(source, target);
@@ -61,7 +82,7 @@ public class EntityRelationCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorNullSource() {
         // Test data
-        User target = new UserFactory().getValidObject();
+        ConcreteEntity target = new ConcreteEntity(new ConcreteSerializable());
 
         // Execution
         ConcreteEntityRelation entityRelation = new ConcreteEntityRelation(null, target);
@@ -70,7 +91,7 @@ public class EntityRelationCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorNullTarget() {
         // Test data
-        User source = new UserFactory().getValidObject();
+        ConcreteEntity source = new ConcreteEntity(new ConcreteSerializable());
 
         // Execution
         ConcreteEntityRelation entityRelation = new ConcreteEntityRelation(source, null);
@@ -79,10 +100,9 @@ public class EntityRelationCommonTest {
     @Test
     public void testJsonConstructor() {
         // Test data
-        String identifier = "sdf0432023rf";
-        UserFactory userFactory = new UserFactory();
-        User source = userFactory.getValidObject();
-        User target = userFactory.getValidObject();
+        ConcreteSerializable identifier = new ConcreteSerializable();
+        ConcreteEntity source = new ConcreteEntity(new ConcreteSerializable());
+        ConcreteEntity target = new ConcreteEntity(new ConcreteSerializable());
 
         // Execution
         ConcreteEntityRelation entityRelation = new ConcreteEntityRelation(identifier, source, target);
