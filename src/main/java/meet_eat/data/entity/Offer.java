@@ -3,24 +3,22 @@ package meet_eat.data.entity;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import meet_eat.data.Report;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.location.Localizable;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 /**
- * Represents a {@link ReportableEntity} of a {@link User}, which can be used to
+ * Represents an {@link Entity} of a {@link User}, which can be used to
  * arrange a meet to eating together.
  */
-public class Offer extends ReportableEntity<String> {
+public class Offer extends Entity<String> implements Reportable {
 
     private static final long serialVersionUID = -5026750026998176586L;
 
@@ -100,7 +98,6 @@ public class Offer extends ReportableEntity<String> {
      * Creates an offer.
      *
      * @param identifier      the identifier
-     * @param reports         the reports
      * @param creator         the creator
      * @param participants    the participating users
      * @param tags            the offer tags
@@ -114,7 +111,6 @@ public class Offer extends ReportableEntity<String> {
     @JsonCreator
     @PersistenceConstructor
     public Offer(@JsonProperty("identifier") String identifier,
-                 @JsonProperty("reports") Collection<Report> reports,
                  @JsonProperty("creator") User creator,
                  @JsonProperty("participants") Set<User> participants,
                  @JsonProperty("tags") Set<Tag> tags,
@@ -125,7 +121,7 @@ public class Offer extends ReportableEntity<String> {
                  @JsonProperty("dateTime") LocalDateTime dateTime,
                  @JsonProperty("location") Localizable location) {
 
-        super(identifier, reports);
+        super(identifier);
         this.creator = Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
         this.participants = Objects.requireNonNull(participants, ERROR_MESSAGE_NULL_PARTICIPANTS);
         this.tags = Objects.requireNonNull(tags, ERROR_MESSAGE_NULL_TAGS);

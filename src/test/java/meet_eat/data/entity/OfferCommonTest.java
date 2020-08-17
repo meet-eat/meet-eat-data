@@ -28,7 +28,6 @@ public class OfferCommonTest {
     private static final double PRICE_DELTA = 0.0001;
 
     private String identifier;
-    private Collection<Report> reports;
     private User creator;
     private Set<User> participants;
     private Set<Tag> tags;
@@ -42,12 +41,6 @@ public class OfferCommonTest {
     @Before
     public void setUp() {
         identifier = "This is my identifier";
-        ReportFactory reportFactory = new ReportFactory();
-        Report reportOne = reportFactory.getValidObject();
-        Report reportTwo = reportFactory.getValidObject();
-        reports = new LinkedList<>();
-        reports.add(reportOne);
-        reports.add(reportTwo);
         UserFactory userFactory = new UserFactory();
         creator = userFactory.getValidObject();
         User participantOne = userFactory.getValidObject();
@@ -72,7 +65,6 @@ public class OfferCommonTest {
     @After
     public void tearDown() {
         identifier = null;
-        reports = null;
         creator = null;
         participants = null;
         tags = null;
@@ -158,13 +150,12 @@ public class OfferCommonTest {
     @Test
     public void testJsonConstructor() {
         // Execution
-        Offer offer = new Offer(identifier, reports, creator, participants, tags, name, description, price,
+        Offer offer = new Offer(identifier, creator, participants, tags, name, description, price,
                 maxParticipants, dateTime, location);
 
         // Assertions
         assertNotNull(offer);
         assertEquals(identifier, offer.getIdentifier());
-        assertTrue(offer.getReports().containsAll(reports));
         assertEquals(creator, offer.getCreator());
         assertEquals(participants, offer.getParticipants());
         assertEquals(tags, offer.getTags());
@@ -179,7 +170,7 @@ public class OfferCommonTest {
     @Test
     public void testJsonConstructorNullIdentifier() {
         // Execution
-        Offer offer = new Offer(null, reports, creator, participants, tags, name, description, price,
+        Offer offer = new Offer(null, creator, participants, tags, name, description, price,
                 maxParticipants, dateTime, location);
 
         // Assertions
@@ -188,44 +179,37 @@ public class OfferCommonTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void testJsonConstructorNullReports() {
-        // Execution
-        Offer offer = new Offer(identifier, null, creator, participants, tags, name, description, price,
-                maxParticipants, dateTime, location);
-    }
-
-    @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullCreator() {
         // Execution
-        Offer offer = new Offer(identifier, reports, null, participants, tags, name, description, price,
+        Offer offer = new Offer(identifier, null, participants, tags, name, description, price,
                 maxParticipants, dateTime, location);
     }
 
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullParticipants() {
         // Execution
-        Offer offer = new Offer(identifier, reports, creator, null, tags, name, description, price,
+        Offer offer = new Offer(identifier, creator, null, tags, name, description, price,
                 maxParticipants, dateTime, location);
     }
 
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullTags() {
         // Execution
-        Offer offer = new Offer(identifier, reports, creator, participants, null, name, description, price,
+        Offer offer = new Offer(identifier, creator, participants, null, name, description, price,
                 maxParticipants, dateTime, location);
     }
 
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullName() {
         // Execution
-        Offer offer = new Offer(identifier, reports, creator, participants, tags, null, description, price,
+        Offer offer = new Offer(identifier, creator, participants, tags, null, description, price,
                 maxParticipants, dateTime, location);
     }
 
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullDescription() {
         // Execution
-        Offer offer = new Offer(identifier, reports, creator, participants, tags, name, null, price,
+        Offer offer = new Offer(identifier, creator, participants, tags, name, null, price,
                 maxParticipants, dateTime, location);
     }
 
@@ -235,7 +219,7 @@ public class OfferCommonTest {
         double illegalPrice = -0.5d;
 
         // Execution
-        Offer offer = new Offer(identifier, reports, creator, participants, tags, name, description, illegalPrice,
+        Offer offer = new Offer(identifier, creator, participants, tags, name, description, illegalPrice,
                 maxParticipants, dateTime, location);
     }
 
@@ -245,21 +229,21 @@ public class OfferCommonTest {
         int illegalParticipants = 0;
 
         // Execution
-        Offer offer = new Offer(identifier, reports, creator, participants, tags, name, description, price,
+        Offer offer = new Offer(identifier, creator, participants, tags, name, description, price,
                 illegalParticipants, dateTime, location);
     }
 
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullDateTime() {
         // Execution
-        Offer offer = new Offer(identifier, reports, creator, participants, tags, name, description, price,
+        Offer offer = new Offer(identifier, creator, participants, tags, name, description, price,
                 maxParticipants, null, location);
     }
 
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullLocation() {
         // Execution
-        Offer offer = new Offer(identifier, reports, creator, participants, tags, name, description, price,
+        Offer offer = new Offer(identifier, creator, participants, tags, name, description, price,
                 maxParticipants, dateTime, null);
     }
 
@@ -514,9 +498,9 @@ public class OfferCommonTest {
     @Test
     public void testOfferEquality() {
         // Execution
-        Offer offer = new Offer(identifier, reports, creator, participants, tags, name, description, price,
+        Offer offer = new Offer(identifier, creator, participants, tags, name, description, price,
                 maxParticipants, dateTime, location);
-        Offer offerCopy = new Offer(offer.getIdentifier(), offer.getReports(), offer.getCreator(),
+        Offer offerCopy = new Offer(offer.getIdentifier(), offer.getCreator(),
                 offer.getParticipants(), offer.getTags(), offer.getName(), offer.getDescription(), offer.getPrice(),
                 offer.getMaxParticipants(), offer.getDateTime(), offer.getLocation());
 
@@ -531,10 +515,9 @@ public class OfferCommonTest {
     public void testEquals() {
         // Execution
         Offer offer = new OfferFactory().getValidObject();
-        LinkedList<Report> reports = Lists.newLinkedList(offer.getReports());
         HashSet<User> participants = Sets.newHashSet(offer.getParticipants());
         HashSet<Tag> tags = Sets.newHashSet(offer.getTags());
-        Offer offerCopy = new Offer(offer.getIdentifier(), reports, offer.getCreator(), participants, tags,
+        Offer offerCopy = new Offer(offer.getIdentifier(), offer.getCreator(), participants, tags,
                 offer.getName(), offer.getDescription(), offer.getPrice(), offer.getMaxParticipants(),
                 offer.getDateTime(), offer.getLocation());
 
