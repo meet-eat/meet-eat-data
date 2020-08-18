@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import meet_eat.data.entity.Bookmark;
 import meet_eat.data.entity.Entity;
-import meet_eat.data.entity.Participation;
-import meet_eat.data.entity.Subscription;
 import meet_eat.data.entity.user.rating.Rating;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
