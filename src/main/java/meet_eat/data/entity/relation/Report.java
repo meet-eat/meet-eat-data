@@ -26,10 +26,10 @@ public class Report extends EntityRelation<User, Entity<?>, String> {
     /**
      * Constructs a new instance of {@link Report}.
      *
-     * @param source the {@link User reporter} of this report
-     * @param target the {@link Entity} to be reported
+     * @param source  the {@link User reporter} of this report
+     * @param target  the {@link Entity} to be reported
      * @param message the message describing the report's circumstances
-     * @param <T> the type of the target entity
+     * @param <T>     the type of the target entity
      */
     public <T extends Entity<?> & Reportable> Report(User source, T target, String message) {
         super(source, target);
@@ -40,11 +40,11 @@ public class Report extends EntityRelation<User, Entity<?>, String> {
      * Constructs a new instance of {@link Report}.
      *
      * @param identifier the identifier of this report
-     * @param source the {@link User reporter} of this report
-     * @param target the {@link Entity} to be reported
-     * @param message the message describing the report's circumstances
-     * @param processed the processing state of this report
-     * @param <T> the type of the target entity
+     * @param source     the {@link User reporter} of this report
+     * @param target     the {@link Entity} to be reported
+     * @param message    the message describing the report's circumstances
+     * @param processed  the processing state of this report
+     * @param <T>        the type of the target entity
      */
     @JsonCreator
     @PersistenceConstructor
