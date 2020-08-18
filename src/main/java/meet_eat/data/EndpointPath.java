@@ -1,9 +1,9 @@
 package meet_eat.data;
 
-import meet_eat.data.entity.Bookmark;
 import meet_eat.data.entity.Offer;
-import meet_eat.data.entity.Subscription;
 import meet_eat.data.entity.Tag;
+import meet_eat.data.entity.relation.Bookmark;
+import meet_eat.data.entity.relation.Subscription;
 import meet_eat.data.entity.user.User;
 
 /**
