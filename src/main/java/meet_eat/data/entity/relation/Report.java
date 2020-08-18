@@ -16,8 +16,6 @@ import java.util.Objects;
  */
 public class Report extends EntityRelation<User, Entity<?>, String> {
 
-    private static final long serialVersionUID = -3131866887183153010L;
-
     @JsonProperty
     private final String message;
     @JsonProperty
