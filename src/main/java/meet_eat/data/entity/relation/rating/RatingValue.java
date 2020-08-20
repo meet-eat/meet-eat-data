@@ -1,10 +1,10 @@
-package meet_eat.data.entity.user.rating;
+package meet_eat.data.entity.relation.rating;
 
 import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * Represents the amount of a given rating.
+ * Represents the amount of a given {@link Rating}.
  */
 public enum RatingValue {
 

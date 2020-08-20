@@ -1,14 +1,16 @@
 package meet_eat.data.predicate.numeric;
 
 import meet_eat.data.entity.Offer;
-import meet_eat.data.entity.user.rating.Rating;
-import meet_eat.data.entity.user.rating.RatingBasis;
-import meet_eat.data.entity.user.rating.RatingValue;
+import meet_eat.data.entity.relation.rating.Rating;
+import meet_eat.data.entity.relation.rating.RatingBasis;
+import meet_eat.data.entity.relation.rating.RatingValue;
 import meet_eat.data.factory.OfferFactory;
 import meet_eat.data.factory.UserFactory;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class RatingPredicateCommonTest {
 

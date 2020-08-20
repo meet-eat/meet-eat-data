@@ -1,14 +1,18 @@
 package meet_eat.data.comparator;
 
 import meet_eat.data.entity.Offer;
+import meet_eat.data.entity.relation.rating.Rating;
+import meet_eat.data.entity.relation.rating.RatingBasis;
+import meet_eat.data.entity.relation.rating.RatingValue;
 import meet_eat.data.entity.user.User;
-import meet_eat.data.entity.user.rating.Rating;
-import meet_eat.data.entity.user.rating.RatingBasis;
-import meet_eat.data.entity.user.rating.RatingValue;
 import meet_eat.data.factory.LocationFactory;
 import meet_eat.data.factory.OfferFactory;
 import meet_eat.data.factory.UserFactory;
-import meet_eat.data.location.*;
+import meet_eat.data.location.CityLocation;
+import meet_eat.data.location.Localizable;
+import meet_eat.data.location.PostcodeLocation;
+import meet_eat.data.location.SphericalLocation;
+import meet_eat.data.location.SphericalPosition;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -17,7 +21,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class OfferComparatorCommonTest {
 

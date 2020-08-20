@@ -1,4 +1,4 @@
-package meet_eat.data.entity.user.rating;
+package meet_eat.data.entity.relation.rating;
 
 import java.util.Objects;
 

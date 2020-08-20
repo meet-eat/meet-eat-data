@@ -2,11 +2,11 @@ package meet_eat.data.factory;
 
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
+import meet_eat.data.entity.relation.rating.Rating;
 import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
 import meet_eat.data.entity.user.Role;
 import meet_eat.data.entity.user.User;
-import meet_eat.data.entity.user.rating.Rating;
 import meet_eat.data.entity.user.setting.ColorMode;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;

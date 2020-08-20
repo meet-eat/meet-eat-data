@@ -5,9 +5,9 @@ import com.google.common.collect.Lists;
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
 import meet_eat.data.entity.Offer;
-import meet_eat.data.entity.user.rating.Rating;
-import meet_eat.data.entity.user.rating.RatingBasis;
-import meet_eat.data.entity.user.rating.RatingValue;
+import meet_eat.data.entity.relation.rating.Rating;
+import meet_eat.data.entity.relation.rating.RatingBasis;
+import meet_eat.data.entity.relation.rating.RatingValue;
 import meet_eat.data.entity.user.setting.ColorMode;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
@@ -656,7 +656,7 @@ public class UserCommonTest {
         LinkedList<Setting> settings = Lists.newLinkedList(user.getSettings());
         User userCopy = new User(user.getIdentifier(), ratings,
                 settings, user.getRole(), user.getEmail(), user.getPassword(),
-                user.getBirthDay() , user.getName(), user.getPhoneNumber(), user.getDescription(), user.isVerified(),
+                user.getBirthDay(), user.getName(), user.getPhoneNumber(), user.getDescription(), user.isVerified(),
                 offerPredicates, user.getOfferComparator(), user.getLocalizable());
 
         // Assertions

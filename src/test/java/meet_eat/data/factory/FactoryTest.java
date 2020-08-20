@@ -1,15 +1,15 @@
 package meet_eat.data.factory;
 
-import meet_eat.data.entity.relation.Report;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.Tag;
+import meet_eat.data.entity.relation.Report;
+import meet_eat.data.entity.relation.rating.Rating;
 import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
 import meet_eat.data.entity.user.User;
-import meet_eat.data.entity.user.rating.Rating;
 import meet_eat.data.location.Localizable;
 import meet_eat.data.location.UnlocalizableException;
-import org.junit.*;
+import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;

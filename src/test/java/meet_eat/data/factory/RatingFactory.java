@@ -1,9 +1,9 @@
 package meet_eat.data.factory;
 
+import meet_eat.data.entity.relation.rating.Rating;
+import meet_eat.data.entity.relation.rating.RatingBasis;
+import meet_eat.data.entity.relation.rating.RatingValue;
 import meet_eat.data.entity.user.User;
-import meet_eat.data.entity.user.rating.Rating;
-import meet_eat.data.entity.user.rating.RatingBasis;
-import meet_eat.data.entity.user.rating.RatingValue;
 
 import java.util.Arrays;
 import java.util.Collections;
