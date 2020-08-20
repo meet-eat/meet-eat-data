@@ -12,6 +12,8 @@ import org.springframework.data.annotation.PersistenceConstructor;
  */
 public class Bookmark extends EntityRelation<User, Offer, String> {
 
+    private static final long serialVersionUID = 1404003165662154028L;
+
     /**
      * Constructs a new instance of {@link Bookmark}.
      *

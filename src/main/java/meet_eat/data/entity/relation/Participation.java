@@ -12,6 +12,8 @@ import org.springframework.data.annotation.PersistenceConstructor;
  */
 public class Participation extends EntityRelation<User, Offer, String> {
 
+    private static final long serialVersionUID = 1514710555568888191L;
+
     /**
      * Constructs a new instance of {@link Participation}.
      *

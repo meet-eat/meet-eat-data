@@ -10,6 +10,8 @@ import org.springframework.data.annotation.PersistenceConstructor;
  */
 public class Subscription extends EntityRelation<User, User, String> {
 
+    private static final long serialVersionUID = 6994036473663319965L;
+
     /**
      * Constructs a new instance of {@link Subscription}.
      *
