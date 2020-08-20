@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import meet_eat.data.entity.relation.EntityRelation;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -19,7 +20,8 @@ import java.util.Objects;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Tag.class),
         @JsonSubTypes.Type(value = Token.class),
-        @JsonSubTypes.Type(value = ReportableEntity.class)
+        @JsonSubTypes.Type(value = ReportableEntity.class),
+        @JsonSubTypes.Type(value = EntityRelation.class)
 })
 public abstract class Entity<U extends Serializable> implements Serializable {
 
