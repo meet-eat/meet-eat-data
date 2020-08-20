@@ -2,7 +2,7 @@ package meet_eat.data;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Iterables;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.Tag;
 import meet_eat.data.entity.Token;
@@ -21,15 +21,26 @@ import meet_eat.data.entity.user.setting.ColorMode;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
-import meet_eat.data.location.*;
+import meet_eat.data.location.CityLocation;
+import meet_eat.data.location.Localizable;
+import meet_eat.data.location.PostcodeLocation;
+import meet_eat.data.location.SphericalLocation;
+import meet_eat.data.location.SphericalPosition;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class ObjectJsonParserCommonTest {
 
@@ -120,7 +131,7 @@ public class ObjectJsonParserCommonTest {
         assertNotNull(jsonString);
         assertNotNull(parsedObject);
         assertEquals(user, parsedObject);
-        assertTrue(Maps.difference(user.getSettings(), parsedObject.getSettings()).areEqual());
+        assertTrue(Iterables.elementsEqual(user.getSettings(), parsedObject.getSettings()));
     }
 
     @Test
@@ -166,7 +177,6 @@ public class ObjectJsonParserCommonTest {
     @Test
     public void testParseReport() {
         // Test data
-        String identifier = "1234ABCDEFG";
         User reporter = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
                 LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
         User reported = new User(new Email("noreply2.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),

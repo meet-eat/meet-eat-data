@@ -1,7 +1,7 @@
 package meet_eat.data.entity.user;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
 import meet_eat.data.entity.Offer;
@@ -31,10 +31,8 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -50,7 +48,7 @@ public class UserCommonTest {
     private String identifier;
     private Collection<Rating> ratings;
     private Set<User> subscriptions;
-    private Map<Class<? extends Setting>, Setting> settings;
+    private Collection<Setting> settings;
     private Set<Offer> bookmarks;
     private Role role;
     private Email email;
@@ -75,9 +73,9 @@ public class UserCommonTest {
         subscriptions = new HashSet<>();
         subscriptions.add(userFactory.getValidObject());
         subscriptions.add(userFactory.getValidObject());
-        settings = new HashMap<>();
-        settings.put(NotificationSetting.class, new NotificationSetting(false, 60));
-        settings.put(DisplaySetting.class, new DisplaySetting(ColorMode.DARK));
+        settings = new LinkedList<>();
+        settings.add(new NotificationSetting(false, 60));
+        settings.add(new DisplaySetting(ColorMode.DARK));
         OfferFactory offerFactory = new OfferFactory();
         bookmarks = new HashSet<>();
         bookmarks.add(offerFactory.getValidObject());
@@ -190,7 +188,7 @@ public class UserCommonTest {
         assertNotNull(user);
         assertEquals(identifier, user.getIdentifier());
         assertTrue(ratings.containsAll(user.getRatings()));
-        assertEquals(settings, user.getSettings());
+        assertTrue(Iterables.elementsEqual(settings, user.getSettings()));
         assertTrue(offerPredicates.containsAll(user.getOfferPredicates()));
         assertEquals(offerComparator, user.getOfferComparator());
         assertEquals(Role.USER, user.getRole());
@@ -427,8 +425,8 @@ public class UserCommonTest {
         user.addSetting(notificationSetting);
 
         // Assertions
-        assertTrue(user.getSettings().containsKey(NotificationSetting.class));
-        assertEquals(notificationSetting, user.getSettings().get(NotificationSetting.class));
+        assertEquals(2, user.getSettings().size());
+        assertTrue(user.getSettings().contains(notificationSetting));
     }
 
     @Test
@@ -437,16 +435,19 @@ public class UserCommonTest {
         Setting notificationSettingToBeOverwritten = new NotificationSetting(true, 30);
         Setting notificationSetting = new NotificationSetting();
 
-        // Execution
+        // Execution: Add
         User user = new UserFactory().getValidObject();
         user.addSetting(notificationSettingToBeOverwritten);
 
-        // Assertions
-        assertEquals(notificationSettingToBeOverwritten, user.getSettings().get(NotificationSetting.class));
+        // Assertions: Pre-Overwrite
+        assertTrue(user.getSettings().contains(notificationSettingToBeOverwritten));
 
-        // Overwrite
+        // Execution: Overwrite
         user.addSetting(notificationSetting);
-        assertEquals(notificationSetting, user.getSettings().get(NotificationSetting.class));
+
+        // Assertions: Post-Overwrite
+        assertTrue(user.getSettings().contains(notificationSetting));
+        assertFalse(user.getSettings().contains(notificationSettingToBeOverwritten));
     }
 
     @Test(expected = NullPointerException.class)
@@ -652,7 +653,7 @@ public class UserCommonTest {
         User user = new UserFactory().getValidObject();
         LinkedList<Rating> ratings = Lists.newLinkedList(user.getRatings());
         LinkedList<OfferPredicate> offerPredicates = Lists.newLinkedList(user.getOfferPredicates());
-        HashMap<Class<? extends Setting>, Setting> settings = Maps.newHashMap(user.getSettings());
+        LinkedList<Setting> settings = Lists.newLinkedList(user.getSettings());
         User userCopy = new User(user.getIdentifier(), ratings,
                 settings, user.getRole(), user.getEmail(), user.getPassword(),
                 user.getBirthDay() , user.getName(), user.getPhoneNumber(), user.getDescription(), user.isVerified(),

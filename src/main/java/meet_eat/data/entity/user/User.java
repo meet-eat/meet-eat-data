@@ -20,9 +20,7 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -55,7 +53,7 @@ public class User extends Entity<String> implements Reportable {
     @JsonProperty
     private final Collection<Rating> ratings;
     @JsonProperty
-    private final Map<Class<? extends Setting>, Setting> settings;
+    private final Collection<Setting> settings;
     @JsonProperty
     private Role role;
     @JsonProperty
@@ -95,7 +93,7 @@ public class User extends Entity<String> implements Reportable {
                 String description, boolean isVerified, Localizable localizable) {
 
         ratings = new LinkedList<>();
-        settings = new HashMap<>();
+        settings = new LinkedList<>();
         offerPredicates = new LinkedList<>();
         role = DEFAULT_ROLE;
         offerComparator = new OfferComparator(OfferComparableField.TIME, localizable);
@@ -134,7 +132,7 @@ public class User extends Entity<String> implements Reportable {
     @PersistenceConstructor
     public User(@JsonProperty("identifier") String identifier,
                 @JsonProperty("ratings") Collection<Rating> ratings,
-                @JsonProperty("settings") Map<Class<? extends Setting>, Setting> settings,
+                @JsonProperty("settings") Collection<Setting> settings,
                 @JsonProperty("role") Role role,
                 @JsonProperty("email") Email email,
                 @JsonProperty("password") Password password,
@@ -179,8 +177,8 @@ public class User extends Entity<String> implements Reportable {
      * @return the settings
      */
     @JsonGetter
-    public Map<Class<? extends Setting>, Setting> getSettings() {
-        return Collections.unmodifiableMap(settings);
+    public Collection<Setting> getSettings() {
+        return Collections.unmodifiableCollection(settings);
     }
 
     /**
@@ -400,7 +398,8 @@ public class User extends Entity<String> implements Reportable {
      */
     public <T extends Setting> void addSetting(T setting) {
         Objects.requireNonNull(setting, ERROR_MESSAGE_NULL_SETTING);
-        settings.put(setting.getClass(), setting);
+        settings.removeIf(x -> x.getClass().equals(setting.getClass()));
+        settings.add(setting);
     }
 
     /**

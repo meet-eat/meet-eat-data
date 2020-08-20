@@ -22,10 +22,8 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public class UserFactory extends ObjectFactory<User> {
@@ -47,9 +45,9 @@ public class UserFactory extends ObjectFactory<User> {
     protected User createObject() {
         String identifier = Integer.toString(objectCounter);
         Collection<Rating> ratings = new LinkedList<>();
-        Map<Class<? extends Setting>, Setting> settings = new HashMap<>();
-        settings.put(NotificationSetting.class, new NotificationSetting(DEFAULT_NOTIFICATION, objectCounter));
-        settings.put(DisplaySetting.class, new DisplaySetting(getRandomEnumValue(ColorMode.class)));
+        Collection<Setting> settings = new LinkedList<>();
+        settings.add(new NotificationSetting(DEFAULT_NOTIFICATION, objectCounter));
+        settings.add(new DisplaySetting(getRandomEnumValue(ColorMode.class)));
         Email email = emailFactory.getValidObject();
         Password password = passwordFactory.getValidObject();
         LocalDate birthDay = LocalDate.EPOCH;

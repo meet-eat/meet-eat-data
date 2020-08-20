@@ -54,7 +54,6 @@ public class DisplaySetting implements Setting {
      */
     public void setColorMode(ColorMode colorMode) {
         this.colorMode = Objects.requireNonNull(colorMode, ERROR_MESSAGE_NULL_COLOR_MODE);
-        ;
     }
 
     @Override
