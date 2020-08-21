@@ -1,44 +1,120 @@
 package meet_eat.data.entity.relation.rating;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import meet_eat.data.entity.Offer;
+import meet_eat.data.entity.relation.EntityRelation;
 import meet_eat.data.entity.user.User;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+import java.util.Objects;
 
 /**
- * Represents the rating of a {@link User}, which he/she has received from other users. On the one hand as a guest,
- * on the other as a host.
+ * Represents the rating of a {@link User user}, which he/she has received from other {@link User users}.
+ * On the one hand as a {@link RatingBasis#GUEST guest}, on the other as a {@link RatingBasis#HOST host}.
  */
-public class Rating {
+public class Rating extends EntityRelation<User, User, String> {
+
+    private static final long serialVersionUID = 908006033527302372L;
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
-    private static final String ERROR_MESSAGE_NULL_BASIS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "basis");
+    private static final String ERROR_MESSAGE_NULL_USER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "user");
+    private static final String ERROR_MESSAGE_NULL_OFFER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "offer");
     private static final String ERROR_MESSAGE_NULL_VALUE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "value");
-    private static final String ERROR_MESSAGE_NULL_REVIEWER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reviewer");
 
+    @DBRef
+    @JsonProperty
+    private final Offer offer;
     @JsonProperty
     private final RatingBasis basis;
     @JsonProperty
     private final RatingValue value;
-    @JsonProperty
-    private final User reviewer;
 
     /**
-     * Creates a rating.
+     * Creates a new instance of {@link Rating}.
      *
-     * @param basis    the rating basis
-     * @param value    the rating value
-     * @param reviewer the reviewer of a rating
+     * @param source the {@link User reviewer}
+     * @param target the {@link User reviewed user}
+     * @param offer  the {@link Offer offer} in which both {@link User users} met.
+     * @param value  the given {@link RatingValue}
+     */
+    private Rating(User source, User target, Offer offer, RatingValue value) {
+        super(source, target);
+        this.offer = offer;
+        if (source.equals(offer.getCreator())) {
+            basis = RatingBasis.GUEST;
+        } else {
+            basis = RatingBasis.HOST;
+        }
+        this.value = value;
+    }
+
+    /**
+     * Creates a new instance of {@link Rating}.
+     *
+     * @param identifier the identifier
+     * @param source     the {@link User reviewer}
+     * @param target     the {@link User reviewed user}
+     * @param offer      the {@link Offer offer} in which both {@link User users} met.
+     * @param value      the given {@link RatingValue}
      */
     @JsonCreator
-    public Rating(@JsonProperty("basis") RatingBasis basis,
-                  @JsonProperty("value") RatingValue value,
-                  @JsonProperty("reviewer") User reviewer) {
-        this.basis = Objects.requireNonNull(basis, ERROR_MESSAGE_NULL_BASIS);
-        this.value = Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
-        this.reviewer = Objects.requireNonNull(reviewer, ERROR_MESSAGE_NULL_REVIEWER);
+    @PersistenceConstructor
+    protected Rating(@JsonProperty("identifier") String identifier,
+                     @JsonProperty("source") User source,
+                     @JsonProperty("target") User target,
+                     @JsonProperty("offer") Offer offer,
+                     @JsonProperty("value") RatingValue value) {
+        super(identifier, source, target);
+        this.offer = offer;
+        if (source.equals(offer.getCreator())) {
+            basis = RatingBasis.GUEST;
+        } else {
+            basis = RatingBasis.HOST;
+        }
+        this.value = value;
+    }
+
+    /**
+     * Creates a new host {@link Rating rating}.
+     *
+     * @param guest the {@link User guest user}
+     * @param offer the {@link Offer offer} in which the {@link User guest} participated
+     * @param value the value which was rated by the {@link User guest}
+     * @return the new host {@link Rating rating}
+     */
+    public static Rating createHostRating(User guest, Offer offer, RatingValue value) {
+        Objects.requireNonNull(guest, ERROR_MESSAGE_NULL_USER);
+        Objects.requireNonNull(offer, ERROR_MESSAGE_NULL_OFFER);
+        Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
+        return new Rating(guest, offer.getCreator(), offer, value);
+    }
+
+    /**
+     * Creates a new guest {@link Rating rating}.
+     *
+     * @param guest the {@link User guest user}
+     * @param offer the {@link Offer offer} in which the {@link User guest} participated
+     * @param value the value which was rated by the {@link User host}
+     * @return the new guest {@link Rating rating}
+     */
+    public static Rating createGuestRating(User guest, Offer offer, RatingValue value) {
+        Objects.requireNonNull(guest, ERROR_MESSAGE_NULL_USER);
+        Objects.requireNonNull(offer, ERROR_MESSAGE_NULL_OFFER);
+        Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
+        return new Rating(offer.getCreator(), guest, offer, value);
+    }
+
+    /**
+     * Gets the offer.
+     *
+     * @return the offer
+     */
+    @JsonGetter
+    public Offer getOffer() {
+        return offer;
     }
 
     /**
@@ -59,30 +135,5 @@ public class Rating {
     @JsonGetter
     public RatingValue getValue() {
         return value;
-    }
-
-    /**
-     * Gets the reviewer.
-     *
-     * @return the reviewer
-     */
-    @JsonGetter
-    public User getReviewer() {
-        return reviewer;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rating rating = (Rating) o;
-        return basis == rating.basis &&
-                value == rating.value &&
-                Objects.equals(reviewer, rating.reviewer);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(basis, value, reviewer);
     }
 }

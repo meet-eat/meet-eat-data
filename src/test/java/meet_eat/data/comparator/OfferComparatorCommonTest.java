@@ -1,9 +1,6 @@
 package meet_eat.data.comparator;
 
 import meet_eat.data.entity.Offer;
-import meet_eat.data.entity.relation.rating.Rating;
-import meet_eat.data.entity.relation.rating.RatingBasis;
-import meet_eat.data.entity.relation.rating.RatingValue;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.factory.LocationFactory;
 import meet_eat.data.factory.OfferFactory;
@@ -340,86 +337,6 @@ public class OfferComparatorCommonTest {
         assertEquals(offerTwo, list.get(1));
         assertEquals(offerThree, list.get(2));
         assertEquals(offerFour, list.get(3));
-        assertEquals(offerFive, list.get(4));
-    }
-
-    @Test
-    public void testRating() {
-        // Test data
-        OfferComparableField rating = OfferComparableField.RATING;
-        Localizable location = new LocationFactory().getValidObject();
-        OfferFactory offerFactory = new OfferFactory();
-        Offer offerOne = offerFactory.getValidObject();
-        Offer offerTwo = offerFactory.getValidObject();
-        Offer offerThree = offerFactory.getValidObject();
-        Offer offerFour = offerFactory.getValidObject();
-        Offer offerFive = offerFactory.getValidObject();
-
-        UserFactory userFactory = new UserFactory();
-        // Average host rating: 3.6
-        offerOne.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        offerOne.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        offerOne.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        offerOne.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_1, userFactory.getValidObject()));
-        offerOne.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        // Average host rating: 3.4
-        offerTwo.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_4, userFactory.getValidObject()));
-        offerTwo.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_4, userFactory.getValidObject()));
-        offerTwo.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        offerTwo.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_4, userFactory.getValidObject()));
-        offerTwo.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_3, userFactory.getValidObject()));
-        // Average host rating: 2.2
-        offerThree.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_3, userFactory.getValidObject()));
-        offerThree.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_3, userFactory.getValidObject()));
-        offerThree.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_1, userFactory.getValidObject()));
-        offerThree.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_3, userFactory.getValidObject()));
-        offerThree.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_1, userFactory.getValidObject()));
-        // Average host rating: 3.0
-        offerFour.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        offerFour.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        offerFour.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        offerFour.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_4, userFactory.getValidObject()));
-        offerFour.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        // Average host rating: 1.2
-        offerFive.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_1, userFactory.getValidObject()));
-        offerFive.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_1, userFactory.getValidObject()));
-        offerFive.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_1, userFactory.getValidObject()));
-        offerFive.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        offerFive.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_1, userFactory.getValidObject()));
-
-        List<Offer> list = new ArrayList<>();
-        list.add(offerOne);
-        list.add(offerTwo);
-        list.add(offerThree);
-        list.add(offerFour);
-        list.add(offerFive);
-
-        // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(rating, location);
-
-        // Assertions
-        assertEquals(offerOne, list.get(0));
-        assertEquals(offerTwo, list.get(1));
-        assertEquals(offerThree, list.get(2));
-        assertEquals(offerFour, list.get(3));
-        assertEquals(offerFive, list.get(4));
-
-        // Sort list from low to high participation
-        Collections.sort(list, comparator);
-
-        assertEquals(offerFive, list.get(0));
-        assertEquals(offerThree, list.get(1));
-        assertEquals(offerFour, list.get(2));
-        assertEquals(offerTwo, list.get(3));
-        assertEquals(offerOne, list.get(4));
-
-        // Sort list from high to low participation
-        Collections.sort(list, comparator.reversed());
-
-        assertEquals(offerOne, list.get(0));
-        assertEquals(offerTwo, list.get(1));
-        assertEquals(offerFour, list.get(2));
-        assertEquals(offerThree, list.get(3));
         assertEquals(offerFive, list.get(4));
     }
 

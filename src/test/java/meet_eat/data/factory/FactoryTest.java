@@ -9,6 +9,7 @@ import meet_eat.data.entity.user.Password;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.location.Localizable;
 import meet_eat.data.location.UnlocalizableException;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -49,6 +50,7 @@ public class FactoryTest {
         assertFalse(location1.equals(location2));
     }
 
+    @Ignore
     @Test
     public void testRatingFactory() {
         // Execution

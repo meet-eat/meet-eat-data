@@ -65,7 +65,8 @@ public class OfferComparator implements Serializable, Comparator<Offer> {
             case PRICE:
                 return Double.compare(offerFst.getPrice(), offerSnd.getPrice());
             case RATING:
-                return Double.compare(offerFst.getCreator().getHostRating(), offerSnd.getCreator().getHostRating());
+                //return Double.compare(offerFst.getCreator().getHostRating(), offerSnd.getCreator().getHostRating());
+                throw new UnsupportedOperationException();
             case PARTICIPANTS:
                 return Integer.compare(offerFst.getParticipants().size(), offerSnd.getParticipants().size());
             case DISTANCE:

@@ -21,6 +21,8 @@ import meet_eat.data.entity.user.setting.ColorMode;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
 import meet_eat.data.entity.user.setting.Setting;
+import meet_eat.data.factory.TagFactory;
+import meet_eat.data.factory.UserFactory;
 import meet_eat.data.location.CityLocation;
 import meet_eat.data.location.Localizable;
 import meet_eat.data.location.PostcodeLocation;
@@ -379,9 +381,22 @@ public class ObjectJsonParserCommonTest {
     @Test
     public void testParseRating() {
         // Test data
-        User user = new User(new Email("noreply.meet.eat@gmail.com"), Password.createHashedPassword("AbcdefghijkL1!"),
-                LocalDate.now(), "Max Mustermann", "+49 12345678", "Empty Description", false, VALID_LOCALIZABLE);
-        Rating rating = new Rating(RatingBasis.HOST, RatingValue.POINTS_4, user);
+        UserFactory userFactory = new UserFactory();
+        TagFactory tagFactory = new TagFactory();
+        User guest = userFactory.getValidObject();
+        User host = userFactory.getValidObject();
+        // Offer
+        Set<Tag> tags = new HashSet<>();
+        tags.add(tagFactory.getValidObject());
+        tags.add(tagFactory.getValidObject());
+        String name = "Test offer fhgeoirguh4";
+        String description = "A crazy description";
+        double price = 5d;
+        int maxParticipants = 5;
+        LocalDateTime dateTime = LocalDateTime.of(2050, Month.OCTOBER, 16, 15, 0);
+        Localizable location = VALID_LOCALIZABLE;
+        Offer offer = new Offer(host, tags, name, description, price, maxParticipants, dateTime, location);
+        Rating rating = Rating.createHostRating(guest, offer, RatingValue.POINTS_4);
 
         // Execution
         ObjectJsonParser objectJsonParser = new ObjectJsonParser();

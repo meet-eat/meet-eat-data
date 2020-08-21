@@ -5,9 +5,6 @@ import com.google.common.collect.Lists;
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
 import meet_eat.data.entity.Offer;
-import meet_eat.data.entity.relation.rating.Rating;
-import meet_eat.data.entity.relation.rating.RatingBasis;
-import meet_eat.data.entity.relation.rating.RatingValue;
 import meet_eat.data.entity.user.setting.ColorMode;
 import meet_eat.data.entity.user.setting.DisplaySetting;
 import meet_eat.data.entity.user.setting.NotificationSetting;
@@ -15,7 +12,6 @@ import meet_eat.data.entity.user.setting.Setting;
 import meet_eat.data.factory.EmailFactory;
 import meet_eat.data.factory.OfferFactory;
 import meet_eat.data.factory.PasswordFactory;
-import meet_eat.data.factory.RatingFactory;
 import meet_eat.data.factory.UserFactory;
 import meet_eat.data.location.CityLocation;
 import meet_eat.data.location.Localizable;
@@ -46,7 +42,6 @@ public class UserCommonTest {
     private static final double DELTA = 0.01;
 
     private String identifier;
-    private Collection<Rating> ratings;
     private Set<User> subscriptions;
     private Collection<Setting> settings;
     private Set<Offer> bookmarks;
@@ -65,10 +60,6 @@ public class UserCommonTest {
     @Before
     public void setUp() {
         identifier = "This is my identifier";
-        RatingFactory ratingFactory = new RatingFactory();
-        ratings = new LinkedList<>();
-        ratings.add(ratingFactory.getValidObject());
-        ratings.add(ratingFactory.getValidObject());
         UserFactory userFactory = new UserFactory();
         subscriptions = new HashSet<>();
         subscriptions.add(userFactory.getValidObject());
@@ -97,7 +88,6 @@ public class UserCommonTest {
     @After
     public void tearDown() {
         identifier = null;
-        ratings = null;
         subscriptions = null;
         settings = null;
         bookmarks = null;
@@ -121,7 +111,6 @@ public class UserCommonTest {
 
         // Assertions
         assertNotNull(user);
-        assertNotNull(user.getRatings());
         assertNotNull(user.getSettings());
         assertNotNull(user.getOfferPredicates());
         assertNotNull(user.getOfferComparator());
@@ -181,13 +170,12 @@ public class UserCommonTest {
     @Test
     public void testJsonConstructor() {
         // Execution
-        User user = new User(identifier, ratings, settings, role, email, password,
+        User user = new User(identifier, settings, role, email, password,
                 birthDay, name, phoneNumber, description, isVerified, offerPredicates, offerComparator, localizable);
 
         // Assertions
         assertNotNull(user);
         assertEquals(identifier, user.getIdentifier());
-        assertTrue(ratings.containsAll(user.getRatings()));
         assertTrue(Iterables.elementsEqual(settings, user.getSettings()));
         assertTrue(offerPredicates.containsAll(user.getOfferPredicates()));
         assertEquals(offerComparator, user.getOfferComparator());
@@ -396,26 +384,6 @@ public class UserCommonTest {
     }
 
     @Test
-    public void testAddRating() {
-        // Test data
-        Rating rating = new RatingFactory().getValidObject();
-
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.addRating(rating);
-
-        // Assertions
-        assertTrue(user.getRatings().contains(rating));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testAddNullRating() {
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.addRating(null);
-    }
-
-    @Test
     public void testAddSetting() {
         // Test data
         Setting notificationSetting = new NotificationSetting();
@@ -503,38 +471,6 @@ public class UserCommonTest {
     }
 
     @Test
-    public void testRemoveRatingsByReviewer() {
-        // Test data
-        User reviewer = new UserFactory().getValidObject();
-        Rating ratingOne = new Rating(RatingBasis.HOST, RatingValue.POINTS_5, reviewer);
-        Rating ratingTwo = new Rating(RatingBasis.HOST, RatingValue.POINTS_3, reviewer);
-        Rating ratingThree = new RatingFactory().getValidObject();
-
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.addRating(ratingOne);
-        user.addRating(ratingTwo);
-        user.addRating(ratingThree);
-
-        // Assertions
-        assertTrue(user.getRatings().contains(ratingOne));
-        assertTrue(user.getRatings().contains(ratingTwo));
-
-        user.removeRatingsByReviewer(reviewer);
-
-        assertFalse(user.getRatings().isEmpty());
-        assertFalse(user.getRatings().contains(ratingOne));
-        assertFalse(user.getRatings().contains(ratingTwo));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testRemoveRatingsByNullReviewer() {
-        // Execution
-        User user = new UserFactory().getValidObject();
-        user.removeRatingsByReviewer(null);
-    }
-
-    @Test
     public void testRemoveOfferPredicate() {
         // Test data
         OfferPredicate namePredicate = new NamePredicate(StringOperation.EQUAL, "test");
@@ -580,82 +516,12 @@ public class UserCommonTest {
     }
 
     @Test
-    public void testGetHostRating() {
-        // Execution
-        UserFactory userFactory = new UserFactory();
-        User user = userFactory.getValidObject();
-
-        // Average host rating: 3.375
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_1, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_5, userFactory.getValidObject()));
-
-        // Assertions
-        assertEquals(3.4, user.getHostRating(), DELTA);
-    }
-
-    @Test
-    public void testGetHostRatingNotEnough() {
-        // Execution
-        UserFactory userFactory = new UserFactory();
-        User user = userFactory.getValidObject();
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_1, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-
-        // Assertions
-        assertEquals(0, user.getHostRating(), DELTA);
-    }
-
-    @Test
-    public void testGetGuestRating() {
-        // Execution
-        UserFactory userFactory = new UserFactory();
-        User user = userFactory.getValidObject();
-
-        // Average host rating: 3.375
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_1, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_5, userFactory.getValidObject()));
-
-        // Assertions
-        assertEquals(3.4, user.getGuestRating(), DELTA);
-    }
-
-    @Test
-    public void testGetGuestRatingNotEnough() {
-        // Execution
-        UserFactory userFactory = new UserFactory();
-        User user = userFactory.getValidObject();
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_1, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        user.addRating(new Rating(RatingBasis.GUEST, RatingValue.POINTS_2, userFactory.getValidObject()));
-
-        // Assertions
-        assertEquals(0, user.getGuestRating(), DELTA);
-    }
-
-    @Test
     public void testEquals() {
         // Execution
         User user = new UserFactory().getValidObject();
-        LinkedList<Rating> ratings = Lists.newLinkedList(user.getRatings());
         LinkedList<OfferPredicate> offerPredicates = Lists.newLinkedList(user.getOfferPredicates());
         LinkedList<Setting> settings = Lists.newLinkedList(user.getSettings());
-        User userCopy = new User(user.getIdentifier(), ratings,
-                settings, user.getRole(), user.getEmail(), user.getPassword(),
+        User userCopy = new User(user.getIdentifier(), settings, user.getRole(), user.getEmail(), user.getPassword(),
                 user.getBirthDay(), user.getName(), user.getPhoneNumber(), user.getDescription(), user.isVerified(),
                 offerPredicates, user.getOfferComparator(), user.getLocalizable());
 

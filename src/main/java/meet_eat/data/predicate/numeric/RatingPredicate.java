@@ -27,6 +27,7 @@ public class RatingPredicate extends DoubleOperator implements OfferPredicate {
 
     @Override
     public boolean test(Offer offer) {
-        return operate(offer.getCreator().getHostRating());
+        //return operate(offer.getCreator().getHostRating());
+        throw new UnsupportedOperationException();
     }
 }

@@ -2,7 +2,6 @@ package meet_eat.data.factory;
 
 import meet_eat.data.comparator.OfferComparableField;
 import meet_eat.data.comparator.OfferComparator;
-import meet_eat.data.entity.relation.rating.Rating;
 import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
 import meet_eat.data.entity.user.Role;
@@ -44,7 +43,6 @@ public class UserFactory extends ObjectFactory<User> {
     @Override
     protected User createObject() {
         String identifier = Integer.toString(objectCounter);
-        Collection<Rating> ratings = new LinkedList<>();
         Collection<Setting> settings = new LinkedList<>();
         settings.add(new NotificationSetting(DEFAULT_NOTIFICATION, objectCounter));
         settings.add(new DisplaySetting(getRandomEnumValue(ColorMode.class)));
@@ -58,7 +56,7 @@ public class UserFactory extends ObjectFactory<User> {
         offerPredicates.add(new PricePredicate(DoubleOperation.LESS, 20d));
         Localizable localizable = new SphericalLocation(new SphericalPosition(0, 0));
         OfferComparator offerComparator = new OfferComparator(OfferComparableField.TIME, localizable);
-        return new User(identifier, ratings, settings, DEFAULT_ROLE, email, password,
+        return new User(identifier, settings, DEFAULT_ROLE, email, password,
                 birthDay, name, phoneNumber, description, DEFAULT_VERIFIED, offerPredicates, offerComparator, localizable);
     }
 
