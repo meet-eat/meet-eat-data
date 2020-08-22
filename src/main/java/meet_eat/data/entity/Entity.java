@@ -25,6 +25,8 @@ import java.util.Objects;
 })
 public abstract class Entity<U extends Serializable> implements Serializable {
 
+    private static final long serialVersionUID = -3127721191945360574L;
+    
     @JsonProperty
     @Id
     private final U identifier;
