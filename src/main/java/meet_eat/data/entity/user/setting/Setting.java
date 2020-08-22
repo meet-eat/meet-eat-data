@@ -17,5 +17,5 @@ public interface Setting {
     /**
      * Applies the settings changed by the {@link User}.
      */
-    public void apply();
+    void apply();
 }

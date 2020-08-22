@@ -23,7 +23,7 @@ public interface Localizable {
      * @throws UnlocalizableException if the location is unlocalizable
      */
     @JsonIgnore
-    public SphericalPosition getSphericalPosition() throws UnlocalizableException;
+    SphericalPosition getSphericalPosition() throws UnlocalizableException;
 
     /**
      * Calculates the distance between two locations.
@@ -33,7 +33,7 @@ public interface Localizable {
      * @throws UnlocalizableException if the location is unlocalizable
      */
     @JsonIgnore
-    public default double getDistance(Localizable localizable) throws UnlocalizableException {
+    default double getDistance(Localizable localizable) throws UnlocalizableException {
         return Haversine.applyHaversineFormula(this.getSphericalPosition(), localizable.getSphericalPosition());
     }
 }
