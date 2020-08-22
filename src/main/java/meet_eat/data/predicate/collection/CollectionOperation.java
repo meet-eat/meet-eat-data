@@ -50,5 +50,5 @@ public enum CollectionOperation implements BiFunction<Collection<?>, Collection<
         public Boolean apply(Collection<?> collectionArgument, Collection<?> collectionBase) {
             return Collections.disjoint(collectionArgument, collectionBase);
         }
-    };
+    }
 }

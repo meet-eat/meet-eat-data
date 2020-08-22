@@ -43,5 +43,5 @@ public enum LocalDateTimeOperation implements BiFunction<LocalDateTime, LocalDat
         public Boolean apply(LocalDateTime LocalDateTimeArgument, LocalDateTime LocalDateTimeBase) {
             return LocalDateTimeBase.isAfter(LocalDateTimeArgument);
         }
-    };
+    }
 }

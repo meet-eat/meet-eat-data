@@ -18,5 +18,5 @@ public enum ColorMode {
     /**
      * The adopted colour concept of the device for the application.
      */
-    SYSTEM;
+    SYSTEM
 }

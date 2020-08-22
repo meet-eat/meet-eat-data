@@ -41,5 +41,5 @@ public enum DoubleOperation implements BiFunction<Double, Double, Boolean> {
         public Boolean apply(Double doubleArgument, Double doubleBase) {
             return Double.compare(doubleBase, doubleArgument) < 0;
         }
-    };
+    }
 }

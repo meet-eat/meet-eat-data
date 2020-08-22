@@ -15,5 +15,5 @@ public enum RatingBasis {
     /**
      * The rating as a guest.
      */
-    GUEST;
+    GUEST
 }

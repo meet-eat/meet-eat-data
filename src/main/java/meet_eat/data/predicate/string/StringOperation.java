@@ -65,5 +65,5 @@ public enum StringOperation implements BiFunction<String, String, Boolean> {
         public Boolean apply(String stringArgument, String stringBase) {
             return stringBase.endsWith(stringArgument);
         }
-    };
+    }
 }

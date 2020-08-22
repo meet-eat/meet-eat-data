@@ -18,5 +18,5 @@ public enum Role {
     /**
      * The user with administrator rights.
      */
-    ADMIN;
+    ADMIN
 }

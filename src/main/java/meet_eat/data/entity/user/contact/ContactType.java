@@ -15,5 +15,5 @@ public enum ContactType {
     /**
      * The email address of a {@link User}.
      */
-    EMAIL;
+    EMAIL
 }
