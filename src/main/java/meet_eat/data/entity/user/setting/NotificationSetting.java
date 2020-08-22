@@ -15,6 +15,7 @@ public class NotificationSetting implements Setting {
     private static final String ERROR_MESSAGE_NOT_IMPLEMENTED = "This function is not implemented yet.";
 
     private static final String ERROR_MESSAGE_NEGATIVE_MINUTES = "Negative values are not allowed.";
+
     private static final boolean NOTIFICATION_DEFAULT = true;
     private static final int MINUTES_UNTIL_OFFER_DEFAULT = 60;
 
