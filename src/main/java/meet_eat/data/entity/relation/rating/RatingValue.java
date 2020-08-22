@@ -2,6 +2,8 @@ package meet_eat.data.entity.relation.rating;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 /**
  * Represents the amount of a given {@link Rating}.
@@ -47,11 +49,11 @@ public enum RatingValue {
      */
     public static RatingValue getRatingValueByInteger(int value) {
         Collection<RatingValue> ratingValues = Arrays.asList(RatingValue.class.getEnumConstants());
-        return ratingValues
-                .stream()
-                .filter(x -> x.getIntegerValue() == value)
-                .findFirst()
-                .orElseThrow();
+        Optional<RatingValue> ratingValue = ratingValues.stream().filter(x -> x.getIntegerValue() == value).findFirst();
+        if (!ratingValue.isPresent()) {
+            throw new NoSuchElementException();
+        }
+        return ratingValue.get();
     }
 
     /**
