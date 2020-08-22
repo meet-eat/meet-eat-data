@@ -18,7 +18,7 @@ public final class Haversine {
     /**
      * Calculates sinus(x / 2) to the power of 2 with x as given value.
      */
-    private static Function<Double, Double> HAVERSINE_FUNCTION = x -> Math.pow(Math.sin(x / 2.0), 2.0);
+    private static final Function<Double, Double> HAVERSINE_FUNCTION = x -> Math.pow(Math.sin(x / 2.0), 2.0);
 
     /**
      * Applies the Haversine function with a given value.
