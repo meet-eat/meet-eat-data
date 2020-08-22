@@ -27,6 +27,7 @@ public class ParticipantsPredicate extends DoubleOperator implements OfferPredic
 
     @Override
     public boolean test(Offer offer) {
-        return operate((double) offer.getParticipants().size());
+        //return operate((double) offer.getParticipants().size());
+        throw new UnsupportedOperationException();
     }
 }

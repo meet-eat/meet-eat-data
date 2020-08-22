@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,8 +23,6 @@ public class Offer extends Entity<String> implements Reportable {
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_CREATOR = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "creator");
-    private static final String ERROR_MESSAGE_NULL_PARTICIPANTS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "participants");
-    private static final String ERROR_MESSAGE_NULL_PARTICIPANT = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "participant");
     private static final String ERROR_MESSAGE_NULL_TAGS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "tags");
     private static final String ERROR_MESSAGE_NULL_TAG = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "tag");
     private static final String ERROR_MESSAGE_NULL_NAME = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "name");
@@ -34,7 +31,6 @@ public class Offer extends Entity<String> implements Reportable {
     private static final String ERROR_MESSAGE_NULL_LOCATION = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "location");
     private static final String ERROR_MESSAGE_ILLEGAL_PRICE = "The price must be greater or equals than 0.";
     private static final String ERROR_MESSAGE_ILLEGAL_MAX_PARTICIPANTS = "At least one individual has to participate.";
-    private static final String ERROR_MESSAGE_MAX_PARTICIPANTS_REACHED = "Maximum participants reached, no participation possible.";
 
     private static final double DEFAULT_MIN_PRICE = 0d;
     private static final int DEFAULT_MIN_PARTICIPANTS = 1;
@@ -42,9 +38,6 @@ public class Offer extends Entity<String> implements Reportable {
     @DBRef
     @JsonProperty
     private final User creator;
-    @DBRef
-    @JsonProperty
-    private final Set<User> participants;
     @DBRef
     @JsonProperty
     private final Set<Tag> tags;
@@ -78,7 +71,6 @@ public class Offer extends Entity<String> implements Reportable {
                  int maxParticipants, LocalDateTime dateTime, Localizable location) {
 
         this.creator = Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
-        this.participants = new HashSet<>();
         this.tags = Objects.requireNonNull(tags, ERROR_MESSAGE_NULL_TAGS);
         this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
         this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
@@ -99,7 +91,6 @@ public class Offer extends Entity<String> implements Reportable {
      *
      * @param identifier      the identifier
      * @param creator         the creator
-     * @param participants    the participating users
      * @param tags            the offer tags
      * @param name            the name
      * @param description     the description
@@ -112,7 +103,6 @@ public class Offer extends Entity<String> implements Reportable {
     @PersistenceConstructor
     public Offer(@JsonProperty("identifier") String identifier,
                  @JsonProperty("creator") User creator,
-                 @JsonProperty("participants") Set<User> participants,
                  @JsonProperty("tags") Set<Tag> tags,
                  @JsonProperty("name") String name,
                  @JsonProperty("description") String description,
@@ -123,7 +113,6 @@ public class Offer extends Entity<String> implements Reportable {
 
         super(identifier);
         this.creator = Objects.requireNonNull(creator, ERROR_MESSAGE_NULL_CREATOR);
-        this.participants = Objects.requireNonNull(participants, ERROR_MESSAGE_NULL_PARTICIPANTS);
         this.tags = Objects.requireNonNull(tags, ERROR_MESSAGE_NULL_TAGS);
         this.name = Objects.requireNonNull(name, ERROR_MESSAGE_NULL_NAME);
         this.description = Objects.requireNonNull(description, ERROR_MESSAGE_NULL_DESCRIPTION);
@@ -147,16 +136,6 @@ public class Offer extends Entity<String> implements Reportable {
     @JsonGetter
     public User getCreator() {
         return creator;
-    }
-
-    /**
-     * Gets the participating users.
-     *
-     * @return the participating users
-     */
-    @JsonGetter
-    public Set<User> getParticipants() {
-        return Collections.unmodifiableSet(participants);
     }
 
     /**
@@ -290,34 +269,12 @@ public class Offer extends Entity<String> implements Reportable {
     }
 
     /**
-     * Adds a {@link User} as participant.
-     *
-     * @param participant the participant
-     */
-    public void addParticipant(User participant) {
-        if (getParticipants().size() < maxParticipants) {
-            participants.add(Objects.requireNonNull(participant, ERROR_MESSAGE_NULL_PARTICIPANT));
-        } else {
-            throw new IllegalStateException(ERROR_MESSAGE_MAX_PARTICIPANTS_REACHED);
-        }
-    }
-
-    /**
      * Adds a {@link Tag}.
      *
      * @param tag the tag
      */
     public void addTag(Tag tag) {
         tags.add(Objects.requireNonNull(tag, ERROR_MESSAGE_NULL_TAG));
-    }
-
-    /**
-     * Removes a {@link User} from the participant list.
-     *
-     * @param participant the previously participating user
-     */
-    public void removeParticipant(User participant) {
-        participants.remove(Objects.requireNonNull(participant, ERROR_MESSAGE_NULL_PARTICIPANT));
     }
 
     /**

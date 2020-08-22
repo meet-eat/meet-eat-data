@@ -13,7 +13,6 @@ import java.util.Set;
 
 public class OfferFactory extends ObjectFactory<Offer> {
 
-    private static final int AMOUNT_PARTICIPANTS = 2;
     private static final int AMOUNT_TAGS = 2;
     private static final double TEST_PRICE = 5d;
     private static final int TEST_MAX_AMOUNT_PARTICIPANTS = 10;
@@ -33,10 +32,6 @@ public class OfferFactory extends ObjectFactory<Offer> {
     protected Offer createObject() {
         String identifier = Integer.toString(objectCounter);
         User creator = userFactory.getValidObject();
-        Set<User> participants = new HashSet<>();
-        for (int i = 0; i < AMOUNT_PARTICIPANTS; i++) {
-            participants.add(userFactory.getValidObject());
-        }
         Set<Tag> tags = new HashSet<>();
         for (int i = 0; i < AMOUNT_TAGS; i++) {
             tags.add(tagFactory.getValidObject());
@@ -45,7 +40,7 @@ public class OfferFactory extends ObjectFactory<Offer> {
         String description = "This is test offer number " + objectCounter;
         LocalDateTime dateTime = LocalDateTime.of(LocalDate.EPOCH, LocalTime.NOON);
         Localizable location = locationFactory.getValidObject();
-        return new Offer(identifier, creator, participants, tags, name, description, TEST_PRICE, TEST_MAX_AMOUNT_PARTICIPANTS,
+        return new Offer(identifier, creator, tags, name, description, TEST_PRICE, TEST_MAX_AMOUNT_PARTICIPANTS,
                 dateTime, location);
     }
 }

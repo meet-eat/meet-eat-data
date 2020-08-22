@@ -16,7 +16,12 @@ import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class OfferCommonTest {
 
@@ -145,14 +150,13 @@ public class OfferCommonTest {
     @Test
     public void testJsonConstructor() {
         // Execution
-        Offer offer = new Offer(identifier, creator, participants, tags, name, description, price,
+        Offer offer = new Offer(identifier, creator, tags, name, description, price,
                 maxParticipants, dateTime, location);
 
         // Assertions
         assertNotNull(offer);
         assertEquals(identifier, offer.getIdentifier());
         assertEquals(creator, offer.getCreator());
-        assertEquals(participants, offer.getParticipants());
         assertEquals(tags, offer.getTags());
         assertEquals(name, offer.getName());
         assertEquals(description, offer.getDescription());
@@ -165,7 +169,7 @@ public class OfferCommonTest {
     @Test
     public void testJsonConstructorNullIdentifier() {
         // Execution
-        Offer offer = new Offer(null, creator, participants, tags, name, description, price,
+        Offer offer = new Offer(null, creator, tags, name, description, price,
                 maxParticipants, dateTime, location);
 
         // Assertions
@@ -176,35 +180,28 @@ public class OfferCommonTest {
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullCreator() {
         // Execution
-        new Offer(identifier, null, participants, tags, name, description, price,
-                maxParticipants, dateTime, location);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testJsonConstructorNullParticipants() {
-        // Execution
-        new Offer(identifier, creator, null, tags, name, description, price,
+        new Offer(identifier, null, tags, name, description, price,
                 maxParticipants, dateTime, location);
     }
 
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullTags() {
         // Execution
-        new Offer(identifier, creator, participants, null, name, description, price,
+        new Offer(identifier, creator, null, name, description, price,
                 maxParticipants, dateTime, location);
     }
 
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullName() {
         // Execution
-        new Offer(identifier, creator, participants, tags, null, description, price,
+        new Offer(identifier, creator, tags, null, description, price,
                 maxParticipants, dateTime, location);
     }
 
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullDescription() {
         // Execution
-        new Offer(identifier, creator, participants, tags, name, null, price,
+        new Offer(identifier, creator, tags, name, null, price,
                 maxParticipants, dateTime, location);
     }
 
@@ -214,7 +211,7 @@ public class OfferCommonTest {
         double illegalPrice = -0.5d;
 
         // Execution
-        new Offer(identifier, creator, participants, tags, name, description, illegalPrice,
+        new Offer(identifier, creator, tags, name, description, illegalPrice,
                 maxParticipants, dateTime, location);
     }
 
@@ -224,21 +221,21 @@ public class OfferCommonTest {
         int illegalParticipants = 0;
 
         // Execution
-        new Offer(identifier, creator, participants, tags, name, description, price,
+        new Offer(identifier, creator, tags, name, description, price,
                 illegalParticipants, dateTime, location);
     }
 
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullDateTime() {
         // Execution
-        new Offer(identifier, creator, participants, tags, name, description, price,
+        new Offer(identifier, creator, tags, name, description, price,
                 maxParticipants, null, location);
     }
 
     @Test(expected = NullPointerException.class)
     public void testJsonConstructorNullLocation() {
         // Execution
-        new Offer(identifier, creator, participants, tags, name, description, price,
+        new Offer(identifier, creator, tags, name, description, price,
                 maxParticipants, dateTime, null);
     }
 
@@ -369,47 +366,6 @@ public class OfferCommonTest {
     }
 
     @Test
-    public void testAddParticipants() {
-        // Test data
-        UserFactory userFactory = new UserFactory();
-        User userOne = userFactory.getValidObject();
-        User userTwo = userFactory.getValidObject();
-
-        // Execution
-        Offer offer = new OfferFactory().getValidObject();
-        int amountParticipantsBefore = offer.getParticipants().size();
-        offer.addParticipant(userOne);
-        offer.addParticipant(userTwo);
-
-        // Assertions
-        assertNotEquals(amountParticipantsBefore, offer.getParticipants().size());
-        assertEquals(offer.getParticipants().size(), amountParticipantsBefore + 2);
-        assertTrue(offer.getParticipants().contains(userOne));
-        assertTrue(offer.getParticipants().contains(userTwo));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testAddNullParticipants() {
-        // Execution
-        Offer offer = new OfferFactory().getValidObject();
-        offer.addParticipant(null);
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void testAddParticipantToFullParticipants() {
-        // Test data
-        UserFactory userFactory = new UserFactory();
-        User userOne = userFactory.getValidObject();
-        User userTwo = userFactory.getValidObject();
-
-        // Execution
-        Offer offer = new OfferFactory().getValidObject();
-        offer.setMaxParticipants(3);
-        offer.addParticipant(userOne);
-        offer.addParticipant(userTwo);
-    }
-
-    @Test
     public void testAddTags() {
         // Test data
         TagFactory tagFactory = new TagFactory();
@@ -434,33 +390,6 @@ public class OfferCommonTest {
         // Execution
         Offer offer = new OfferFactory().getValidObject();
         offer.addTag(null);
-    }
-
-    @Test
-    public void testRemoveParticipant() {
-        // Test data
-        UserFactory userFactory = new UserFactory();
-        User userOne = userFactory.getValidObject();
-        User userTwo = userFactory.getValidObject();
-
-        // Execution
-        Offer offer = new OfferFactory().getValidObject();
-        int amountParticipantsBefore = offer.getParticipants().size();
-        offer.addParticipant(userOne);
-        offer.addParticipant(userTwo);
-        offer.removeParticipant(userOne);
-
-        // Assertions
-        assertTrue(offer.getParticipants().contains(userTwo));
-        assertFalse(offer.getParticipants().contains(userOne));
-        assertEquals(amountParticipantsBefore + 1, offer.getParticipants().size());
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testRemoveNullParticipant() {
-        // Execution
-        Offer offer = new OfferFactory().getValidObject();
-        offer.removeParticipant(null);
     }
 
     @Test
@@ -493,11 +422,11 @@ public class OfferCommonTest {
     @Test
     public void testOfferEquality() {
         // Execution
-        Offer offer = new Offer(identifier, creator, participants, tags, name, description, price,
+        Offer offer = new Offer(identifier, creator, tags, name, description, price,
                 maxParticipants, dateTime, location);
-        Offer offerCopy = new Offer(offer.getIdentifier(), offer.getCreator(),
-                offer.getParticipants(), offer.getTags(), offer.getName(), offer.getDescription(), offer.getPrice(),
-                offer.getMaxParticipants(), offer.getDateTime(), offer.getLocation());
+        Offer offerCopy = new Offer(offer.getIdentifier(), offer.getCreator(), offer.getTags(), offer.getName(),
+                offer.getDescription(), offer.getPrice(), offer.getMaxParticipants(), offer.getDateTime(),
+                offer.getLocation());
 
         // Assertions
         assertNotNull(offer);
@@ -510,9 +439,8 @@ public class OfferCommonTest {
     public void testEquals() {
         // Execution
         Offer offer = new OfferFactory().getValidObject();
-        HashSet<User> participants = Sets.newHashSet(offer.getParticipants());
         HashSet<Tag> tags = Sets.newHashSet(offer.getTags());
-        Offer offerCopy = new Offer(offer.getIdentifier(), offer.getCreator(), participants, tags,
+        Offer offerCopy = new Offer(offer.getIdentifier(), offer.getCreator(), tags,
                 offer.getName(), offer.getDescription(), offer.getPrice(), offer.getMaxParticipants(),
                 offer.getDateTime(), offer.getLocation());
 
