@@ -43,11 +43,7 @@ public class Rating extends EntityRelation<User, User, String> {
     private Rating(User source, User target, Offer offer, RatingValue value) {
         super(source, target);
         this.offer = offer;
-        if (source.equals(offer.getCreator())) {
-            basis = RatingBasis.GUEST;
-        } else {
-            basis = RatingBasis.HOST;
-        }
+        basis = isCreator(source, offer);
         this.value = value;
     }
 
@@ -69,11 +65,7 @@ public class Rating extends EntityRelation<User, User, String> {
                      @JsonProperty("value") RatingValue value) {
         super(identifier, source, target);
         this.offer = offer;
-        if (source.equals(offer.getCreator())) {
-            basis = RatingBasis.GUEST;
-        } else {
-            basis = RatingBasis.HOST;
-        }
+        basis = isCreator(source, offer);
         this.value = value;
     }
 
@@ -135,5 +127,18 @@ public class Rating extends EntityRelation<User, User, String> {
     @JsonGetter
     public RatingValue getValue() {
         return value;
+    }
+
+    /**
+     * Checks whether the {@link User reviewer} of a {@link Rating rating} was the {@link RatingBasis#HOST host}
+     * of an {@link Offer offer} or the participating {@link RatingBasis#GUEST guest}.
+     *
+     * @param reviewer the reviewer
+     * @param offer    the offer
+     * @return {@link RatingBasis#GUEST} if the reviewer is creator of the offer
+     * and thus rating a guest, {@link RatingBasis#HOST} otherwise
+     */
+    private RatingBasis isCreator(User reviewer, Offer offer) {
+        return reviewer.equals(offer.getCreator()) ? RatingBasis.GUEST : RatingBasis.HOST;
     }
 }
