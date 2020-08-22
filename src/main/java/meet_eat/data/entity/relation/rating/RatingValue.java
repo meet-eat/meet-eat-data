@@ -33,7 +33,7 @@ public enum RatingValue {
      */
     POINTS_5(5);
 
-    private int integerValue;
+    private final int integerValue;
 
     private RatingValue(int integerValue) {
         this.integerValue = integerValue;
