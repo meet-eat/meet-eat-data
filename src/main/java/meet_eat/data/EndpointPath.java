@@ -3,7 +3,11 @@ package meet_eat.data;
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.Tag;
 import meet_eat.data.entity.relation.Bookmark;
+import meet_eat.data.entity.relation.Participation;
+import meet_eat.data.entity.relation.Report;
 import meet_eat.data.entity.relation.Subscription;
+import meet_eat.data.entity.relation.rating.Rating;
+import meet_eat.data.entity.relation.rating.RatingBasis;
 import meet_eat.data.entity.user.User;
 
 /**
@@ -47,9 +51,29 @@ public final class EndpointPath {
     public static final String BOOKMARKS = "/bookmarks";
 
     /**
-     * The URI endpoint path for: {@link User Participants}
+     * The URI endpoint path for: {@link Participation Participations}
      */
-    public static final String PARTICIPANTS = "/participants";
+    public static final String PARTICIPATIONS = "/participations";
+
+    /**
+     * The URI endpoint path for: {@link Report Reports}
+     */
+    public static final String REPORTS = "/reports";
+
+    /**
+     * The URI endpoint path for: {@link Rating Ratings}
+     */
+    public static final String RATINGS = "/ratings";
+
+    /**
+     * The URI endpoint path for: {@link RatingBasis#GUEST}
+     */
+    public static final String GUEST = "/guest";
+
+    /**
+     * The URI endpoint path for: {@link RatingBasis#HOST}
+     */
+    public static final String HOST = "/host";
 
     private EndpointPath() {
     }
