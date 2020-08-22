@@ -57,7 +57,7 @@ public enum RatingValue {
     }
 
     /**
-     * Gets the integer value of a rating value.
+     * Gets the integer value of a {@link RatingValue rating value}.
      *
      * @return the integer value
      */
