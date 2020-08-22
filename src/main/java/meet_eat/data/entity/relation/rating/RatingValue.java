@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
- * Represents the amount of a given {@link Rating}.
+ * Represents the amount of a given {@link Rating rating}.
  */
 public enum RatingValue {
 
@@ -42,7 +42,7 @@ public enum RatingValue {
     }
 
     /**
-     * Gets the matching rating value based by a given integer value.
+     * Gets the matching {@link RatingValue rating value} based by a given integer value.
      *
      * @param value the integer value
      * @return the rating basis
