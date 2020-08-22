@@ -19,8 +19,6 @@ import java.util.Objects;
 @Deprecated
 public abstract class ReportableEntity<U extends Serializable> extends Entity<U> {
 
-    private static final long serialVersionUID = -2543864986285500956L;
-
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
     private static final String ERROR_MESSAGE_NULL_REPORTS = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "reports");
     private static final String ERROR_MESSAGE_NULL_REPORT = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "report");

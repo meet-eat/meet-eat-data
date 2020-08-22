@@ -16,8 +16,6 @@ import java.util.function.BiFunction;
  */
 public abstract class BooleanOperator<T extends BiFunction<S, S, Boolean>, S> implements Serializable {
 
-    private static final long serialVersionUID = -347923085311754712L;
-
     @JsonProperty
     private final T operation;
     @JsonProperty

@@ -24,8 +24,6 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = EntityRelation.class)
 })
 public abstract class Entity<U extends Serializable> implements Serializable {
-
-    private static final long serialVersionUID = -3127721191945360574L;
     
     @JsonProperty
     @Id
