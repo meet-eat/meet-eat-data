@@ -73,7 +73,7 @@ public class ReportableEntityCommonTest {
         String identifier = "ThisIsASpecialIdentifier123!";
 
         // Execution
-        ConcreteReportableEntity entity = new ConcreteReportableEntity(identifier, null);
+        new ConcreteReportableEntity(identifier, null);
     }
 
     @Test

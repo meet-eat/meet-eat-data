@@ -3,7 +3,6 @@ package meet_eat.data.location;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -49,7 +48,7 @@ public class SphericalPositionCommonTest {
         double lon = 120.1212;
 
         // Execution
-        SphericalPosition sphericalPosition = new SphericalPosition(lat, lon);
+        new SphericalPosition(lat, lon);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -59,7 +58,7 @@ public class SphericalPositionCommonTest {
         double lon = 120.1212;
 
         // Execution
-        SphericalPosition sphericalPosition = new SphericalPosition(lat, lon);
+        new SphericalPosition(lat, lon);
     }
 
     @Test
@@ -85,7 +84,7 @@ public class SphericalPositionCommonTest {
         double lon = -180.0001;
 
         // Execution
-        SphericalPosition sphericalPosition = new SphericalPosition(lat, lon);
+        new SphericalPosition(lat, lon);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -95,7 +94,7 @@ public class SphericalPositionCommonTest {
         double lon = 180.0001;
 
         // Execution
-        SphericalPosition sphericalPosition = new SphericalPosition(lat, lon);
+        new SphericalPosition(lat, lon);
     }
 
     @Test

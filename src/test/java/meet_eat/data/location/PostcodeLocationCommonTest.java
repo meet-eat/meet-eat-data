@@ -23,7 +23,7 @@ public class PostcodeLocationCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorNullPostcode() {
         // Execution
-        PostcodeLocation postcodeLocation = new PostcodeLocation(null);
+        new PostcodeLocation(null);
     }
 
     @Test

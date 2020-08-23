@@ -15,7 +15,7 @@ public class LocalDateTimePredicateCommonTest {
     public void testConstructor() {
         // Test data
         LocalDateTimeOperation operation = LocalDateTimeOperation.BEFORE;
-        LocalDateTime reference = LocalDateTime.of(2020, Month.AUGUST, 6, 22, 05);
+        LocalDateTime reference = LocalDateTime.of(2020, Month.AUGUST, 6, 22, 5);
 
         // Execution
         LocalDateTimePredicate localDateTimePredicate = new LocalDateTimePredicate(operation, reference);
@@ -29,10 +29,10 @@ public class LocalDateTimePredicateCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorWithNullOperation() {
         // Test data
-        LocalDateTime reference = LocalDateTime.of(2020, Month.AUGUST, 6, 22, 05);
+        LocalDateTime reference = LocalDateTime.of(2020, Month.AUGUST, 6, 22, 5);
 
         // Execution
-        LocalDateTimePredicate localDateTimePredicate = new LocalDateTimePredicate(null, reference);
+        new LocalDateTimePredicate(null, reference);
     }
 
     @Test(expected = NullPointerException.class)
@@ -41,14 +41,14 @@ public class LocalDateTimePredicateCommonTest {
         LocalDateTimeOperation operation = LocalDateTimeOperation.BEFORE;
 
         // Execution
-        LocalDateTimePredicate localDateTimePredicate = new LocalDateTimePredicate(operation, null);
+        new LocalDateTimePredicate(operation, null);
     }
 
     @Test
     public void testOperate() {
         // Test data
         LocalDateTimeOperation operation = LocalDateTimeOperation.BEFORE;
-        LocalDateTime reference = LocalDateTime.of(2020, Month.AUGUST, 6, 22, 05);
+        LocalDateTime reference = LocalDateTime.of(2020, Month.AUGUST, 6, 22, 5);
         OfferFactory offerFactory = new OfferFactory();
         Offer offerOne = offerFactory.getValidObject();
         offerOne.setDateTime(LocalDateTime.of(2020, Month.JANUARY, 1, 12, 0));

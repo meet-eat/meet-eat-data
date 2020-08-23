@@ -36,7 +36,7 @@ public class LocalizablePredicateCommonTest {
         Localizable localizable = new CityLocation("Karlsruhe");
 
         // Execution
-        LocalizablePredicate localizablePredicate = new LocalizablePredicate(null, reference, localizable);
+        new LocalizablePredicate(null, reference, localizable);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class LocalizablePredicateCommonTest {
         offerTwo.setLocation(new CityLocation("Mannheim"));
 
         // Execution
-        LocalizablePredicate localizablePredicate = new LocalizablePredicate(operation, reference, localizable);
+        new LocalizablePredicate(operation, reference, localizable);
     }
 
     @Test

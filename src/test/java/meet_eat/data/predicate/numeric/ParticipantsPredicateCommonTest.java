@@ -32,7 +32,7 @@ public class ParticipantsPredicateCommonTest {
         double reference = 1d;
 
         // Execution
-        ParticipantsPredicate participantsPredicate = new ParticipantsPredicate(null, reference);
+        new ParticipantsPredicate(null, reference);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ParticipantsPredicateCommonTest {
         Offer offerOne = offerFactory.getValidObject();
         Offer offerTwo = offerFactory.getValidObject();
 
-        UserFactory userFactory = new UserFactory();
+        new UserFactory();
         //offerOne.addParticipant(userFactory.getValidObject()); Does not work anymore
         // TODO Rebuild due to participants relation fix
 

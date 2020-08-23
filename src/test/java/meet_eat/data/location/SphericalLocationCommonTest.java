@@ -25,7 +25,7 @@ public class SphericalLocationCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorNullSphericalPosition() {
         // Execution
-        SphericalLocation sphericalLocation = new SphericalLocation(null);
+        new SphericalLocation(null);
     }
 
     @Test

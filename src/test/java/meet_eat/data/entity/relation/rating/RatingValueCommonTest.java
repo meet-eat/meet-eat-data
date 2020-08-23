@@ -31,6 +31,6 @@ public class RatingValueCommonTest {
         int value = 10;
 
         // Execution
-        RatingValue ratingValue = RatingValue.getRatingValueByInteger(value);
+        RatingValue.getRatingValueByInteger(value);
     }
 }

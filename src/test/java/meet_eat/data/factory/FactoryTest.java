@@ -8,11 +8,9 @@ import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.location.Localizable;
-import meet_eat.data.location.UnlocalizableException;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
 public class FactoryTest {
@@ -40,7 +38,7 @@ public class FactoryTest {
     }
 
     @Test
-    public void testLocationFactory() throws UnlocalizableException {
+    public void testLocationFactory() {
         // Execution
         LocationFactory locationFactory = new LocationFactory();
         Localizable location1 = locationFactory.getValidObject();
@@ -98,7 +96,7 @@ public class FactoryTest {
     }
 
     @Test
-    public void testOfferFactory() throws UnlocalizableException {
+    public void testOfferFactory() {
         // Execution
         OfferFactory offerFactory = new OfferFactory();
         Offer offer1 = offerFactory.getValidObject();

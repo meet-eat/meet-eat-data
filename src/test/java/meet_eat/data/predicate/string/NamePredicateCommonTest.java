@@ -29,7 +29,7 @@ public class NamePredicateCommonTest {
         String reference = "Test";
 
         // Execution
-        NamePredicate namePredicate = new NamePredicate(null, reference);
+        new NamePredicate(null, reference);
     }
 
     @Test(expected = NullPointerException.class)
@@ -38,7 +38,7 @@ public class NamePredicateCommonTest {
         StringOperation operation = StringOperation.EQUAL;
 
         // Execution
-        NamePredicate namePredicate = new NamePredicate(operation, null);
+        new NamePredicate(operation, null);
     }
 
     @Test

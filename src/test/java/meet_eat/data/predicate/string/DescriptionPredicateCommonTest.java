@@ -32,7 +32,7 @@ public class DescriptionPredicateCommonTest {
         String reference = "Test";
 
         // Execution
-        DescriptionPredicate descriptionPredicate = new DescriptionPredicate(null, reference);
+        new DescriptionPredicate(null, reference);
     }
 
     @Test(expected = NullPointerException.class)
@@ -41,7 +41,7 @@ public class DescriptionPredicateCommonTest {
         StringOperation operation = StringOperation.EQUAL;
 
         // Execution
-        DescriptionPredicate descriptionPredicate = new DescriptionPredicate(operation, null);
+        new DescriptionPredicate(operation, null);
     }
 
     @Test

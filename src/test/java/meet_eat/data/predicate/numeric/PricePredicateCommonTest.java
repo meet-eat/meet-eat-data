@@ -29,7 +29,7 @@ public class PricePredicateCommonTest {
         double reference = 1d;
 
         // Execution
-        PricePredicate pricePredicate = new PricePredicate(null, reference);
+        new PricePredicate(null, reference);
     }
 
     @Test(expected = NullPointerException.class)
@@ -38,7 +38,7 @@ public class PricePredicateCommonTest {
         DoubleOperation operation = DoubleOperation.EQUAL;
 
         // Execution
-        PricePredicate pricePredicate = new PricePredicate(operation, null);
+        new PricePredicate(operation, null);
     }
 
     @Test

@@ -23,7 +23,7 @@ public class TagCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorNullName() {
         // Execution
-        Tag tag = new Tag(null);
+        new Tag(null);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class TagCommonTest {
         String identifier = "IdentifierXY";
 
         // Execution
-        Tag tag = new Tag(identifier, null);
+        new Tag(identifier, null);
     }
 
     @Test

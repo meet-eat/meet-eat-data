@@ -16,7 +16,7 @@ public class EmailCommonTest {
         Email email = new Email(emailAddress);
 
         // Assertions
-        assertEquals(emailAddress, new Email(emailAddress).toString());
+        assertEquals(emailAddress, email.toString());
     }
 
     @Test

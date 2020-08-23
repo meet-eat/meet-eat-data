@@ -32,7 +32,7 @@ public class DisplaySettingCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorNull() {
         // Execution
-        DisplaySetting displaySetting = new DisplaySetting(null);
+        new DisplaySetting(null);
     }
 
     @Test

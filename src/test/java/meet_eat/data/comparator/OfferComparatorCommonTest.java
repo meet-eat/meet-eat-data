@@ -16,14 +16,11 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 public class OfferComparatorCommonTest {
 
@@ -57,7 +54,7 @@ public class OfferComparatorCommonTest {
         Localizable location = new LocationFactory().getValidObject();
 
         // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(null, location);
+        new OfferComparatorMock(null, location);
     }
 
     @Test(expected = NullPointerException.class)
@@ -66,7 +63,7 @@ public class OfferComparatorCommonTest {
         OfferComparableField field = OfferComparableField.DISTANCE;
 
         // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(field, null);
+        new OfferComparatorMock(field, null);
     }
 
     @Test

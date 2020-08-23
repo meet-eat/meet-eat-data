@@ -36,7 +36,7 @@ public class ReportCommonTest {
         User reported = userFactory.getValidObject();
 
         // Execution
-        Report report = new Report(null, reported, message);
+        new Report(null, reported, message);
     }
 
     @Test(expected = NullPointerException.class)
@@ -47,7 +47,7 @@ public class ReportCommonTest {
         String message = "MyReportMessage";
 
         // Execution
-        Report report = new Report(reporter, null, message);
+        new Report(reporter, null, message);
     }
 
     @Test(expected = NullPointerException.class)
@@ -58,7 +58,7 @@ public class ReportCommonTest {
         User reported = userFactory.getValidObject();
 
         // Execution
-        Report report = new Report(reporter, reported, null);
+        new Report(reporter, reported, null);
     }
 
     @Test
@@ -66,13 +66,12 @@ public class ReportCommonTest {
         // Test data
         ReportFactory reportFactory = new ReportFactory();
         Report report = reportFactory.getValidObject();
-        boolean processed = true;
 
         // Execution
-        report.setProcessed(processed);
+        report.setProcessed(true);
 
         // Assertions
         assertNotNull(report);
-        assertEquals(processed, report.isProcessed());
+        assertTrue(report.isProcessed());
     }
 }

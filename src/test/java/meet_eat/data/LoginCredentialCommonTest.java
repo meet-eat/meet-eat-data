@@ -7,9 +7,7 @@ import meet_eat.data.factory.PasswordFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
 public class LoginCredentialCommonTest {
 
@@ -36,7 +34,7 @@ public class LoginCredentialCommonTest {
         Password password = Password.createHashedPassword(testPassword);
 
         // Execution
-        LoginCredential loginCredential = new LoginCredential(null, password);
+        new LoginCredential(null, password);
     }
 
     @Test(expected = NullPointerException.class)
@@ -46,7 +44,7 @@ public class LoginCredentialCommonTest {
         Email email = new Email(testEmail);
 
         // Execution
-        LoginCredential loginCredential = new LoginCredential(email, null);
+        new LoginCredential(email, null);
     }
 
     @Test

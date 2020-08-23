@@ -39,8 +39,6 @@ import static org.junit.Assert.assertTrue;
 
 public class UserCommonTest {
 
-    private static final double DELTA = 0.01;
-
     private String identifier;
     private Set<User> subscriptions;
     private Collection<Setting> settings;
@@ -332,15 +330,12 @@ public class UserCommonTest {
 
     @Test
     public void testSetVerified() {
-        // Test data
-        boolean isVerified = true;
-
         // Execution
         User user = new UserFactory().getValidObject();
-        user.setVerified(isVerified);
+        user.setVerified(true);
 
         // Assertions
-        assertEquals(isVerified, user.isVerified());
+        assertTrue(user.isVerified());
     }
 
     @Test

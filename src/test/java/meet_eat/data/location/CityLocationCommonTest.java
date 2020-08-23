@@ -23,7 +23,7 @@ public class CityLocationCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorNullCityName() {
         // Execution
-        CityLocation cityLocation = new CityLocation(null);
+        new CityLocation(null);
     }
 
     @Test

@@ -31,7 +31,7 @@ public class ContactRequestCommonTest {
         User requestedUser = userFactory.getValidObject();
 
         // Execution
-        ContactRequest contactRequest = new ContactRequest(null, requestedUser);
+        new ContactRequest(null, requestedUser);
     }
 
     @Test(expected = NullPointerException.class)
@@ -41,7 +41,7 @@ public class ContactRequestCommonTest {
         User requester = userFactory.getValidObject();
 
         // Execution
-        ContactRequest contactRequest = new ContactRequest(requester, null);
+        new ContactRequest(requester, null);
     }
 
     @Test

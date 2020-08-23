@@ -11,7 +11,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 public class ContactDataCommonTest {
 
@@ -35,7 +34,7 @@ public class ContactDataCommonTest {
     @Test(expected = NullPointerException.class)
     public void testConstructorNullRequest() {
         // Execution
-        ContactData contactData = new ContactData(null);
+        new ContactData(null);
     }
 
     @Test
@@ -67,7 +66,7 @@ public class ContactDataCommonTest {
         contacts.put(ContactType.EMAIL, email);
 
         // Execution
-        ContactData contactData = new ContactData(null, contacts);
+        new ContactData(null, contacts);
     }
 
     @Test(expected = NullPointerException.class)
@@ -79,7 +78,7 @@ public class ContactDataCommonTest {
         ContactRequest contactRequest = new ContactRequest(requester, requestedUser);
 
         // Execution
-        ContactData contactData = new ContactData(contactRequest, null);
+        new ContactData(contactRequest, null);
     }
 
     @Test

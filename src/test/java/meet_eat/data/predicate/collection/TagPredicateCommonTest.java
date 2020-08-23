@@ -34,7 +34,7 @@ public class TagPredicateCommonTest {
         Set<Tag> reference = new HashSet<>();
 
         // Execution
-        TagPredicate tagPredicate = new TagPredicate(null, reference);
+        new TagPredicate(null, reference);
     }
 
     @Test(expected = NullPointerException.class)
@@ -43,7 +43,7 @@ public class TagPredicateCommonTest {
         CollectionOperation operation = CollectionOperation.CONTAIN_ALL;
 
         // Execution
-        TagPredicate tagPredicate = new TagPredicate(operation, null);
+        new TagPredicate(operation, null);
     }
 
     @Test

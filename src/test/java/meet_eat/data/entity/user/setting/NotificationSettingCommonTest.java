@@ -22,28 +22,24 @@ public class NotificationSettingCommonTest {
     @Test
     public void testConstructor() {
         // Test data
-        boolean enabled = false;
         int minutesUntilOffer = 120;
 
         // Execution
-        NotificationSetting notificationSetting = new NotificationSetting(enabled, minutesUntilOffer);
+        NotificationSetting notificationSetting = new NotificationSetting(false, minutesUntilOffer);
 
         // Assertions
-        assertEquals(enabled, notificationSetting.isEnabled());
+        assertFalse(notificationSetting.isEnabled());
         assertEquals(minutesUntilOffer, notificationSetting.getMinutesUntilOffer());
     }
 
     @Test
     public void testSetterEnabled() {
-        // Test data
-        boolean enabled = false;
-
         // Execution
         NotificationSetting notificationSetting = new NotificationSetting();
-        notificationSetting.setEnabled(enabled);
+        notificationSetting.setEnabled(false);
 
         // Assertions
-        assertEquals(enabled, notificationSetting.isEnabled());
+        assertFalse(notificationSetting.isEnabled());
     }
 
     @Test

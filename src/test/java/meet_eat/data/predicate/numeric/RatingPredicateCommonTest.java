@@ -28,7 +28,7 @@ public class RatingPredicateCommonTest {
         double reference = 1d;
 
         // Execution
-        RatingPredicate ratingPredicate = new RatingPredicate(null, reference);
+        new RatingPredicate(null, reference);
     }
 
     @Test(expected = NullPointerException.class)
@@ -37,7 +37,7 @@ public class RatingPredicateCommonTest {
         DoubleOperation operation = DoubleOperation.EQUAL;
 
         // Execution
-        RatingPredicate ratingPredicate = new RatingPredicate(operation, null);
+        new RatingPredicate(operation, null);
     }
 
     @Ignore

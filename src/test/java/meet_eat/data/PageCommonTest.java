@@ -27,7 +27,7 @@ public class PageCommonTest {
         int size = Page.SIZE_LOWER_BOUND;
         
         // Execution
-        Page page = new Page(index, size);
+        new Page(index, size);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -37,7 +37,7 @@ public class PageCommonTest {
         int size = Page.SIZE_LOWER_BOUND - 1;
         
         // Execution
-        Page page = new Page(index, size);
+        new Page(index, size);
     }
 
     @Test
