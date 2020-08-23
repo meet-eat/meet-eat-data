@@ -1,9 +1,11 @@
 package meet_eat.data.location;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class SphericalPositionCommonTest {
 
@@ -37,7 +39,7 @@ public class SphericalPositionCommonTest {
 
         // Assertions
         assertEquals(testLat, sphericalPosition.getLatitude(), DELTA);
-        assertFalse(lat == sphericalPosition.getLatitude());
+        assertNotEquals(lat, sphericalPosition.getLatitude(), 0.0);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -73,7 +75,7 @@ public class SphericalPositionCommonTest {
 
         // Assertions
         assertEquals(testLon, sphericalPosition.getLongitude(), DELTA);
-        assertFalse(lon == sphericalPosition.getLongitude());
+        assertNotEquals(lon, sphericalPosition.getLongitude(), 0.0);
     }
 
     @Test(expected = IllegalArgumentException.class)

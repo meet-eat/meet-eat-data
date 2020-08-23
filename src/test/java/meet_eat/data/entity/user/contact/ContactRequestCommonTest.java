@@ -52,10 +52,10 @@ public class ContactRequestCommonTest {
         ContactRequest contactRequestCopy = new ContactRequest(contactRequest.getRequester(), contactRequest.getRequestedUser());
 
         // Assertions
-        assertTrue(contactRequest.equals(contactRequest));
-        assertFalse(contactRequest.equals(null));
-        assertFalse(contactRequest.equals(new Object()));
-        assertTrue(contactRequest.equals(contactRequestCopy));
+        assertEquals(contactRequest, contactRequest);
+        assertNotEquals(null, contactRequest);
+        assertNotEquals(contactRequest, new Object());
+        assertEquals(contactRequest, contactRequestCopy);
         assertEquals(contactRequest.hashCode(), contactRequestCopy.hashCode());
     }
 }

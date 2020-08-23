@@ -2,13 +2,16 @@ package meet_eat.data.entity.user.contact;
 
 import meet_eat.data.entity.user.User;
 import meet_eat.data.factory.UserFactory;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.EnumMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class ContactDataCommonTest {
 
@@ -175,10 +178,10 @@ public class ContactDataCommonTest {
         ContactData contactDataCopy = new ContactData(contactData.getRequest(), contactData.getContacts());
 
         // Assertions
-        assertTrue(contactData.equals(contactData));
-        assertFalse(contactData.equals(null));
-        assertFalse(contactData.equals(new Object()));
-        assertTrue(contactData.equals(contactDataCopy));
+        assertEquals(contactData, contactData);
+        assertNotEquals(null, contactData);
+        assertNotEquals(contactData, new Object());
+        assertEquals(contactData, contactDataCopy);
         assertEquals(contactData.hashCode(), contactDataCopy.hashCode());
     }
 }

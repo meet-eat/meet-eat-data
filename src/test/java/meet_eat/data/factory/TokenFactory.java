@@ -5,7 +5,7 @@ import meet_eat.data.entity.user.User;
 
 public class TokenFactory extends ObjectFactory<Token> {
 
-    private UserFactory userFactory;
+    private final UserFactory userFactory;
 
     public TokenFactory() {
         super();

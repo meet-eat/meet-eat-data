@@ -25,8 +25,8 @@ public class HaversineFunctionTest {
         });
     }
 
-    private double value;
-    private double expected;
+    private final double value;
+    private final double expected;
 
     public HaversineFunctionTest(double value, double expected) {
         this.value = value;

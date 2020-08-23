@@ -47,10 +47,10 @@ public class PageCommonTest {
         Page pageCopy = new Page(page.getIndex(), page.getSize());
 
         // Assertions
-        assertTrue(page.equals(page));
-        assertFalse(page.equals(null));
-        assertFalse(page.equals(new Object()));
-        assertTrue(page.equals(pageCopy));
+        assertEquals(page, page);
+        assertNotEquals(null, page);
+        assertNotEquals(page, new Object());
+        assertEquals(page, pageCopy);
         assertEquals(page.hashCode(), pageCopy.hashCode());
     }
 }

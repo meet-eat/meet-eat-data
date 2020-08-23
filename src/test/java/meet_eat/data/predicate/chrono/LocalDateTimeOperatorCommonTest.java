@@ -4,14 +4,15 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.time.chrono.ChronoLocalDateTime;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class LocalDateTimeOperatorCommonTest {
 
-    private class LocalDateTimeOperatorMock extends LocalDateTimeOperator {
+    private static class LocalDateTimeOperatorMock extends LocalDateTimeOperator {
+
+        private static final long serialVersionUID = -3634102972165883495L;
 
         public LocalDateTimeOperatorMock(LocalDateTimeOperation operation, LocalDateTime referenceValue) {
             super(operation, referenceValue);

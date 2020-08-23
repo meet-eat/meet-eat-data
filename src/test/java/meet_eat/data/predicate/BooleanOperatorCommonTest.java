@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 
 public class BooleanOperatorCommonTest {
 
-    private class ObjectOperation implements BiFunction<Object, Object, Boolean> {
+    private static class ObjectOperation implements BiFunction<Object, Object, Boolean> {
 
         @Override
         public Boolean apply(Object o, Object o2) {
@@ -16,7 +16,7 @@ public class BooleanOperatorCommonTest {
         }
     }
 
-    private class BooleanOperatorMock extends BooleanOperator<ObjectOperation, Object> {
+    private static class BooleanOperatorMock extends BooleanOperator<ObjectOperation, Object> {
 
         private static final long serialVersionUID = -3438256332795454650L;
 

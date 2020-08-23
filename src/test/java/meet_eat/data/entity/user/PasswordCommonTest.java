@@ -109,10 +109,10 @@ public class PasswordCommonTest {
         Password passwordCopy = new Password(password.getHash(), password.getSalt(), password.getIterations());
 
         // Assertions
-        assertTrue(password.equals(password));
-        assertFalse(password.equals(null));
-        assertFalse(password.equals(new Object()));
-        assertTrue(password.equals(passwordCopy));
+        assertEquals(password, password);
+        assertNotEquals(null, password);
+        assertNotEquals(password, new Object());
+        assertEquals(password, passwordCopy);
         assertEquals(password.hashCode(), passwordCopy.hashCode());
     }
 }

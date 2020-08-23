@@ -26,10 +26,10 @@ public class EmailCommonTest {
         Email emailCopy = new Email(email.toString());
 
         // Assertions
-        assertTrue(email.equals(email));
-        assertFalse(email.equals(null));
-        assertFalse(email.equals(new Object()));
-        assertTrue(email.equals(emailCopy));
+        assertEquals(email, email);
+        assertNotEquals(null, email);
+        assertNotEquals(email, new Object());
+        assertEquals(email, emailCopy);
         assertEquals(email.hashCode(), emailCopy.hashCode());
     }
 }

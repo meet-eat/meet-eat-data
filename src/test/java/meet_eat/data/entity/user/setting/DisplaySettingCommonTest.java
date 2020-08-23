@@ -63,10 +63,10 @@ public class DisplaySettingCommonTest {
         DisplaySetting displaySettingCopy = new DisplaySetting(displaySetting.getColorMode());
 
         // Assertions
-        assertTrue(displaySetting.equals(displaySetting));
-        assertFalse(displaySetting.equals(null));
-        assertFalse(displaySetting.equals(new Object()));
-        assertTrue(displaySetting.equals(displaySettingCopy));
+        assertEquals(displaySetting, displaySetting);
+        assertNotEquals(null, displaySetting);
+        assertNotEquals(displaySetting, new Object());
+        assertEquals(displaySetting, displaySettingCopy);
         assertEquals(displaySetting.hashCode(), displaySettingCopy.hashCode());
     }
 }

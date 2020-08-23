@@ -6,7 +6,9 @@ import static org.junit.Assert.*;
 
 public class EntityCommonTest {
 
-    private class ConcreteEntity extends Entity<String> {
+    private static class ConcreteEntity extends Entity<String> {
+
+        private static final long serialVersionUID = -5159321112449258959L;
 
         public ConcreteEntity() {
             super();
@@ -45,10 +47,10 @@ public class EntityCommonTest {
         ConcreteEntity entityCopy = new ConcreteEntity(entity.getIdentifier());
 
         // Assertions
-        assertTrue(entity.equals(entity));
-        assertFalse(entity.equals(null));
-        assertFalse(entity.equals(new Object()));
-        assertTrue(entity.equals(entityCopy));
+        assertEquals(entity, entity);
+        assertNotEquals(null, entity);
+        assertNotEquals(entity, new Object());
+        assertEquals(entity, entityCopy);
         assertEquals(entity.hashCode(), entityCopy.hashCode());
     }
 }

@@ -7,7 +7,9 @@ import static org.junit.Assert.assertTrue;
 
 public class StringOperatorCommonTest {
 
-    private class StringOperatorMock extends StringOperator {
+    private static class StringOperatorMock extends StringOperator {
+
+        private static final long serialVersionUID = 8871287310901710730L;
 
         protected StringOperatorMock(StringOperation operation, String referenceValue) {
             super(operation, referenceValue);

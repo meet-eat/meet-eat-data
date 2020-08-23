@@ -11,7 +11,9 @@ import static org.junit.Assert.assertTrue;
 
 public class CollectionOperatorCommonTest {
 
-    private class CollectionOperatorMock extends CollectionOperator {
+    private static class CollectionOperatorMock extends CollectionOperator {
+
+        private static final long serialVersionUID = 7037968879667803046L;
 
         public CollectionOperatorMock(CollectionOperation operation, Collection<?> referenceValue) {
             super(operation, referenceValue);

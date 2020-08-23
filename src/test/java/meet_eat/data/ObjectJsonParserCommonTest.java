@@ -394,8 +394,7 @@ public class ObjectJsonParserCommonTest {
         double price = 5d;
         int maxParticipants = 5;
         LocalDateTime dateTime = LocalDateTime.of(2050, Month.OCTOBER, 16, 15, 0);
-        Localizable location = VALID_LOCALIZABLE;
-        Offer offer = new Offer(host, tags, name, description, price, maxParticipants, dateTime, location);
+        Offer offer = new Offer(host, tags, name, description, price, maxParticipants, dateTime, VALID_LOCALIZABLE);
         Rating rating = Rating.createHostRating(guest, offer, RatingValue.POINTS_4);
 
         // Execution

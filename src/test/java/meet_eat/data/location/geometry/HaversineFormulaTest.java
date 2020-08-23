@@ -50,7 +50,7 @@ public class HaversineFormulaTest {
 
     private final SphericalPosition origin;
     private final SphericalPosition destination;
-    private double expected;
+    private final double expected;
 
     public HaversineFormulaTest(SphericalPosition origin, SphericalPosition destination, double expected) {
         this.origin = origin;

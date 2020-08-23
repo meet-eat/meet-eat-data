@@ -37,7 +37,7 @@ public enum RatingValue {
 
     private final int integerValue;
 
-    private RatingValue(int integerValue) {
+    RatingValue(int integerValue) {
         this.integerValue = integerValue;
     }
 

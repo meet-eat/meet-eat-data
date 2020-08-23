@@ -21,12 +21,15 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class OfferComparatorCommonTest {
 
-    private class OfferComparatorMock extends OfferComparator {
+    private static class OfferComparatorMock extends OfferComparator {
+
+        private static final long serialVersionUID = -2364032757131663178L;
 
         public OfferComparatorMock(OfferComparableField field, Localizable localizable) {
             super(field, localizable);
@@ -100,7 +103,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerFive, list.get(4));
 
         // Sort list from small to big
-        Collections.sort(list, comparator);
+        list.sort(comparator);
 
         assertEquals(offerThree, list.get(0));
         assertEquals(offerOne, list.get(1));
@@ -109,7 +112,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerFive, list.get(4));
 
         // Reverse list order from big to small
-        Collections.sort(list, comparator.reversed());
+        list.sort(comparator.reversed());
 
         assertEquals(offerFive, list.get(0));
         assertEquals(offerFour, list.get(1));
@@ -152,7 +155,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerFive, list.get(4));
 
         // Sort list from early to late
-        Collections.sort(list, comparator);
+        list.sort(comparator);
 
         assertEquals(offerFive, list.get(0));
         assertEquals(offerTwo, list.get(1));
@@ -161,7 +164,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerFour, list.get(4));
 
         // Reverse list order from late to early
-        Collections.sort(list, comparator.reversed());
+        list.sort(comparator.reversed());
 
         assertEquals(offerFour, list.get(0));
         assertEquals(offerOne, list.get(1));
@@ -207,7 +210,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerFour, list.get(3));
         assertEquals(offerFive, list.get(4));
 
-        /**
+        /*
          * Approx. distances from Karlsruhe to:
          * Stuttgart        - 62,48 km
          * München          - 252,90 km
@@ -217,7 +220,7 @@ public class OfferComparatorCommonTest {
          */
 
         // Sort list from close to far
-        Collections.sort(list, comparator);
+        list.sort(comparator);
 
         assertEquals(offerFive, list.get(0));
         assertEquals(offerOne, list.get(1));
@@ -226,7 +229,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerThree, list.get(4));
 
         // Reverse list order from far to close
-        Collections.sort(list, comparator.reversed());
+        list.sort(comparator.reversed());
 
         assertEquals(offerThree, list.get(0));
         assertEquals(offerFour, list.get(1));
@@ -261,7 +264,7 @@ public class OfferComparatorCommonTest {
 
         // Execution
         OfferComparatorMock comparator = new OfferComparatorMock(distance, location);
-        Collections.sort(list, comparator);
+        list.sort(comparator);
 
         // Assertions
         assertEquals(offerFive, list.get(0));
@@ -325,7 +328,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerFive, list.get(4));
 
         // Sort list from low to high participation
-        Collections.sort(list, comparator);
+        list.sort(comparator);
 
         assertEquals(offerFive, list.get(0));
         assertEquals(offerFour, list.get(1));
@@ -334,7 +337,7 @@ public class OfferComparatorCommonTest {
         assertEquals(offerOne, list.get(4));
 
         // Reverse list order from high to low participation
-        Collections.sort(list, comparator.reversed());
+        list.sort(comparator.reversed());
 
         assertEquals(offerOne, list.get(0));
         assertEquals(offerTwo, list.get(1));
@@ -350,10 +353,10 @@ public class OfferComparatorCommonTest {
         OfferComparator comparatorCopy = new OfferComparator(comparator.getField(), comparator.getLocation());
 
         // Assertions
-        assertTrue(comparator.equals(comparator));
-        assertFalse(comparator.equals(null));
-        assertFalse(comparator.equals(new Object()));
-        assertTrue(comparator.equals(comparatorCopy));
+        assertEquals(comparator, comparator);
+        assertNotEquals(null, comparator);
+        assertNotEquals(comparator, new Object());
+        assertEquals(comparator, comparatorCopy);
         assertEquals(comparator.hashCode(), comparatorCopy.hashCode());
     }
 }

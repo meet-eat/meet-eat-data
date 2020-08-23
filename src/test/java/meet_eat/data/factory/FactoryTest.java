@@ -25,7 +25,7 @@ public class FactoryTest {
         Email email2 = emailFactory.getValidObject();
 
         // Assertions
-        assertFalse(email1.equals(email2));
+        assertNotEquals(email1, email2);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class FactoryTest {
         Password password2 = passwordFactory.getValidObject();
 
         // Assertions
-        assertFalse(password1.equals(password2));
+        assertNotEquals(password1, password2);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class FactoryTest {
         Localizable location2 = locationFactory.getValidObject();
 
         // Assertions
-        assertFalse(location1.equals(location2));
+        assertNotEquals(location1, location2);
     }
 
     @Ignore
@@ -59,7 +59,7 @@ public class FactoryTest {
         Rating rating2 = ratingFactory.getValidObject();
 
         // Assertions
-        assertFalse(rating1.equals(rating2));
+        assertNotEquals(rating1, rating2);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class FactoryTest {
         Tag tag2 = tagFactory.getValidObject();
 
         // Assertions
-        assertFalse(tag1.equals(tag2));
+        assertNotEquals(tag1, tag2);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class FactoryTest {
         User user2 = userFactory.getValidObject();
 
         // Assertions
-        assertFalse(user1.equals(user2));
+        assertNotEquals(user1, user2);
     }
 
     @Test
@@ -105,6 +105,6 @@ public class FactoryTest {
         Offer offer2 = offerFactory.getValidObject();
 
         // Assertions
-        assertFalse(offer1.equals(offer2));
+        assertNotEquals(offer1, offer2);
     }
 }

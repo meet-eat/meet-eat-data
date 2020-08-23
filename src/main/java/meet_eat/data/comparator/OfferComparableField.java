@@ -31,5 +31,5 @@ public enum OfferComparableField {
     /**
      * The host rating of the {@link Offer} creator.
      */
-    RATING;
+    RATING
 }

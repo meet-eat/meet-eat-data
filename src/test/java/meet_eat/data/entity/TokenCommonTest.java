@@ -3,10 +3,14 @@ package meet_eat.data.entity;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.factory.TokenFactory;
 import meet_eat.data.factory.UserFactory;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class TokenCommonTest {
 
@@ -77,7 +81,7 @@ public class TokenCommonTest {
         Token token2 = tokenFactory.getValidObject();
 
         // Assertion
-        assertFalse(token1.equals(token2));
+        assertNotEquals(token1, token2);
     }
 
     @Test
@@ -87,10 +91,10 @@ public class TokenCommonTest {
         Token tokenCopy = new Token(token.getIdentifier(), token.getUser(), token.getValue());
 
         // Assertions
-        assertTrue(token.equals(token));
-        assertFalse(token.equals(null));
-        assertFalse(token.equals(new Object()));
-        assertTrue(token.equals(tokenCopy));
+        assertEquals(token, token);
+        assertNotEquals(null, token);
+        assertNotEquals(token, new Object());
+        assertEquals(token, tokenCopy);
         assertEquals(token.hashCode(), tokenCopy.hashCode());
     }
 }

@@ -7,7 +7,9 @@ import static org.junit.Assert.assertTrue;
 
 public class DoubleOperatorCommonTest {
 
-    private class DoubleOperatorMock extends DoubleOperator {
+    private static class DoubleOperatorMock extends DoubleOperator {
+
+        private static final long serialVersionUID = 6716327545660906599L;
 
         public DoubleOperatorMock(DoubleOperation operation, Double referenceValue) {
             super(operation, referenceValue);

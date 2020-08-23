@@ -65,10 +65,10 @@ public class NotificationSettingCommonTest {
         NotificationSetting notificationSettingCopy = new NotificationSetting(notificatonSetting.isEnabled(), notificatonSetting.getMinutesUntilOffer());
 
         // Assertions
-        assertTrue(notificatonSetting.equals(notificatonSetting));
-        assertFalse(notificatonSetting.equals(null));
-        assertFalse(notificatonSetting.equals(new Object()));
-        assertTrue(notificatonSetting.equals(notificationSettingCopy));
+        assertEquals(notificatonSetting, notificatonSetting);
+        assertNotEquals(null, notificatonSetting);
+        assertNotEquals(notificatonSetting, new Object());
+        assertEquals(notificatonSetting, notificationSettingCopy);
         assertEquals(notificatonSetting.hashCode(), notificationSettingCopy.hashCode());
     }
 }
