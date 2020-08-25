@@ -67,4 +67,17 @@ public class ParticipantsPredicateCommonTest {
         assertFalse(participantsPredicate.test(offerOne));
         assertTrue(participantsPredicate.test(offerTwo));
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void testTestWithoutFunction() {
+        // Test data
+        DoubleOperation operation = DoubleOperation.EQUAL;
+        double reference = 2d;
+        OfferFactory offerFactory = new OfferFactory();
+        Offer offerOne = offerFactory.getValidObject();
+
+        // Execution
+        ParticipantsPredicate participantsPredicate = new ParticipantsPredicate(operation, reference);
+        participantsPredicate.test(offerOne);
+    }
 }

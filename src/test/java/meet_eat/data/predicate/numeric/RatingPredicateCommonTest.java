@@ -68,4 +68,17 @@ public class RatingPredicateCommonTest {
         assertFalse(ratingPredicate.test(offerOne));
         assertTrue(ratingPredicate.test(offerTwo));
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void testTestWithoutFunction() {
+        // Test data
+        DoubleOperation operation = DoubleOperation.EQUAL;
+        double reference = 2d;
+        OfferFactory offerFactory = new OfferFactory();
+        Offer offerOne = offerFactory.getValidObject();
+
+        // Execution
+        RatingPredicate ratingPredicate = new RatingPredicate(operation, reference);
+        ratingPredicate.test(offerOne);
+    }
 }
