@@ -2,6 +2,7 @@ package meet_eat.data;
 
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.Tag;
+import meet_eat.data.entity.Token;
 import meet_eat.data.entity.relation.Bookmark;
 import meet_eat.data.entity.relation.Participation;
 import meet_eat.data.entity.relation.Report;
@@ -74,6 +75,16 @@ public final class EndpointPath {
      * The URI endpoint path for: {@link RatingBasis#HOST}
      */
     public static final String HOST = "/host";
+
+    /**
+     * The URI endpoint path for: {@link Token tokens}
+     */
+    public static final String TOKENS = "/tokens";
+
+    /**
+     * The URI endpoint path for: Validity of a resource
+     */
+    public static final String VALIDITY = "/validity";
 
     private EndpointPath() {
     }
