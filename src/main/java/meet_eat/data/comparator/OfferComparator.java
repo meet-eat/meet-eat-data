@@ -5,12 +5,17 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import meet_eat.data.entity.Offer;
+import meet_eat.data.entity.relation.Participation;
+import meet_eat.data.entity.relation.rating.Rating;
+import meet_eat.data.entity.relation.rating.RatingBasis;
+import meet_eat.data.entity.user.User;
 import meet_eat.data.location.Localizable;
 import meet_eat.data.location.UnlocalizableException;
 
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * Implements the {@link Comparator} functionality for {@link Offer} objects.
@@ -18,11 +23,16 @@ import java.util.Objects;
 public class OfferComparator implements Serializable, Comparator<Offer> {
 
     private static final long serialVersionUID = 3846969499567330524L;
+    private static final String ERROR_MESSAGE_NULL_FUNCTION = "A function must be set before using this operation type";
 
     @JsonProperty
     private final OfferComparableField field;
     @JsonProperty
     private final Localizable location;
+    @JsonIgnore
+    private Function<Offer, Double> hostRatingGetter;
+    @JsonIgnore
+    private Function<Offer, Integer> participantAmountGetter;
 
     /**
      * Creates a {@link Comparator} for {@link Offer} object comparison.
@@ -65,11 +75,15 @@ public class OfferComparator implements Serializable, Comparator<Offer> {
             case PRICE:
                 return Double.compare(offerFst.getPrice(), offerSnd.getPrice());
             case RATING:
-                //return Double.compare(offerFst.getCreator().getHostRating(), offerSnd.getCreator().getHostRating());
-                throw new UnsupportedOperationException();
+                if (Objects.nonNull(hostRatingGetter)) {
+                    return Double.compare(hostRatingGetter.apply(offerFst), hostRatingGetter.apply(offerSnd));
+                }
+                throw new IllegalStateException(ERROR_MESSAGE_NULL_FUNCTION);
             case PARTICIPANTS:
-                //return Integer.compare(offerFst.getParticipants().size(), offerSnd.getParticipants().size());
-                throw new UnsupportedOperationException();
+                if (Objects.nonNull(participantAmountGetter)) {
+                    return Integer.compare(participantAmountGetter.apply(offerFst), participantAmountGetter.apply(offerSnd));
+                }
+                throw new IllegalStateException(ERROR_MESSAGE_NULL_FUNCTION);
             case DISTANCE:
                 double distanceFst = getDistance(offerFst.getLocation());
                 double distanceSnd = getDistance(offerSnd.getLocation());
@@ -94,6 +108,28 @@ public class OfferComparator implements Serializable, Comparator<Offer> {
             distance = Double.MAX_VALUE;
         }
         return distance;
+    }
+
+    /**
+     * Sets the used {@link Function function} for getting the {@link RatingBasis host} {@link Rating rating} of an
+     * {@link Offer offer's} {@link User creator}.
+     *
+     * @param hostRatingGetter the {@link Function function} to be used
+     */
+    @JsonIgnore
+    public void setHostRatingGetter(Function<Offer, Double> hostRatingGetter) {
+        this.hostRatingGetter = Objects.requireNonNull(hostRatingGetter);
+    }
+
+    /**
+     * Sets the used {@link Function function} for getting the amount of {@link Participation participations} of an
+     * {@link Offer offer}.
+     *
+     * @param participantAmountGetter the {@link Function function} to be used
+     */
+    @JsonIgnore
+    public void setParticipantAmountGetter(Function<Offer, Integer> participantAmountGetter) {
+        this.participantAmountGetter = Objects.requireNonNull(participantAmountGetter);
     }
 
     @Override
