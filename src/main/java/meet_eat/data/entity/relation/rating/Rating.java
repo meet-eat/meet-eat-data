@@ -43,7 +43,7 @@ public class Rating extends EntityRelation<User, User, String> {
     private Rating(User source, User target, Offer offer, RatingValue value) {
         super(source, target);
         this.offer = offer;
-        basis = isCreator(source, offer);
+        basis = getBasisByCreator(source, offer);
         this.value = value;
     }
 
@@ -65,7 +65,7 @@ public class Rating extends EntityRelation<User, User, String> {
                      @JsonProperty("value") RatingValue value) {
         super(identifier, source, target);
         this.offer = offer;
-        basis = isCreator(source, offer);
+        basis = getBasisByCreator(source, offer);
         this.value = value;
     }
 
@@ -78,7 +78,6 @@ public class Rating extends EntityRelation<User, User, String> {
      * @return the new host {@link Rating rating}
      */
     public static Rating createHostRating(User guest, Offer offer, RatingValue value) {
-        Objects.requireNonNull(guest, ERROR_MESSAGE_NULL_USER);
         Objects.requireNonNull(offer, ERROR_MESSAGE_NULL_OFFER);
         Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
         return new Rating(guest, offer.getCreator(), offer, value);
@@ -93,7 +92,6 @@ public class Rating extends EntityRelation<User, User, String> {
      * @return the new guest {@link Rating rating}
      */
     public static Rating createGuestRating(User guest, Offer offer, RatingValue value) {
-        Objects.requireNonNull(guest, ERROR_MESSAGE_NULL_USER);
         Objects.requireNonNull(offer, ERROR_MESSAGE_NULL_OFFER);
         Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
         return new Rating(offer.getCreator(), guest, offer, value);
@@ -138,7 +136,7 @@ public class Rating extends EntityRelation<User, User, String> {
      * @return {@link RatingBasis#GUEST} if the reviewer is creator of the offer
      * and thus rating a guest, {@link RatingBasis#HOST} otherwise
      */
-    private RatingBasis isCreator(User reviewer, Offer offer) {
+    private RatingBasis getBasisByCreator(User reviewer, Offer offer) {
         return reviewer.equals(offer.getCreator()) ? RatingBasis.GUEST : RatingBasis.HOST;
     }
 }
