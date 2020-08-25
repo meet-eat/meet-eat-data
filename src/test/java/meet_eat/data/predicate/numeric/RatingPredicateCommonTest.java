@@ -1,9 +1,15 @@
 package meet_eat.data.predicate.numeric;
 
-import org.junit.Ignore;
+import meet_eat.data.entity.Offer;
+import meet_eat.data.factory.OfferFactory;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class RatingPredicateCommonTest {
 
@@ -40,40 +46,26 @@ public class RatingPredicateCommonTest {
         new RatingPredicate(operation, null);
     }
 
-    @Ignore
     @Test
-    public void testOperate() {
+    public void testTest() {
         // Test data
         DoubleOperation operation = DoubleOperation.LESS;
         double reference = 3.5;
-
-        /*
 
         OfferFactory offerFactory = new OfferFactory();
         Offer offerOne = offerFactory.getValidObject();
         Offer offerTwo = offerFactory.getValidObject();
 
-        UserFactory userFactory = new UserFactory();
-        // Average host rating: 3.6
-        offerOne.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        offerOne.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        offerOne.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        offerOne.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_1, userFactory.getValidObject()));
-        offerOne.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_5, userFactory.getValidObject()));
-        // Average host rating: 3.4
-        offerTwo.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_4, userFactory.getValidObject()));
-        offerTwo.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_4, userFactory.getValidObject()));
-        offerTwo.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_2, userFactory.getValidObject()));
-        offerTwo.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_4, userFactory.getValidObject()));
-        offerTwo.getCreator().addRating(new Rating(RatingBasis.HOST, RatingValue.POINTS_3, userFactory.getValidObject()));
+        Map<Offer, Double> hostRatings = new HashMap<>();
+        hostRatings.put(offerOne, 3.6);
+        hostRatings.put(offerTwo, 3.4);
 
         // Execution
         RatingPredicate ratingPredicate = new RatingPredicate(operation, reference);
+        ratingPredicate.setNumericRatingGetter(hostRatings::get);
 
         // Assertions
         assertFalse(ratingPredicate.test(offerOne));
         assertTrue(ratingPredicate.test(offerTwo));
-
-        */
     }
 }

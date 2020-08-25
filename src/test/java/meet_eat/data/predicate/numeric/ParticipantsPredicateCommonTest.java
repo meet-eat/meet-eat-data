@@ -2,13 +2,15 @@ package meet_eat.data.predicate.numeric;
 
 import meet_eat.data.entity.Offer;
 import meet_eat.data.factory.OfferFactory;
-import meet_eat.data.factory.UserFactory;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.HashMap;
+import java.util.Map;
 
-@Ignore
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 public class ParticipantsPredicateCommonTest {
 
     @Test
@@ -35,8 +37,17 @@ public class ParticipantsPredicateCommonTest {
         new ParticipantsPredicate(null, reference);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testConstructorWithNullReferenceValue() {
+        // Test data
+        DoubleOperation operation = DoubleOperation.EQUAL;
+
+        // Execution
+        new ParticipantsPredicate(operation, null);
+    }
+
     @Test
-    public void testOperate() {
+    public void testTest() {
         // Test data
         DoubleOperation operation = DoubleOperation.EQUAL;
         double reference = 2d;
@@ -44,12 +55,13 @@ public class ParticipantsPredicateCommonTest {
         Offer offerOne = offerFactory.getValidObject();
         Offer offerTwo = offerFactory.getValidObject();
 
-        new UserFactory();
-        //offerOne.addParticipant(userFactory.getValidObject()); Does not work anymore
-        // TODO Rebuild due to participants relation fix
+        Map<Offer, Integer> participantAmounts = new HashMap<>();
+        participantAmounts.put(offerOne, 1);
+        participantAmounts.put(offerTwo, 2);
 
         // Execution
         ParticipantsPredicate participantsPredicate = new ParticipantsPredicate(operation, reference);
+        participantsPredicate.setParticipantAmountGetter(participantAmounts::get);
 
         // Assertions
         assertFalse(participantsPredicate.test(offerOne));
