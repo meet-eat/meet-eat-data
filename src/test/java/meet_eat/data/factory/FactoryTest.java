@@ -2,13 +2,10 @@ package meet_eat.data.factory;
 
 import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.Tag;
-import meet_eat.data.entity.relation.Report;
-import meet_eat.data.entity.relation.rating.Rating;
 import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
 import meet_eat.data.entity.user.User;
 import meet_eat.data.location.Localizable;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotEquals;
@@ -46,31 +43,6 @@ public class FactoryTest {
 
         // Assertions
         assertNotEquals(location1, location2);
-    }
-
-    @Ignore
-    @Test
-    public void testRatingFactory() {
-        // Execution
-        RatingFactory ratingFactory = new RatingFactory();
-        Rating rating1 = ratingFactory.getValidObject();
-        Rating rating2 = ratingFactory.getValidObject();
-
-        // Assertions
-        assertNotEquals(rating1, rating2);
-    }
-
-    @Test
-    public void testReportFactory() {
-        // Execution
-        ReportFactory reportFactory = new ReportFactory();
-        Report report1 = reportFactory.getValidObject();
-        Report report2 = reportFactory.getValidObject();
-
-        // Assertions
-        assertNotEquals(report1.getSource(), report2.getSource());
-        assertNotEquals(report1.getTarget(), report2.getTarget());
-        assertNotEquals(report1.getMessage(), report2.getMessage());
     }
 
     @Test
