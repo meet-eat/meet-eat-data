@@ -42,24 +42,7 @@ public class EntityRelationCommonTest {
     }
 
     @Test
-    public void testConstructorReportableUser() {
-        // Test data
-        ConcreteEntity source = new ConcreteEntity(new ConcreteSerializable());
-        ConcreteEntity target = new ConcreteEntity(new ConcreteSerializable());
-
-        // Execution
-        ConcreteEntityRelation entityRelation = new ConcreteEntityRelation(source, target);
-
-        // Assertions
-        assertNotNull(entityRelation);
-        assertNotNull(entityRelation.getSource());
-        assertNotNull(entityRelation.getTarget());
-        assertEquals(source, entityRelation.getSource());
-        assertEquals(target, entityRelation.getTarget());
-    }
-
-    @Test
-    public void testConstructorReportableOffer() {
+    public void testConstructor() {
         // Test data
         ConcreteEntity source = new ConcreteEntity(new ConcreteSerializable());
         ConcreteEntity target = new ConcreteEntity(new ConcreteSerializable());
