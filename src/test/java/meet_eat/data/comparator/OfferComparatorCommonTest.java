@@ -1,22 +1,21 @@
 package meet_eat.data.comparator;
 
 import meet_eat.data.entity.Offer;
-import meet_eat.data.entity.user.User;
 import meet_eat.data.factory.LocationFactory;
 import meet_eat.data.factory.OfferFactory;
-import meet_eat.data.factory.UserFactory;
 import meet_eat.data.location.CityLocation;
 import meet_eat.data.location.Localizable;
 import meet_eat.data.location.PostcodeLocation;
 import meet_eat.data.location.SphericalLocation;
 import meet_eat.data.location.SphericalPosition;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -271,41 +270,25 @@ public class OfferComparatorCommonTest {
         assertEquals(offerTwo, list.get(4));
     }
 
-    @Ignore
     @Test
     public void testParticipants() {
         // Test data
         OfferComparableField participants = OfferComparableField.PARTICIPANTS;
         Localizable location = new LocationFactory().getValidObject();
-        UserFactory userFactory = new UserFactory();
-        User user1 = userFactory.getValidObject();
-        User user2 = userFactory.getValidObject();
-        User user3 = userFactory.getValidObject();
-        User user4 = userFactory.getValidObject();
-        User user5 = userFactory.getValidObject();
-        User user6 = userFactory.getValidObject();
-        User user7 = userFactory.getValidObject();
-        User user8 = userFactory.getValidObject();
-        User user9 = userFactory.getValidObject();
-        User user10 = userFactory.getValidObject();
-        // Every offer has an initial participant amount of OfferFactory.AMOUNT_PARTICIPANTS
         OfferFactory offerFactory = new OfferFactory();
         Offer offerOne = offerFactory.getValidObject();
         Offer offerTwo = offerFactory.getValidObject();
         Offer offerThree = offerFactory.getValidObject();
         Offer offerFour = offerFactory.getValidObject();
         Offer offerFive = offerFactory.getValidObject();
-        /*offerOne.addParticipant(user1);
-        offerOne.addParticipant(user2);
-        offerOne.addParticipant(user3);
-        offerOne.addParticipant(user4);
-        offerTwo.addParticipant(user5);
-        offerTwo.addParticipant(user6);
-        offerTwo.addParticipant(user7);
-        offerThree.addParticipant(user8);
-        offerThree.addParticipant(user9);
-        offerFour.addParticipant(user10);*/
-        // TODO Change addParticipants to new predicate and comparator system
+
+        // Add a map able to return the number of participants an offer has
+        Map<Offer, Integer> participantAmounts = new HashMap<>();
+        participantAmounts.put(offerOne, 4);
+        participantAmounts.put(offerTwo, 3);
+        participantAmounts.put(offerThree, 2);
+        participantAmounts.put(offerFour, 1);
+        participantAmounts.put(offerFive, 0);
 
         List<Offer> list = new ArrayList<>();
         list.add(offerOne);
@@ -316,6 +299,7 @@ public class OfferComparatorCommonTest {
 
         // Execution
         OfferComparatorMock comparator = new OfferComparatorMock(participants, location);
+        comparator.setParticipantAmountGetter(participantAmounts::get);
 
         // Assertions
         assertEquals(offerOne, list.get(0));
@@ -341,6 +325,127 @@ public class OfferComparatorCommonTest {
         assertEquals(offerThree, list.get(2));
         assertEquals(offerFour, list.get(3));
         assertEquals(offerFive, list.get(4));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testParticipantsWithoutFunction() {
+        // Test data
+        OfferComparableField participants = OfferComparableField.PARTICIPANTS;
+        Localizable location = new LocationFactory().getValidObject();
+        OfferFactory offerFactory = new OfferFactory();
+        Offer offerOne = offerFactory.getValidObject();
+        Offer offerTwo = offerFactory.getValidObject();
+        Offer offerThree = offerFactory.getValidObject();
+        Offer offerFour = offerFactory.getValidObject();
+        Offer offerFive = offerFactory.getValidObject();
+
+        List<Offer> list = new ArrayList<>();
+        list.add(offerOne);
+        list.add(offerTwo);
+        list.add(offerThree);
+        list.add(offerFour);
+        list.add(offerFive);
+
+        // Execution
+        OfferComparatorMock comparator = new OfferComparatorMock(participants, location);
+
+        // Assertions
+        assertEquals(offerOne, list.get(0));
+        assertEquals(offerTwo, list.get(1));
+        assertEquals(offerThree, list.get(2));
+        assertEquals(offerFour, list.get(3));
+        assertEquals(offerFive, list.get(4));
+
+        list.sort(comparator);
+    }
+
+    @Test
+    public void testRating() {
+        // Test data
+        OfferComparableField participants = OfferComparableField.RATING;
+        Localizable location = new LocationFactory().getValidObject();
+        OfferFactory offerFactory = new OfferFactory();
+        Offer offerOne = offerFactory.getValidObject();
+        Offer offerTwo = offerFactory.getValidObject();
+        Offer offerThree = offerFactory.getValidObject();
+        Offer offerFour = offerFactory.getValidObject();
+        Offer offerFive = offerFactory.getValidObject();
+
+        // Add a map able to return the numeric host rating of an offer
+        Map<Offer, Double> hostRatings = new HashMap<>();
+        hostRatings.put(offerOne, 4d);
+        hostRatings.put(offerTwo, 3d);
+        hostRatings.put(offerThree, 2d);
+        hostRatings.put(offerFour, 1d);
+        hostRatings.put(offerFive, 0d);
+
+        List<Offer> list = new ArrayList<>();
+        list.add(offerOne);
+        list.add(offerTwo);
+        list.add(offerThree);
+        list.add(offerFour);
+        list.add(offerFive);
+
+        // Execution
+        OfferComparatorMock comparator = new OfferComparatorMock(participants, location);
+        comparator.setHostRatingGetter(hostRatings::get);
+
+        // Assertions
+        assertEquals(offerOne, list.get(0));
+        assertEquals(offerTwo, list.get(1));
+        assertEquals(offerThree, list.get(2));
+        assertEquals(offerFour, list.get(3));
+        assertEquals(offerFive, list.get(4));
+
+        // Sort list from low to high rating
+        list.sort(comparator);
+
+        assertEquals(offerFive, list.get(0));
+        assertEquals(offerFour, list.get(1));
+        assertEquals(offerThree, list.get(2));
+        assertEquals(offerTwo, list.get(3));
+        assertEquals(offerOne, list.get(4));
+
+        // Reverse list order from high to low rating
+        list.sort(comparator.reversed());
+
+        assertEquals(offerOne, list.get(0));
+        assertEquals(offerTwo, list.get(1));
+        assertEquals(offerThree, list.get(2));
+        assertEquals(offerFour, list.get(3));
+        assertEquals(offerFive, list.get(4));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testRatingWithoutFunction() {
+        // Test data
+        OfferComparableField participants = OfferComparableField.RATING;
+        Localizable location = new LocationFactory().getValidObject();
+        OfferFactory offerFactory = new OfferFactory();
+        Offer offerOne = offerFactory.getValidObject();
+        Offer offerTwo = offerFactory.getValidObject();
+        Offer offerThree = offerFactory.getValidObject();
+        Offer offerFour = offerFactory.getValidObject();
+        Offer offerFive = offerFactory.getValidObject();
+
+        List<Offer> list = new ArrayList<>();
+        list.add(offerOne);
+        list.add(offerTwo);
+        list.add(offerThree);
+        list.add(offerFour);
+        list.add(offerFive);
+
+        // Execution
+        OfferComparatorMock comparator = new OfferComparatorMock(participants, location);
+
+        // Assertions
+        assertEquals(offerOne, list.get(0));
+        assertEquals(offerTwo, list.get(1));
+        assertEquals(offerThree, list.get(2));
+        assertEquals(offerFour, list.get(3));
+        assertEquals(offerFive, list.get(4));
+
+        list.sort(comparator);
     }
 
     @Test
