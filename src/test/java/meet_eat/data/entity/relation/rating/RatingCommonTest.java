@@ -56,7 +56,6 @@ public class RatingCommonTest {
         // Test data
         UserFactory userFactory = new UserFactory();
         User guest = userFactory.getValidObject();
-        User host = userFactory.getValidObject();
         RatingValue value = RatingValue.POINTS_3;
 
         // Execution
@@ -121,7 +120,6 @@ public class RatingCommonTest {
         // Test data
         UserFactory userFactory = new UserFactory();
         User guest = userFactory.getValidObject();
-        User host = userFactory.getValidObject();
         RatingValue value = RatingValue.POINTS_3;
 
         // Execution

@@ -20,7 +20,6 @@ public class Rating extends EntityRelation<User, User, String> {
     private static final long serialVersionUID = 908006033527302372L;
 
     private static final String ERROR_MESSAGE_TEMPLATE_NULL = "The %s must not be null.";
-    private static final String ERROR_MESSAGE_NULL_USER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "user");
     private static final String ERROR_MESSAGE_NULL_OFFER = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "offer");
     private static final String ERROR_MESSAGE_NULL_VALUE = String.format(ERROR_MESSAGE_TEMPLATE_NULL, "value");
 

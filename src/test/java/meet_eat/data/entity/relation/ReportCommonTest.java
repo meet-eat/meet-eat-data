@@ -1,10 +1,8 @@
 package meet_eat.data.entity.relation;
 
 import meet_eat.data.entity.Entity;
-import meet_eat.data.entity.Offer;
 import meet_eat.data.entity.Reportable;
 import meet_eat.data.entity.user.User;
-import meet_eat.data.factory.OfferFactory;
 import meet_eat.data.factory.UserFactory;
 import org.junit.Test;
 
@@ -100,11 +98,10 @@ public class ReportCommonTest {
         assertNotNull(relation.getSource());
         assertNotNull(relation.getTarget());
         assertNotNull(relation.getMessage());
-        assertNotNull(relation.isProcessed());
         assertEquals(identifier, relation.getIdentifier());
         assertEquals(source, relation.getSource());
         assertEquals(target, relation.getTarget());
-        assertEquals(message,relation.getMessage());
+        assertEquals(message, relation.getMessage());
         assertEquals(true, relation.isProcessed());
     }
 }
