@@ -37,6 +37,11 @@ public enum RatingValue {
 
     private final int integerValue;
 
+    /**
+     * Creates a new instance of a {@link RatingValue}.
+     *
+     * @param integerValue the represented integer value
+     */
     RatingValue(int integerValue) {
         this.integerValue = integerValue;
     }
