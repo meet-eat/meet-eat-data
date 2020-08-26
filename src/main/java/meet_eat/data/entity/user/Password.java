@@ -142,10 +142,11 @@ public class Password implements Serializable {
     }
 
     /**
-     * Checks if two hashes which represent {@link Password}s, are matching.
+     * Checks if a {@link Password password} can be derived to a given derived password using the salt and iterations
+     * of the derived password.
      *
      * @param derivedPassword the derived password
-     * @return {@code true} if both hashes are representing the same {@link Password}, {@code false} if not
+     * @return {@code true} if the password can be derived to the given derived password, {@code false} if not
      */
     public boolean matches(Password derivedPassword) {
         if (Objects.isNull(derivedPassword.getSalt()) || Objects.isNull(derivedPassword.getIterations())) {
