@@ -4,7 +4,6 @@ import meet_eat.data.entity.user.Email;
 import meet_eat.data.entity.user.Password;
 import meet_eat.data.factory.EmailFactory;
 import meet_eat.data.factory.PasswordFactory;
-import org.apache.commons.logging.Log;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

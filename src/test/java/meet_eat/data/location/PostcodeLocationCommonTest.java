@@ -2,8 +2,6 @@ package meet_eat.data.location;
 
 import org.junit.Test;
 
-import java.lang.reflect.Executable;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
