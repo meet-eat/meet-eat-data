@@ -16,7 +16,6 @@ public final class Geocoding {
 
     private static final String BASE_URL = "https://nominatim.openstreetmap.org/%s?format=json&limit=1%s";
     private static final String SEARCH_OPERATION = "search";
-    private static final String REVERSE_OPERATION = "reverse";
     private static final String PARAMETER_POSTCODE = "&postalcode=%s";
     private static final String PARAMETER_CITY = "&city=%s";
 
@@ -53,11 +52,6 @@ public final class Geocoding {
                 DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS);
 
         return getForObject(url, SphericalPosition.class, messageConverter);
-    }
-
-    private static <T> T getForObject(String url, Class<T> responseType) {
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(url, responseType);
     }
 
     private static <T> T getForObject(String url, Class<T> responseType, HttpMessageConverter<?>... messageConverters) {
