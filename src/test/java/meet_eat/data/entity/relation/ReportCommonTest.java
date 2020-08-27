@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class ReportCommonTest {
 
@@ -103,5 +104,27 @@ public class ReportCommonTest {
         assertEquals(target, relation.getTarget());
         assertEquals(message, relation.getMessage());
         assertEquals(true, relation.isProcessed());
+    }
+
+    @Test
+    public void testSetterProcessed() {
+        // Test data
+        User source = new UserFactory().getValidObject();
+        ConcreteEntity target = new ConcreteEntity(new ConcreteSerializable());
+        String message = "Report test message.";
+
+        // Execution
+        Report relation = new Report(source, target, message);
+        relation.setProcessed(true);
+
+        // Assertions
+        assertNotNull(relation);
+        assertNotNull(relation.getSource());
+        assertNotNull(relation.getTarget());
+        assertNotNull(relation.getMessage());
+        assertEquals(source, relation.getSource());
+        assertEquals(target, relation.getTarget());
+        assertEquals(message, relation.getMessage());
+        assertTrue(relation.isProcessed());
     }
 }
