@@ -178,7 +178,7 @@ public class ContactDataCommonTest {
 
         // Assertions
         assertEquals(contactData, contactData);
-        assertNotEquals(null, contactData);
+        assertNotEquals(contactData, null);
         assertNotEquals(contactData, new Object());
         assertEquals(contactData, contactDataCopy);
         assertEquals(contactData.hashCode(), contactDataCopy.hashCode());

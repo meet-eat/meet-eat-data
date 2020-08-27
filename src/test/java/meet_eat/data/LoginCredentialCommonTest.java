@@ -55,7 +55,7 @@ public class LoginCredentialCommonTest {
 
         // Assertions
         assertEquals(loginCredential, loginCredential);
-        assertNotEquals(null, loginCredential);
+        assertNotEquals(loginCredential, null);
         assertNotEquals(loginCredential, new Object());
         assertEquals(loginCredential, loginCredentialCopy);
         assertEquals(loginCredential.hashCode(), loginCredentialCopy.hashCode());

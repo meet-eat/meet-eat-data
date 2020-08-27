@@ -64,7 +64,7 @@ public class DisplaySettingCommonTest {
 
         // Assertions
         assertEquals(displaySetting, displaySetting);
-        assertNotEquals(null, displaySetting);
+        assertNotEquals(displaySetting, null);
         assertNotEquals(displaySetting, new Object());
         assertEquals(displaySetting, displaySettingCopy);
         assertEquals(displaySetting.hashCode(), displaySettingCopy.hashCode());

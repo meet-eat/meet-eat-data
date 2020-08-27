@@ -105,12 +105,12 @@ public class PasswordCommonTest {
     @Test
     public void testEquals() {
         // Execution
-        Password password = new PasswordFactory().getValidObject();
+        Password password = new PasswordFactory().getValidObject().derive("test", 100);
         Password passwordCopy = new Password(password.getHash(), password.getSalt(), password.getIterations());
 
         // Assertions
         assertEquals(password, password);
-        assertNotEquals(null, password);
+        assertNotEquals(password, null);
         assertNotEquals(password, new Object());
         assertEquals(password, passwordCopy);
         assertEquals(password.hashCode(), passwordCopy.hashCode());

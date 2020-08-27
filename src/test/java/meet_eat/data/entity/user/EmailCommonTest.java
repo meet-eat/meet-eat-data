@@ -27,7 +27,7 @@ public class EmailCommonTest {
 
         // Assertions
         assertEquals(email, email);
-        assertNotEquals(null, email);
+        assertNotEquals(email, null);
         assertNotEquals(email, new Object());
         assertEquals(email, emailCopy);
         assertEquals(email.hashCode(), emailCopy.hashCode());

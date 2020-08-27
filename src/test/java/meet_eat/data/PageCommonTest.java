@@ -48,7 +48,7 @@ public class PageCommonTest {
 
         // Assertions
         assertEquals(page, page);
-        assertNotEquals(null, page);
+        assertNotEquals(page, null);
         assertNotEquals(page, new Object());
         assertEquals(page, pageCopy);
         assertEquals(page.hashCode(), pageCopy.hashCode());

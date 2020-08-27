@@ -53,7 +53,7 @@ public class ContactRequestCommonTest {
 
         // Assertions
         assertEquals(contactRequest, contactRequest);
-        assertNotEquals(null, contactRequest);
+        assertNotEquals(contactRequest, null);
         assertNotEquals(contactRequest, new Object());
         assertEquals(contactRequest, contactRequestCopy);
         assertEquals(contactRequest.hashCode(), contactRequestCopy.hashCode());

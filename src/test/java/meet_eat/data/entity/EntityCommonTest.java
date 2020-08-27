@@ -48,7 +48,7 @@ public class EntityCommonTest {
 
         // Assertions
         assertEquals(entity, entity);
-        assertNotEquals(null, entity);
+        assertNotEquals(entity, null);
         assertNotEquals(entity, new Object());
         assertEquals(entity, entityCopy);
         assertEquals(entity.hashCode(), entityCopy.hashCode());
