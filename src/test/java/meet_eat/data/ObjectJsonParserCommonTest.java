@@ -1,5 +1,7 @@
 package meet_eat.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
@@ -33,6 +35,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,6 +48,22 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class ObjectJsonParserCommonTest {
+
+    private static final class UnparsableObject extends Object {
+
+        @JsonProperty
+        private final int attribute;
+
+        public UnparsableObject() {
+            attribute = 0;
+        }
+
+        @JsonGetter
+        public int getAttribute() {
+            throw new IllegalStateException();
+        }
+
+    }
 
     private static final Localizable VALID_LOCALIZABLE = new SphericalLocation(new SphericalPosition(0, 0));
 
@@ -70,6 +89,55 @@ public class ObjectJsonParserCommonTest {
         assertNotNull(objectJsonParser);
         assertNotNull(objectJsonParser.getObjectMapper());
         assertEquals(objectMapper, objectJsonParser.getObjectMapper());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testParseUnparsableJsonStringToObjectWithClassType() {
+        // Test data
+        String jsonString = "This is unparsable.";
+
+        // Execution
+        new ObjectJsonParser().parseJsonStringToObject(jsonString, Object.class);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testParseUnparsableJsonStringToObjectWithJavaType() {
+        // Test data
+        String jsonString = "This is unparsable.";
+
+        // Execution
+        ObjectJsonParser objectJsonParser = new ObjectJsonParser();
+        JavaType javaType = objectJsonParser.getObjectMapper().getTypeFactory().constructArrayType(ArrayList.class);
+        objectJsonParser.parseJsonStringToObject(jsonString, javaType);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testParseUnparsableObjectToJsonString() {
+        // Test data
+        UnparsableObject unparsableObject = new UnparsableObject();
+
+        // Execution
+        new ObjectJsonParser().parseObjectToJsonString(unparsableObject);
+    }
+
+    @Test
+    public void testSetObjectMapper() {
+        // Test data
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Execution
+        ObjectJsonParser objectJsonParser = new ObjectJsonParser();
+        objectJsonParser.setObjectMapper(objectMapper);
+
+        // Assertions
+        assertNotNull(objectJsonParser);
+        assertNotNull(objectJsonParser.getObjectMapper());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testSetNullObjectMapper() {
+        // Execution
+        new ObjectJsonParser().setObjectMapper(null);
     }
 
     @Test
