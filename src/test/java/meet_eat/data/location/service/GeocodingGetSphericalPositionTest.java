@@ -116,8 +116,8 @@ public class GeocodingGetSphericalPositionTest {
 
         // Assertions
         assertNotNull(sphericalPosition);
-        assertEquals(expectedLatitude, sphericalPosition.getLatitude(), ARC_MINUTE);
-        assertEquals(expectedLongitude, sphericalPosition.getLongitude(), ARC_MINUTE);
+        assertEquals(expectedLatitude, sphericalPosition.getLatitude(), 2 * ARC_MINUTE);
+        assertEquals(expectedLongitude, sphericalPosition.getLongitude(), 2 * ARC_MINUTE);
     }
 
     @Test(expected = UnlocalizableException.class)
