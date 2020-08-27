@@ -173,14 +173,23 @@ public class ContactDataCommonTest {
         User requester = userFactory.getValidObject();
         User requestedUser = userFactory.getValidObject();
         Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+        contacts.put(ContactType.EMAIL, "test@example.com");
         ContactData contactData = new ContactData(new ContactRequest(requester, requestedUser), contacts);
         ContactData contactDataCopy = new ContactData(contactData.getRequest(), contactData.getContacts());
+        // FakeCopyRequest
+        ContactRequest fakeContactRequest = new ContactRequest(userFactory.getValidObject(), userFactory.getValidObject());
+        ContactData contactDataFakeCopyRequest = new ContactData(fakeContactRequest, contactData.getContacts());
+        // FakeCopyContacts
+        Map<ContactType, String> fakeContacts = new EnumMap<>(ContactType.class);
+        ContactData contactDataFakeCopyContacts = new ContactData(contactData.getRequest(), fakeContacts);
 
         // Assertions
         assertEquals(contactData, contactData);
         assertNotEquals(contactData, null);
         assertNotEquals(contactData, new Object());
         assertEquals(contactData, contactDataCopy);
+        assertNotEquals(contactData, contactDataFakeCopyRequest);
+        assertNotEquals(contactData, contactDataFakeCopyContacts);
         assertEquals(contactData.hashCode(), contactDataCopy.hashCode());
     }
 }

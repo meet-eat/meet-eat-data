@@ -125,12 +125,16 @@ public class SphericalPositionCommonTest {
         // Execution
         SphericalPosition sphericalPosition = new SphericalPosition(10d, 100d);
         SphericalPosition sphericalPositionCopy = new SphericalPosition(sphericalPosition.getLatitude(), sphericalPosition.getLongitude());
+        SphericalPosition sphericalPositionFakeCopyLongitude = new SphericalPosition(sphericalPosition.getLatitude(), 50d);
+        SphericalPosition sphericalPositionFakeCopyLatitude = new SphericalPosition(50d, sphericalPosition.getLongitude());
 
         // Assertions
         assertEquals(sphericalPosition, sphericalPosition);
         assertNotEquals(sphericalPosition, null);
         assertNotEquals(sphericalPosition, new Object());
         assertEquals(sphericalPosition, sphericalPositionCopy);
+        assertNotEquals(sphericalPosition, sphericalPositionFakeCopyLongitude);
+        assertNotEquals(sphericalPosition, sphericalPositionFakeCopyLatitude);
         assertEquals(sphericalPosition.hashCode(), sphericalPositionCopy.hashCode());
     }
 }

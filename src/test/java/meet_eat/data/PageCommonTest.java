@@ -45,12 +45,16 @@ public class PageCommonTest {
         // Execution
         Page page = new Page(0, 50);
         Page pageCopy = new Page(page.getIndex(), page.getSize());
+        Page pageFakeCopyIndex = new Page(42, page.getSize());
+        Page pageFakeCopySize = new Page(page.getIndex(), 42);
 
         // Assertions
         assertEquals(page, page);
         assertNotEquals(page, null);
         assertNotEquals(page, new Object());
         assertEquals(page, pageCopy);
+        assertNotEquals(page, pageFakeCopyIndex);
+        assertNotEquals(page, pageFakeCopySize);
         assertEquals(page.hashCode(), pageCopy.hashCode());
     }
 }

@@ -50,12 +50,16 @@ public class ContactRequestCommonTest {
         UserFactory userFactory = new UserFactory();
         ContactRequest contactRequest = new ContactRequest(userFactory.getValidObject(), userFactory.getValidObject());
         ContactRequest contactRequestCopy = new ContactRequest(contactRequest.getRequester(), contactRequest.getRequestedUser());
+        ContactRequest contactRequestFakeCopyRequester = new ContactRequest(userFactory.getValidObject(), contactRequest.getRequestedUser());
+        ContactRequest contactRequestFakeCopyRequestedUser = new ContactRequest(contactRequest.getRequester(), userFactory.getValidObject());
 
         // Assertions
         assertEquals(contactRequest, contactRequest);
         assertNotEquals(contactRequest, null);
         assertNotEquals(contactRequest, new Object());
         assertEquals(contactRequest, contactRequestCopy);
+        assertNotEquals(contactRequest, contactRequestFakeCopyRequester);
+        assertNotEquals(contactRequest, contactRequestFakeCopyRequestedUser);
         assertEquals(contactRequest.hashCode(), contactRequestCopy.hashCode());
     }
 }

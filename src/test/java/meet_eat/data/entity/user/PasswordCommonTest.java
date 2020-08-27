@@ -107,12 +107,18 @@ public class PasswordCommonTest {
         // Execution
         Password password = new PasswordFactory().getValidObject().derive("test", 100);
         Password passwordCopy = new Password(password.getHash(), password.getSalt(), password.getIterations());
+        Password passwordFakeCopyHash = new Password("fake", password.getSalt(), password.getIterations());
+        Password passwordFakeCopySalt = new Password(password.getHash(), "fake", password.getIterations());
+        Password passwordFakeCopyIterations = new Password(password.getHash(), password.getSalt(), 42);
 
         // Assertions
         assertEquals(password, password);
         assertNotEquals(password, null);
         assertNotEquals(password, new Object());
         assertEquals(password, passwordCopy);
+        assertNotEquals(password, passwordFakeCopyHash);
+        assertNotEquals(password, passwordFakeCopySalt);
+        assertNotEquals(password, passwordFakeCopyIterations);
         assertEquals(password.hashCode(), passwordCopy.hashCode());
     }
 }
