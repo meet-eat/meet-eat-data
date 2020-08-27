@@ -131,18 +131,4 @@ public class OfferComparator implements Serializable, Comparator<Offer> {
     public void setParticipantAmountGetter(Function<Offer, Integer> participantAmountGetter) {
         this.participantAmountGetter = Objects.requireNonNull(participantAmountGetter);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OfferComparator that = (OfferComparator) o;
-        return field == that.field &&
-                Objects.equals(location, that.location);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(field, location);
-    }
 }

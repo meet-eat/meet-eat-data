@@ -73,18 +73,4 @@ public class Token extends Entity<String> {
     public String getValue() {
         return value;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Token token = (Token) o;
-        return Objects.equals(user, token.user) && Objects.equals(value, token.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), user, value);
-    }
 }
