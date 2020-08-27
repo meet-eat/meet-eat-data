@@ -61,10 +61,11 @@ public class Rating extends EntityRelation<User, User, String> {
                      @JsonProperty("source") User source,
                      @JsonProperty("target") User target,
                      @JsonProperty("offer") Offer offer,
-                     @JsonProperty("value") RatingValue value) {
+                     @JsonProperty("value") RatingValue value,
+                     @JsonProperty("basis") RatingBasis basis) {
         super(identifier, source, target);
         this.offer = offer;
-        basis = getBasisByCreator(source, offer);
+        this.basis = basis;
         this.value = value;
     }
 

@@ -165,7 +165,7 @@ public class RatingCommonTest {
         RatingValue value = RatingValue.POINTS_3;
 
         // Execution
-        Rating rating = new Rating(identifier, guest, host, offer, value);
+        Rating rating = new Rating(identifier, guest, host, offer, value, RatingBasis.HOST);
 
         // Assertions
         assertNotNull(rating);
