@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Maps;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -96,7 +97,7 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
-        return Objects.equals(contacts, that.contacts) && Objects.equals(request, that.request);
+        return Maps.difference(contacts, that.contacts).areEqual() && Objects.equals(request, that.request);
     }
 
     @Override
