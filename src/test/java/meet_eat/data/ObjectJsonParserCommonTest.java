@@ -1,7 +1,6 @@
 package meet_eat.data;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
@@ -49,13 +48,10 @@ import static org.junit.Assert.assertTrue;
 
 public class ObjectJsonParserCommonTest {
 
-    private static final class UnparsableObject extends Object {
-
-        @JsonProperty
-        private final int attribute;
+    private static final class UnparsableObject {
 
         public UnparsableObject() {
-            attribute = 0;
+            int attribute = 0;
         }
 
         @JsonGetter
