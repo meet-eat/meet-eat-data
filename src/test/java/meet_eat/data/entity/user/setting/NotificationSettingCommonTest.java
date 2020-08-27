@@ -32,6 +32,15 @@ public class NotificationSettingCommonTest {
         assertEquals(minutesUntilOffer, notificationSetting.getMinutesUntilOffer());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorNegativeMinutes() {
+        // Test data
+        int minutesUntilOffer = -1;
+
+        // Execution
+        new NotificationSetting(false, minutesUntilOffer);
+    }
+
     @Test
     public void testSetterEnabled() {
         // Execution
@@ -55,6 +64,16 @@ public class NotificationSettingCommonTest {
         assertEquals(minutesUntilOffer, notificationSetting.getMinutesUntilOffer());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetterNegativeMinutes() {
+        // Test data
+        int minutesUntilOffer = -1;
+
+        // Execution
+        NotificationSetting notificationSetting = new NotificationSetting();
+        notificationSetting.setMinutesUntilOffer(minutesUntilOffer);
+    }
+
     @Test
     public void testEquals() {
         NotificationSetting notificatonSetting = new NotificationSetting(false, 60);
@@ -62,7 +81,7 @@ public class NotificationSettingCommonTest {
 
         // Assertions
         assertEquals(notificatonSetting, notificatonSetting);
-        assertNotEquals(null, notificatonSetting);
+        assertNotEquals(notificatonSetting, null);
         assertNotEquals(notificatonSetting, new Object());
         assertEquals(notificatonSetting, notificationSettingCopy);
         assertEquals(notificatonSetting.hashCode(), notificationSettingCopy.hashCode());
