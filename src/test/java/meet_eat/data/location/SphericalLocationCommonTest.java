@@ -4,6 +4,7 @@ import meet_eat.data.factory.LocationFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class SphericalLocationCommonTest {
@@ -53,5 +54,19 @@ public class SphericalLocationCommonTest {
         // Execution
         SphericalLocation sphericalLocation = new SphericalLocation(sphericalPosition);
         sphericalLocation.setSphericalPosition(null);
+    }
+
+    @Test
+    public void testEquals() throws UnlocalizableException {
+        // Execution
+        Localizable sphericalLocation = new LocationFactory().getValidObject();
+        Localizable sphericalLocationCopy = new SphericalLocation(sphericalLocation.getSphericalPosition());
+
+        // Assertions
+        assertEquals(sphericalLocation, sphericalLocation);
+        assertNotEquals(sphericalLocation, null);
+        assertNotEquals(sphericalLocation, new Object());
+        assertEquals(sphericalLocation, sphericalLocationCopy);
+        assertEquals(sphericalLocation.hashCode(), sphericalLocationCopy.hashCode());
     }
 }

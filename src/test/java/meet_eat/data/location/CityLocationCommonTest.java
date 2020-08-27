@@ -3,6 +3,7 @@ package meet_eat.data.location;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class CityLocationCommonTest {
@@ -44,5 +45,19 @@ public class CityLocationCommonTest {
         // Execution
         CityLocation cityLocation = new CityLocation("");
         cityLocation.setCityName(null);
+    }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        CityLocation cityLocation = new CityLocation("Karlsruhe");
+        CityLocation cityLocationCopy = new CityLocation(cityLocation.getCityName());
+
+        // Assertions
+        assertEquals(cityLocation, cityLocation);
+        assertNotEquals(cityLocation, null);
+        assertNotEquals(cityLocation, new Object());
+        assertEquals(cityLocation, cityLocationCopy);
+        assertEquals(cityLocation.hashCode(), cityLocationCopy.hashCode());
     }
 }

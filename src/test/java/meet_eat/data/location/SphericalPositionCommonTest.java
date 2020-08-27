@@ -119,4 +119,18 @@ public class SphericalPositionCommonTest {
         assertEquals((Math.PI / 2), sphericalPositionThree.getLatitudeAsRadians(), DELTA);
         assertEquals(Math.PI, sphericalPositionThree.getLongitudeAsRadians(), DELTA);
     }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        SphericalPosition sphericalPosition = new SphericalPosition(10d, 100d);
+        SphericalPosition sphericalPositionCopy = new SphericalPosition(sphericalPosition.getLatitude(), sphericalPosition.getLongitude());
+
+        // Assertions
+        assertEquals(sphericalPosition, sphericalPosition);
+        assertNotEquals(sphericalPosition, null);
+        assertNotEquals(sphericalPosition, new Object());
+        assertEquals(sphericalPosition, sphericalPositionCopy);
+        assertEquals(sphericalPosition.hashCode(), sphericalPositionCopy.hashCode());
+    }
 }

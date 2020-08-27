@@ -2,7 +2,10 @@ package meet_eat.data.location;
 
 import org.junit.Test;
 
+import java.lang.reflect.Executable;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class PostcodeLocationCommonTest {
@@ -44,5 +47,19 @@ public class PostcodeLocationCommonTest {
         // Execution
         PostcodeLocation postcodeLocation = new PostcodeLocation("");
         postcodeLocation.setPostcode(null);
+    }
+
+    @Test
+    public void testEquals() {
+        // Execution
+        PostcodeLocation postcodeLocation = new PostcodeLocation("76137");
+        PostcodeLocation postcodeLocationCopy = new PostcodeLocation(postcodeLocation.getPostcode());
+
+        // Assertions
+        assertEquals(postcodeLocation, postcodeLocation);
+        assertNotEquals(postcodeLocation, null);
+        assertNotEquals(postcodeLocation, new Object());
+        assertEquals(postcodeLocation, postcodeLocationCopy);
+        assertEquals(postcodeLocation.hashCode(), postcodeLocationCopy.hashCode());
     }
 }
