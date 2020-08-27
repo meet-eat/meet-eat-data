@@ -68,7 +68,7 @@ public class DisplaySetting implements Setting {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DisplaySetting that = (DisplaySetting) o;
-        return colorMode == that.colorMode;
+        return Objects.equals(colorMode, that.colorMode);
     }
 
     @Override
