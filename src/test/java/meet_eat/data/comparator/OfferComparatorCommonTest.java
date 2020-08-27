@@ -18,19 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class OfferComparatorCommonTest {
-
-    private static class OfferComparatorMock extends OfferComparator {
-
-        private static final long serialVersionUID = -2364032757131663178L;
-
-        public OfferComparatorMock(OfferComparableField field, Localizable localizable) {
-            super(field, localizable);
-        }
-    }
 
     @Test
     public void testConstructor() {
@@ -39,7 +29,7 @@ public class OfferComparatorCommonTest {
         Localizable location = new LocationFactory().getValidObject();
 
         // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(field, location);
+        OfferComparator comparator = new OfferComparator(field, location);
 
         // Assertions
         assertNotNull(comparator);
@@ -53,7 +43,7 @@ public class OfferComparatorCommonTest {
         Localizable location = new LocationFactory().getValidObject();
 
         // Execution
-        new OfferComparatorMock(null, location);
+        new OfferComparator(null, location);
     }
 
     @Test(expected = NullPointerException.class)
@@ -62,7 +52,7 @@ public class OfferComparatorCommonTest {
         OfferComparableField field = OfferComparableField.DISTANCE;
 
         // Execution
-        new OfferComparatorMock(field, null);
+        new OfferComparator(field, null);
     }
 
     @Test
@@ -89,7 +79,7 @@ public class OfferComparatorCommonTest {
         list.add(offerFive);
 
         // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(price, location);
+        OfferComparator comparator = new OfferComparator(price, location);
 
         // Assertions
         assertEquals(offerOne, list.get(0));
@@ -141,7 +131,7 @@ public class OfferComparatorCommonTest {
         list.add(offerFive);
 
         // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(time, location);
+        OfferComparator comparator = new OfferComparator(time, location);
 
         // Assertions
         assertEquals(offerOne, list.get(0));
@@ -197,7 +187,7 @@ public class OfferComparatorCommonTest {
         list.add(offerFive);
 
         // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(distance, location);
+        OfferComparator comparator = new OfferComparator(distance, location);
 
         // Assertions
         assertEquals(offerOne, list.get(0));
@@ -259,7 +249,7 @@ public class OfferComparatorCommonTest {
         list.add(offerFive);
 
         // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(distance, location);
+        OfferComparator comparator = new OfferComparator(distance, location);
         list.sort(comparator);
 
         // Assertions
@@ -298,7 +288,7 @@ public class OfferComparatorCommonTest {
         list.add(offerFive);
 
         // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(participants, location);
+        OfferComparator comparator = new OfferComparator(participants, location);
         comparator.setParticipantAmountGetter(participantAmounts::get);
 
         // Assertions
@@ -347,7 +337,7 @@ public class OfferComparatorCommonTest {
         list.add(offerFive);
 
         // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(participants, location);
+        OfferComparator comparator = new OfferComparator(participants, location);
 
         // Assertions
         assertEquals(offerOne, list.get(0));
@@ -387,7 +377,7 @@ public class OfferComparatorCommonTest {
         list.add(offerFive);
 
         // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(participants, location);
+        OfferComparator comparator = new OfferComparator(participants, location);
         comparator.setHostRatingGetter(hostRatings::get);
 
         // Assertions
@@ -436,7 +426,7 @@ public class OfferComparatorCommonTest {
         list.add(offerFive);
 
         // Execution
-        OfferComparatorMock comparator = new OfferComparatorMock(participants, location);
+        OfferComparator comparator = new OfferComparator(participants, location);
 
         // Assertions
         assertEquals(offerOne, list.get(0));
