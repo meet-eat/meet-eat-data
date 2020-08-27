@@ -447,18 +447,4 @@ public class OfferComparatorCommonTest {
 
         list.sort(comparator);
     }
-
-    @Test
-    public void testEquals() {
-        // Execution
-        OfferComparator comparator = new OfferComparator(OfferComparableField.DISTANCE, new CityLocation("Karlsruhe"));
-        OfferComparator comparatorCopy = new OfferComparator(comparator.getField(), comparator.getLocation());
-
-        // Assertions
-        assertEquals(comparator, comparator);
-        assertNotEquals(null, comparator);
-        assertNotEquals(comparator, new Object());
-        assertEquals(comparator, comparatorCopy);
-        assertEquals(comparator.hashCode(), comparatorCopy.hashCode());
-    }
 }
