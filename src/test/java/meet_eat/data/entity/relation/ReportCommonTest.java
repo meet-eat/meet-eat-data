@@ -103,7 +103,7 @@ public class ReportCommonTest {
         assertEquals(source, relation.getSource());
         assertEquals(target, relation.getTarget());
         assertEquals(message, relation.getMessage());
-        assertEquals(true, relation.isProcessed());
+        assertTrue(relation.isProcessed());
     }
 
     @Test
