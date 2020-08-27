@@ -1,5 +1,5 @@
 plugins {
-    // Apply the java-library plugin to add support for Java Library
+    // Support for Java Library
     `java-library`
     // Idea plugin
     idea
@@ -18,10 +18,10 @@ repositories {
 }
 
 dependencies {
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
+    // This dependency is exported to consumers, that is to say found on their compile classpath
     api("org.apache.commons:commons-math3:3.6.1")
 
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+    // This dependency is used internally, and not exposed to consumers on their own compile classpath
     implementation("com.google.guava:guava:29.0-jre")
 
     // Spring framework
@@ -38,7 +38,7 @@ dependencies {
     // Apache Commons Codec
     implementation("commons-codec:commons-codec:1.14")
 
-    // Use JUnit test framework
+    // JUnit test framework
     testImplementation("junit:junit:4.13")
 }
 
@@ -50,6 +50,7 @@ tasks.test {
 tasks.jacocoTestReport {
     // Tests are required to run before generating the report
     dependsOn(tasks.test)
+
     reports {
         html.isEnabled = true
         html.destination = file("${buildDir}/reports/coverage")
