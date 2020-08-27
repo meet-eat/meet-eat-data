@@ -20,7 +20,6 @@ import java.util.Objects;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Tag.class),
         @JsonSubTypes.Type(value = Token.class),
-        @JsonSubTypes.Type(value = ReportableEntity.class),
         @JsonSubTypes.Type(value = EntityRelation.class)
 })
 public abstract class Entity<U extends Serializable> implements Serializable {
