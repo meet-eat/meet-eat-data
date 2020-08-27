@@ -18,6 +18,7 @@ import meet_eat.data.predicate.numeric.DoubleOperation;
 import meet_eat.data.predicate.numeric.PricePredicate;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -48,7 +49,7 @@ public class UserFactory extends ObjectFactory<User> {
         settings.add(new DisplaySetting(getRandomEnumValue(ColorMode.class)));
         Email email = emailFactory.getValidObject();
         Password password = passwordFactory.getValidObject();
-        LocalDate birthDay = LocalDate.EPOCH;
+        LocalDate birthDay = LocalDate.of(1970, Month.OCTOBER, 10);
         String name = "TestUser" + objectCounter;
         String phoneNumber = Integer.toString(objectCounter);
         String description = "I am " + name + " and this is my description.";

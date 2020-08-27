@@ -8,6 +8,7 @@ import meet_eat.data.location.Localizable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,7 +39,7 @@ public class OfferFactory extends ObjectFactory<Offer> {
         }
         String name = "TestOffer" + objectCounter;
         String description = "This is test offer number " + objectCounter;
-        LocalDateTime dateTime = LocalDateTime.of(LocalDate.EPOCH, LocalTime.NOON);
+        LocalDateTime dateTime = LocalDateTime.of(LocalDate.of(2050, Month.OCTOBER, 16), LocalTime.NOON);
         Localizable location = locationFactory.getValidObject();
         return new Offer(identifier, creator, tags, name, description, TEST_PRICE, TEST_MAX_AMOUNT_PARTICIPANTS,
                 dateTime, location);
