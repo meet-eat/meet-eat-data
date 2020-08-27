@@ -54,6 +54,8 @@ public class Rating extends EntityRelation<User, User, String> {
      * @param target     the {@link User reviewed user}
      * @param offer      the {@link Offer offer} in which both {@link User users} met.
      * @param value      the given {@link RatingValue}
+     * @param basis      the indicator whether it's a {@link RatingBasis#HOST host}
+     *                   or a {@link RatingBasis#GUEST guest} {@link Rating rating}
      */
     @JsonCreator
     @PersistenceConstructor
@@ -65,8 +67,8 @@ public class Rating extends EntityRelation<User, User, String> {
                      @JsonProperty("basis") RatingBasis basis) {
         super(identifier, source, target);
         this.offer = offer;
-        this.basis = basis;
         this.value = value;
+        this.basis = basis;
     }
 
     /**
