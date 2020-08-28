@@ -19,7 +19,7 @@ public class OfferPredicateCommonTest {
         }
     }
 
-    private class ConcreteOperator extends BooleanOperator<ObjectOperation, Object> {
+    private static class ConcreteOperator extends BooleanOperator<ObjectOperation, Object> {
 
         private static final long serialVersionUID = -5089642069838520263L;
 
@@ -28,7 +28,7 @@ public class OfferPredicateCommonTest {
         }
     }
 
-    private class ConcretePredicateRating extends ConcreteOperator implements OfferPredicate {
+    private static class ConcretePredicateRating extends ConcreteOperator implements OfferPredicate {
 
         private static final long serialVersionUID = -5016386823510937362L;
 
@@ -48,9 +48,10 @@ public class OfferPredicateCommonTest {
         }
     }
 
-    private class ConcretePredicateParticipants extends ConcreteOperator implements OfferPredicate {
+    private static class ConcretePredicateParticipants extends ConcreteOperator implements OfferPredicate {
 
         private static final long serialVersionUID = 5649016716449183776L;
+
         private Function<Offer, Integer> function;
 
         protected ConcretePredicateParticipants(ObjectOperation operation, Object referenceValue) {
