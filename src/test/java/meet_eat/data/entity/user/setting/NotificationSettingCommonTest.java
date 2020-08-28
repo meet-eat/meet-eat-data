@@ -74,6 +74,12 @@ public class NotificationSettingCommonTest {
         notificationSetting.setMinutesUntilOffer(minutesUntilOffer);
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void testApply() {
+        // Execution
+        new NotificationSetting().apply();
+    }
+
     @Test
     public void testEquals() {
         NotificationSetting notificatonSetting = new NotificationSetting(false, 60);

@@ -57,6 +57,12 @@ public class DisplaySettingCommonTest {
         displaySetting.setColorMode(null);
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void testApply() {
+        // Execution
+        new DisplaySetting().apply();
+    }
+
     @Test
     public void testEquals() {
         DisplaySetting displaySetting = new DisplaySetting(ColorMode.DARK);
