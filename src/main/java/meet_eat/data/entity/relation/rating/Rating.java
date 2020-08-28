@@ -27,9 +27,9 @@ public class Rating extends EntityRelation<User, User, String> {
     @JsonProperty
     private final Offer offer;
     @JsonProperty
-    private final RatingBasis basis;
-    @JsonProperty
     private final RatingValue value;
+    @JsonProperty
+    private final RatingBasis basis;
 
     /**
      * Creates a new instance of {@link Rating}.
@@ -38,12 +38,14 @@ public class Rating extends EntityRelation<User, User, String> {
      * @param target the {@link User reviewed user}
      * @param offer  the {@link Offer offer} in which both {@link User users} met.
      * @param value  the given {@link RatingValue}
+     * @param basis  the indicator whether it's a {@link RatingBasis#HOST host}
+     *               or a {@link RatingBasis#GUEST guest} {@link Rating rating}
      */
-    private Rating(User source, User target, Offer offer, RatingValue value) {
+    private Rating(User source, User target, Offer offer, RatingValue value, RatingBasis basis) {
         super(source, target);
         this.offer = offer;
-        basis = getBasisByCreator(source, offer);
         this.value = value;
+        this.basis = basis;
     }
 
     /**
@@ -82,7 +84,7 @@ public class Rating extends EntityRelation<User, User, String> {
     public static Rating createHostRating(User guest, Offer offer, RatingValue value) {
         Objects.requireNonNull(offer, ERROR_MESSAGE_NULL_OFFER);
         Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
-        return new Rating(guest, offer.getCreator(), offer, value);
+        return new Rating(guest, offer.getCreator(), offer, value, RatingBasis.HOST);
     }
 
     /**
@@ -96,7 +98,7 @@ public class Rating extends EntityRelation<User, User, String> {
     public static Rating createGuestRating(User guest, Offer offer, RatingValue value) {
         Objects.requireNonNull(offer, ERROR_MESSAGE_NULL_OFFER);
         Objects.requireNonNull(value, ERROR_MESSAGE_NULL_VALUE);
-        return new Rating(offer.getCreator(), guest, offer, value);
+        return new Rating(offer.getCreator(), guest, offer, value, RatingBasis.GUEST);
     }
 
     /**
@@ -127,18 +129,5 @@ public class Rating extends EntityRelation<User, User, String> {
     @JsonGetter
     public RatingValue getValue() {
         return value;
-    }
-
-    /**
-     * Checks whether the {@link User reviewer} of a {@link Rating rating} was the {@link RatingBasis#HOST host}
-     * of an {@link Offer offer} or the participating {@link RatingBasis#GUEST guest}.
-     *
-     * @param reviewer the reviewer
-     * @param offer    the offer
-     * @return {@link RatingBasis#GUEST} if the reviewer is creator of the offer
-     * and thus rating a guest, {@link RatingBasis#HOST} otherwise
-     */
-    private RatingBasis getBasisByCreator(User reviewer, Offer offer) {
-        return reviewer.equals(offer.getCreator()) ? RatingBasis.GUEST : RatingBasis.HOST;
     }
 }
